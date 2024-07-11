@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <title>Custom Node Security Scan Results</title>
-    <link rel="stylesheet" href="options.css" />
     <script src="./lib/jquery-3.7.1.min.js"></script>
     <script src="./lib/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
@@ -14,14 +13,32 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .dd3 {
+        font-size: 5rem;
+        font-weight: 100;
+        font-family: "Noto Sans", sans-serif;
+      }
+      .subtitle-dd3 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        font-family: "Noto Sans", sans-serif;
+      }
+      main {
+        font-size: large;
+      }
+    </style>
   </head>
   <body>
     <main>
-      <div class="col-md-12 p-4 mb-4">
-        <h1 class="display-1 mb-5 text-center dd3">
+      <div class="col-md-12 p-4 mb-4 mt-5">
+        <h1 class="display-1 text-center dd3 my-4">
           Custom Node Security Scan Results
         </h1>
-        <table class="table">
+        <p class="text-center text-muted mb-5 pb-5 subtitle-dd3">
+          Generated on 2024-07-11 06:08:55
+        </p>
+        <table class="table mt-5 p-5">
           <thead>
             <tr id="configTableHeaderRow">
               <th scope="col">Custom Node Package Name</th>
@@ -33,269 +50,1637 @@
           <tbody id="configTableBody">
             
             <tr>
-              <td>comfyui_controlnet_aux</td>
-              <td><span style='color: var(--red);'>724.16</span></td>
-              <td>5.9905</td>
-              <td><a href="comfyui_controlnet_aux.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui_controlnet_aux"
+              >
+                <a href="https://github.com/Fannovel16/comfyui_controlnet_aux"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui_controlnet_aux
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--red);'>724.16</span>"
+              >
+                <span style='color: var(--red);'>724.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="5.9905"
+              >
+                5.9905
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui_controlnet_aux.html"
+              >
+                <a href="comfyui_controlnet_aux.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfy_mtb</td>
-              <td><span style='color: var(--yellow);'>82.24</span></td>
-              <td>0.4535</td>
-              <td><a href="comfy_mtb.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfy_mtb"
+              >
+                <a href="https://github.com/melMass/comfy_mtb"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfy_mtb
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--yellow);'>82.24</span>"
+              >
+                <span style='color: var(--yellow);'>82.24</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="0.4535"
+              >
+                0.4535
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfy_mtb.html"
+              >
+                <a href="comfy_mtb.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Frame-Interpolation</td>
-              <td><span style='color: var(--yellow);'>72.09</span></td>
-              <td>0.3660</td>
-              <td><a href="ComfyUI-Frame-Interpolation.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Frame-Interpolation"
+              >
+                <a href="https://github.com/Fannovel16/ComfyUI-Frame-Interpolation"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Frame-Interpolation
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--yellow);'>72.09</span>"
+              >
+                <span style='color: var(--yellow);'>72.09</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="0.3660"
+              >
+                0.3660
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Frame-Interpolation.html"
+              >
+                <a href="ComfyUI-Frame-Interpolation.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfyui-reactor-node</td>
-              <td><span style='color: var(--yellow);'>71.60</span></td>
-              <td>0.3618</td>
-              <td><a href="comfyui-reactor-node.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui-reactor-node"
+              >
+                <a href="https://github.com/Gourieff/comfyui-reactor-node"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui-reactor-node
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--yellow);'>71.60</span>"
+              >
+                <span style='color: var(--yellow);'>71.60</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="0.3618"
+              >
+                0.3618
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui-reactor-node.html"
+              >
+                <a href="comfyui-reactor-node.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>facerestore_cf</td>
-              <td><span style='color: var(--green);'>29.36</span></td>
-              <td>-0.0026</td>
-              <td><a href="facerestore_cf.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="facerestore_cf"
+              >
+                <a href="https://github.com/mav-rik/facerestore_cf"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; facerestore_cf
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>29.36</span>"
+              >
+                <span style='color: var(--green);'>29.36</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.0026"
+              >
+                -0.0026
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="facerestore_cf.html"
+              >
+                <a href="facerestore_cf.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfyui_segment_anything</td>
-              <td><span style='color: var(--green);'>21.00</span></td>
-              <td>-0.0747</td>
-              <td><a href="comfyui_segment_anything.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui_segment_anything"
+              >
+                <a href="https://github.com/storyicon/comfyui_segment_anything"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui_segment_anything
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>21.00</span>"
+              >
+                <span style='color: var(--green);'>21.00</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.0747"
+              >
+                -0.0747
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui_segment_anything.html"
+              >
+                <a href="comfyui_segment_anything.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>was-node-suite-comfyui</td>
-              <td><span style='color: var(--green);'>18.40</span></td>
-              <td>-0.0971</td>
-              <td><a href="was-node-suite-comfyui.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="was-node-suite-comfyui"
+              >
+                <a href="https://github.com/WASasquatch/was-node-suite-comfyui"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; was-node-suite-comfyui
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>18.40</span>"
+              >
+                <span style='color: var(--green);'>18.40</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.0971"
+              >
+                -0.0971
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="was-node-suite-comfyui.html"
+              >
+                <a href="was-node-suite-comfyui.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Manager</td>
-              <td><span style='color: var(--green);'>17.58</span></td>
-              <td>-0.1042</td>
-              <td><a href="ComfyUI-Manager.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Manager"
+              >
+                <a href="https:////github.com/ltdrdata/ComfyUI-Manager"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Manager
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>17.58</span>"
+              >
+                <span style='color: var(--green);'>17.58</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.1042"
+              >
+                -0.1042
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Manager.html"
+              >
+                <a href="ComfyUI-Manager.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>SeargeSDXL</td>
-              <td><span style='color: var(--green);'>15.88</span></td>
-              <td>-0.1189</td>
-              <td><a href="SeargeSDXL.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="SeargeSDXL"
+              >
+                <a href="https://github.com/SeargeDP/SeargeSDXL"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; SeargeSDXL
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>15.88</span>"
+              >
+                <span style='color: var(--green);'>15.88</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.1189"
+              >
+                -0.1189
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="SeargeSDXL.html"
+              >
+                <a href="SeargeSDXL.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>mikey_nodes</td>
-              <td><span style='color: var(--green);'>10.92</span></td>
-              <td>-0.1616</td>
-              <td><a href="mikey_nodes.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="mikey_nodes"
+              >
+                <a href="https://github.com/bash-j/mikey_nodes"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; mikey_nodes
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>10.92</span>"
+              >
+                <span style='color: var(--green);'>10.92</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.1616"
+              >
+                -0.1616
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="mikey_nodes.html"
+              >
+                <a href="mikey_nodes.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI_FizzNodes</td>
-              <td><span style='color: var(--green);'>10.32</span></td>
-              <td>-0.1668</td>
-              <td><a href="ComfyUI_FizzNodes.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI_FizzNodes"
+              >
+                <a href="https://github.com/FizzleDorf/ComfyUI_FizzNodes"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI_FizzNodes
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>10.32</span>"
+              >
+                <span style='color: var(--green);'>10.32</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.1668"
+              >
+                -0.1668
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI_FizzNodes.html"
+              >
+                <a href="ComfyUI_FizzNodes.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>KepPromptLang</td>
-              <td><span style='color: var(--green);'>9.80</span></td>
-              <td>-0.1713</td>
-              <td><a href="KepPromptLang.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="KepPromptLang"
+              >
+                <a href="https://github.com/M1kep/KepPromptLang"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; KepPromptLang
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>9.80</span>"
+              >
+                <span style='color: var(--green);'>9.80</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.1713"
+              >
+                -0.1713
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="KepPromptLang.html"
+              >
+                <a href="KepPromptLang.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Impact-Pack</td>
-              <td><span style='color: var(--green);'>6.20</span></td>
-              <td>-0.2024</td>
-              <td><a href="ComfyUI-Impact-Pack.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Impact-Pack"
+              >
+                <a href="https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Impact-Pack
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>6.20</span>"
+              >
+                <span style='color: var(--green);'>6.20</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2024"
+              >
+                -0.2024
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Impact-Pack.html"
+              >
+                <a href="ComfyUI-Impact-Pack.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI_Comfyroll_CustomNodes</td>
-              <td><span style='color: var(--green);'>5.12</span></td>
-              <td>-0.2117</td>
-              <td><a href="ComfyUI_Comfyroll_CustomNodes.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI_Comfyroll_CustomNodes"
+              >
+                <a href="https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI_Comfyroll_CustomNodes
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>5.12</span>"
+              >
+                <span style='color: var(--green);'>5.12</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2117"
+              >
+                -0.2117
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI_Comfyroll_CustomNodes.html"
+              >
+                <a href="ComfyUI_Comfyroll_CustomNodes.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Inspire-Pack</td>
-              <td><span style='color: var(--green);'>4.44</span></td>
-              <td>-0.2175</td>
-              <td><a href="ComfyUI-Inspire-Pack.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Inspire-Pack"
+              >
+                <a href="https://github.com/ltdrdata/ComfyUI-Inspire-Pack"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Inspire-Pack
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>4.44</span>"
+              >
+                <span style='color: var(--green);'>4.44</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2175"
+              >
+                -0.2175
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Inspire-Pack.html"
+              >
+                <a href="ComfyUI-Inspire-Pack.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfyui-prompt-reader-node</td>
-              <td><span style='color: var(--green);'>3.48</span></td>
-              <td>-0.2258</td>
-              <td><a href="comfyui-prompt-reader-node.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui-prompt-reader-node"
+              >
+                <a href="https://github.com/receyuki/comfyui-prompt-reader-node"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui-prompt-reader-node
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>3.48</span>"
+              >
+                <span style='color: var(--green);'>3.48</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2258"
+              >
+                -0.2258
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui-prompt-reader-node.html"
+              >
+                <a href="comfyui-prompt-reader-node.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>masquerade-nodes-comfyui</td>
-              <td><span style='color: var(--green);'>3.40</span></td>
-              <td>-0.2265</td>
-              <td><a href="masquerade-nodes-comfyui.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="masquerade-nodes-comfyui"
+              >
+                <a href="https://github.com/BadCafeCode/masquerade-nodes-comfyui"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; masquerade-nodes-comfyui
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>3.40</span>"
+              >
+                <span style='color: var(--green);'>3.40</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2265"
+              >
+                -0.2265
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="masquerade-nodes-comfyui.html"
+              >
+                <a href="masquerade-nodes-comfyui.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Advanced-ControlNet</td>
-              <td><span style='color: var(--green);'>3.36</span></td>
-              <td>-0.2268</td>
-              <td><a href="ComfyUI-Advanced-ControlNet.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Advanced-ControlNet"
+              >
+                <a href="https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Advanced-ControlNet
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>3.36</span>"
+              >
+                <span style='color: var(--green);'>3.36</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2268"
+              >
+                -0.2268
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Advanced-ControlNet.html"
+              >
+                <a href="ComfyUI-Advanced-ControlNet.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-KJNodes</td>
-              <td><span style='color: var(--green);'>2.76</span></td>
-              <td>-0.2320</td>
-              <td><a href="ComfyUI-KJNodes.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-KJNodes"
+              >
+                <a href="https://github.com/kijai/ComfyUI-KJNodes"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-KJNodes
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>2.76</span>"
+              >
+                <span style='color: var(--green);'>2.76</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2320"
+              >
+                -0.2320
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-KJNodes.html"
+              >
+                <a href="ComfyUI-KJNodes.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-AnimateDiff-Evolved</td>
-              <td><span style='color: var(--green);'>2.40</span></td>
-              <td>-0.2351</td>
-              <td><a href="ComfyUI-AnimateDiff-Evolved.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-AnimateDiff-Evolved"
+              >
+                <a href="https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-AnimateDiff-Evolved
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>2.40</span>"
+              >
+                <span style='color: var(--green);'>2.40</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2351"
+              >
+                -0.2351
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-AnimateDiff-Evolved.html"
+              >
+                <a href="ComfyUI-AnimateDiff-Evolved.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-VideoHelperSuite</td>
-              <td><span style='color: var(--green);'>2.08</span></td>
-              <td>-0.2379</td>
-              <td><a href="ComfyUI-VideoHelperSuite.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-VideoHelperSuite"
+              >
+                <a href="https://Kosinkadink/ComfyUI-VideoHelperSuite"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-VideoHelperSuite
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>2.08</span>"
+              >
+                <span style='color: var(--green);'>2.08</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2379"
+              >
+                -0.2379
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-VideoHelperSuite.html"
+              >
+                <a href="ComfyUI-VideoHelperSuite.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>LoadLoraWithTags</td>
-              <td><span style='color: var(--green);'>1.80</span></td>
-              <td>-0.2403</td>
-              <td><a href="LoadLoraWithTags.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="LoadLoraWithTags"
+              >
+                <a href="https://github.com/Extraltodeus/LoadLoraWithTags"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; LoadLoraWithTags
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>1.80</span>"
+              >
+                <span style='color: var(--green);'>1.80</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2403"
+              >
+                -0.2403
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="LoadLoraWithTags.html"
+              >
+                <a href="LoadLoraWithTags.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyI2I</td>
-              <td><span style='color: var(--green);'>1.44</span></td>
-              <td>-0.2434</td>
-              <td><a href="ComfyI2I.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyI2I"
+              >
+                <a href="https://github.com/ManglerFTW/ComfyI2I"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyI2I
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>1.44</span>"
+              >
+                <span style='color: var(--green);'>1.44</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2434"
+              >
+                -0.2434
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyI2I.html"
+              >
+                <a href="ComfyI2I.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>rgthree-comfy</td>
-              <td><span style='color: var(--green);'>1.44</span></td>
-              <td>-0.2434</td>
-              <td><a href="rgthree-comfy.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="rgthree-comfy"
+              >
+                <a href="https://github.com/rgthree/rgthree-comfy"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; rgthree-comfy
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>1.44</span>"
+              >
+                <span style='color: var(--green);'>1.44</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2434"
+              >
+                -0.2434
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="rgthree-comfy.html"
+              >
+                <a href="rgthree-comfy.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>bilbox-comfyui</td>
-              <td><span style='color: var(--green);'>1.28</span></td>
-              <td>-0.2448</td>
-              <td><a href="bilbox-comfyui.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="bilbox-comfyui"
+              >
+                <a href="https://github.com/syllebra/bilbox-comfyui"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; bilbox-comfyui
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>1.28</span>"
+              >
+                <span style='color: var(--green);'>1.28</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2448"
+              >
+                -0.2448
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="bilbox-comfyui.html"
+              >
+                <a href="bilbox-comfyui.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI_essentials</td>
-              <td><span style='color: var(--green);'>1.12</span></td>
-              <td>-0.2462</td>
-              <td><a href="ComfyUI_essentials.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI_essentials"
+              >
+                <a href="https://github.com/cubiq/ComfyUI_essentials"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI_essentials
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>1.12</span>"
+              >
+                <span style='color: var(--green);'>1.12</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2462"
+              >
+                -0.2462
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI_essentials.html"
+              >
+                <a href="ComfyUI_essentials.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>efficiency-nodes-comfyui</td>
-              <td><span style='color: var(--green);'>0.64</span></td>
-              <td>-0.2503</td>
-              <td><a href="efficiency-nodes-comfyui.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="efficiency-nodes-comfyui"
+              >
+                <a href="https://github.com/jags111/efficiency-nodes-comfyui"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; efficiency-nodes-comfyui
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.64</span>"
+              >
+                <span style='color: var(--green);'>0.64</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2503"
+              >
+                -0.2503
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="efficiency-nodes-comfyui.html"
+              >
+                <a href="efficiency-nodes-comfyui.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Custom-Scripts</td>
-              <td><span style='color: var(--green);'>0.48</span></td>
-              <td>-0.2517</td>
-              <td><a href="ComfyUI-Custom-Scripts.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Custom-Scripts"
+              >
+                <a href="https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Custom-Scripts
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.48</span>"
+              >
+                <span style='color: var(--green);'>0.48</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2517"
+              >
+                -0.2517
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Custom-Scripts.html"
+              >
+                <a href="ComfyUI-Custom-Scripts.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfyui-prompt-control</td>
-              <td><span style='color: var(--green);'>0.42</span></td>
-              <td>-0.2522</td>
-              <td><a href="comfyui-prompt-control.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui-prompt-control"
+              >
+                <a href="https://github.com/asagi4/comfyui-prompt-control"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui-prompt-control
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.42</span>"
+              >
+                <span style='color: var(--green);'>0.42</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2522"
+              >
+                -0.2522
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui-prompt-control.html"
+              >
+                <a href="comfyui-prompt-control.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-Image-Selector</td>
-              <td><span style='color: var(--green);'>0.32</span></td>
-              <td>-0.2531</td>
-              <td><a href="ComfyUI-Image-Selector.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-Image-Selector"
+              >
+                <a href="https://github.com/SLAPaper/ComfyUI-Image-Selector"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-Image-Selector
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.32</span>"
+              >
+                <span style='color: var(--green);'>0.32</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2531"
+              >
+                -0.2531
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-Image-Selector.html"
+              >
+                <a href="ComfyUI-Image-Selector.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUi_PromptStylers</td>
-              <td><span style='color: var(--green);'>0.32</span></td>
-              <td>-0.2531</td>
-              <td><a href="ComfyUi_PromptStylers.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUi_PromptStylers"
+              >
+                <a href="https://github.com/wolfden/ComfyUi_PromptStylers"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUi_PromptStylers
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.32</span>"
+              >
+                <span style='color: var(--green);'>0.32</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2531"
+              >
+                -0.2531
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUi_PromptStylers.html"
+              >
+                <a href="ComfyUi_PromptStylers.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI_Cutoff</td>
-              <td><span style='color: var(--green);'>0.26</span></td>
-              <td>-0.2536</td>
-              <td><a href="ComfyUI_Cutoff.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI_Cutoff"
+              >
+                <a href="https://github.com/BlenderNeko/ComfyUI_Cutoff"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI_Cutoff
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.26</span>"
+              >
+                <span style='color: var(--green);'>0.26</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2536"
+              >
+                -0.2536
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI_Cutoff.html"
+              >
+                <a href="ComfyUI_Cutoff.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI-WD14-Tagger</td>
-              <td><span style='color: var(--green);'>0.16</span></td>
-              <td>-0.2545</td>
-              <td><a href="ComfyUI-WD14-Tagger.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI-WD14-Tagger"
+              >
+                <a href="https://github.com/pythongosssss/ComfyUI-WD14-Tagger"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI-WD14-Tagger
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.16</span>"
+              >
+                <span style='color: var(--green);'>0.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2545"
+              >
+                -0.2545
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI-WD14-Tagger.html"
+              >
+                <a href="ComfyUI-WD14-Tagger.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI_IPAdapter_plus</td>
-              <td><span style='color: var(--green);'>0.16</span></td>
-              <td>-0.2545</td>
-              <td><a href="ComfyUI_IPAdapter_plus.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI_IPAdapter_plus"
+              >
+                <a href="https://github.com/cubiq/ComfyUI_IPAdapter_plus"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI_IPAdapter_plus
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.16</span>"
+              >
+                <span style='color: var(--green);'>0.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2545"
+              >
+                -0.2545
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI_IPAdapter_plus.html"
+              >
+                <a href="ComfyUI_IPAdapter_plus.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>ComfyUI_UltimateSDUpscale</td>
-              <td><span style='color: var(--green);'>0.16</span></td>
-              <td>-0.2545</td>
-              <td><a href="ComfyUI_UltimateSDUpscale.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="ComfyUI_UltimateSDUpscale"
+              >
+                <a href="https://github.com/ssitu/ComfyUI_UltimateSDUpscale"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; ComfyUI_UltimateSDUpscale
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.16</span>"
+              >
+                <span style='color: var(--green);'>0.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2545"
+              >
+                -0.2545
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="ComfyUI_UltimateSDUpscale.html"
+              >
+                <a href="ComfyUI_UltimateSDUpscale.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>cg-image-picker</td>
-              <td><span style='color: var(--green);'>0.16</span></td>
-              <td>-0.2545</td>
-              <td><a href="cg-image-picker.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="cg-image-picker"
+              >
+                <a href="https://github.com/chrisgoringe/cg-image-picker"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; cg-image-picker
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.16</span>"
+              >
+                <span style='color: var(--green);'>0.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2545"
+              >
+                -0.2545
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="cg-image-picker.html"
+              >
+                <a href="cg-image-picker.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfyui-PromptAttention</td>
-              <td><span style='color: var(--green);'>0.16</span></td>
-              <td>-0.2545</td>
-              <td><a href="comfyui-PromptAttention.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui-PromptAttention"
+              >
+                <a href="https://github.com/andersxa/comfyui-PromptAttention"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui-PromptAttention
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.16</span>"
+              >
+                <span style='color: var(--green);'>0.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2545"
+              >
+                -0.2545
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui-PromptAttention.html"
+              >
+                <a href="comfyui-PromptAttention.html">View Report</a>
+              </td>
             </tr>
             
             <tr>
-              <td>comfyui-lama-remover</td>
-              <td><span style='color: var(--green);'>0.16</span></td>
-              <td>-0.2545</td>
-              <td><a href="comfyui-lama-remover.html">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="comfyui-lama-remover"
+              >
+                <a href="https://github.com/Layer-norm/comfyui-lama-remover"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; comfyui-lama-remover
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="<span style='color: var(--green);'>0.16</span>"
+              >
+                <span style='color: var(--green);'>0.16</span>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="-0.2545"
+              >
+                -0.2545
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="comfyui-lama-remover.html"
+              >
+                <a href="comfyui-lama-remover.html">View Report</a>
+              </td>
             </tr>
             
           </tbody>

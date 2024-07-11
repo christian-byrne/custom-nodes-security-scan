@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <title>Custom Node Security Scan Results</title>
-    <link rel="stylesheet" href="options.css" />
     <script src="./lib/jquery-3.7.1.min.js"></script>
     <script src="./lib/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
@@ -14,14 +13,32 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .dd3 {
+        font-size: 5rem;
+        font-weight: 100;
+        font-family: "Noto Sans", sans-serif;
+      }
+      .subtitle-dd3 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        font-family: "Noto Sans", sans-serif;
+      }
+      main {
+        font-size: large;
+      }
+    </style>
   </head>
   <body>
     <main>
-      <div class="col-md-12 p-4 mb-4">
-        <h1 class="display-1 mb-5 text-center dd3">
+      <div class="col-md-12 p-4 mb-4 mt-5">
+        <h1 class="display-1 text-center dd3 my-4">
           Custom Node Security Scan Results
         </h1>
-        <table class="table">
+        <p class="text-center text-muted mb-5 pb-5 subtitle-dd3">
+          Generated on {{ date }}
+        </p>
+        <table class="table mt-5 p-5">
           <thead>
             <tr id="configTableHeaderRow">
               <th scope="col">Custom Node Package Name</th>
@@ -33,10 +50,46 @@
           <tbody id="configTableBody">
             {% for result in results %}
             <tr>
-              <td>{{ result.package_name }}</td>
-              <td>{{ result.risk_level }}</td>
-              <td>{{ result.z_score }}</td>
-              <td><a href="{{ result.full_report_url }}">View Report</a></td>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Custom Node Package Name"
+                aria-label="Custom Node Package Name"
+                aria-details="{{ result.package_name }}"
+              >
+                <a href="{{ result.github_url }}"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp; {{ result.package_name }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level"
+                aria-label="Risk Level"
+                aria-details="{{ result.risk_level }}"
+              >
+                {{ result.risk_level }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score"
+                aria-label="Z-Score"
+                aria-details="{{ result.z_score }}"
+              >
+                {{ result.z_score }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report"
+                aria-label="Full Report"
+                aria-details="{{ result.full_report_url }}"
+              >
+                <a href="{{ result.full_report_url }}">View Report</a>
+              </td>
             </tr>
             {% endfor %}
           </tbody>

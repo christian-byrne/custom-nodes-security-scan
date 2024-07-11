@@ -1,7 +1,9 @@
 import os
+import time
 import sys
 from scipy import stats
 from jinja2 import Environment, FileSystemLoader
+import subprocess
 
 from bandit.core.issue import Issue
 from bandit.core import config as b_config
@@ -144,6 +146,24 @@ html_src_dir = sys.argv[2]
 this_parent = os.path.dirname(this_path)
 
 template_dir = os.path.join(this_parent, "html-templates")
+def get_github_url(node_name):
+    path = os.path.join(custom_nodes_dir, node_name)
+    try:
+        cmd = ['git', '-C', path, 'remote', '-v']
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        remotes = result.stdout.strip().split('\n')
+        for remote in remotes:
+            if 'github.com' in remote:
+                github_url = remote.split()[1]
+                if github_url.endswith('.git'):
+                    github_url = github_url[:-4]
+                    github_url = github_url.split(':')[-1]
+                    github_url = f"https://{github_url}"
+                return github_url
+    except subprocess.CalledProcessError as e:
+        print(f"Error retrieving remotes for {path}: {e}")
+    
+    return None
 
 results = []
 for i, node_name in enumerate(custom_node_scores):
@@ -165,15 +185,18 @@ for i, node_name in enumerate(custom_node_scores):
         "package_name": node_name,
         "risk_level": f"<span style='color: {color};'>{severity:.2f}</span>",
         "z_score": f"{z_score:.4f}",
-        "full_report_url": full_report_url
+        "full_report_url": full_report_url,
+        "github_url": get_github_url(node_name),
     })
 
+
+    
 # Sort by risk level high to low
 results = sorted(results, key=lambda x: float(x["sort_key"]), reverse=True)
 
 env = Environment(loader=FileSystemLoader(template_dir))
 template = env.get_template('index.html')
-output_html = template.render(results=results)
+output_html = template.render(results=results, date=time.strftime("%Y-%m-%d %H:%M:%S"))
 
 # Save rendered template to file
 output_file = os.path.join(html_src_dir, 'index.html')
