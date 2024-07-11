@@ -92,144 +92,6 @@ pre {
 <div id="results">
     
 <div id="issue-0">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>272<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-271	                elif random_indicator:
-272	                    offset = random.randint(0, 1000000)
-273	                elif increment_indicator:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-1">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>278<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-277	                else:
-278	                    offset = random.randint(0, 1000000)
-279	            selected_lines = []
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-2">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>323<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-322	    def repl(m):
-323	        return random.choice(m.group(1).split(&#x27;|&#x27;))
-324	    for m in wc_re.finditer(text):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-3">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>508<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-507	        lower_bound, upper_bound = map(float, match.groups())
-508	        random_value = random.uniform(lower_bound, upper_bound)
-509	        random_value = round(random_value, 4)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-4">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>2085<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-2084	        if len(positive_prompt_) != len(positive_prompt) or len(negative_prompt_) != len(negative_prompt):
-2085	            seed += random.randint(0, 1000000)
-2086	        positive_prompt = positive_prompt_
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-5">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>2347<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-2346	        if len(text_) != len(text):
-2347	            seed = random.randint(0, 1000000)
-2348	        else:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-6">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
     <b>Test ID:</b> B307<br>
@@ -242,9 +104,126 @@ pre {
 
 <div class="code">
 <pre>
+3723	            foreground_image = foreground_image.convert(&#x27;RGBA&#x27;)
+3724	
+3725	        # Separate the alpha channel and use it as mask
+3726	        r, g, b, alpha = foreground_image.split()
+3727	
+3728	        # paste the foreground image onto the background image
+3729	        background_image.paste(foreground_image, (x_position, y_position), mask=alpha)
+3730	
+3731	        return (pil2tensor(background_image),)
+3732	
+3733	class TextCombinations2:
+3734	    texts = [&#x27;text1&#x27;, &#x27;text2&#x27;, &#x27;text1 + text2&#x27;]
+3735	    outputs = [&#x27;output1&#x27;,&#x27;output2&#x27;]
+3736	
+3737	    @classmethod
+3738	    def generate_combinations(cls, texts, outputs):
+3739	        operations = []
+3740	        for output1, output2 in product(texts, repeat=len(outputs)):
+3741	            operation = f&quot;{output1} to {outputs[0]}, {output2} to {outputs[1]}&quot;
+3742	            operations.append(operation)
+3743	        return operations
+3744	
+3745	    @classmethod
+3746	    def INPUT_TYPES(cls):
+3747	        cls.operations = cls.generate_combinations(cls.texts, cls.outputs)
+3748	        return {&#x27;required&#x27;: {&#x27;text1&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 1&#x27;}),
+3749	                             &#x27;text2&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 2&#x27;}),
+3750	                             &#x27;operation&#x27;: (cls.operations, {&#x27;default&#x27;:cls.operations[0]}),
+3751	                             &#x27;delimiter&#x27;: (&#x27;STRING&#x27;, {&#x27;default&#x27;: &#x27; &#x27;}),
+3752	                             &#x27;use_seed&#x27;: ([&#x27;true&#x27;,&#x27;false&#x27;], {&#x27;default&#x27;: &#x27;false&#x27;}),
+3753	                             &#x27;seed&#x27;: (&#x27;INT&#x27;, {&#x27;default&#x27;: 0, &#x27;min&#x27;: 0, &#x27;max&#x27;: 0xffffffffffffffff})},
+3754	                &quot;hidden&quot;: {&quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3755	
+3756	    RETURN_TYPES = (&#x27;STRING&#x27;,&#x27;STRING&#x27;)
+3757	    RETURN_NAMES = (&#x27;output1&#x27;,&#x27;output2&#x27;)
+3758	    FUNCTION = &#x27;mix&#x27;
+3759	    CATEGORY = &#x27;Mikey/Text&#x27;
+3760	
+3761	    def mix(self, text1, text2, operation, delimiter, use_seed, seed, extra_pnginfo, prompt):
+3762	        # search and replace
+3763	        text1 = search_and_replace(text1, extra_pnginfo, prompt)
+3764	        text2 = search_and_replace(text2, extra_pnginfo, prompt)
+3765	
+3766	        text_dict = {&#x27;text1&#x27;: text1, &#x27;text2&#x27;: text2}
+3767	        if use_seed == &#x27;true&#x27; and len(self.operations) &gt; 0:
+3768	            offset = seed % len(self.operations)
+3769	            operation = self.operations[offset]
+3770	
+3771	        # Parsing the operation string
+3772	        ops = operation.split(&quot;, &quot;)
+3773	        output_texts = [op.split(&quot; to &quot;)[0] for op in ops]
+3774	
+3775	        # Generate the outputs
+3776	        outputs = []
+3777	
+3778	        for output_text in output_texts:
+3779	            # Split the string by &#x27;+&#x27; to identify individual text components
+3780	            components = output_text.split(&quot; + &quot;)
+3781	
 3782	            # Generate the final string for each output
 3783	            final_output = delimiter.join(eval(comp, {}, text_dict) for comp in components)
 3784	
+3785	            outputs.append(final_output)
+3786	
+3787	        return tuple(outputs)
+3788	
+3789	class TextCombinations3:
+3790	    texts = [&#x27;text1&#x27;, &#x27;text2&#x27;, &#x27;text3&#x27;, &#x27;text1 + text2&#x27;, &#x27;text1 + text3&#x27;, &#x27;text2 + text3&#x27;, &#x27;text1 + text2 + text3&#x27;]
+3791	    outputs = [&#x27;output1&#x27;,&#x27;output2&#x27;,&#x27;output3&#x27;]
+3792	
+3793	    @classmethod
+3794	    def generate_combinations(cls, texts, outputs):
+3795	        operations = []
+3796	        for output1, output2, output3 in product(texts, repeat=len(outputs)):
+3797	            operation = f&quot;{output1} to {outputs[0]}, {output2} to {outputs[1]}, {output3} to {outputs[2]}&quot;
+3798	            operations.append(operation)
+3799	        return operations
+3800	
+3801	    @classmethod
+3802	    def INPUT_TYPES(cls):
+3803	        cls.operations = cls.generate_combinations(cls.texts, cls.outputs)
+3804	        return {&#x27;required&#x27;: {&#x27;text1&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 1&#x27;}),
+3805	                             &#x27;text2&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 2&#x27;}),
+3806	                             &#x27;text3&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 3&#x27;}),
+3807	                             &#x27;operation&#x27;: (cls.operations, {&#x27;default&#x27;:cls.operations[0]}),
+3808	                             &#x27;delimiter&#x27;: (&#x27;STRING&#x27;, {&#x27;default&#x27;: &#x27; &#x27;}),
+3809	                             &#x27;use_seed&#x27;: ([&#x27;true&#x27;,&#x27;false&#x27;], {&#x27;default&#x27;: &#x27;false&#x27;}),
+3810	                             &#x27;seed&#x27;: (&#x27;INT&#x27;, {&#x27;default&#x27;: 0, &#x27;min&#x27;: 0, &#x27;max&#x27;: 0xffffffffffffffff})},
+3811	                &quot;hidden&quot;: {&quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3812	
+3813	    RETURN_TYPES = (&#x27;STRING&#x27;,&#x27;STRING&#x27;,&#x27;STRING&#x27;)
+3814	    RETURN_NAMES = (&#x27;output1&#x27;,&#x27;output2&#x27;,&#x27;output3&#x27;)
+3815	    FUNCTION = &#x27;mix&#x27;
+3816	    CATEGORY = &#x27;Mikey/Text&#x27;
+3817	
+3818	    def mix(self, text1, text2, text3, operation, delimiter, use_seed, seed, extra_pnginfo, prompt):
+3819	        # search and replace
+3820	        text1 = search_and_replace(text1, extra_pnginfo, prompt)
+3821	        text2 = search_and_replace(text2, extra_pnginfo, prompt)
+3822	        text3 = search_and_replace(text3, extra_pnginfo, prompt)
+3823	
+3824	        text_dict = {&#x27;text1&#x27;: text1, &#x27;text2&#x27;: text2, &#x27;text3&#x27;: text3}
+3825	        if use_seed == &#x27;true&#x27; and len(self.operations) &gt; 0:
+3826	            offset = seed % len(self.operations)
+3827	            operation = self.operations[offset]
+3828	
+3829	        # Parsing the operation string
+3830	        ops = operation.split(&quot;, &quot;)
+3831	        output_texts = [op.split(&quot; to &quot;)[0] for op in ops]
+3832	
+3833	        # Generate the outputs
+3834	        outputs = []
+3835	
+3836	        for output_text in output_texts:
+3837	            # Split the string by &#x27;+&#x27; to identify individual text components
+3838	            components = output_text.split(&quot; + &quot;)
+3839	
+3840	            # Generate the final string for each output
+3841	            final_output = delimiter.join(eval(comp, {}, text_dict) for comp in components)
+3842	
 </pre>
 </div>
 
@@ -252,7 +231,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-7">
+<div id="issue-1">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
     <b>Test ID:</b> B307<br>
@@ -265,9 +244,126 @@ pre {
 
 <div class="code">
 <pre>
+3781	
+3782	            # Generate the final string for each output
+3783	            final_output = delimiter.join(eval(comp, {}, text_dict) for comp in components)
+3784	
+3785	            outputs.append(final_output)
+3786	
+3787	        return tuple(outputs)
+3788	
+3789	class TextCombinations3:
+3790	    texts = [&#x27;text1&#x27;, &#x27;text2&#x27;, &#x27;text3&#x27;, &#x27;text1 + text2&#x27;, &#x27;text1 + text3&#x27;, &#x27;text2 + text3&#x27;, &#x27;text1 + text2 + text3&#x27;]
+3791	    outputs = [&#x27;output1&#x27;,&#x27;output2&#x27;,&#x27;output3&#x27;]
+3792	
+3793	    @classmethod
+3794	    def generate_combinations(cls, texts, outputs):
+3795	        operations = []
+3796	        for output1, output2, output3 in product(texts, repeat=len(outputs)):
+3797	            operation = f&quot;{output1} to {outputs[0]}, {output2} to {outputs[1]}, {output3} to {outputs[2]}&quot;
+3798	            operations.append(operation)
+3799	        return operations
+3800	
+3801	    @classmethod
+3802	    def INPUT_TYPES(cls):
+3803	        cls.operations = cls.generate_combinations(cls.texts, cls.outputs)
+3804	        return {&#x27;required&#x27;: {&#x27;text1&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 1&#x27;}),
+3805	                             &#x27;text2&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 2&#x27;}),
+3806	                             &#x27;text3&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text 3&#x27;}),
+3807	                             &#x27;operation&#x27;: (cls.operations, {&#x27;default&#x27;:cls.operations[0]}),
+3808	                             &#x27;delimiter&#x27;: (&#x27;STRING&#x27;, {&#x27;default&#x27;: &#x27; &#x27;}),
+3809	                             &#x27;use_seed&#x27;: ([&#x27;true&#x27;,&#x27;false&#x27;], {&#x27;default&#x27;: &#x27;false&#x27;}),
+3810	                             &#x27;seed&#x27;: (&#x27;INT&#x27;, {&#x27;default&#x27;: 0, &#x27;min&#x27;: 0, &#x27;max&#x27;: 0xffffffffffffffff})},
+3811	                &quot;hidden&quot;: {&quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3812	
+3813	    RETURN_TYPES = (&#x27;STRING&#x27;,&#x27;STRING&#x27;,&#x27;STRING&#x27;)
+3814	    RETURN_NAMES = (&#x27;output1&#x27;,&#x27;output2&#x27;,&#x27;output3&#x27;)
+3815	    FUNCTION = &#x27;mix&#x27;
+3816	    CATEGORY = &#x27;Mikey/Text&#x27;
+3817	
+3818	    def mix(self, text1, text2, text3, operation, delimiter, use_seed, seed, extra_pnginfo, prompt):
+3819	        # search and replace
+3820	        text1 = search_and_replace(text1, extra_pnginfo, prompt)
+3821	        text2 = search_and_replace(text2, extra_pnginfo, prompt)
+3822	        text3 = search_and_replace(text3, extra_pnginfo, prompt)
+3823	
+3824	        text_dict = {&#x27;text1&#x27;: text1, &#x27;text2&#x27;: text2, &#x27;text3&#x27;: text3}
+3825	        if use_seed == &#x27;true&#x27; and len(self.operations) &gt; 0:
+3826	            offset = seed % len(self.operations)
+3827	            operation = self.operations[offset]
+3828	
+3829	        # Parsing the operation string
+3830	        ops = operation.split(&quot;, &quot;)
+3831	        output_texts = [op.split(&quot; to &quot;)[0] for op in ops]
+3832	
+3833	        # Generate the outputs
+3834	        outputs = []
+3835	
+3836	        for output_text in output_texts:
+3837	            # Split the string by &#x27;+&#x27; to identify individual text components
+3838	            components = output_text.split(&quot; + &quot;)
+3839	
 3840	            # Generate the final string for each output
 3841	            final_output = delimiter.join(eval(comp, {}, text_dict) for comp in components)
 3842	
+3843	            outputs.append(final_output)
+3844	
+3845	        return tuple(outputs)
+3846	
+3847	class Text2InputOr3rdOption:
+3848	    @classmethod
+3849	    def INPUT_TYPES(s):
+3850	        return {&#x27;required&#x27;: {&#x27;text_a&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text A&#x27;}),
+3851	                             &#x27;text_b&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text B&#x27;}),
+3852	                             &#x27;text_c&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text C&#x27;}),
+3853	                             &#x27;use_text_c_for_both&#x27;: ([&#x27;true&#x27;,&#x27;false&#x27;], {&#x27;default&#x27;: &#x27;false&#x27;}),},
+3854	                &quot;hidden&quot;: {&quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3855	
+3856	    RETURN_TYPES = (&#x27;STRING&#x27;,&#x27;STRING&#x27;,)
+3857	    RETURN_NAMES = (&#x27;text_a&#x27;,&#x27;text_b&#x27;,)
+3858	    FUNCTION = &#x27;output&#x27;
+3859	    CATEGORY = &#x27;Mikey/Text&#x27;
+3860	
+3861	    def output(self, text_a, text_b, text_c, use_text_c_for_both, extra_pnginfo, prompt):
+3862	        # search and replace
+3863	        text_a = search_and_replace(text_a, extra_pnginfo, prompt)
+3864	        text_b = search_and_replace(text_b, extra_pnginfo, prompt)
+3865	        text_c = search_and_replace(text_c, extra_pnginfo, prompt)
+3866	        if use_text_c_for_both == &#x27;true&#x27;:
+3867	            return (text_c, text_c)
+3868	        else:
+3869	            return (text_a, text_b)
+3870	
+3871	class CheckpointLoaderSimpleMikey:
+3872	    @classmethod
+3873	    def INPUT_TYPES(s):
+3874	        return {&quot;required&quot;: { &quot;ckpt_name&quot;: (folder_paths.get_filename_list(&quot;checkpoints&quot;), ),},
+3875	                &quot;hidden&quot;: {&quot;unique_id&quot;: &quot;UNIQUE_ID&quot;, &quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3876	
+3877	    RETURN_TYPES = (&quot;MODEL&quot;, &quot;CLIP&quot;, &quot;VAE&quot;, &quot;STRING&quot;, &quot;STRING&quot;)
+3878	    RETURN_NAMES = (&quot;model&quot;, &quot;clip&quot;, &quot;vae&quot;, &quot;ckpt_name&quot;, &quot;ckpt_hash&quot;)
+3879	    FUNCTION = &quot;load_checkpoint&quot;
+3880	
+3881	    CATEGORY = &quot;Mikey/Loaders&quot;
+3882	
+3883	    def load_checkpoint(self, ckpt_name, output_vae=True, output_clip=True, unique_id=None, extra_pnginfo=None, prompt=None):
+3884	        ckpt_path = folder_paths.get_full_path(&quot;checkpoints&quot;, ckpt_name)
+3885	        out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths(&quot;embeddings&quot;))
+3886	        #print(ckpt_path)
+3887	        hash = get_file_hash(ckpt_path)
+3888	        ckpt_name = os.path.basename(ckpt_name)
+3889	        #prompt.get(str(unique_id))[&#x27;inputs&#x27;][&#x27;output_ckpt_hash&#x27;] = hash
+3890	        #prompt.get(str(unique_id))[&#x27;inputs&#x27;][&#x27;output_ckpt_name&#x27;] = ckpt_name
+3891	        return out[:3] + (ckpt_name, hash)
+3892	
+3893	class CheckpointHash:
+3894	    @classmethod
+3895	    def INPUT_TYPES(s):
+3896	        return {&quot;required&quot;: { &quot;ckpt_name&quot;: (&quot;STRING&quot;, {&quot;forceInput&quot;: True}),},
+3897	                &quot;hidden&quot;: {&quot;unique_id&quot;: &quot;UNIQUE_ID&quot;, &quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3898	
+3899	    RETURN_TYPES = (&quot;STRING&quot;,)
+3900	    RETURN_NAMES = (&quot;ckpt_hash&quot;,)
 </pre>
 </div>
 
@@ -275,145 +371,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-8">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>3981<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-3980	        def repl(m):
-3981	            return random.choice(m.group(1).split(&#x27;|&#x27;))
-3982	        for m in wc_re.finditer(text):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-9">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>4351<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-4350	            random.seed(seed)
-4351	            prompt = f&#x27;{random.choice(spice)} {prompt}&#x27;
-4352	        request = {
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-10">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>4385<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-4384	        def repl(m):
-4385	            return random.choice(m.group(1).split(&#x27;|&#x27;))
-4386	        for m in wc_re.finditer(input_prompt):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-11">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>4416<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-4415	        def repl(m):
-4416	            return random.choice(m.group(1).split(&#x27;|&#x27;))
-4417	        for m in wc_re.finditer(input_prompt):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-12">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>4597<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-4596	            random.seed(seed)
-4597	            prompt = f&#x27;{random.choice(spice)} {prompt}&#x27;
-4598	        &quot;&quot;&quot;
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-13">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/mikey_nodes/mikey_nodes.py</a><br>
-    <b>Line number: </b>4650<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-4649	        def repl(m):
-4650	            return random.choice(m.group(1).split(&#x27;|&#x27;))
-4651	        for m in wc_re.finditer(input_prompt):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-14">
+<div id="issue-2">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
     <b>Test ID:</b> B307<br>
@@ -426,9 +384,126 @@ pre {
 
 <div class="code">
 <pre>
+4615	        history[&#x27;messages&#x27;].append({&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: prompt})
+4616	        request = {
+4617	            &#x27;messages&#x27;: history[&#x27;messages&#x27;],
+4618	            &#x27;temperature&#x27;: 0.2,
+4619	            &#x27;top_p&#x27;: 0.95,
+4620	            &#x27;presence_penalty&#x27;: 0.0,
+4621	            &#x27;frequency_penalty&#x27;: 0.0,
+4622	            &#x27;max_tokens&#x27;: 1200,
+4623	            &#x27;stream&#x27;: False,
+4624	            &#x27;seed&#x27;: seed,
+4625	        }
+4626	        HOST = f&#x27;{server_address}:{server_port}&#x27;
+4627	        URI = f&#x27;http://{HOST}/v1/chat/completions&#x27;
+4628	
+4629	        try:
+4630	            response = requests.post(URI, json=request, timeout=60)
+4631	        except requests.exceptions.ConnectionError:
+4632	            raise Exception(&#x27;Are you running LM Studio with server running?&#x27;)
+4633	
+4634	        if response.status_code == 200:
+4635	            # response is in openai format
+4636	            result = response.json()[&#x27;choices&#x27;][0][&#x27;message&#x27;][&#x27;content&#x27;]
+4637	            result = html.unescape(result)  # decode URL encoded special characters
+4638	            return result
+4639	        else:
+4640	            return &#x27;Error&#x27;
+4641	
+4642	    def process(self, input_prompt, mode, custom_history, server_address, server_port, seed, prompt=None, unique_id=None, extra_pnginfo=None):
+4643	        # search and replace
+4644	        input_prompt = find_and_replace_wildcards(input_prompt, seed, debug=True)
+4645	        input_prompt = search_and_replace(input_prompt, extra_pnginfo, prompt)
+4646	        # wildcard sytax is {like|this}
+4647	        # select a random word from the | separated list
+4648	        wc_re = re.compile(r&#x27;{([^}]+)}&#x27;)
+4649	        def repl(m):
+4650	            return random.choice(m.group(1).split(&#x27;|&#x27;))
+4651	        for m in wc_re.finditer(input_prompt):
+4652	            input_prompt = input_prompt.replace(m.group(0), repl(m))
+4653	        result = self.api_request(input_prompt, server_address, server_port, seed, mode, custom_history)
+4654	        prompt.get(str(unique_id))[&#x27;inputs&#x27;][&#x27;output_text&#x27;] = result
+4655	        return (result,)
+4656	
+4657	class EvalFloats:
+4658	    # takes two float inputs and a text widget the user can type a formula for values a and b to calculate
+4659	    # then returns the result as the output
+4660	    @classmethod
+4661	    def INPUT_TYPES(cls):
+4662	        return {&#x27;required&#x27;: {&#x27;a&#x27;: (&#x27;FLOAT&#x27;, {&#x27;default&#x27;: 0.0}),
+4663	                             &#x27;b&#x27;: (&#x27;FLOAT&#x27;, {&#x27;default&#x27;: 0.0}),
+4664	                             &#x27;formula&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: False, &#x27;default&#x27;: &#x27;a + b&#x27;})}}
+4665	
+4666	    RETURN_TYPES = (&#x27;FLOAT&#x27;,)
+4667	    RETURN_NAMES = (&#x27;result_float&#x27;,&#x27;result_int&#x27;,&#x27;result_str&#x27;)
+4668	    FUNCTION = &#x27;process&#x27;
+4669	    CATEGORY = &#x27;Mikey/Math&#x27;
+4670	
+4671	    def process(self, a, b, formula):
+4672	        # eval formula
+4673	        formula = formula.replace(&#x27;a&#x27;, str(a))
 4674	        formula = formula.replace(&#x27;b&#x27;, str(b))
 4675	        result = eval(formula)
 4676	        return (result, int(result), str(result))
+4677	
+4678	class ImageOverlay:
+4679	    # overlay foreground image on top of background image
+4680	    # automatically fill or crop foreground image to match background image size
+4681	    # automatically resize foreground image to match background image size
+4682	    @classmethod
+4683	    def INPUT_TYPES(cls):
+4684	        return {&#x27;required&#x27;: {&#x27;background_image&#x27;: (&#x27;IMAGE&#x27;, {&#x27;default&#x27;: None}),
+4685	                             &#x27;foreground_image&#x27;: (&#x27;IMAGE&#x27;, {&#x27;default&#x27;: None}),
+4686	                             &#x27;opacity&#x27;: (&#x27;FLOAT&#x27;, {&#x27;default&#x27;: 1.0, &#x27;min&#x27;: 0.0, &#x27;max&#x27;: 1.0, &#x27;step&#x27;: 0.01})}}
+4687	
+4688	    RETURN_TYPES = (&#x27;IMAGE&#x27;,)
+4689	    RETURN_NAMES = (&#x27;result_img&#x27;,)
+4690	    FUNCTION = &#x27;overlay&#x27;
+4691	    CATEGORY = &#x27;Mikey/Image&#x27;
+4692	
+4693	    def overlay(self, background_image, foreground_image, opacity):
+4694	        background_image = tensor2pil(background_image)
+4695	        foreground_image = tensor2pil(foreground_image)
+4696	        # Ensure images are in RGB mode and resize foreground to match background
+4697	        background_image = background_image.convert(&#x27;RGB&#x27;)
+4698	        foreground_image = foreground_image.convert(&#x27;RGB&#x27;)
+4699	        # create a cropped image from the foreground image with the same dimensions as the background image
+4700	        cropped_fg = Image.new(&#x27;RGB&#x27;, (background_image.size[0], background_image.size[1]))
+4701	        # paste the foreground image into the center of the cropped image
+4702	        cropped_fg.paste(foreground_image, (int((background_image.size[0] - foreground_image.size[0]) / 2), int((background_image.size[1] - foreground_image.size[1]) / 2)))
+4703	
+4704	        # Convert images to NumPy arrays
+4705	        bg_array = np.array(background_image, dtype=np.float32) / 255
+4706	        fg_array = np.array(cropped_fg, dtype=np.float32) / 255
+4707	
+4708	        ## Calculate Overlay blend
+4709	        mask = bg_array &lt; 0.5
+4710	        overlay = np.zeros_like(bg_array)
+4711	        overlay[mask] = 2 * bg_array[mask] * fg_array[mask]
+4712	        overlay[~mask] = 1 - 2 * (1 - bg_array[~mask]) * (1 - fg_array[~mask])
+4713	
+4714	        ## Apply opacity
+4715	        result = (1 - opacity) * bg_array + opacity * overlay
+4716	
+4717	        ## Convert the result to uint8 and back to an Image
+4718	        result_img = Image.fromarray((result * 255).astype(np.uint8))
+4719	        result_img = pil2tensor(result_img)
+4720	        return result_img,
+4721	
+4722	class CinematicLook:
+4723	    # combine function from ImageOverlay and HALDClut to create a cinematic look
+4724	    @classmethod
+4725	    def INPUT_TYPES(s):
+4726	        s.haldclut_files = read_cluts()
+4727	        s.file_names = [os.path.basename(f) for f in s.haldclut_files]
+4728	        return {&#x27;required&#x27;: {&#x27;image&#x27;: (&#x27;IMAGE&#x27;, {&#x27;default&#x27;: None}),
+4729	                             &#x27;look&#x27;: ([&#x27;modern&#x27;,&#x27;retro&#x27;,&#x27;clipped&#x27;,&#x27;broadcast&#x27;,&#x27;black and white&#x27;,&#x27;black and white - warm&#x27;],)}}
+4730	
+4731	    RETURN_TYPES = (&#x27;IMAGE&#x27;,)
+4732	    RETURN_NAMES = (&#x27;result_img&#x27;,)
+4733	    FUNCTION = &#x27;cinematic_look&#x27;
+4734	    CATEGORY = &#x27;Mikey/Image&#x27;
 </pre>
 </div>
 

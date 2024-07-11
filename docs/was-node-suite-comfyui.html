@@ -104,9 +104,126 @@ pre {
 
 <div class="code">
 <pre>
+1	# By WASasquatch (Discord: WAS#0263)
+2	#
+3	# Copyright 2023 Jordan Thompson (WASasquatch)
+4	#
+5	# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to
+6	# deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+7	# and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+8	#
+9	# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+10	#
+11	# THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+12	# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+13	# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+14	# THE SOFTWARE.
+15	
+16	
+17	from PIL import Image, ImageFilter, ImageEnhance, ImageOps, ImageDraw, ImageChops, ImageFont
+18	from PIL.PngImagePlugin import PngInfo
+19	from io import BytesIO
+20	from typing import Optional, Union, List
+21	from urllib.request import urlopen
+22	import comfy.diffusers_convert
+23	import comfy.samplers
+24	import comfy.sd
+25	import comfy.utils
+26	import comfy.clip_vision
+27	import comfy.model_management
+28	import folder_paths as comfy_paths
+29	from comfy_extras.chainner_models import model_loading
+30	import ast
+31	import glob
+32	import hashlib
+33	import json
+34	import nodes
+35	import math
+36	import numpy as np
+37	from numba import jit
+38	import os
+39	import random
+40	import re
+41	import requests
 42	import socket
 43	import subprocess
 44	import sys
+45	import datetime
+46	import time
+47	import torch
+48	from tqdm import tqdm
+49	
+50	p310_plus = (sys.version_info &gt;= (3, 10))
+51	
+52	MANIFEST = {
+53	    &quot;name&quot;: &quot;WAS Node Suite&quot;,
+54	    &quot;version&quot;: (2,2,2),
+55	    &quot;author&quot;: &quot;WASasquatch&quot;,
+56	    &quot;project&quot;: &quot;https://github.com/WASasquatch/was-node-suite-comfyui&quot;,
+57	    &quot;description&quot;: &quot;An extensive node suite for ComfyUI with over 180 new nodes&quot;,
+58	}
+59	
+60	sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;was_node_suite_comfyui&quot;))
+61	sys.path.append(comfy_paths.base_path)
+62	
+63	#! SYSTEM HOOKS
+64	
+65	class cstr(str):
+66	    class color:
+67	        END = &#x27;\33[0m&#x27;
+68	        BOLD = &#x27;\33[1m&#x27;
+69	        ITALIC = &#x27;\33[3m&#x27;
+70	        UNDERLINE = &#x27;\33[4m&#x27;
+71	        BLINK = &#x27;\33[5m&#x27;
+72	        BLINK2 = &#x27;\33[6m&#x27;
+73	        SELECTED = &#x27;\33[7m&#x27;
+74	
+75	        BLACK = &#x27;\33[30m&#x27;
+76	        RED = &#x27;\33[31m&#x27;
+77	        GREEN = &#x27;\33[32m&#x27;
+78	        YELLOW = &#x27;\33[33m&#x27;
+79	        BLUE = &#x27;\33[34m&#x27;
+80	        VIOLET = &#x27;\33[35m&#x27;
+81	        BEIGE = &#x27;\33[36m&#x27;
+82	        WHITE = &#x27;\33[37m&#x27;
+83	
+84	        BLACKBG = &#x27;\33[40m&#x27;
+85	        REDBG = &#x27;\33[41m&#x27;
+86	        GREENBG = &#x27;\33[42m&#x27;
+87	        YELLOWBG = &#x27;\33[43m&#x27;
+88	        BLUEBG = &#x27;\33[44m&#x27;
+89	        VIOLETBG = &#x27;\33[45m&#x27;
+90	        BEIGEBG = &#x27;\33[46m&#x27;
+91	        WHITEBG = &#x27;\33[47m&#x27;
+92	
+93	        GREY = &#x27;\33[90m&#x27;
+94	        LIGHTRED = &#x27;\33[91m&#x27;
+95	        LIGHTGREEN = &#x27;\33[92m&#x27;
+96	        LIGHTYELLOW = &#x27;\33[93m&#x27;
+97	        LIGHTBLUE = &#x27;\33[94m&#x27;
+98	        LIGHTVIOLET = &#x27;\33[95m&#x27;
+99	        LIGHTBEIGE = &#x27;\33[96m&#x27;
+100	        LIGHTWHITE = &#x27;\33[97m&#x27;
+101	
+102	        GREYBG = &#x27;\33[100m&#x27;
+103	        LIGHTREDBG = &#x27;\33[101m&#x27;
+104	        LIGHTGREENBG = &#x27;\33[102m&#x27;
+105	        LIGHTYELLOWBG = &#x27;\33[103m&#x27;
+106	        LIGHTBLUEBG = &#x27;\33[104m&#x27;
+107	        LIGHTVIOLETBG = &#x27;\33[105m&#x27;
+108	        LIGHTBEIGEBG = &#x27;\33[106m&#x27;
+109	        LIGHTWHITEBG = &#x27;\33[107m&#x27;
+110	
+111	        @staticmethod
+112	        def add_code(name, code):
+113	            if not hasattr(cstr.color, name.upper()):
+114	                setattr(cstr.color, name.upper(), code)
+115	            else:
+116	                raise ValueError(f&quot;&#x27;cstr&#x27; object already contains a code with the name &#x27;{name}&#x27;.&quot;)
+117	
+118	    def __new__(cls, text):
+119	        return super().__new__(cls, text)
+120	
 </pre>
 </div>
 
@@ -127,9 +244,126 @@ pre {
 
 <div class="code">
 <pre>
+275	    cstr(f&quot;There is no write access to `{WAS_SUITE_ROOT}` or `{MODELS_DIR}`. Write access is required!&quot;).error.print()
+276	    exit
+277	
+278	# SET TEXT TYPE
+279	TEXT_TYPE = &quot;STRING&quot;
+280	if was_config and was_config.__contains__(&#x27;text_nodes_type&#x27;):
+281	    if was_config[&#x27;text_nodes_type&#x27;].strip() != &#x27;&#x27;:
+282	        TEXT_TYPE = was_config[&#x27;text_nodes_type&#x27;].strip()
+283	if was_config and was_config.__contains__(&#x27;use_legacy_ascii_text&#x27;):
+284	    if was_config[&#x27;use_legacy_ascii_text&#x27;]:
+285	        TEXT_TYPE = &quot;ASCII&quot;
+286	        cstr(&quot;use_legacy_ascii_text is `True` in `was_suite_config.json`. `ASCII` type is deprecated and the default will be `STRING` in the future.&quot;).warning.print()
+287	
+288	# Convert WebUI Styles - TODO: Convert to PromptStyles class
+289	if was_config.__contains__(&#x27;webui_styles&#x27;):
+290	
+291	    if was_config[&#x27;webui_styles&#x27;] not in [None, &#x27;None&#x27;, &#x27;none&#x27;, &#x27;&#x27;]:
+292	
+293	        webui_styles_file = was_config[&#x27;webui_styles&#x27;]
+294	
+295	        if was_config.__contains__(&#x27;webui_styles_persistent_update&#x27;):
+296	            styles_persist = was_config[&#x27;webui_styles_persistent_update&#x27;]
+297	        else:
+298	            styles_persist = True
+299	
+300	        if webui_styles_file not in [None, &#x27;none&#x27;, &#x27;None&#x27;, &#x27;&#x27;] and os.path.exists(webui_styles_file):
+301	
+302	            cstr(f&quot;Importing styles from `{webui_styles_file}`.&quot;).msg.print()
+303	
+304	            import csv
+305	
+306	            styles = {}
+307	            with open(webui_styles_file, &quot;r&quot;, encoding=&quot;utf-8-sig&quot;, newline=&#x27;&#x27;) as file:
+308	                reader = csv.DictReader(file)
+309	                for row in reader:
+310	                    prompt = row.get(&quot;prompt&quot;) or row.get(&quot;text&quot;, &quot;&quot;) # Old files
+311	                    negative_prompt = row.get(&quot;negative_prompt&quot;, &quot;&quot;)
+312	                    styles[row[&quot;name&quot;]] = {
+313	                        &quot;prompt&quot;: prompt,
+314	                        &quot;negative_prompt&quot;: negative_prompt
+315	                    }
+316	
+317	            if styles:
+318	                if not os.path.exists(STYLES_PATH) or styles_persist:
+319	                    with open(STYLES_PATH, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:
+320	                        json.dump(styles, f, indent=4)
+321	
+322	            del styles
+323	
+324	            cstr(f&quot;Styles import complete.&quot;).msg.print()
+325	
+326	        else:
+327	            cstr(f&quot;Styles file `{webui_styles_file}` does not exist.&quot;).error.print()
+328	
+329	
+330	#! SUITE SPECIFIC CLASSES &amp; FUNCTIONS
+331	
+332	# Freeze PIP modules
+333	def packages(versions=False):
 334	    import sys
 335	    import subprocess
 336	    return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
+337	
+338	def install_package(package, uninstall_first: Union[List[str], str] = None):
+339	    if os.getenv(&quot;WAS_BLOCK_AUTO_INSTALL&quot;, &#x27;False&#x27;).lower() in (&#x27;true&#x27;, &#x27;1&#x27;, &#x27;t&#x27;):
+340	        cstr(f&quot;Preventing package install of &#x27;{package}&#x27; due to WAS_BLOCK_INSTALL env&quot;).msg.print()
+341	    else:
+342	        if uninstall_first is None:
+343	            return
+344	
+345	        if isinstance(uninstall_first, str):
+346	            uninstall_first = [uninstall_first]
+347	
+348	        cstr(f&quot;Uninstalling {&#x27;, &#x27;.join(uninstall_first)}..&quot;)
+349	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;uninstall&#x27;, *uninstall_first])
+350	        cstr(&quot;Installing package...&quot;).msg.print()
+351	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, package])
+352	
+353	# Tensor to PIL
+354	def tensor2pil(image):
+355	    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
+356	
+357	# PIL to Tensor
+358	def pil2tensor(image):
+359	    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
+360	
+361	# PIL Hex
+362	def pil2hex(image):
+363	    return hashlib.sha256(np.array(tensor2pil(image)).astype(np.uint16).tobytes()).hexdigest()
+364	
+365	# PIL to Mask
+366	def pil2mask(image):
+367	    image_np = np.array(image.convert(&quot;L&quot;)).astype(np.float32) / 255.0
+368	    mask = torch.from_numpy(image_np)
+369	    return 1.0 - mask
+370	
+371	# Mask to PIL
+372	def mask2pil(mask):
+373	    if mask.ndim &gt; 2:
+374	        mask = mask.squeeze(0)
+375	    mask_np = mask.cpu().numpy().astype(&#x27;uint8&#x27;)
+376	    mask_pil = Image.fromarray(mask_np, mode=&quot;L&quot;)
+377	    return mask_pil
+378	
+379	# Tensor to SAM-compatible NumPy
+380	def tensor2sam(image):
+381	    # Convert tensor to numpy array in HWC uint8 format with pixel values in [0, 255]
+382	    sam_image = np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
+383	    # Transpose the image to HWC format if it&#x27;s in CHW format
+384	    if sam_image.shape[0] == 3:
+385	        sam_image = np.transpose(sam_image, (1, 2, 0))
+386	    return sam_image
+387	
+388	# SAM-compatible NumPy to tensor
+389	def sam2tensor(image):
+390	    # Convert the image to float32 and normalize the pixel values to [0, 1]
+391	    float_image = image.astype(np.float32) / 255.0
+392	    # Transpose the image from HWC format to CHW format
+393	    chw_image = np.transpose(float_image, (2, 0, 1))
+394	    # Convert the numpy array to a tensor
 </pre>
 </div>
 
@@ -150,9 +384,126 @@ pre {
 
 <div class="code">
 <pre>
+276	    exit
+277	
+278	# SET TEXT TYPE
+279	TEXT_TYPE = &quot;STRING&quot;
+280	if was_config and was_config.__contains__(&#x27;text_nodes_type&#x27;):
+281	    if was_config[&#x27;text_nodes_type&#x27;].strip() != &#x27;&#x27;:
+282	        TEXT_TYPE = was_config[&#x27;text_nodes_type&#x27;].strip()
+283	if was_config and was_config.__contains__(&#x27;use_legacy_ascii_text&#x27;):
+284	    if was_config[&#x27;use_legacy_ascii_text&#x27;]:
+285	        TEXT_TYPE = &quot;ASCII&quot;
+286	        cstr(&quot;use_legacy_ascii_text is `True` in `was_suite_config.json`. `ASCII` type is deprecated and the default will be `STRING` in the future.&quot;).warning.print()
+287	
+288	# Convert WebUI Styles - TODO: Convert to PromptStyles class
+289	if was_config.__contains__(&#x27;webui_styles&#x27;):
+290	
+291	    if was_config[&#x27;webui_styles&#x27;] not in [None, &#x27;None&#x27;, &#x27;none&#x27;, &#x27;&#x27;]:
+292	
+293	        webui_styles_file = was_config[&#x27;webui_styles&#x27;]
+294	
+295	        if was_config.__contains__(&#x27;webui_styles_persistent_update&#x27;):
+296	            styles_persist = was_config[&#x27;webui_styles_persistent_update&#x27;]
+297	        else:
+298	            styles_persist = True
+299	
+300	        if webui_styles_file not in [None, &#x27;none&#x27;, &#x27;None&#x27;, &#x27;&#x27;] and os.path.exists(webui_styles_file):
+301	
+302	            cstr(f&quot;Importing styles from `{webui_styles_file}`.&quot;).msg.print()
+303	
+304	            import csv
+305	
+306	            styles = {}
+307	            with open(webui_styles_file, &quot;r&quot;, encoding=&quot;utf-8-sig&quot;, newline=&#x27;&#x27;) as file:
+308	                reader = csv.DictReader(file)
+309	                for row in reader:
+310	                    prompt = row.get(&quot;prompt&quot;) or row.get(&quot;text&quot;, &quot;&quot;) # Old files
+311	                    negative_prompt = row.get(&quot;negative_prompt&quot;, &quot;&quot;)
+312	                    styles[row[&quot;name&quot;]] = {
+313	                        &quot;prompt&quot;: prompt,
+314	                        &quot;negative_prompt&quot;: negative_prompt
+315	                    }
+316	
+317	            if styles:
+318	                if not os.path.exists(STYLES_PATH) or styles_persist:
+319	                    with open(STYLES_PATH, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:
+320	                        json.dump(styles, f, indent=4)
+321	
+322	            del styles
+323	
+324	            cstr(f&quot;Styles import complete.&quot;).msg.print()
+325	
+326	        else:
+327	            cstr(f&quot;Styles file `{webui_styles_file}` does not exist.&quot;).error.print()
+328	
+329	
+330	#! SUITE SPECIFIC CLASSES &amp; FUNCTIONS
+331	
+332	# Freeze PIP modules
+333	def packages(versions=False):
+334	    import sys
 335	    import subprocess
 336	    return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
 337	
+338	def install_package(package, uninstall_first: Union[List[str], str] = None):
+339	    if os.getenv(&quot;WAS_BLOCK_AUTO_INSTALL&quot;, &#x27;False&#x27;).lower() in (&#x27;true&#x27;, &#x27;1&#x27;, &#x27;t&#x27;):
+340	        cstr(f&quot;Preventing package install of &#x27;{package}&#x27; due to WAS_BLOCK_INSTALL env&quot;).msg.print()
+341	    else:
+342	        if uninstall_first is None:
+343	            return
+344	
+345	        if isinstance(uninstall_first, str):
+346	            uninstall_first = [uninstall_first]
+347	
+348	        cstr(f&quot;Uninstalling {&#x27;, &#x27;.join(uninstall_first)}..&quot;)
+349	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;uninstall&#x27;, *uninstall_first])
+350	        cstr(&quot;Installing package...&quot;).msg.print()
+351	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, package])
+352	
+353	# Tensor to PIL
+354	def tensor2pil(image):
+355	    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
+356	
+357	# PIL to Tensor
+358	def pil2tensor(image):
+359	    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
+360	
+361	# PIL Hex
+362	def pil2hex(image):
+363	    return hashlib.sha256(np.array(tensor2pil(image)).astype(np.uint16).tobytes()).hexdigest()
+364	
+365	# PIL to Mask
+366	def pil2mask(image):
+367	    image_np = np.array(image.convert(&quot;L&quot;)).astype(np.float32) / 255.0
+368	    mask = torch.from_numpy(image_np)
+369	    return 1.0 - mask
+370	
+371	# Mask to PIL
+372	def mask2pil(mask):
+373	    if mask.ndim &gt; 2:
+374	        mask = mask.squeeze(0)
+375	    mask_np = mask.cpu().numpy().astype(&#x27;uint8&#x27;)
+376	    mask_pil = Image.fromarray(mask_np, mode=&quot;L&quot;)
+377	    return mask_pil
+378	
+379	# Tensor to SAM-compatible NumPy
+380	def tensor2sam(image):
+381	    # Convert tensor to numpy array in HWC uint8 format with pixel values in [0, 255]
+382	    sam_image = np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
+383	    # Transpose the image to HWC format if it&#x27;s in CHW format
+384	    if sam_image.shape[0] == 3:
+385	        sam_image = np.transpose(sam_image, (1, 2, 0))
+386	    return sam_image
+387	
+388	# SAM-compatible NumPy to tensor
+389	def sam2tensor(image):
+390	    # Convert the image to float32 and normalize the pixel values to [0, 1]
+391	    float_image = image.astype(np.float32) / 255.0
+392	    # Transpose the image from HWC format to CHW format
+393	    chw_image = np.transpose(float_image, (2, 0, 1))
+394	    # Convert the numpy array to a tensor
+395	    tensor_image = torch.from_numpy(chw_image)
 </pre>
 </div>
 
@@ -173,9 +524,126 @@ pre {
 
 <div class="code">
 <pre>
+289	if was_config.__contains__(&#x27;webui_styles&#x27;):
+290	
+291	    if was_config[&#x27;webui_styles&#x27;] not in [None, &#x27;None&#x27;, &#x27;none&#x27;, &#x27;&#x27;]:
+292	
+293	        webui_styles_file = was_config[&#x27;webui_styles&#x27;]
+294	
+295	        if was_config.__contains__(&#x27;webui_styles_persistent_update&#x27;):
+296	            styles_persist = was_config[&#x27;webui_styles_persistent_update&#x27;]
+297	        else:
+298	            styles_persist = True
+299	
+300	        if webui_styles_file not in [None, &#x27;none&#x27;, &#x27;None&#x27;, &#x27;&#x27;] and os.path.exists(webui_styles_file):
+301	
+302	            cstr(f&quot;Importing styles from `{webui_styles_file}`.&quot;).msg.print()
+303	
+304	            import csv
+305	
+306	            styles = {}
+307	            with open(webui_styles_file, &quot;r&quot;, encoding=&quot;utf-8-sig&quot;, newline=&#x27;&#x27;) as file:
+308	                reader = csv.DictReader(file)
+309	                for row in reader:
+310	                    prompt = row.get(&quot;prompt&quot;) or row.get(&quot;text&quot;, &quot;&quot;) # Old files
+311	                    negative_prompt = row.get(&quot;negative_prompt&quot;, &quot;&quot;)
+312	                    styles[row[&quot;name&quot;]] = {
+313	                        &quot;prompt&quot;: prompt,
+314	                        &quot;negative_prompt&quot;: negative_prompt
+315	                    }
+316	
+317	            if styles:
+318	                if not os.path.exists(STYLES_PATH) or styles_persist:
+319	                    with open(STYLES_PATH, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:
+320	                        json.dump(styles, f, indent=4)
+321	
+322	            del styles
+323	
+324	            cstr(f&quot;Styles import complete.&quot;).msg.print()
+325	
+326	        else:
+327	            cstr(f&quot;Styles file `{webui_styles_file}` does not exist.&quot;).error.print()
+328	
+329	
+330	#! SUITE SPECIFIC CLASSES &amp; FUNCTIONS
+331	
+332	# Freeze PIP modules
+333	def packages(versions=False):
+334	    import sys
+335	    import subprocess
+336	    return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
+337	
+338	def install_package(package, uninstall_first: Union[List[str], str] = None):
+339	    if os.getenv(&quot;WAS_BLOCK_AUTO_INSTALL&quot;, &#x27;False&#x27;).lower() in (&#x27;true&#x27;, &#x27;1&#x27;, &#x27;t&#x27;):
+340	        cstr(f&quot;Preventing package install of &#x27;{package}&#x27; due to WAS_BLOCK_INSTALL env&quot;).msg.print()
+341	    else:
+342	        if uninstall_first is None:
+343	            return
+344	
+345	        if isinstance(uninstall_first, str):
+346	            uninstall_first = [uninstall_first]
+347	
 348	        cstr(f&quot;Uninstalling {&#x27;, &#x27;.join(uninstall_first)}..&quot;)
 349	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;uninstall&#x27;, *uninstall_first])
 350	        cstr(&quot;Installing package...&quot;).msg.print()
+351	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, package])
+352	
+353	# Tensor to PIL
+354	def tensor2pil(image):
+355	    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
+356	
+357	# PIL to Tensor
+358	def pil2tensor(image):
+359	    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
+360	
+361	# PIL Hex
+362	def pil2hex(image):
+363	    return hashlib.sha256(np.array(tensor2pil(image)).astype(np.uint16).tobytes()).hexdigest()
+364	
+365	# PIL to Mask
+366	def pil2mask(image):
+367	    image_np = np.array(image.convert(&quot;L&quot;)).astype(np.float32) / 255.0
+368	    mask = torch.from_numpy(image_np)
+369	    return 1.0 - mask
+370	
+371	# Mask to PIL
+372	def mask2pil(mask):
+373	    if mask.ndim &gt; 2:
+374	        mask = mask.squeeze(0)
+375	    mask_np = mask.cpu().numpy().astype(&#x27;uint8&#x27;)
+376	    mask_pil = Image.fromarray(mask_np, mode=&quot;L&quot;)
+377	    return mask_pil
+378	
+379	# Tensor to SAM-compatible NumPy
+380	def tensor2sam(image):
+381	    # Convert tensor to numpy array in HWC uint8 format with pixel values in [0, 255]
+382	    sam_image = np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
+383	    # Transpose the image to HWC format if it&#x27;s in CHW format
+384	    if sam_image.shape[0] == 3:
+385	        sam_image = np.transpose(sam_image, (1, 2, 0))
+386	    return sam_image
+387	
+388	# SAM-compatible NumPy to tensor
+389	def sam2tensor(image):
+390	    # Convert the image to float32 and normalize the pixel values to [0, 1]
+391	    float_image = image.astype(np.float32) / 255.0
+392	    # Transpose the image from HWC format to CHW format
+393	    chw_image = np.transpose(float_image, (2, 0, 1))
+394	    # Convert the numpy array to a tensor
+395	    tensor_image = torch.from_numpy(chw_image)
+396	    return tensor_image
+397	
+398	# Median Filter
+399	def medianFilter(img, diameter, sigmaColor, sigmaSpace):
+400	    import cv2 as cv
+401	    diameter = int(diameter)
+402	    sigmaColor = int(sigmaColor)
+403	    sigmaSpace = int(sigmaSpace)
+404	    img = img.convert(&#x27;RGB&#x27;)
+405	    img = cv.cvtColor(np.array(img), cv.COLOR_RGB2BGR)
+406	    img = cv.bilateralFilter(img, diameter, sigmaColor, sigmaSpace)
+407	    img = cv.cvtColor(np.array(img), cv.COLOR_BGR2RGB)
+408	    return Image.fromarray(img).convert(&#x27;RGB&#x27;)
 </pre>
 </div>
 
@@ -196,9 +664,126 @@ pre {
 
 <div class="code">
 <pre>
+291	    if was_config[&#x27;webui_styles&#x27;] not in [None, &#x27;None&#x27;, &#x27;none&#x27;, &#x27;&#x27;]:
+292	
+293	        webui_styles_file = was_config[&#x27;webui_styles&#x27;]
+294	
+295	        if was_config.__contains__(&#x27;webui_styles_persistent_update&#x27;):
+296	            styles_persist = was_config[&#x27;webui_styles_persistent_update&#x27;]
+297	        else:
+298	            styles_persist = True
+299	
+300	        if webui_styles_file not in [None, &#x27;none&#x27;, &#x27;None&#x27;, &#x27;&#x27;] and os.path.exists(webui_styles_file):
+301	
+302	            cstr(f&quot;Importing styles from `{webui_styles_file}`.&quot;).msg.print()
+303	
+304	            import csv
+305	
+306	            styles = {}
+307	            with open(webui_styles_file, &quot;r&quot;, encoding=&quot;utf-8-sig&quot;, newline=&#x27;&#x27;) as file:
+308	                reader = csv.DictReader(file)
+309	                for row in reader:
+310	                    prompt = row.get(&quot;prompt&quot;) or row.get(&quot;text&quot;, &quot;&quot;) # Old files
+311	                    negative_prompt = row.get(&quot;negative_prompt&quot;, &quot;&quot;)
+312	                    styles[row[&quot;name&quot;]] = {
+313	                        &quot;prompt&quot;: prompt,
+314	                        &quot;negative_prompt&quot;: negative_prompt
+315	                    }
+316	
+317	            if styles:
+318	                if not os.path.exists(STYLES_PATH) or styles_persist:
+319	                    with open(STYLES_PATH, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:
+320	                        json.dump(styles, f, indent=4)
+321	
+322	            del styles
+323	
+324	            cstr(f&quot;Styles import complete.&quot;).msg.print()
+325	
+326	        else:
+327	            cstr(f&quot;Styles file `{webui_styles_file}` does not exist.&quot;).error.print()
+328	
+329	
+330	#! SUITE SPECIFIC CLASSES &amp; FUNCTIONS
+331	
+332	# Freeze PIP modules
+333	def packages(versions=False):
+334	    import sys
+335	    import subprocess
+336	    return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
+337	
+338	def install_package(package, uninstall_first: Union[List[str], str] = None):
+339	    if os.getenv(&quot;WAS_BLOCK_AUTO_INSTALL&quot;, &#x27;False&#x27;).lower() in (&#x27;true&#x27;, &#x27;1&#x27;, &#x27;t&#x27;):
+340	        cstr(f&quot;Preventing package install of &#x27;{package}&#x27; due to WAS_BLOCK_INSTALL env&quot;).msg.print()
+341	    else:
+342	        if uninstall_first is None:
+343	            return
+344	
+345	        if isinstance(uninstall_first, str):
+346	            uninstall_first = [uninstall_first]
+347	
+348	        cstr(f&quot;Uninstalling {&#x27;, &#x27;.join(uninstall_first)}..&quot;)
+349	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;uninstall&#x27;, *uninstall_first])
 350	        cstr(&quot;Installing package...&quot;).msg.print()
 351	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, package])
 352	
+353	# Tensor to PIL
+354	def tensor2pil(image):
+355	    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
+356	
+357	# PIL to Tensor
+358	def pil2tensor(image):
+359	    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
+360	
+361	# PIL Hex
+362	def pil2hex(image):
+363	    return hashlib.sha256(np.array(tensor2pil(image)).astype(np.uint16).tobytes()).hexdigest()
+364	
+365	# PIL to Mask
+366	def pil2mask(image):
+367	    image_np = np.array(image.convert(&quot;L&quot;)).astype(np.float32) / 255.0
+368	    mask = torch.from_numpy(image_np)
+369	    return 1.0 - mask
+370	
+371	# Mask to PIL
+372	def mask2pil(mask):
+373	    if mask.ndim &gt; 2:
+374	        mask = mask.squeeze(0)
+375	    mask_np = mask.cpu().numpy().astype(&#x27;uint8&#x27;)
+376	    mask_pil = Image.fromarray(mask_np, mode=&quot;L&quot;)
+377	    return mask_pil
+378	
+379	# Tensor to SAM-compatible NumPy
+380	def tensor2sam(image):
+381	    # Convert tensor to numpy array in HWC uint8 format with pixel values in [0, 255]
+382	    sam_image = np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
+383	    # Transpose the image to HWC format if it&#x27;s in CHW format
+384	    if sam_image.shape[0] == 3:
+385	        sam_image = np.transpose(sam_image, (1, 2, 0))
+386	    return sam_image
+387	
+388	# SAM-compatible NumPy to tensor
+389	def sam2tensor(image):
+390	    # Convert the image to float32 and normalize the pixel values to [0, 1]
+391	    float_image = image.astype(np.float32) / 255.0
+392	    # Transpose the image from HWC format to CHW format
+393	    chw_image = np.transpose(float_image, (2, 0, 1))
+394	    # Convert the numpy array to a tensor
+395	    tensor_image = torch.from_numpy(chw_image)
+396	    return tensor_image
+397	
+398	# Median Filter
+399	def medianFilter(img, diameter, sigmaColor, sigmaSpace):
+400	    import cv2 as cv
+401	    diameter = int(diameter)
+402	    sigmaColor = int(sigmaColor)
+403	    sigmaSpace = int(sigmaSpace)
+404	    img = img.convert(&#x27;RGB&#x27;)
+405	    img = cv.cvtColor(np.array(img), cv.COLOR_RGB2BGR)
+406	    img = cv.bilateralFilter(img, diameter, sigmaColor, sigmaSpace)
+407	    img = cv.cvtColor(np.array(img), cv.COLOR_BGR2RGB)
+408	    return Image.fromarray(img).convert(&#x27;RGB&#x27;)
+409	
+410	# Resize Image
 </pre>
 </div>
 
@@ -219,9 +804,126 @@ pre {
 
 <div class="code">
 <pre>
+394	    # Convert the numpy array to a tensor
+395	    tensor_image = torch.from_numpy(chw_image)
+396	    return tensor_image
+397	
+398	# Median Filter
+399	def medianFilter(img, diameter, sigmaColor, sigmaSpace):
+400	    import cv2 as cv
+401	    diameter = int(diameter)
+402	    sigmaColor = int(sigmaColor)
+403	    sigmaSpace = int(sigmaSpace)
+404	    img = img.convert(&#x27;RGB&#x27;)
+405	    img = cv.cvtColor(np.array(img), cv.COLOR_RGB2BGR)
+406	    img = cv.bilateralFilter(img, diameter, sigmaColor, sigmaSpace)
+407	    img = cv.cvtColor(np.array(img), cv.COLOR_BGR2RGB)
+408	    return Image.fromarray(img).convert(&#x27;RGB&#x27;)
+409	
+410	# Resize Image
+411	def resizeImage(image, max_size):
+412	    width, height = image.size
+413	    if width &gt; height:
+414	        if width &gt; max_size:
+415	            new_width = max_size
+416	            new_height = int(height * (max_size / width))
+417	    else:
+418	        if height &gt; max_size:
+419	            new_height = max_size
+420	            new_width = int(width * (max_size / height))
+421	    resized_image = image.resize((new_width, new_height))
+422	    return resized_image
+423	
+424	# Image Seed
+425	def image2seed(image):
+426	    image_data = image.tobytes()
+427	    hash_object = hashlib.sha256(image_data)
+428	    hash_digest = hash_object.digest()
+429	    seed = int.from_bytes(hash_digest[:4], byteorder=&#x27;big&#x27;)
+430	    return seed
+431	
+432	
+433	# SHA-256 Hash
+434	def get_sha256(file_path):
+435	    sha256_hash = hashlib.sha256()
+436	    with open(file_path, &#x27;rb&#x27;) as file:
+437	        for chunk in iter(lambda: file.read(4096), b&#x27;&#x27;):
+438	            sha256_hash.update(chunk)
+439	    return sha256_hash.hexdigest()
+440	
+441	# Batch Seed Generator
+442	def seed_batch(seed, batches, seeds):
+443	    rng = np.random.default_rng(seed)
+444	    btch = [rng.choice(2**32 - 1, seeds, replace=False).tolist() for _ in range(batches)]
+445	    return btch
+446	
+447	# Download File
+448	def download_file(url, filename=None, path=None):
+449	    if not filename:
+450	        filename = url.split(&#x27;/&#x27;)[-1]
+451	    if not path:
+452	        path = &#x27;.&#x27;
 453	    save_path = os.path.join(path, filename)
 454	    response = requests.get(url, stream=True)
 455	    if response.status_code == requests.codes.ok:
+456	        file_size = int(response.headers.get(&#x27;Content-Length&#x27;, 0))
+457	        with open(save_path, &#x27;wb&#x27;) as file:
+458	            with tqdm(total=file_size, unit=&#x27;B&#x27;, unit_scale=True, unit_divisor=1024) as progress:
+459	                for chunk in response.iter_content(chunk_size=1024):
+460	                    file.write(chunk)
+461	                    progress.update(len(chunk))
+462	        print(f&quot;Downloaded file saved at: {save_path}&quot;)
+463	        return True
+464	    elif response.status_code == requests.codes.not_found:
+465	        cstr(&quot;Error: File not found.&quot;).error.print()
+466	    else:
+467	        cstr(f&quot;Error: Failed to download file. Status code: {response.status_code}&quot;).error.print()
+468	    return False
+469	
+470	# NSP Function
+471	
+472	def nsp_parse(text, seed=0, noodle_key=&#x27;__&#x27;, nspterminology=None, pantry_path=None):
+473	    if nspterminology is None:
+474	        # Fetch the NSP Pantry
+475	        if pantry_path is None:
+476	            pantry_path = DEFAULT_NSP_PANTRY_PATH
+477	        if not os.path.exists(pantry_path):
+478	            response = urlopen(&#x27;https://raw.githubusercontent.com/WASasquatch/noodle-soup-prompts/main/nsp_pantry.json&#x27;)
+479	            tmp_pantry = json.loads(response.read())
+480	            # Dump JSON locally
+481	            pantry_serialized = json.dumps(tmp_pantry, indent=4)
+482	            with open(pantry_path, &quot;w&quot;) as f:
+483	                f.write(pantry_serialized)
+484	            del response, tmp_pantry
+485	
+486	        # Load local pantry
+487	        with open(pantry_path, &#x27;r&#x27;) as f:
+488	            nspterminology = json.load(f)
+489	
+490	    if seed &gt; 0 or seed &lt; 0:
+491	        random.seed(seed)
+492	
+493	    # Parse Text
+494	    new_text = text
+495	    for term in nspterminology:
+496	        # Target Noodle
+497	        tkey = f&#x27;{noodle_key}{term}{noodle_key}&#x27;
+498	        # How many occurrences?
+499	        tcount = new_text.count(tkey)
+500	        # Apply random results for each noodle counted
+501	        for _ in range(tcount):
+502	            new_text = new_text.replace(
+503	                tkey, random.choice(nspterminology[term]), 1)
+504	            seed += 1
+505	            random.seed(seed)
+506	
+507	    return new_text
+508	
+509	# Simple wildcard parser:
+510	
+511	def replace_wildcards(text, seed=None, noodle_key=&#x27;__&#x27;):
+512	
+513	    def replace_nested(text, key_path_dict):
 </pre>
 </div>
 
@@ -242,9 +944,126 @@ pre {
 
 <div class="code">
 <pre>
+418	        if height &gt; max_size:
+419	            new_height = max_size
+420	            new_width = int(width * (max_size / height))
+421	    resized_image = image.resize((new_width, new_height))
+422	    return resized_image
+423	
+424	# Image Seed
+425	def image2seed(image):
+426	    image_data = image.tobytes()
+427	    hash_object = hashlib.sha256(image_data)
+428	    hash_digest = hash_object.digest()
+429	    seed = int.from_bytes(hash_digest[:4], byteorder=&#x27;big&#x27;)
+430	    return seed
+431	
+432	
+433	# SHA-256 Hash
+434	def get_sha256(file_path):
+435	    sha256_hash = hashlib.sha256()
+436	    with open(file_path, &#x27;rb&#x27;) as file:
+437	        for chunk in iter(lambda: file.read(4096), b&#x27;&#x27;):
+438	            sha256_hash.update(chunk)
+439	    return sha256_hash.hexdigest()
+440	
+441	# Batch Seed Generator
+442	def seed_batch(seed, batches, seeds):
+443	    rng = np.random.default_rng(seed)
+444	    btch = [rng.choice(2**32 - 1, seeds, replace=False).tolist() for _ in range(batches)]
+445	    return btch
+446	
+447	# Download File
+448	def download_file(url, filename=None, path=None):
+449	    if not filename:
+450	        filename = url.split(&#x27;/&#x27;)[-1]
+451	    if not path:
+452	        path = &#x27;.&#x27;
+453	    save_path = os.path.join(path, filename)
+454	    response = requests.get(url, stream=True)
+455	    if response.status_code == requests.codes.ok:
+456	        file_size = int(response.headers.get(&#x27;Content-Length&#x27;, 0))
+457	        with open(save_path, &#x27;wb&#x27;) as file:
+458	            with tqdm(total=file_size, unit=&#x27;B&#x27;, unit_scale=True, unit_divisor=1024) as progress:
+459	                for chunk in response.iter_content(chunk_size=1024):
+460	                    file.write(chunk)
+461	                    progress.update(len(chunk))
+462	        print(f&quot;Downloaded file saved at: {save_path}&quot;)
+463	        return True
+464	    elif response.status_code == requests.codes.not_found:
+465	        cstr(&quot;Error: File not found.&quot;).error.print()
+466	    else:
+467	        cstr(f&quot;Error: Failed to download file. Status code: {response.status_code}&quot;).error.print()
+468	    return False
+469	
+470	# NSP Function
+471	
+472	def nsp_parse(text, seed=0, noodle_key=&#x27;__&#x27;, nspterminology=None, pantry_path=None):
+473	    if nspterminology is None:
+474	        # Fetch the NSP Pantry
+475	        if pantry_path is None:
+476	            pantry_path = DEFAULT_NSP_PANTRY_PATH
 477	        if not os.path.exists(pantry_path):
 478	            response = urlopen(&#x27;https://raw.githubusercontent.com/WASasquatch/noodle-soup-prompts/main/nsp_pantry.json&#x27;)
 479	            tmp_pantry = json.loads(response.read())
+480	            # Dump JSON locally
+481	            pantry_serialized = json.dumps(tmp_pantry, indent=4)
+482	            with open(pantry_path, &quot;w&quot;) as f:
+483	                f.write(pantry_serialized)
+484	            del response, tmp_pantry
+485	
+486	        # Load local pantry
+487	        with open(pantry_path, &#x27;r&#x27;) as f:
+488	            nspterminology = json.load(f)
+489	
+490	    if seed &gt; 0 or seed &lt; 0:
+491	        random.seed(seed)
+492	
+493	    # Parse Text
+494	    new_text = text
+495	    for term in nspterminology:
+496	        # Target Noodle
+497	        tkey = f&#x27;{noodle_key}{term}{noodle_key}&#x27;
+498	        # How many occurrences?
+499	        tcount = new_text.count(tkey)
+500	        # Apply random results for each noodle counted
+501	        for _ in range(tcount):
+502	            new_text = new_text.replace(
+503	                tkey, random.choice(nspterminology[term]), 1)
+504	            seed += 1
+505	            random.seed(seed)
+506	
+507	    return new_text
+508	
+509	# Simple wildcard parser:
+510	
+511	def replace_wildcards(text, seed=None, noodle_key=&#x27;__&#x27;):
+512	
+513	    def replace_nested(text, key_path_dict):
+514	        if re.findall(f&quot;{noodle_key}(.+?){noodle_key}&quot;, text):
+515	            for key, file_path in key_path_dict.items():
+516	                with open(file_path, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+517	                    lines = file.readlines()
+518	                    if lines:
+519	                        random_line = None
+520	                        while not random_line:
+521	                            line = random.choice(lines).strip()
+522	                            if not line.startswith(&#x27;#&#x27;) and not line.startswith(&#x27;//&#x27;):
+523	                                random_line = line
+524	                        text = text.replace(key, random_line)
+525	        return text
+526	
+527	    conf = getSuiteConfig()
+528	    wildcard_dir = os.path.join(WAS_SUITE_ROOT, &#x27;wildcards&#x27;)
+529	    if not os.path.exists(wildcard_dir):
+530	        os.makedirs(wildcard_dir, exist_ok=True)
+531	    if conf.__contains__(&#x27;wildcards_path&#x27;):
+532	        if conf[&#x27;wildcards_path&#x27;] not in [None, &quot;&quot;]:
+533	            wildcard_dir = conf[&#x27;wildcards_path&#x27;]
+534	
+535	    cstr(f&quot;Wildcard Path: {wildcard_dir}&quot;).msg.print()
+536	
+537	    # Set the random seed for reproducibility
 </pre>
 </div>
 
@@ -253,443 +1072,6 @@ pre {
 </div>
 
 <div id="issue-7">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>503<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-502	            new_text = new_text.replace(
-503	                tkey, random.choice(nspterminology[term]), 1)
-504	            seed += 1
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-8">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>521<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-520	                        while not random_line:
-521	                            line = random.choice(lines).strip()
-522	                            if not line.startswith(&#x27;#&#x27;) and not line.startswith(&#x27;//&#x27;):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-9">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>556<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-555	                while not random_line:
-556	                    line = random.choice(lines).strip()
-557	                    if not line.startswith(&#x27;#&#x27;) and not line.startswith(&#x27;//&#x27;):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-10">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>595<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-594	        options = match.group(1).split(&#x27;|&#x27;)
-595	        return random.choice(options)
-596	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-11">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1768<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1767	        for i in range(5000):
-1768	            x = random.randint(0, width)
-1769	            y = random.randint(0, height)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-12">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1769<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1768	            x = random.randint(0, width)
-1769	            y = random.randint(0, height)
-1770	            r = random.randint(0, 255)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-13">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1770<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1769	            y = random.randint(0, height)
-1770	            r = random.randint(0, 255)
-1771	            g = random.randint(0, 255)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-14">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1771<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1770	            r = random.randint(0, 255)
-1771	            g = random.randint(0, 255)
-1772	            b = random.randint(0, 255)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-15">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1772<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1771	            g = random.randint(0, 255)
-1772	            b = random.randint(0, 255)
-1773	            draw.point((x, y), fill=(r, g, b, 255))
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-16">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1780<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1779	        for i in range(5000):
-1780	            x = random.randint(0, width)
-1781	            y = random.randint(0, height)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-17">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1781<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1780	            x = random.randint(0, width)
-1781	            y = random.randint(0, height)
-1782	            r = random.randint(0, 255)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-18">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1782<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1781	            y = random.randint(0, height)
-1782	            r = random.randint(0, 255)
-1783	            g = random.randint(0, 255)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-19">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1783<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1782	            r = random.randint(0, 255)
-1783	            g = random.randint(0, 255)
-1784	            b = random.randint(0, 255)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-20">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>1784<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1783	            g = random.randint(0, 255)
-1784	            b = random.randint(0, 255)
-1785	            draw.point((x, y), fill=(r, g, b, 255))
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-21">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>4559<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-4558	                for y in range(height):
-4559	                    if random.randint(0,1) == 1:
-4560	                        black_noise.putpixel((x, y), (0, 0, 0, 255))
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-22">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>5153<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-5152	        else:
-5153	            newindex = int(random.random() * len(fl.image_paths))
-5154	            image, filename = fl.get_image_by_id(newindex)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-23">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>6110<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-6109	        for i in range(num_pixels):
-6110	            x = random.randint(0, img_gray.size[0]-1)
-6111	            y = random.randint(0, img_gray.size[1]-1)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-24">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>6111<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-6110	            x = random.randint(0, img_gray.size[0]-1)
-6111	            y = random.randint(0, img_gray.size[1]-1)
-6112	            noise_pixels.append((x, y))
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-25">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>6115<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-6114	        for x, y in noise_pixels:
-6115	            value = random.randint(0, 255)
-6116	            img_gray.putpixel((x, y), value)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-26">
 <div class="issue-block issue-sev-medium">
     <b>request_without_timeout: </b> Requests call without timeout<br>
     <b>Test ID:</b> B113<br>
@@ -702,9 +1084,126 @@ pre {
 
 <div class="code">
 <pre>
+7360	        self.HDB = WASDatabase(WAS_HISTORY_DATABASE)
+7361	
+7362	    @classmethod
+7363	    def INPUT_TYPES(cls):
+7364	        return {
+7365	                &quot;required&quot;: {
+7366	                    &quot;image_path&quot;: (&quot;STRING&quot;, {&quot;default&quot;: &#x27;./ComfyUI/input/example.png&#x27;, &quot;multiline&quot;: False}),
+7367	                    &quot;RGBA&quot;: ([&quot;false&quot;,&quot;true&quot;],),
+7368	                },
+7369	                &quot;optional&quot;: {
+7370	                    &quot;filename_text_extension&quot;: ([&quot;true&quot;, &quot;false&quot;],),
+7371	                }
+7372	            }
+7373	
+7374	    RETURN_TYPES = (&quot;IMAGE&quot;, &quot;MASK&quot;, TEXT_TYPE)
+7375	    RETURN_NAMES = (&quot;image&quot;, &quot;mask&quot;, &quot;filename_text&quot;)
+7376	    FUNCTION = &quot;load_image&quot;
+7377	
+7378	    CATEGORY = &quot;WAS Suite/IO&quot;
+7379	
+7380	    def load_image(self, image_path, RGBA=&#x27;false&#x27;, filename_text_extension=&quot;true&quot;):
+7381	
+7382	        RGBA = (RGBA == &#x27;true&#x27;)
+7383	
+7384	        if image_path.startswith(&#x27;http&#x27;):
+7385	            from io import BytesIO
+7386	            i = self.download_image(image_path)
+7387	        else:
+7388	            try:
+7389	                i = Image.open(image_path)
+7390	            except OSError:
+7391	                cstr(f&quot;The image `{image_path.strip()}` specified doesn&#x27;t exist!&quot;).error.print()
+7392	                i = Image.new(mode=&#x27;RGB&#x27;, size=(512, 512), color=(0, 0, 0))
+7393	        if not i:
+7394	            return
+7395	
+7396	        # Update history
+7397	        update_history_images(image_path)
+7398	
+7399	        image = i
+7400	        if not RGBA:
+7401	            image = image.convert(&#x27;RGB&#x27;)
+7402	        image = np.array(image).astype(np.float32) / 255.0
+7403	        image = torch.from_numpy(image)[None,]
+7404	
+7405	        if &#x27;A&#x27; in i.getbands():
+7406	            mask = np.array(i.getchannel(&#x27;A&#x27;)).astype(np.float32) / 255.0
+7407	            mask = 1. - torch.from_numpy(mask)
+7408	        else:
+7409	            mask = torch.zeros((64, 64), dtype=torch.float32, device=&quot;cpu&quot;)
+7410	
+7411	        if filename_text_extension == &quot;true&quot;:
+7412	            filename = os.path.basename(image_path)
+7413	        else:
+7414	            filename = os.path.splitext(os.path.basename(image_path))[0]
+7415	
+7416	        return (image, mask, filename)
+7417	
+7418	    def download_image(self, url):
 7419	        try:
 7420	            response = requests.get(url)
 7421	            response.raise_for_status()
+7422	            img = Image.open(BytesIO(response.content))
+7423	            return img
+7424	        except requests.exceptions.HTTPError as errh:
+7425	            cstr(f&quot;HTTP Error: ({url}): {errh}&quot;).error.print()
+7426	        except requests.exceptions.ConnectionError as errc:
+7427	            cstr(f&quot;Connection Error: ({url}): {errc}&quot;).error.print()
+7428	        except requests.exceptions.Timeout as errt:
+7429	            cstr(f&quot;Timeout Error: ({url}): {errt}&quot;).error.print()
+7430	        except requests.exceptions.RequestException as err:
+7431	            cstr(f&quot;Request Exception: ({url}): {err}&quot;).error.print()
+7432	
+7433	    @classmethod
+7434	    def IS_CHANGED(cls, image_path):
+7435	        if image_path.startswith(&#x27;http&#x27;):
+7436	            return float(&quot;NaN&quot;)
+7437	        m = hashlib.sha256()
+7438	        with open(image_path, &#x27;rb&#x27;) as f:
+7439	            m.update(f.read())
+7440	        return m.digest().hex()
+7441	
+7442	# MASK BATCH TO MASK
+7443	
+7444	class WAS_Mask_Batch_to_Single_Mask:
+7445	    def __init__(self):
+7446	        pass
+7447	
+7448	    @classmethod
+7449	    def INPUT_TYPES(cls):
+7450	        return {
+7451	            &quot;required&quot;: {
+7452	                &quot;masks&quot;: (&quot;MASK&quot;,),
+7453	                &quot;batch_number&quot;: (&quot;INT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: 0, &quot;max&quot;: 64, &quot;step&quot;: 1}),
+7454	            },
+7455	        }
+7456	
+7457	    RETURN_TYPES = (&quot;MASK&quot;,)
+7458	    FUNCTION = &quot;mask_batch_to_mask&quot;
+7459	
+7460	    CATEGORY = &quot;WAS Suite/Image/Masking&quot;
+7461	
+7462	    def mask_batch_to_mask(self, masks=[], batch_number=0):
+7463	        count = 0
+7464	        for _ in masks:
+7465	            if batch_number == count:
+7466	                tensor = masks[batch_number][0]
+7467	                return (tensor,)
+7468	            count += 1
+7469	
+7470	        cstr(f&quot;Batch number `{batch_number}` is not defined, returning last image&quot;).error.print()
+7471	        last_tensor = masks[-1][0]
+7472	        return (last_tensor,)
+7473	
+7474	# TENSOR BATCH TO IMAGE
+7475	
+7476	class WAS_Tensor_Batch_to_Image:
+7477	    def __init__(self):
+7478	        pass
+7479	
 </pre>
 </div>
 
@@ -712,76 +1211,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-27">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>10052<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-10051	        random.seed(seed)
-10052	        choice = random.choice(lines)
-10053	        return (choice, )
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-28">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>10250<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-10249	            for _ in range(tcount):
-10250	                new_text = new_text.replace(tkey, random.choice(dictionary[term]), 1)
-10251	                if seed &gt; 0 or seed &lt; 0:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-29">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>10929<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-10928	        if not query:
-10929	            query = random.choice([&quot;portrait&quot;,&quot;landscape&quot;,&quot;anime&quot;,&quot;superhero&quot;,&quot;animal&quot;,&quot;nature&quot;,&quot;scenery&quot;])
-10930	        url = f&quot;https://lexica.art/api/v1/search?q={query}&quot;
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-30">
+<div id="issue-8">
 <div class="issue-block issue-sev-medium">
     <b>request_without_timeout: </b> Requests call without timeout<br>
     <b>Test ID:</b> B113<br>
@@ -794,32 +1224,126 @@ pre {
 
 <div class="code">
 <pre>
+10872	        if text.replace(&quot;.&quot;, &quot;&quot;).isnumeric():
+10873	            number = float(text)
+10874	        else:
+10875	            number = int(text)
+10876	        return (number, )
+10877	
+10878	
+10879	class WAS_String_To_Text:
+10880	    def __init__(self):
+10881	        pass
+10882	
+10883	    @classmethod
+10884	    def INPUT_TYPES(cls):
+10885	        return {
+10886	            &quot;required&quot;: {
+10887	                &quot;string&quot;: (&quot;STRING&quot;, {}),
+10888	            }
+10889	        }
+10890	
+10891	    RETURN_TYPES = (TEXT_TYPE,)
+10892	    FUNCTION = &quot;string_to_text&quot;
+10893	
+10894	    CATEGORY = &quot;WAS Suite/Text/Operations&quot;
+10895	
+10896	    def string_to_text(self, string):
+10897	        return (string, )
+10898	
+10899	# Random Prompt
+10900	
+10901	class WAS_Text_Random_Prompt:
+10902	    def __init__(self):
+10903	        pass
+10904	
+10905	    @classmethod
+10906	    def INPUT_TYPES(cls):
+10907	        return {
+10908	            &quot;required&quot;: {
+10909	                &quot;search_seed&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: False}),
+10910	            }
+10911	        }
+10912	
+10913	    @classmethod
+10914	    def IS_CHANGED(cls, **kwargs):
+10915	        return float(&quot;NaN&quot;)
+10916	
+10917	    RETURN_TYPES = (TEXT_TYPE,)
+10918	    FUNCTION = &quot;random_prompt&quot;
+10919	
+10920	    CATEGORY = &quot;WAS Suite/Text&quot;
+10921	
+10922	    def random_prompt(self, search_seed=None):
+10923	        if search_seed in [&#x27;&#x27;, &#x27; &#x27;]:
+10924	            search_seed = None
+10925	        return (self.search_lexica_art(search_seed), )
+10926	
+10927	    def search_lexica_art(self, query=None):
+10928	        if not query:
+10929	            query = random.choice([&quot;portrait&quot;,&quot;landscape&quot;,&quot;anime&quot;,&quot;superhero&quot;,&quot;animal&quot;,&quot;nature&quot;,&quot;scenery&quot;])
+10930	        url = f&quot;https://lexica.art/api/v1/search?q={query}&quot;
 10931	        try:
 10932	            response = requests.get(url)
 10933	            data = response.json()
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-31">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>10937<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
+10934	            images = data.get(&quot;images&quot;, [])
+10935	            if not images:
 10936	                return &quot;404 not found error&quot;
 10937	            random_image = random.choice(images)
 10938	            prompt = random_image.get(&quot;prompt&quot;)
+10939	        except Exception:
+10940	            cstr(&quot;Unable to establish connection to Lexica API.&quot;).error.print()
+10941	            prompt = &quot;404 not found error&quot;
+10942	
+10943	        return prompt
+10944	
+10945	# BLIP Model Loader
+10946	
+10947	class WAS_BLIP_Model_Loader:
+10948	    def __init__(self):
+10949	        pass
+10950	
+10951	    @classmethod
+10952	    def INPUT_TYPES(cls):
+10953	        return {
+10954	            &quot;required&quot;: {
+10955	                &quot;blip_model&quot;: ([&quot;caption&quot;, &quot;interrogate&quot;], ),
+10956	            }
+10957	        }
+10958	
+10959	    RETURN_TYPES = (&quot;BLIP_MODEL&quot;,)
+10960	    FUNCTION = &quot;blip_model&quot;
+10961	
+10962	    CATEGORY = &quot;WAS Suite/Loaders&quot;
+10963	
+10964	    def blip_model(self, blip_model):
+10965	
+10966	        if ( &#x27;timm&#x27; not in packages()
+10967	            or &#x27;transformers&#x27; not in packages()
+10968	            or &#x27;fairscale&#x27; not in packages() ):
+10969	            cstr(f&quot;Modules or packages are missing to use BLIP models. Please run the `{os.path.join(WAS_SUITE_ROOT, &#x27;requirements.txt&#x27;)}` through ComfyUI&#x27;s python executable.&quot;).error.print()
+10970	            exit
+10971	
+10972	        if &#x27;transformers==4.26.1&#x27; not in packages(True):
+10973	            cstr(f&quot;`transformers==4.26.1` is required for BLIP models. Please run the `{os.path.join(WAS_SUITE_ROOT, &#x27;requirements.txt&#x27;)}` through ComfyUI&#x27;s python executable.&quot;).error.print()
+10974	            exit
+10975	
+10976	        device = &#x27;cpu&#x27;
+10977	        conf = getSuiteConfig()
+10978	        size = 384
+10979	
+10980	        if blip_model == &#x27;caption&#x27;:
+10981	
+10982	            from .modules.BLIP.blip_module import blip_decoder
+10983	
+10984	            blip_dir = os.path.join(MODELS_DIR, &#x27;blip&#x27;)
+10985	            if not os.path.exists(blip_dir):
+10986	                os.makedirs(blip_dir, exist_ok=True)
+10987	
+10988	            torch.hub.set_dir(blip_dir)
+10989	
+10990	            if conf.__contains__(&#x27;blip_model_url&#x27;):
+10991	                model_url = conf[&#x27;blip_model_url&#x27;]
 </pre>
 </div>
 
@@ -827,7 +1351,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-32">
+<div id="issue-9">
 <div class="issue-block issue-sev-medium">
     <b>request_without_timeout: </b> Requests call without timeout<br>
     <b>Test ID:</b> B113<br>
@@ -840,9 +1364,126 @@ pre {
 
 <div class="code">
 <pre>
+11310	
+11311	        del inputs, model, result, tensor, masks, mask_images, images_pil
+11312	
+11313	        return (images_tensor, masks_tensor, mask_images_tensor)
+11314	
+11315	
+11316	# SAM MODEL LOADER
+11317	
+11318	class WAS_SAM_Model_Loader:
+11319	    def __init__(self):
+11320	        pass
+11321	
+11322	    @classmethod
+11323	    def INPUT_TYPES(self):
+11324	        return {
+11325	            &quot;required&quot;: {
+11326	                &quot;model_size&quot;: ([&quot;ViT-H&quot;, &quot;ViT-L&quot;, &quot;ViT-B&quot;], ),
+11327	            }
+11328	        }
+11329	
+11330	    RETURN_TYPES = (&quot;SAM_MODEL&quot;,)
+11331	    FUNCTION = &quot;sam_load_model&quot;
+11332	
+11333	    CATEGORY = &quot;WAS Suite/Image/Masking&quot;
+11334	
+11335	    def sam_load_model(self, model_size):
+11336	        conf = getSuiteConfig()
+11337	
+11338	        model_filename_mapping = {
+11339	            &quot;ViT-H&quot;: &quot;sam_vit_h_4b8939.pth&quot;,
+11340	            &quot;ViT-L&quot;: &quot;sam_vit_l_0b3195.pth&quot;,
+11341	            &quot;ViT-B&quot;: &quot;sam_vit_b_01ec64.pth&quot;,
+11342	        }
+11343	
+11344	        model_url_mapping = {
+11345	            &quot;ViT-H&quot;: conf[&#x27;sam_model_vith_url&#x27;] if conf.__contains__(&#x27;sam_model_vith_url&#x27;) else r&quot;https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth&quot;,
+11346	            &quot;ViT-L&quot;: conf[&#x27;sam_model_vitl_url&#x27;] if conf.__contains__(&#x27;sam_model_vitl_url&#x27;) else r&quot;https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth&quot;,
+11347	            &quot;ViT-B&quot;: conf[&#x27;sam_model_vitb_url&#x27;] if conf.__contains__(&#x27;sam_model_vitb_url&#x27;) else r&quot;https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth&quot;,
+11348	        }
+11349	
+11350	        model_url = model_url_mapping[model_size]
+11351	        model_filename = model_filename_mapping[model_size]
+11352	
+11353	        if &#x27;GitPython&#x27; not in packages():
+11354	            install_package(&quot;gitpython&quot;)
+11355	
+11356	        if not os.path.exists(os.path.join(WAS_SUITE_ROOT, &#x27;repos&#x27;+os.sep+&#x27;SAM&#x27;)):
+11357	            from git.repo.base import Repo
+11358	            cstr(&quot;Installing SAM...&quot;).msg.print()
+11359	            Repo.clone_from(&#x27;https://github.com/facebookresearch/segment-anything&#x27;, os.path.join(WAS_SUITE_ROOT, &#x27;repos&#x27;+os.sep+&#x27;SAM&#x27;))
+11360	
+11361	        sys.path.append(os.path.join(WAS_SUITE_ROOT, &#x27;repos&#x27;+os.sep+&#x27;SAM&#x27;))
+11362	
+11363	        sam_dir = os.path.join(MODELS_DIR, &#x27;sam&#x27;)
+11364	        if not os.path.exists(sam_dir):
+11365	            os.makedirs(sam_dir, exist_ok=True)
+11366	
+11367	        sam_file = os.path.join(sam_dir, model_filename)
+11368	        if not os.path.exists(sam_file):
 11369	            cstr(&quot;Selected SAM model not found. Downloading...&quot;).msg.print()
 11370	            r = requests.get(model_url, allow_redirects=True)
 11371	            open(sam_file, &#x27;wb&#x27;).write(r.content)
+11372	
+11373	        from segment_anything import build_sam_vit_h, build_sam_vit_l, build_sam_vit_b
+11374	
+11375	        if model_size == &#x27;ViT-H&#x27;:
+11376	            sam_model = build_sam_vit_h(sam_file)
+11377	        elif model_size == &#x27;ViT-L&#x27;:
+11378	            sam_model = build_sam_vit_l(sam_file)
+11379	        elif model_size == &#x27;ViT-B&#x27;:
+11380	            sam_model = build_sam_vit_b(sam_file)
+11381	        else:
+11382	            raise ValueError(f&quot;SAM model does not match the model_size: &#x27;{model_size}&#x27;.&quot;)
+11383	
+11384	        return (sam_model, )
+11385	
+11386	
+11387	# SAM PARAMETERS
+11388	class WAS_SAM_Parameters:
+11389	    def __init__(self):
+11390	        pass
+11391	
+11392	    @classmethod
+11393	    def INPUT_TYPES(self):
+11394	        return {
+11395	            &quot;required&quot;: {
+11396	                &quot;points&quot;: (&quot;STRING&quot;, {&quot;default&quot;: &quot;[128, 128]; [0, 0]&quot;, &quot;multiline&quot;: False}),
+11397	                &quot;labels&quot;: (&quot;STRING&quot;, {&quot;default&quot;: &quot;[1, 0]&quot;, &quot;multiline&quot;: False}),
+11398	            }
+11399	        }
+11400	
+11401	    RETURN_TYPES = (&quot;SAM_PARAMETERS&quot;,)
+11402	    FUNCTION = &quot;sam_parameters&quot;
+11403	
+11404	    CATEGORY = &quot;WAS Suite/Image/Masking&quot;
+11405	
+11406	    def sam_parameters(self, points, labels):
+11407	        parameters = {
+11408	            &quot;points&quot;: np.asarray(np.matrix(points)),
+11409	            &quot;labels&quot;: np.array(np.matrix(labels))[0]
+11410	        }
+11411	
+11412	        return (parameters,)
+11413	
+11414	
+11415	# SAM COMBINE PARAMETERS
+11416	class WAS_SAM_Combine_Parameters:
+11417	    def __init__(self):
+11418	        pass
+11419	
+11420	    @classmethod
+11421	    def INPUT_TYPES(self):
+11422	        return {
+11423	            &quot;required&quot;: {
+11424	                &quot;sam_parameters_a&quot;: (&quot;SAM_PARAMETERS&quot;,),
+11425	                &quot;sam_parameters_b&quot;: (&quot;SAM_PARAMETERS&quot;,),
+11426	            }
+11427	        }
+11428	
+11429	    RETURN_TYPES = (&quot;SAM_PARAMETERS&quot;,)
 </pre>
 </div>
 
@@ -850,76 +1491,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-33">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>11931<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-11930	            if number_type == &#x27;integer&#x27;:
-11931	                number = random.randint(minimum, maximum)
-11932	            elif number_type == &#x27;float&#x27;:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-34">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>11933<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-11932	            elif number_type == &#x27;float&#x27;:
-11933	                number = random.uniform(minimum, maximum)
-11934	            elif number_type == &#x27;bool&#x27;:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-35">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>11935<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-11934	            elif number_type == &#x27;bool&#x27;:
-11935	                number = random.random()
-11936	            else:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-36">
+<div id="issue-10">
 <div class="issue-block issue-sev-medium">
     <b>request_without_timeout: </b> Requests call without timeout<br>
     <b>Test ID:</b> B113<br>
@@ -932,215 +1504,126 @@ pre {
 
 <div class="code">
 <pre>
+11940	        return (number, float(number), round(number))
+11941	
+11942	    @classmethod
+11943	    def IS_CHANGED(cls, seed, **kwargs):
+11944	        m = hashlib.sha256()
+11945	        m.update(seed)
+11946	        return m.digest().hex()
+11947	
+11948	# TRUE RANDOM NUMBER
+11949	
+11950	class WAS_True_Random_Number:
+11951	    def __init__(self):
+11952	        pass
+11953	
+11954	    @classmethod
+11955	    def INPUT_TYPES(cls):
+11956	        return {
+11957	            &quot;required&quot;: {
+11958	                &quot;api_key&quot;: (&quot;STRING&quot;,{&quot;default&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;, &quot;multiline&quot;: False}),
+11959	                &quot;minimum&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: -18446744073709551615, &quot;max&quot;: 18446744073709551615}),
+11960	                &quot;maximum&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 10000000, &quot;min&quot;: -18446744073709551615, &quot;max&quot;: 18446744073709551615}),
+11961	                &quot;mode&quot;: ([&quot;random&quot;, &quot;fixed&quot;],),
+11962	            }
+11963	        }
+11964	
+11965	    RETURN_TYPES = (&quot;NUMBER&quot;, &quot;FLOAT&quot;, &quot;INT&quot;)
+11966	    FUNCTION = &quot;return_true_randm_number&quot;
+11967	
+11968	    CATEGORY = &quot;WAS Suite/Number&quot;
+11969	
+11970	    def return_true_randm_number(self, api_key=None, minimum=0, maximum=10):
+11971	
+11972	        # Get Random Number
+11973	        number = self.get_random_numbers(api_key=api_key, minimum=minimum, maximum=maximum)[0]
+11974	
+11975	        # Return number
+11976	        return (number, )
+11977	
+11978	    def get_random_numbers(self, api_key=None, amount=1, minimum=0, maximum=10, mode=&quot;random&quot;):
+11979	        &#x27;&#x27;&#x27;Get random number(s) from random.org&#x27;&#x27;&#x27;
+11980	        if api_key in [None, &#x27;00000000-0000-0000-0000-000000000000&#x27;, &#x27;&#x27;]:
+11981	            cstr(&quot;No API key provided! A valid RANDOM.ORG API key is required to use `True Random.org Number Generator`&quot;).error.print()
+11982	            return [0]
+11983	
+11984	        url = &quot;https://api.random.org/json-rpc/2/invoke&quot;
+11985	        headers = {&quot;Content-Type&quot;: &quot;application/json&quot;}
+11986	        payload = {
+11987	            &quot;jsonrpc&quot;: &quot;2.0&quot;,
+11988	            &quot;method&quot;: &quot;generateIntegers&quot;,
+11989	            &quot;params&quot;: {
+11990	                &quot;apiKey&quot;: api_key,
+11991	                &quot;n&quot;: amount,
+11992	                &quot;min&quot;: minimum,
+11993	                &quot;max&quot;: maximum,
+11994	                &quot;replacement&quot;: True,
+11995	                &quot;base&quot;: 10
+11996	            },
+11997	            &quot;id&quot;: 1
+11998	        }
 11999	
 12000	        response = requests.post(url, headers=headers, data=json.dumps(payload))
 12001	        if response.status_code == 200:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-37">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>13629<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-13628	            &quot;required&quot;: {
-13629	                &quot;latent_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-13630	                &quot;image_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-38">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>13630<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-13629	                &quot;latent_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-13630	                &quot;image_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-13631	                &quot;conditioning_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-39">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>13631<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-13630	                &quot;image_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-13631	                &quot;conditioning_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
-13632	            },
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-40">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
-    <b>Line number: </b>14256<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-14255	    ]
-14256	    print(f&#x27;\n\t\033[3m{random.choice(art_quotes)}\033[0m\n&#x27;)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-41">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_med.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_med.py</a><br>
-    <b>Line number: </b>359<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-358	        if mode==&#x27;multimodal&#x27;:
-359	            assert encoder_hidden_states is not None, &quot;encoder_hidden_states must be given for cross-attention layers&quot;
-360	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-42">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
-    <b>Line number: </b>54<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-53	        
-54	        assert mode in [&#x27;image&#x27;, &#x27;text&#x27;, &#x27;multimodal&#x27;], &quot;mode parameter must be image, text, or multimodal&quot;
-55	        text = self.tokenizer(caption, return_tensors=&quot;pt&quot;).to(image.device) 
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-43">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
-    <b>Line number: </b>182<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-181	        model,msg = load_checkpoint(model,pretrained)
-182	        assert(len(msg.missing_keys)==0)
-183	    return model    
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-44">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
-    <b>Line number: </b>189<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-188	        model,msg = load_checkpoint(model,pretrained)
-189	        assert(len(msg.missing_keys)==0)
-190	    return model        
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-45">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
-    <b>Line number: </b>202<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-201	        
-202	    assert vit in [&#x27;base&#x27;, &#x27;large&#x27;], &quot;vit parameter must be base or large&quot;
-203	    if vit==&#x27;base&#x27;:
+12002	            data = response.json()
+12003	            if &quot;result&quot; in data:
+12004	                return data[&quot;result&quot;][&quot;random&quot;][&quot;data&quot;], float(data[&quot;result&quot;][&quot;random&quot;][&quot;data&quot;]), int(data[&quot;result&quot;][&quot;random&quot;][&quot;data&quot;])
+12005	
+12006	        return [0]
+12007	
+12008	    @classmethod
+12009	    def IS_CHANGED(cls, api_key, mode, **kwargs):
+12010	        m = hashlib.sha256()
+12011	        m.update(api_key)
+12012	        if mode == &#x27;fixed&#x27;:
+12013	            return m.digest().hex()
+12014	        return float(&quot;NaN&quot;)
+12015	
+12016	
+12017	# CONSTANT NUMBER
+12018	
+12019	class WAS_Constant_Number:
+12020	    def __init__(self):
+12021	        pass
+12022	
+12023	    @classmethod
+12024	    def INPUT_TYPES(cls):
+12025	        return {
+12026	            &quot;required&quot;: {
+12027	                &quot;number_type&quot;: ([&quot;integer&quot;, &quot;float&quot;, &quot;bool&quot;],),
+12028	                &quot;number&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: -18446744073709551615, &quot;max&quot;: 18446744073709551615}),
+12029	            },
+12030	            &quot;optional&quot;: {
+12031	                &quot;number_as_text&quot;: (TEXT_TYPE, {&quot;forceInput&quot;: (True if TEXT_TYPE == &#x27;STRING&#x27; else False)}),
+12032	            }
+12033	        }
+12034	
+12035	    RETURN_TYPES = (&quot;NUMBER&quot;, &quot;FLOAT&quot;, &quot;INT&quot;)
+12036	    FUNCTION = &quot;return_constant_number&quot;
+12037	
+12038	    CATEGORY = &quot;WAS Suite/Number&quot;
+12039	
+12040	    def return_constant_number(self, number_type, number, number_as_text=None):
+12041	
+12042	        if number_as_text:
+12043	            if number_type == &quot;integer&quot;:
+12044	                number = int(number_as_text)
+12045	            elif number_type == &quot;float&quot;:
+12046	                number = float(number_as_text)
+12047	            else:
+12048	                number = bool(number_as_text)
+12049	
+12050	        # Return number
+12051	        if number_type:
+12052	            if number_type == &#x27;integer&#x27;:
+12053	                return (int(number), float(number), int(number) )
+12054	            elif number_type == &#x27;integer&#x27;:
+12055	                return (float(number), float(number), int(number) )
+12056	            elif number_type == &#x27;bool&#x27;:
+12057	                boolean = (1 if float(number) &gt; 0.5 else 0)
+12058	                return (int(boolean), float(boolean), int(boolean) )
+12059	            else:
 </pre>
 </div>
 

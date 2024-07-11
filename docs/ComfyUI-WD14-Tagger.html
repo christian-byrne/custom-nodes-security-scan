@@ -104,10 +104,127 @@ pre {
 
 <div class="code">
 <pre>
+30	
+31	
+32	def get_ext_dir(subpath=None, mkdir=False):
+33	    dir = os.path.dirname(__file__)
+34	    if subpath is not None:
+35	        dir = os.path.join(dir, subpath)
+36	
+37	    dir = os.path.abspath(dir)
+38	
+39	    if mkdir and not os.path.exists(dir):
+40	        os.makedirs(dir)
+41	    return dir
+42	
+43	
+44	def get_comfy_dir(subpath=None):
+45	    dir = os.path.dirname(inspect.getfile(PromptServer))
+46	    if subpath is not None:
+47	        dir = os.path.join(dir, subpath)
+48	
+49	    dir = os.path.abspath(dir)
+50	
+51	    return dir
+52	
+53	
+54	def get_web_ext_dir():
+55	    config = get_extension_config()
+56	    name = config[&quot;name&quot;]
+57	    dir = get_comfy_dir(&quot;web/extensions/pysssss&quot;)
+58	    if not os.path.exists(dir):
+59	        os.makedirs(dir)
+60	    dir += &quot;/&quot; + name
+61	    return dir
+62	
+63	
+64	def get_extension_config(reload=False):
+65	    global config
+66	    if reload == False and config is not None:
+67	        return config
+68	
+69	    config_path = get_ext_dir(&quot;pysssss.user.json&quot;)
+70	    if not os.path.exists(config_path):
+71	        config_path = get_ext_dir(&quot;pysssss.json&quot;)
+72	
+73	    if not os.path.exists(config_path):
+74	        log(&quot;Missing pysssss.json and pysssss.user.json, this extension may not work correctly. Please reinstall the extension.&quot;,
+75	            type=&quot;ERROR&quot;, always=True)
+76	        print(f&quot;Extension path: {get_ext_dir()}&quot;)
+77	        return {&quot;name&quot;: &quot;Unknown&quot;, &quot;version&quot;: -1}
+78	    with open(config_path, &quot;r&quot;) as f:
+79	        config = json.loads(f.read())
+80	    return config
+81	
+82	def link_js(src, dst):
+83	    src = os.path.abspath(src)
+84	    dst = os.path.abspath(dst)
+85	    if os.name == &quot;nt&quot;:
+86	        try:
+87	            import _winapi
+88	            _winapi.CreateJunction(src, dst)
 89	            return True
 90	        except:
 91	            pass
 92	    try:
+93	        os.symlink(src, dst)
+94	        return True
+95	    except:
+96	        import logging
+97	        logging.exception(&#x27;&#x27;)
+98	        return False
+99	
+100	
+101	def is_junction(path):
+102	    if os.name != &quot;nt&quot;:
+103	        return False
+104	    try:
+105	        return bool(os.readlink(path))
+106	    except OSError:
+107	        return False
+108	
+109	def install_js():
+110	    src_dir = get_ext_dir(&quot;web/js&quot;)
+111	    if not os.path.exists(src_dir):
+112	        log(&quot;No JS&quot;)
+113	        return
+114	
+115	    should_install = should_install_js()
+116	    if should_install:
+117	        log(&quot;it looks like you&#x27;re running an old version of ComfyUI that requires manual setup of web files, it is recommended you update your installation.&quot;, &quot;warning&quot;, True)
+118	    dst_dir = get_web_ext_dir()
+119	    linked = os.path.islink(dst_dir) or is_junction(dst_dir)
+120	    if linked or os.path.exists(dst_dir):
+121	        if linked:
+122	            if should_install:
+123	                log(&quot;JS already linked&quot;)
+124	            else:
+125	                os.unlink(dst_dir)
+126	                log(&quot;JS unlinked, PromptServer will serve extension&quot;)
+127	        elif not should_install:
+128	            shutil.rmtree(dst_dir)
+129	            log(&quot;JS deleted, PromptServer will serve extension&quot;)
+130	        return
+131	    
+132	    if not should_install:
+133	        log(&quot;JS skipped, PromptServer will serve extension&quot;)
+134	        return
+135	    
+136	    if link_js(src_dir, dst_dir):
+137	        log(&quot;JS linked&quot;)
+138	        return
+139	
+140	    log(&quot;Copying JS files&quot;)
+141	    shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
+142	
+143	
+144	def should_install_js():
+145	    return not hasattr(PromptServer.instance, &quot;supports&quot;) or &quot;custom_nodes_from_web&quot; not in PromptServer.instance.supports
+146	
+147	
+148	def init(check_imports):
+149	    log(&quot;Init&quot;)
+150	
 </pre>
 </div>
 

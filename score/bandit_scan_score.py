@@ -84,7 +84,7 @@ for test in b_mgr.results:
     test_categories[issue.test_id]["end_col_offset"].append(issue.end_col_offset)
 
     # Calculate the score
-    score = 8 if issue.severity == "HIGH" else 4 if issue.severity == "MEDIUM" else 1
+    score = 10 if issue.severity == "HIGH" else 3 if issue.severity == "MEDIUM" else .16
     if issue.confidence == "MEDIUM":
         score *= .8
     elif issue.confidence == "LOW":

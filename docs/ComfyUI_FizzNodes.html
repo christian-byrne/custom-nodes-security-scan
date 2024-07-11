@@ -104,10 +104,75 @@ pre {
 
 <div class="code">
 <pre>
+781	# Original code is from:
+782	# ComfyUI-Image-Selector by SLAPaper
+783	# https://github.com/SLAPaper/ComfyUI-Image-Selector
+784	# licensed under Apache-2.0
+785	class ImagesFromBatchSchedule:
+786	    @classmethod
+787	    def INPUT_TYPES(s):
+788	        return {
+789	            &quot;required&quot;: {
+790	                &quot;images&quot;: (&quot;IMAGE&quot;,),
+791	                &quot;text&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: True, &quot;default&quot;:defaultPrompt}),
+792	                &quot;current_frame&quot;: (&quot;INT&quot;, {&quot;default&quot;: 0.0, &quot;min&quot;: 0.0, &quot;max&quot;: 999999.0, &quot;step&quot;: 1.0, }),
+793	                &quot;max_frames&quot;: (&quot;INT&quot;, {&quot;default&quot;: 120.0, &quot;min&quot;: 1.0, &quot;max&quot;: 999999.0, &quot;step&quot;: 1.0}),
+794	                &quot;print_output&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False}),
+795	            }
+796	        }
+797	
+798	    RETURN_TYPES = (&quot;IMAGE&quot;,)
+799	    FUNCTION = &quot;animate&quot;
+800	    CATEGORY = &quot;FizzNodes 📅🅕🅝/ScheduleNodes&quot;
+801	
+802	    def animate(self, images, text, current_frame, max_frames, print_output):
+803	        inputText = str(&quot;{&quot; + text + &quot;}&quot;)
+804	        inputText = re.sub(r&#x27;,\s*}&#x27;, &#x27;}&#x27;, inputText)
+805	        start_frame = 0
+806	        animation_prompts = json.loads(inputText.strip())
+807	        pos_cur_prompt, pos_nxt_prompt, weight = interpolate_prompt_series(animation_prompts, max_frames, 0, &quot;&quot;,
+808	                                                                           &quot;&quot;, 0,
+809	                                                                           0, 0, 0, print_output)
+810	        selImages = selectImages(images,pos_cur_prompt[current_frame])
+811	        return selImages
+812	
+813	def selectImages(images: torch.Tensor, selected_indexes: str):
+814	    shape = images.shape
+815	    len_first_dim = shape[0]
+816	
+817	    selected_index: list[int] = []
+818	    total_indexes: list[int] = list(range(len_first_dim))
+819	    for s in selected_indexes.strip().split(&#x27;,&#x27;):
+820	        try:
+821	            if &quot;:&quot; in s:
+822	                _li = s.strip().split(&#x27;:&#x27;, maxsplit=1)
+823	                _start = _li[0]
+824	                _end = _li[1]
+825	                if _start and _end:
+826	                    selected_index.extend(
+827	                        total_indexes[int(_start) - 1:int(_end) - 1]
+828	                    )
+829	                elif _start:
+830	                    selected_index.extend(
+831	                        total_indexes[int(_start) - 1:]
+832	                    )
+833	                elif _end:
+834	                    selected_index.extend(
+835	                        total_indexes[:int(_end) - 1]
+836	                    )
+837	            else:
+838	                x: int = int(s.strip()) - 1
+839	                if x &lt; len_first_dim:
 840	                    selected_index.append(x)
 841	        except:
 842	            pass
 843	
+844	    if selected_index:
+845	        print(f&quot;ImageSelector: selected: {len(selected_index)} images&quot;)
+846	        return (images[selected_index], )
+847	
+848	    print(f&quot;ImageSelector: selected no images, passthrough&quot;)
+849	    return images
 </pre>
 </div>
 
@@ -128,9 +193,126 @@ pre {
 
 <div class="code">
 <pre>
+1	# Made by Davemane42#0042 for ComfyUI
 2	import os
 3	import subprocess
 4	import importlib.util
+5	import sys
+6	import filecmp
+7	import shutil
+8	
+9	import __main__
+10	
+11	python = sys.executable
+12	
+13	
+14	extentions_folder = os.path.join(os.path.dirname(os.path.realpath(__main__.__file__)),
+15	                                 &quot;web&quot; + os.sep + &quot;extensions&quot; + os.sep + &quot;FizzleDorf&quot;)
+16	javascript_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;javascript&quot;)
+17	
+18	if not os.path.exists(extentions_folder):
+19	    print(&#x27;Making the &quot;web\extensions\FizzleDorf&quot; folder&#x27;)
+20	    os.makedirs(extentions_folder)
+21	
+22	result = filecmp.dircmp(javascript_folder, extentions_folder)
+23	
+24	if result.left_only or result.diff_files:
+25	    print(&#x27;Update to javascripts files detected&#x27;)
+26	    file_list = list(result.left_only)
+27	    file_list.extend(x for x in result.diff_files if x not in file_list)
+28	
+29	    for file in file_list:
+30	        print(f&#x27;Copying {file} to extensions folder&#x27;)
+31	        src_file = os.path.join(javascript_folder, file)
+32	        dst_file = os.path.join(extentions_folder, file)
+33	        if os.path.exists(dst_file):
+34	            os.remove(dst_file)
+35	        #print(&quot;disabled&quot;)
+36	        shutil.copy(src_file, dst_file)
+37	
+38	
+39	def is_installed(package, package_overwrite=None):
+40	    try:
+41	        spec = importlib.util.find_spec(package)
+42	    except ModuleNotFoundError:
+43	        pass
+44	
+45	    package = package_overwrite or package
+46	
+47	    if spec is None:
+48	        print(f&quot;Installing {package}...&quot;)
+49	        command = f&#x27;&quot;{python}&quot; -m pip install {package}&#x27;
+50	  
+51	        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, env=os.environ)
+52	
+53	        if result.returncode != 0:
+54	            print(f&quot;Couldn&#x27;t install\nCommand: {command}\nError code: {result.returncode}&quot;)
+55	
+56	from .WaveNodes import Lerp, SinWave, InvSinWave, CosWave, InvCosWave, SquareWave, SawtoothWave, TriangleWave, AbsCosWave, AbsSinWave
+57	from .ScheduledNodes import (
+58	    ValueSchedule, PromptSchedule, PromptScheduleNodeFlow, PromptScheduleNodeFlowEnd, PromptScheduleEncodeSDXL,
+59	    StringSchedule, BatchPromptSchedule, BatchValueSchedule, BatchPromptScheduleEncodeSDXL, BatchStringSchedule,
+60	    BatchValueScheduleLatentInput, BatchPromptScheduleEncodeSDXLLatentInput, BatchPromptScheduleLatentInput,
+61	    ImagesFromBatchSchedule,
+62	    #, BatchPromptScheduleNodeFlowEnd #, BatchGLIGENSchedule
+63	)
+64	from .FrameNodes import FrameConcatenate, InitNodeFrame, NodeFrame, StringConcatenate
+65	from .HelperNodes import ConcatStringSingle, convertKeyframeKeysToBatchKeys, CalculateFrameOffset
+66	
+67	NODE_CLASS_MAPPINGS = {
+68	    &quot;Lerp&quot;: Lerp,
+69	    &quot;SinWave&quot;: SinWave,
+70	    &quot;InvSinWave&quot;: InvSinWave,
+71	    &quot;CosWave&quot;: CosWave,
+72	    &quot;InvCosWave&quot;: InvCosWave,
+73	    &quot;SquareWave&quot;:SquareWave,
+74	    &quot;SawtoothWave&quot;: SawtoothWave,
+75	    &quot;TriangleWave&quot;: TriangleWave,
+76	    &quot;AbsCosWave&quot;: AbsCosWave,
+77	    &quot;AbsSinWave&quot;: AbsSinWave,
+78	    &quot;PromptSchedule&quot;: PromptSchedule,
+79	    &quot;ValueSchedule&quot;: ValueSchedule,
+80	    &quot;PromptScheduleNodeFlow&quot;: PromptScheduleNodeFlow,
+81	    &quot;PromptScheduleNodeFlowEnd&quot;: PromptScheduleNodeFlowEnd,
+82	    &quot;PromptScheduleEncodeSDXL&quot;:PromptScheduleEncodeSDXL,
+83	    &quot;StringSchedule&quot;:StringSchedule,
+84	    &quot;BatchPromptSchedule&quot;: BatchPromptSchedule,
+85	    &quot;BatchValueSchedule&quot;: BatchValueSchedule,
+86	    &quot;BatchPromptScheduleEncodeSDXL&quot;: BatchPromptScheduleEncodeSDXL,
+87	    &quot;BatchStringSchedule&quot;: BatchStringSchedule,
+88	    &quot;BatchValueScheduleLatentInput&quot;: BatchValueScheduleLatentInput,
+89	    &quot;BatchPromptScheduleSDXLLatentInput&quot;:BatchPromptScheduleEncodeSDXLLatentInput,
+90	    &quot;BatchPromptScheduleLatentInput&quot;:BatchPromptScheduleLatentInput,
+91	    &quot;ImagesFromBatchSchedule&quot;:ImagesFromBatchSchedule,
+92	    #&quot;BatchPromptScheduleNodeFlowEnd&quot;:BatchPromptScheduleNodeFlowEnd,
+93	    #&quot;BatchGLIGENSchedule&quot;: BatchGLIGENSchedule,
+94	
+95	    &quot;StringConcatenate&quot;:StringConcatenate,
+96	    &quot;Init FizzFrame&quot;:InitNodeFrame,
+97	    &quot;FizzFrame&quot;:NodeFrame,
+98	    &quot;FizzFrameConcatenate&quot;:FrameConcatenate,
+99	
+100	    &quot;ConcatStringSingle&quot;: ConcatStringSingle,
+101	    &quot;convertKeyframeKeysToBatchKeys&quot;: convertKeyframeKeysToBatchKeys,
+102	    &quot;CalculateFrameOffset&quot;:CalculateFrameOffset,
+103	}
+104	
+105	NODE_DISPLAY_NAME_MAPPINGS = {
+106	    &quot;Lerp&quot;: &quot;Lerp 📅🅕🅝&quot;,
+107	    &quot;SinWave&quot;: &quot;SinWave 📅🅕🅝&quot;,
+108	    &quot;InvSinWave&quot;: &quot;InvSinWave 📅🅕🅝&quot;,
+109	    &quot;CosWave&quot;: &quot;CosWave 📅🅕🅝&quot;,
+110	    &quot;InvCosWave&quot;: &quot;InvCosWave 📅🅕🅝&quot;,
+111	    &quot;SquareWave&quot;:&quot;SquareWave 📅🅕🅝&quot;,
+112	    &quot;SawtoothWave&quot;: &quot;SawtoothWave 📅🅕🅝&quot;,
+113	    &quot;TriangleWave&quot;: &quot;TriangleWave 📅🅕🅝&quot;,
+114	    &quot;AbsCosWave&quot;: &quot;AbsCosWave 📅🅕🅝&quot;,
+115	    &quot;AbsSinWave&quot;: &quot;AbsSinWave 📅🅕🅝&quot;,
+116	    &quot;PromptSchedule&quot;: &quot;Prompt Schedule 📅🅕🅝&quot;,
+117	    &quot;ValueSchedule&quot;: &quot;Value Schedule 📅🅕🅝&quot;,
+118	    &quot;PromptScheduleNodeFlow&quot;: &quot;Prompt Schedule NodeFlow 📅🅕🅝&quot;,
+119	    &quot;PromptScheduleNodeFlowEnd&quot;: &quot;Prompt Schedule NodeFlow End 📅🅕🅝&quot;,
+120	    &quot;StringSchedule&quot;:&quot;String Schedule 📅🅕🅝&quot;,
 </pre>
 </div>
 
@@ -151,9 +333,126 @@ pre {
 
 <div class="code">
 <pre>
+1	# Made by Davemane42#0042 for ComfyUI
+2	import os
+3	import subprocess
+4	import importlib.util
+5	import sys
+6	import filecmp
+7	import shutil
+8	
+9	import __main__
+10	
+11	python = sys.executable
+12	
+13	
+14	extentions_folder = os.path.join(os.path.dirname(os.path.realpath(__main__.__file__)),
+15	                                 &quot;web&quot; + os.sep + &quot;extensions&quot; + os.sep + &quot;FizzleDorf&quot;)
+16	javascript_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;javascript&quot;)
+17	
+18	if not os.path.exists(extentions_folder):
+19	    print(&#x27;Making the &quot;web\extensions\FizzleDorf&quot; folder&#x27;)
+20	    os.makedirs(extentions_folder)
+21	
+22	result = filecmp.dircmp(javascript_folder, extentions_folder)
+23	
+24	if result.left_only or result.diff_files:
+25	    print(&#x27;Update to javascripts files detected&#x27;)
+26	    file_list = list(result.left_only)
+27	    file_list.extend(x for x in result.diff_files if x not in file_list)
+28	
+29	    for file in file_list:
+30	        print(f&#x27;Copying {file} to extensions folder&#x27;)
+31	        src_file = os.path.join(javascript_folder, file)
+32	        dst_file = os.path.join(extentions_folder, file)
+33	        if os.path.exists(dst_file):
+34	            os.remove(dst_file)
+35	        #print(&quot;disabled&quot;)
+36	        shutil.copy(src_file, dst_file)
+37	
+38	
+39	def is_installed(package, package_overwrite=None):
+40	    try:
+41	        spec = importlib.util.find_spec(package)
+42	    except ModuleNotFoundError:
+43	        pass
+44	
+45	    package = package_overwrite or package
+46	
+47	    if spec is None:
+48	        print(f&quot;Installing {package}...&quot;)
+49	        command = f&#x27;&quot;{python}&quot; -m pip install {package}&#x27;
 50	  
 51	        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, env=os.environ)
 52	
+53	        if result.returncode != 0:
+54	            print(f&quot;Couldn&#x27;t install\nCommand: {command}\nError code: {result.returncode}&quot;)
+55	
+56	from .WaveNodes import Lerp, SinWave, InvSinWave, CosWave, InvCosWave, SquareWave, SawtoothWave, TriangleWave, AbsCosWave, AbsSinWave
+57	from .ScheduledNodes import (
+58	    ValueSchedule, PromptSchedule, PromptScheduleNodeFlow, PromptScheduleNodeFlowEnd, PromptScheduleEncodeSDXL,
+59	    StringSchedule, BatchPromptSchedule, BatchValueSchedule, BatchPromptScheduleEncodeSDXL, BatchStringSchedule,
+60	    BatchValueScheduleLatentInput, BatchPromptScheduleEncodeSDXLLatentInput, BatchPromptScheduleLatentInput,
+61	    ImagesFromBatchSchedule,
+62	    #, BatchPromptScheduleNodeFlowEnd #, BatchGLIGENSchedule
+63	)
+64	from .FrameNodes import FrameConcatenate, InitNodeFrame, NodeFrame, StringConcatenate
+65	from .HelperNodes import ConcatStringSingle, convertKeyframeKeysToBatchKeys, CalculateFrameOffset
+66	
+67	NODE_CLASS_MAPPINGS = {
+68	    &quot;Lerp&quot;: Lerp,
+69	    &quot;SinWave&quot;: SinWave,
+70	    &quot;InvSinWave&quot;: InvSinWave,
+71	    &quot;CosWave&quot;: CosWave,
+72	    &quot;InvCosWave&quot;: InvCosWave,
+73	    &quot;SquareWave&quot;:SquareWave,
+74	    &quot;SawtoothWave&quot;: SawtoothWave,
+75	    &quot;TriangleWave&quot;: TriangleWave,
+76	    &quot;AbsCosWave&quot;: AbsCosWave,
+77	    &quot;AbsSinWave&quot;: AbsSinWave,
+78	    &quot;PromptSchedule&quot;: PromptSchedule,
+79	    &quot;ValueSchedule&quot;: ValueSchedule,
+80	    &quot;PromptScheduleNodeFlow&quot;: PromptScheduleNodeFlow,
+81	    &quot;PromptScheduleNodeFlowEnd&quot;: PromptScheduleNodeFlowEnd,
+82	    &quot;PromptScheduleEncodeSDXL&quot;:PromptScheduleEncodeSDXL,
+83	    &quot;StringSchedule&quot;:StringSchedule,
+84	    &quot;BatchPromptSchedule&quot;: BatchPromptSchedule,
+85	    &quot;BatchValueSchedule&quot;: BatchValueSchedule,
+86	    &quot;BatchPromptScheduleEncodeSDXL&quot;: BatchPromptScheduleEncodeSDXL,
+87	    &quot;BatchStringSchedule&quot;: BatchStringSchedule,
+88	    &quot;BatchValueScheduleLatentInput&quot;: BatchValueScheduleLatentInput,
+89	    &quot;BatchPromptScheduleSDXLLatentInput&quot;:BatchPromptScheduleEncodeSDXLLatentInput,
+90	    &quot;BatchPromptScheduleLatentInput&quot;:BatchPromptScheduleLatentInput,
+91	    &quot;ImagesFromBatchSchedule&quot;:ImagesFromBatchSchedule,
+92	    #&quot;BatchPromptScheduleNodeFlowEnd&quot;:BatchPromptScheduleNodeFlowEnd,
+93	    #&quot;BatchGLIGENSchedule&quot;: BatchGLIGENSchedule,
+94	
+95	    &quot;StringConcatenate&quot;:StringConcatenate,
+96	    &quot;Init FizzFrame&quot;:InitNodeFrame,
+97	    &quot;FizzFrame&quot;:NodeFrame,
+98	    &quot;FizzFrameConcatenate&quot;:FrameConcatenate,
+99	
+100	    &quot;ConcatStringSingle&quot;: ConcatStringSingle,
+101	    &quot;convertKeyframeKeysToBatchKeys&quot;: convertKeyframeKeysToBatchKeys,
+102	    &quot;CalculateFrameOffset&quot;:CalculateFrameOffset,
+103	}
+104	
+105	NODE_DISPLAY_NAME_MAPPINGS = {
+106	    &quot;Lerp&quot;: &quot;Lerp 📅🅕🅝&quot;,
+107	    &quot;SinWave&quot;: &quot;SinWave 📅🅕🅝&quot;,
+108	    &quot;InvSinWave&quot;: &quot;InvSinWave 📅🅕🅝&quot;,
+109	    &quot;CosWave&quot;: &quot;CosWave 📅🅕🅝&quot;,
+110	    &quot;InvCosWave&quot;: &quot;InvCosWave 📅🅕🅝&quot;,
+111	    &quot;SquareWave&quot;:&quot;SquareWave 📅🅕🅝&quot;,
+112	    &quot;SawtoothWave&quot;: &quot;SawtoothWave 📅🅕🅝&quot;,
+113	    &quot;TriangleWave&quot;: &quot;TriangleWave 📅🅕🅝&quot;,
+114	    &quot;AbsCosWave&quot;: &quot;AbsCosWave 📅🅕🅝&quot;,
+115	    &quot;AbsSinWave&quot;: &quot;AbsSinWave 📅🅕🅝&quot;,
+116	    &quot;PromptSchedule&quot;: &quot;Prompt Schedule 📅🅕🅝&quot;,
+117	    &quot;ValueSchedule&quot;: &quot;Value Schedule 📅🅕🅝&quot;,
+118	    &quot;PromptScheduleNodeFlow&quot;: &quot;Prompt Schedule NodeFlow 📅🅕🅝&quot;,
+119	    &quot;PromptScheduleNodeFlowEnd&quot;: &quot;Prompt Schedule NodeFlow End 📅🅕🅝&quot;,
+120	    &quot;StringSchedule&quot;:&quot;String Schedule 📅🅕🅝&quot;,
 </pre>
 </div>
 

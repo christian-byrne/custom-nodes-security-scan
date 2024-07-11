@@ -1,1 +1,1 @@
-### [️🛡️ Node Security Scan Results](https://christian-byrne.github.io/node-sec-scan/node-scan-results/)
+### [️🛡️ Node Security Scan Results](https://christian-byrne.github.io/node-sec-scan/)

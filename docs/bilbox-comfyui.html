@@ -104,9 +104,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
 29	    if(type == &quot;shutdown&quot;):
 30	        os.system(&quot;shutdown /s&quot;) # Shutdown
 31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -127,9 +164,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
 29	    if(type == &quot;shutdown&quot;):
 30	        os.system(&quot;shutdown /s&quot;) # Shutdown
 31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -150,9 +224,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
 31	    if(type == &quot;reboot&quot;):
 32	        os.system(&quot;shutdown /r&quot;) # Restart
 33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -173,9 +284,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
 31	    if(type == &quot;reboot&quot;):
 32	        os.system(&quot;shutdown /r&quot;) # Restart
 33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -196,9 +344,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
 33	    if(type == &quot;logout&quot;):
 34	        os.system(&quot;shutdown /l&quot;) # logout
 35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -219,9 +404,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
 33	    if(type == &quot;logout&quot;):
 34	        os.system(&quot;shutdown /l&quot;) # logout
 35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -242,9 +464,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
 35	    if(type == &quot;lock&quot;):
 36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
 37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 
@@ -265,9 +524,46 @@ pre {
 
 <div class="code">
 <pre>
+1	from .bilbox_photo_prompt import BilboXPhotoPrompt
+2	from .bilbox_post_processing import BilboXLut, BilboXVignette
+3	import os
+4	
+5	NODE_CLASS_MAPPINGS = {
+6	    &quot;BilboXPhotoPrompt&quot;: BilboXPhotoPrompt,
+7	    &quot;BilboXVignette&quot;: BilboXVignette,
+8	    &quot;BilboXLut&quot;: BilboXLut,
+9	}
+10	
+11	NODE_DISPLAY_NAME_MAPPINGS = {
+12	    &quot;BilboXLut&quot;: &quot;BilboX post-processing LUT&quot;,
+13	    &quot;BilboXVignette&quot;: &quot;BilboX post-processing vignette effect&quot;,
+14	    &quot;BilboXPhotoPrompt&quot;: &quot;BilboX PromptGeek Photo Prompt&quot;,
+15	}
+16	
+17	# Expand Server api
+18	
+19	import server
+20	from aiohttp import web
+21	
+22	
+23	@server.PromptServer.instance.routes.get(&quot;/bilbox/reboot&quot;)
+24	async def fetch_customnode_mappings(request):
+25	    type = request.rel_url.query[&quot;mode&quot;]
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
 35	    if(type == &quot;lock&quot;):
 36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
 37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+40	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
 </pre>
 </div>
 

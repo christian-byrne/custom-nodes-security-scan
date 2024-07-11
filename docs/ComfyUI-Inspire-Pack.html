@@ -104,6 +104,52 @@ pre {
 
 <div class="code">
 <pre>
+1	&quot;&quot;&quot;
+2	@author: Dr.Lt.Data
+3	@title: Inspire Pack
+4	@nickname: Inspire Pack
+5	@description: This extension provides various nodes to support Lora Block Weight and the Impact Pack.
+6	&quot;&quot;&quot;
+7	
+8	import importlib
+9	
+10	version_code = [0, 70]
+11	version_str = f&quot;V{version_code[0]}.{version_code[1]}&quot; + (f&#x27;.{version_code[2]}&#x27; if len(version_code) &gt; 2 else &#x27;&#x27;)
+12	print(f&quot;### Loading: ComfyUI-Inspire-Pack ({version_str})&quot;)
+13	
+14	node_list = [
+15	    &quot;lora_block_weight&quot;,
+16	    &quot;segs_support&quot;,
+17	    &quot;a1111_compat&quot;,
+18	    &quot;prompt_support&quot;,
+19	    &quot;inspire_server&quot;,
+20	    &quot;image_util&quot;,
+21	    &quot;regional_nodes&quot;,
+22	    &quot;sampler_nodes&quot;,
+23	    &quot;backend_support&quot;,
+24	    &quot;list_nodes&quot;,
+25	    &quot;conditioning_nodes&quot;,
+26	    &quot;model_nodes&quot;
+27	]
+28	
+29	NODE_CLASS_MAPPINGS = {}
+30	NODE_DISPLAY_NAME_MAPPINGS = {}
+31	
+32	for module_name in node_list:
+33	    imported_module = importlib.import_module(&quot;.inspire.{}&quot;.format(module_name), __name__)
+34	
+35	    NODE_CLASS_MAPPINGS = {**NODE_CLASS_MAPPINGS, **imported_module.NODE_CLASS_MAPPINGS}
+36	    NODE_DISPLAY_NAME_MAPPINGS = {**NODE_DISPLAY_NAME_MAPPINGS, **imported_module.NODE_DISPLAY_NAME_MAPPINGS}
+37	
+38	WEB_DIRECTORY = &quot;./js&quot;
+39	__all__ = [&quot;NODE_CLASS_MAPPINGS&quot;, &quot;NODE_DISPLAY_NAME_MAPPINGS&quot;, &quot;WEB_DIRECTORY&quot;]
+40	
+41	try:
+42	    import cm_global
+43	    cm_global.register_extension(&#x27;ComfyUI-Inspire-Pack&#x27;,
+44	                                 {&#x27;version&#x27;: version_code,
+45	                                  &#x27;name&#x27;: &#x27;Inspire Pack&#x27;,
+46	                                  &#x27;nodes&#x27;: set(NODE_CLASS_MAPPINGS.keys()),
 47	                                  &#x27;description&#x27;: &#x27;This extension provides various nodes to support Lora Block Weight and the Impact Pack. Provides many easily applicable regional features and applications for Variation Seed.&#x27;, })
 48	except:
 49	    pass
@@ -115,146 +161,6 @@ pre {
 </div>
 
 <div id="issue-1">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/a1111_compat.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/a1111_compat.py</a><br>
-    <b>Line number: </b>258<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-257	
-258	def random_divisor(value: int, min_value: int, /, max_options: int = 1, rand_obj=random.Random()) -&gt; int:
-259	    # print(f&quot;value={value}, min_value={min_value}, max_options={max_options}&quot;)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-2">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/a1111_compat.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/a1111_compat.py</a><br>
-    <b>Line number: </b>321<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-320	
-321	        rand_obj = random.Random()
-322	        rand_obj.seed(seed)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-3">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py</a><br>
-    <b>Line number: </b>88<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-87	        elif self.action == SGmode.RAND:
-88	            self.base_value = random.randint(0, max_seed)
-89	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-4">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py</a><br>
-    <b>Line number: </b>106<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-105	    elif action == &#x27;randomize&#x27; or action == &#x27;randomize for each node&#x27;:
-106	        value = random.randint(0, max_seed)
-107	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-5">
-<div class="issue-block issue-sev-low">
-    <b>try_except_continue: </b> Try, Except, Continue detected.<br>
-    <b>Test ID:</b> B112<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py</a><br>
-    <b>Line number: </b>289<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b112_try_except_continue.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b112_try_except_continue.html</a><br>
-
-<div class="code">
-<pre>
-288	                                continue
-289	                        except:
-290	                            continue
-291	                    else:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-6">
-<div class="issue-block issue-sev-low">
-    <b>try_except_continue: </b> Try, Except, Continue detected.<br>
-    <b>Test ID:</b> B112<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/inspire_server.py</a><br>
-    <b>Line number: </b>317<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b112_try_except_continue.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b112_try_except_continue.html</a><br>
-
-<div class="code">
-<pre>
-316	                                continue
-317	                        except:
-318	                            continue
-319	                    else:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-7">
 <div class="issue-block issue-sev-medium">
     <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
     <b>Test ID:</b> B506<br>
@@ -267,55 +173,126 @@ pre {
 
 <div class="code">
 <pre>
+1	import os
+2	import re
+3	import json
+4	import shutil
+5	import yaml
+6	
+7	from PIL import Image
+8	import nodes
+9	import torch
+10	
+11	import folder_paths
+12	import comfy
+13	import traceback
+14	import random
+15	
+16	from server import PromptServer
+17	from .libs import utils, common
+18	from .backend_support import CheckpointLoaderSimpleShared
+19	
+20	prompt_builder_preset = {}
+21	
+22	
+23	resource_path = os.path.join(os.path.dirname(__file__), &quot;..&quot;, &quot;resources&quot;)
+24	resource_path = os.path.abspath(resource_path)
+25	
+26	prompts_path = os.path.join(os.path.dirname(__file__), &quot;..&quot;, &quot;prompts&quot;)
+27	prompts_path = os.path.abspath(prompts_path)
+28	
+29	
+30	try:
+31	    pb_yaml_path = os.path.join(resource_path, &#x27;prompt-builder.yaml&#x27;)
+32	    pb_yaml_path_example = os.path.join(resource_path, &#x27;prompt-builder.yaml.example&#x27;)
+33	
+34	    if not os.path.exists(pb_yaml_path):
+35	        shutil.copy(pb_yaml_path_example, pb_yaml_path)
+36	
 37	    with open(pb_yaml_path, &#x27;r&#x27;, encoding=&quot;utf-8&quot;) as f:
 38	        prompt_builder_preset = yaml.load(f, Loader=yaml.FullLoader)
 39	except Exception as e:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-8">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/prompt_support.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/prompt_support.py</a><br>
-    <b>Line number: </b>702<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-701	
-702	        rn = random.Random()
-703	        rn.seed(seed + count)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-9">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/prompt_support.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/prompt_support.py</a><br>
-    <b>Line number: </b>704<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-703	        rn.seed(seed + count)
-704	        new_seed = random.randint(0, 1125899906842624)
-705	
+40	    print(f&quot;[Inspire Pack] Failed to load &#x27;prompt-builder.yaml&#x27;&quot;)
+41	
+42	
+43	class LoadPromptsFromDir:
+44	    @classmethod
+45	    def INPUT_TYPES(cls):
+46	        global prompts_path
+47	        try:
+48	            prompt_dirs = [d for d in os.listdir(prompts_path) if os.path.isdir(os.path.join(prompts_path, d))]
+49	        except Exception:
+50	            prompt_dirs = []
+51	
+52	        return {&quot;required&quot;: {&quot;prompt_dir&quot;: (prompt_dirs,)}}
+53	
+54	    RETURN_TYPES = (&quot;ZIPPED_PROMPT&quot;,)
+55	    OUTPUT_IS_LIST = (True,)
+56	
+57	    FUNCTION = &quot;doit&quot;
+58	
+59	    CATEGORY = &quot;InspirePack/Prompt&quot;
+60	
+61	    def doit(self, prompt_dir):
+62	        global prompts_path
+63	        prompt_dir = os.path.join(prompts_path, prompt_dir)
+64	        files = [f for f in os.listdir(prompt_dir) if f.endswith(&quot;.txt&quot;)]
+65	        files.sort()
+66	
+67	        prompts = []
+68	        for file_name in files:
+69	            print(f&quot;file_name: {file_name}&quot;)
+70	            try:
+71	                with open(os.path.join(prompt_dir, file_name), &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+72	                    prompt_data = file.read()
+73	                    prompt_list = re.split(r&#x27;\n\s*-+\s*\n&#x27;, prompt_data)
+74	
+75	                    for prompt in prompt_list:
+76	                        pattern = r&quot;positive:(.*?)(?:\n*|$)negative:(.*)&quot;
+77	                        matches = re.search(pattern, prompt, re.DOTALL)
+78	
+79	                        if matches:
+80	                            positive_text = matches.group(1).strip()
+81	                            negative_text = matches.group(2).strip()
+82	                            result_tuple = (positive_text, negative_text, file_name)
+83	                            prompts.append(result_tuple)
+84	                        else:
+85	                            print(f&quot;[WARN] LoadPromptsFromDir: invalid prompt format in &#x27;{file_name}&#x27;&quot;)
+86	            except Exception as e:
+87	                print(f&quot;[ERROR] LoadPromptsFromDir: an error occurred while processing &#x27;{file_name}&#x27;: {str(e)}&quot;)
+88	
+89	        return (prompts, )
+90	
+91	
+92	class LoadPromptsFromFile:
+93	    @classmethod
+94	    def INPUT_TYPES(cls):
+95	        global prompts_path
+96	        try:
+97	            prompt_files = []
+98	            for root, dirs, files in os.walk(prompts_path):
+99	                for file in files:
+100	                    if file.endswith(&quot;.txt&quot;):
+101	                        file_path = os.path.join(root, file)
+102	                        rel_path = os.path.relpath(file_path, prompts_path)
+103	                        prompt_files.append(rel_path)
+104	        except Exception:
+105	            prompt_files = []
+106	
+107	        return {&quot;required&quot;: {&quot;prompt_file&quot;: (prompt_files,)}}
+108	
+109	    RETURN_TYPES = (&quot;ZIPPED_PROMPT&quot;,)
+110	    OUTPUT_IS_LIST = (True,)
+111	
+112	    FUNCTION = &quot;doit&quot;
+113	
+114	    CATEGORY = &quot;InspirePack/Prompt&quot;
+115	
+116	    def doit(self, prompt_file):
+117	        prompt_path = os.path.join(prompts_path, prompt_file)
+118	
+119	        prompts = []
+120	        try:
 </pre>
 </div>
 

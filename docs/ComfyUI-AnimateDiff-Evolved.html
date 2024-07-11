@@ -93,144 +93,6 @@ pre {
     
 <div id="issue-0">
 <div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_animatelcm_i2v.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_animatelcm_i2v.py</a><br>
-    <b>Line number: </b>77<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-76	            insertion_weights = [1.0, 1.0, 1.0, 1.0]
-77	        assert len(insertion_weights) == 4
-78	        self.insertion_weights = insertion_weights
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-1">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_animatelcm_i2v.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_animatelcm_i2v.py</a><br>
-    <b>Line number: </b>174<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-173	        else:
-174	            assert self.channels == self.out_channels
-175	            self.operation = avg_pool_nd(dims, kernel_size=stride, stride=stride)  # both are stride value on purpose
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-2">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_animatelcm_i2v.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_animatelcm_i2v.py</a><br>
-    <b>Line number: </b>178<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-177	    def forward(self, x: Tensor):
-178	        assert x.shape[1] == self.channels
-179	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-3">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_cameractrl.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_cameractrl.py</a><br>
-    <b>Line number: </b>317<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-316	        else:
-317	            assert self.channels == self.out_channels
-318	            self.operation = avg_pool_nd(dims, kernel_size=stride, stride=stride)  # both are stride value on purpose
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-4">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_cameractrl.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/adapter_cameractrl.py</a><br>
-    <b>Line number: </b>321<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-320	    def forward(self, x: Tensor):
-321	        assert x.shape[1] == self.channels
-322	        return self.operation(x)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-5">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/motion_module_ad.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/motion_module_ad.py</a><br>
-    <b>Line number: </b>1128<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-1127	        super().__init__(operations=ops, *args, **kwargs)
-1128	        assert attention_mode == &quot;Temporal&quot;
-1129	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-6">
-<div class="issue-block issue-sev-low">
     <b>try_except_pass: </b> Try, Except, Pass detected.<br>
     <b>Test ID:</b> B110<br>
     <b>Severity: </b>LOW<br>
@@ -242,6 +104,65 @@ pre {
 
 <div class="code">
 <pre>
+88	        encoder_only_motion_model = create_fresh_encoder_only_model(motion_model=motion_model)
+89	        return (motion_model, encoder_only_motion_model)
+90	
+91	
+92	class LoadAnimateDiffAndInjectI2VNode:
+93	    @classmethod
+94	    def INPUT_TYPES(s):
+95	        return {
+96	            &quot;required&quot;: {
+97	                &quot;model_name&quot;: (get_available_motion_models(),),
+98	                &quot;motion_model&quot;: (&quot;MOTION_MODEL_ADE&quot;,),
+99	            },
+100	            &quot;optional&quot;: {
+101	                &quot;ad_settings&quot;: (&quot;AD_SETTINGS&quot;,),
+102	            }
+103	        }
+104	    
+105	    RETURN_TYPES = (&quot;MOTION_MODEL_ADE&quot;,)
+106	    RETURN_NAMES = (&quot;MOTION_MODEL&quot;,)
+107	
+108	    CATEGORY = &quot;Animate Diff 🎭🅐🅓/② Gen2 nodes ②/AnimateLCM-I2V/🧪experimental&quot;
+109	    FUNCTION = &quot;load_motion_model&quot;
+110	
+111	    def load_motion_model(self, model_name: str, motion_model: MotionModelPatcher, ad_settings: AnimateDiffSettings=None):
+112	        # make sure model w/ encoder actually has encoder
+113	        if motion_model.model.img_encoder is None:
+114	            raise Exception(&quot;Passed-in motion model was expected to have an img_encoder, but did not.&quot;)
+115	        # load motion module and motion settings, if included
+116	        loaded_motion_model = load_motion_module_gen2(model_name=model_name, motion_model_settings=ad_settings)
+117	        inject_img_encoder_into_model(motion_model=loaded_motion_model, w_encoder=motion_model)
+118	        return (loaded_motion_model,)
+119	
+120	
+121	class UpscaleAndVaeEncode:
+122	    @classmethod
+123	    def INPUT_TYPES(s):
+124	        return {
+125	            &quot;required&quot;: {
+126	                &quot;image&quot;: (&quot;IMAGE&quot;,),
+127	                &quot;vae&quot;: (&quot;VAE&quot;,),
+128	                &quot;latent_size&quot;: (&quot;LATENT&quot;,),
+129	                &quot;scale_method&quot;: (ScaleMethods._LIST_IMAGE,),
+130	                &quot;crop&quot;: (CropMethods._LIST, {&quot;default&quot;: CropMethods.CENTER},),
+131	            }
+132	        }
+133	    
+134	    RETURN_TYPES = (&quot;LATENT&quot;,)
+135	    FUNCTION = &quot;preprocess_images&quot;
+136	
+137	    CATEGORY = &quot;Animate Diff 🎭🅐🅓/② Gen2 nodes ②/AnimateLCM-I2V&quot;
+138	
+139	    def preprocess_images(self, image: torch.Tensor, vae: VAE, latent_size: torch.Tensor, scale_method: str, crop: str):
+140	        b, c, h, w = latent_size[&quot;samples&quot;].size()
+141	        image = image.movedim(-1,1)
+142	        image = comfy.utils.common_upscale(samples=image, width=w*8, height=h*8, upscale_method=scale_method, crop=crop)
+143	        image = image.movedim(1,-1)
+144	        # now that images are the expected size, VAEEncode them
+145	        try:  # account for old ComfyUI versions (TODO: remove this when other changes require ComfyUI update)
+146	            if not hasattr(vae, &quot;vae_encode_crop_pixels&quot;):
 147	                image = VAEEncode.vae_encode_crop_pixels(image)
 148	        except Exception:
 149	            pass
@@ -253,53 +174,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-7">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/nodes_cameractrl.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/nodes_cameractrl.py</a><br>
-    <b>Line number: </b>24<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-23	    def __init__(self, rotate: tuple[float], translate: tuple[float]):
-24	        assert len(rotate) == 3
-25	        assert len(translate) == 3
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-8">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/nodes_cameractrl.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/nodes_cameractrl.py</a><br>
-    <b>Line number: </b>25<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-24	        assert len(rotate) == 3
-25	        assert len(translate) == 3
-26	        self.rotate = np.array(rotate)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-9">
+<div id="issue-1">
 <div class="issue-block issue-sev-low">
     <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
     <b>Test ID:</b> B404<br>
@@ -312,9 +187,126 @@ pre {
 
 <div class="code">
 <pre>
+1	import json
+2	import os
 3	import shutil
 4	import subprocess
 5	from typing import Dict, List
+6	
+7	import numpy as np
+8	import torch
+9	from PIL import Image
+10	from PIL.PngImagePlugin import PngInfo
+11	
+12	import folder_paths
+13	from comfy.model_patcher import ModelPatcher
+14	
+15	from .ad_settings import AnimateDiffSettings, AdjustGroup, AdjustPE, AdjustWeight
+16	from .context import ContextOptionsGroup, ContextOptions, ContextSchedules
+17	from .logger import logger
+18	from .utils_model import Folders, BetaSchedules, get_available_motion_models
+19	from .model_injection import ModelPatcherAndInjector, InjectionParams, MotionModelGroup, load_motion_module_gen1
+20	
+21	
+22	class AnimateDiffLoader_Deprecated:
+23	    @classmethod
+24	    def INPUT_TYPES(s):
+25	        return {
+26	            &quot;required&quot;: {
+27	                &quot;model&quot;: (&quot;MODEL&quot;,),
+28	                &quot;latents&quot;: (&quot;LATENT&quot;,),
+29	                &quot;model_name&quot;: (get_available_motion_models(),),
+30	                &quot;unlimited_area_hack&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False},),
+31	                &quot;beta_schedule&quot;: (BetaSchedules.get_alias_list_with_first_element(BetaSchedules.SQRT_LINEAR),),
+32	            },
+33	        }
+34	
+35	    RETURN_TYPES = (&quot;MODEL&quot;, &quot;LATENT&quot;)
+36	    CATEGORY = &quot;&quot;
+37	    FUNCTION = &quot;load_mm_and_inject_params&quot;
+38	
+39	    def load_mm_and_inject_params(
+40	        self,
+41	        model: ModelPatcher,
+42	        latents: Dict[str, torch.Tensor],
+43	        model_name: str, unlimited_area_hack: bool, beta_schedule: str,
+44	    ):
+45	        # load motion module
+46	        motion_model = load_motion_module_gen1(model_name, model)
+47	        # get total frames
+48	        init_frames_len = len(latents[&quot;samples&quot;])  # deprecated - no longer used for anything lol
+49	        # set injection params
+50	        params = InjectionParams(
+51	                unlimited_area_hack=unlimited_area_hack,
+52	                apply_mm_groupnorm_hack=True,
+53	                model_name=model_name,
+54	                apply_v2_properly=False,
+55	        )
+56	        # inject for use in sampling code
+57	        model = ModelPatcherAndInjector.create_from(model, hooks_only=True)
+58	        model.motion_models = MotionModelGroup(motion_model)
+59	        model.motion_injection_params = params
+60	
+61	        # save model sampling from BetaSchedule as object patch
+62	        # if autoselect, get suggested beta_schedule from motion model
+63	        if beta_schedule == BetaSchedules.AUTOSELECT and not model.motion_models.is_empty():
+64	            beta_schedule = model.motion_models[0].model.get_best_beta_schedule(log=True)
+65	        new_model_sampling = BetaSchedules.to_model_sampling(beta_schedule, model)
+66	        if new_model_sampling is not None:
+67	            model.add_object_patch(&quot;model_sampling&quot;, new_model_sampling)
+68	
+69	        del motion_model
+70	        return (model, latents)
+71	
+72	
+73	class AnimateDiffLoaderAdvanced_Deprecated:
+74	    @classmethod
+75	    def INPUT_TYPES(s):
+76	        return {
+77	            &quot;required&quot;: {
+78	                &quot;model&quot;: (&quot;MODEL&quot;,),
+79	                &quot;latents&quot;: (&quot;LATENT&quot;,),
+80	                &quot;model_name&quot;: (get_available_motion_models(),),
+81	                &quot;unlimited_area_hack&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False},),
+82	                &quot;context_length&quot;: (&quot;INT&quot;, {&quot;default&quot;: 16, &quot;min&quot;: 0, &quot;max&quot;: 1000}),
+83	                &quot;context_stride&quot;: (&quot;INT&quot;, {&quot;default&quot;: 1, &quot;min&quot;: 1, &quot;max&quot;: 1000}),
+84	                &quot;context_overlap&quot;: (&quot;INT&quot;, {&quot;default&quot;: 4, &quot;min&quot;: 0, &quot;max&quot;: 1000}),
+85	                &quot;context_schedule&quot;: (ContextSchedules.LEGACY_UNIFORM_SCHEDULE_LIST,),
+86	                &quot;closed_loop&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False},),
+87	                &quot;beta_schedule&quot;: (BetaSchedules.get_alias_list_with_first_element(BetaSchedules.SQRT_LINEAR),),
+88	            },
+89	        }
+90	
+91	    RETURN_TYPES = (&quot;MODEL&quot;, &quot;LATENT&quot;)
+92	    CATEGORY = &quot;&quot;
+93	    FUNCTION = &quot;load_mm_and_inject_params&quot;
+94	
+95	    def load_mm_and_inject_params(self,
+96	            model: ModelPatcher,
+97	            latents: Dict[str, torch.Tensor],
+98	            model_name: str, unlimited_area_hack: bool,
+99	            context_length: int, context_stride: int, context_overlap: int, context_schedule: str, closed_loop: bool,
+100	            beta_schedule: str,
+101	        ):
+102	        # load motion module
+103	        motion_model = load_motion_module_gen1(model_name, model)
+104	        # get total frames
+105	        init_frames_len = len(latents[&quot;samples&quot;])  # deprecated - no longer used for anything lol
+106	        # set injection params
+107	        params = InjectionParams(
+108	                unlimited_area_hack=unlimited_area_hack,
+109	                apply_mm_groupnorm_hack=True,
+110	                model_name=model_name,
+111	                apply_v2_properly=False,
+112	        )
+113	        context_group = ContextOptionsGroup()
+114	        context_group.add(
+115	            ContextOptions(
+116	                context_length=context_length,
+117	                context_stride=context_stride,
+118	                context_overlap=context_overlap,
+119	                context_schedule=context_schedule,
+120	                closed_loop=closed_loop,
 </pre>
 </div>
 
@@ -322,7 +314,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-10">
+<div id="issue-2">
 <div class="issue-block issue-sev-low">
     <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
     <b>Test ID:</b> B603<br>
@@ -335,9 +327,126 @@ pre {
 
 <div class="code">
 <pre>
+206	        (
+207	            full_output_folder,
+208	            filename,
+209	            counter,
+210	            subfolder,
+211	            _,
+212	        ) = folder_paths.get_save_image_path(filename_prefix, output_dir)
+213	
+214	        metadata = PngInfo()
+215	        if prompt is not None:
+216	            metadata.add_text(&quot;prompt&quot;, json.dumps(prompt))
+217	        if extra_pnginfo is not None:
+218	            for x in extra_pnginfo:
+219	                metadata.add_text(x, json.dumps(extra_pnginfo[x]))
+220	
+221	        # save first frame as png to keep metadata
+222	        file = f&quot;{filename}_{counter:05}_.png&quot;
+223	        file_path = os.path.join(full_output_folder, file)
+224	        frames[0].save(
+225	            file_path,
+226	            pnginfo=metadata,
+227	            compress_level=4,
+228	        )
+229	        if pingpong:
+230	            frames = frames + frames[-2:0:-1]
+231	        
+232	        format_type, format_ext = format.split(&quot;/&quot;)
+233	        file = f&quot;{filename}_{counter:05}_.{format_ext}&quot;
+234	        file_path = os.path.join(full_output_folder, file)
+235	        if format_type == &quot;image&quot;:
+236	            # Use pillow directly to save an animated image
+237	            frames[0].save(
+238	                file_path,
+239	                format=format_ext.upper(),
+240	                save_all=True,
+241	                append_images=frames[1:],
+242	                duration=round(1000 / frame_rate),
+243	                loop=loop_count,
+244	                compress_level=4,
+245	            )
+246	        else:
+247	            # Use ffmpeg to save a video
+248	            ffmpeg_path = shutil.which(&quot;ffmpeg&quot;)
+249	            if ffmpeg_path is None:
+250	                #Should never be reachable
+251	                raise ProcessLookupError(&quot;Could not find ffmpeg&quot;)
+252	
+253	            video_format_path = folder_paths.get_full_path(&quot;video_formats&quot;, format_ext + &quot;.json&quot;)
+254	            with open(video_format_path, &#x27;r&#x27;) as stream:
+255	                video_format = json.load(stream)
+256	            file = f&quot;{filename}_{counter:05}_.{video_format[&#x27;extension&#x27;]}&quot;
+257	            file_path = os.path.join(full_output_folder, file)
+258	            dimensions = f&quot;{frames[0].width}x{frames[0].height}&quot;
+259	            args = [ffmpeg_path, &quot;-v&quot;, &quot;error&quot;, &quot;-f&quot;, &quot;rawvideo&quot;, &quot;-pix_fmt&quot;, &quot;rgb24&quot;,
+260	                    &quot;-s&quot;, dimensions, &quot;-r&quot;, str(frame_rate), &quot;-i&quot;, &quot;-&quot;] \
+261	                    + video_format[&#x27;main_pass&#x27;] + [file_path]
+262	
+263	            env=os.environ.copy()
+264	            if  &quot;environment&quot; in video_format:
 265	                env.update(video_format[&quot;environment&quot;])
 266	            with subprocess.Popen(args, stdin=subprocess.PIPE, env=env) as proc:
 267	                for frame in frames:
+268	                    proc.stdin.write(frame.tobytes())
+269	
+270	        previews = [
+271	            {
+272	                &quot;filename&quot;: file,
+273	                &quot;subfolder&quot;: subfolder,
+274	                &quot;type&quot;: &quot;output&quot; if save_image else &quot;temp&quot;,
+275	                &quot;format&quot;: format,
+276	            }
+277	        ]
+278	        return {&quot;ui&quot;: {&quot;gifs&quot;: previews}}
+279	
+280	
+281	
+282	class AnimateDiffModelSettings:
+283	    @classmethod
+284	    def INPUT_TYPES(s):
+285	        return {
+286	            &quot;required&quot;: {
+287	                &quot;min_motion_scale&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;step&quot;: 0.001}),
+288	                &quot;max_motion_scale&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;step&quot;: 0.001}),
+289	            },
+290	            &quot;optional&quot;: {
+291	                &quot;mask_motion_scale&quot;: (&quot;MASK&quot;,),
+292	            }
+293	        }
+294	    
+295	    RETURN_TYPES = (&quot;AD_SETTINGS&quot;,)
+296	    CATEGORY = &quot;&quot;  #&quot;Animate Diff 🎭🅐🅓/① Gen1 nodes ①/motion settings&quot;
+297	    FUNCTION = &quot;get_motion_model_settings&quot;
+298	
+299	    def get_motion_model_settings(self, mask_motion_scale: torch.Tensor=None, min_motion_scale: float=1.0, max_motion_scale: float=1.0):
+300	        motion_model_settings = AnimateDiffSettings(
+301	            mask_attn_scale=mask_motion_scale,
+302	            mask_attn_scale_min=min_motion_scale,
+303	            mask_attn_scale_max=max_motion_scale,
+304	            )
+305	
+306	        return (motion_model_settings,)
+307	
+308	
+309	class AnimateDiffModelSettingsSimple:
+310	    @classmethod
+311	    def INPUT_TYPES(s):
+312	        return {
+313	            &quot;required&quot;: {
+314	                &quot;motion_pe_stretch&quot;: (&quot;INT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: 0, &quot;step&quot;: 1}),
+315	            },
+316	            &quot;optional&quot;: {
+317	                &quot;mask_motion_scale&quot;: (&quot;MASK&quot;,),
+318	                &quot;min_motion_scale&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;step&quot;: 0.001}),
+319	                &quot;max_motion_scale&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;step&quot;: 0.001}),
+320	            }
+321	        }
+322	    
+323	    RETURN_TYPES = (&quot;AD_SETTINGS&quot;,)
+324	    CATEGORY = &quot;&quot;  #&quot;Animate Diff 🎭🅐🅓/① Gen1 nodes ①/motion settings/experimental&quot;
+325	    FUNCTION = &quot;get_motion_model_settings&quot;
 </pre>
 </div>
 
@@ -345,7 +454,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-11">
+<div id="issue-3">
 <div class="issue-block issue-sev-low">
     <b>try_except_pass: </b> Try, Except, Pass detected.<br>
     <b>Test ID:</b> B110<br>
@@ -358,10 +467,127 @@ pre {
 
 <div class="code">
 <pre>
+215	    else:
+216	        enough_latents = False
+217	    if params.context_options.context_length and enough_latents:
+218	        logger.info(f&quot;Sliding context window activated - latents passed in ({params.full_length}) greater than context_length {params.context_options.context_length}.&quot;)
+219	    else:
+220	        logger.info(f&quot;Regular AnimateDiff activated - latents passed in ({params.full_length}) less or equal to context_length {params.context_options.context_length}.&quot;)
+221	        params.reset_context()
+222	    if motion_models is not None:
+223	        # if no context_length, treat video length as intended AD frame window
+224	        if not params.context_options.context_length:
+225	            for motion_model in motion_models.models:
+226	                if not motion_model.model.is_length_valid_for_encoding_max_len(params.full_length):
+227	                    raise ValueError(f&quot;Without a context window, AnimateDiff model {motion_model.model.mm_info.mm_name} has upper limit of {motion_model.model.encoding_max_len} frames, but received {params.full_length} latents.&quot;)
+228	            motion_models.set_video_length(params.full_length, params.full_length)
+229	        # otherwise, treat context_length as intended AD frame window
+230	        else:
+231	            for motion_model in motion_models.models:
+232	                view_options = params.context_options.view_options
+233	                context_length = view_options.context_length if view_options else params.context_options.context_length
+234	                if not motion_model.model.is_length_valid_for_encoding_max_len(context_length):
+235	                    raise ValueError(f&quot;AnimateDiff model {motion_model.model.mm_info.mm_name} has upper limit of {motion_model.model.encoding_max_len} frames for a context window, but received context length of {params.context_options.context_length}.&quot;)
+236	            motion_models.set_video_length(params.context_options.context_length, params.full_length)
+237	        # inject model
+238	        module_str = &quot;modules&quot; if len(motion_models.models) &gt; 1 else &quot;module&quot;
+239	        logger.info(f&quot;Using motion {module_str} {motion_models.get_name_string(show_version=True)}.&quot;)
+240	    return params
+241	
+242	
+243	class FunctionInjectionHolder:
+244	    def __init__(self):
+245	        pass
+246	    
+247	    def inject_functions(self, model: ModelPatcherAndInjector, params: InjectionParams):
+248	        # Save Original Functions - order must match between here and restore_functions
+249	        self.orig_forward_timestep_embed = openaimodel.forward_timestep_embed # needed to account for VanillaTemporalModule
+250	        self.orig_memory_required = model.model.memory_required # allows for &quot;unlimited area hack&quot; to prevent halving of conds/unconds
+251	        self.orig_groupnorm_forward = torch.nn.GroupNorm.forward # used to normalize latents to remove &quot;flickering&quot; of colors/brightness between frames
+252	        self.orig_groupnorm_manual_cast_forward = comfy.ops.manual_cast.GroupNorm.forward_comfy_cast_weights
+253	        self.orig_sampling_function = comfy.samplers.sampling_function # used to support sliding context windows in samplers
+254	        self.orig_get_area_and_mult = comfy.samplers.get_area_and_mult
+255	        if SAMPLE_FALLBACK:  # for backwards compatibility, for now
+256	            self.orig_get_additional_models = comfy.sample.get_additional_models
+257	        else:
+258	            self.orig_get_additional_models = comfy.sampler_helpers.get_additional_models
+259	        self.orig_apply_model = model.model.apply_model
+260	        # Inject Functions
+261	        openaimodel.forward_timestep_embed = forward_timestep_embed_factory()
+262	        if params.unlimited_area_hack:
+263	            model.model.memory_required = unlimited_memory_required
+264	        if model.motion_models is not None:
+265	            # only apply groupnorm hack if not [v3 or ([not Hotshot] and SD1.5 and v2 and apply_v2_properly)]
+266	            info: AnimateDiffInfo = model.motion_models[0].model.mm_info
+267	            if not (info.mm_version == AnimateDiffVersion.V3 or
+268	                    (info.mm_format not in [AnimateDiffFormat.HOTSHOTXL] and info.sd_type == ModelTypeSD.SD1_5 and info.mm_version == AnimateDiffVersion.V2 and params.apply_v2_properly)):
+269	                torch.nn.GroupNorm.forward = groupnorm_mm_factory(params)
+270	                comfy.ops.manual_cast.GroupNorm.forward_comfy_cast_weights = groupnorm_mm_factory(params, manual_cast=True)
+271	                # if mps device (Apple Silicon), disable batched conds to avoid black images with groupnorm hack
+272	                try:
+273	                    if model.load_device.type == &quot;mps&quot;:
 274	                        model.model.memory_required = unlimited_memory_required
 275	                except Exception:
 276	                    pass
 277	            # if img_encoder or camera_encoder present, inject apply_model to handle correctly
+278	            for motion_model in model.motion_models:
+279	                if (motion_model.model.img_encoder is not None) or (motion_model.model.camera_encoder is not None):
+280	                    model.model.apply_model = apply_model_factory(self.orig_apply_model).__get__(model.model, type(model.model))
+281	                    break
+282	            del info
+283	        comfy.samplers.sampling_function = evolved_sampling_function
+284	        comfy.samplers.get_area_and_mult = get_area_and_mult_ADE
+285	        if SAMPLE_FALLBACK:  # for backwards compatibility, for now
+286	            comfy.sample.get_additional_models = get_additional_models_factory(self.orig_get_additional_models, model.motion_models)
+287	        else:
+288	            comfy.sampler_helpers.get_additional_models = get_additional_models_factory(self.orig_get_additional_models, model.motion_models)
+289	
+290	    def restore_functions(self, model: ModelPatcherAndInjector):
+291	        # Restoration
+292	        try:
+293	            model.model.memory_required = self.orig_memory_required
+294	            openaimodel.forward_timestep_embed = self.orig_forward_timestep_embed
+295	            torch.nn.GroupNorm.forward = self.orig_groupnorm_forward
+296	            comfy.ops.manual_cast.GroupNorm.forward_comfy_cast_weights = self.orig_groupnorm_manual_cast_forward
+297	            comfy.samplers.sampling_function = self.orig_sampling_function
+298	            comfy.samplers.get_area_and_mult = self.orig_get_area_and_mult
+299	            if SAMPLE_FALLBACK:  # for backwards compatibility, for now
+300	                comfy.sample.get_additional_models = self.orig_get_additional_models
+301	            else:
+302	                comfy.sampler_helpers.get_additional_models = self.orig_get_additional_models
+303	            model.model.apply_model = self.orig_apply_model
+304	        except AttributeError:
+305	            logger.error(&quot;Encountered AttributeError while attempting to restore functions - likely, an error occured while trying &quot; + \
+306	                         &quot;to save original functions before injection, and a more specific error was thrown by ComfyUI.&quot;)
+307	
+308	
+309	def motion_sample_factory(orig_comfy_sample: Callable, is_custom: bool=False) -&gt; Callable:
+310	    def motion_sample(model: ModelPatcherAndInjector, noise: Tensor, *args, **kwargs):
+311	        # check if model is intended for injecting
+312	        if type(model) != ModelPatcherAndInjector:
+313	            return orig_comfy_sample(model, noise, *args, **kwargs)
+314	        # otherwise, injection time
+315	        latents = None
+316	        cached_latents = None
+317	        cached_noise = None
+318	        function_injections = FunctionInjectionHolder()
+319	        try:
+320	            if model.sample_settings.custom_cfg is not None:
+321	                model = model.sample_settings.custom_cfg.patch_model(model)
+322	            # clone params from model
+323	            params = model.motion_injection_params.clone()
+324	            # get amount of latents passed in, and store in params
+325	            latents: Tensor = args[-1]
+326	            params.full_length = latents.size(0)
+327	            # reset global state
+328	            ADGS.reset()
+329	
+330	            # apply custom noise, if needed
+331	            disable_noise = kwargs.get(&quot;disable_noise&quot;) or False
+332	            seed = kwargs[&quot;seed&quot;]
+333	
+334	            # apply params to motion model
+335	            params = apply_params_to_motion_models(model.motion_models, params)
 </pre>
 </div>
 
@@ -369,53 +595,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-12">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/sampling.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/sampling.py</a><br>
-    <b>Line number: </b>683<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-682	        mask = conds[&#x27;mask&#x27;]
-683	        assert(mask.shape[1] == x_in.shape[2])
-684	        assert(mask.shape[2] == x_in.shape[3])
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-13">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/sampling.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-AnimateDiff-Evolved/animatediff/sampling.py</a><br>
-    <b>Line number: </b>684<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-683	        assert(mask.shape[1] == x_in.shape[2])
-684	        assert(mask.shape[2] == x_in.shape[3])
-685	        # make sure mask is capped at input_shape batch length to prevent 0 as dimension
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-14">
+<div id="issue-4">
 <div class="issue-block issue-sev-low">
     <b>try_except_pass: </b> Try, Except, Pass detected.<br>
     <b>Test ID:</b> B110<br>
@@ -428,10 +608,127 @@ pre {
 
 <div class="code">
 <pre>
+213	    EASE_IN_OUT = &quot;ease_in_out&quot;
+214	
+215	    _LIST = [LINEAR, EASE_IN, EASE_OUT, EASE_IN_OUT]
+216	
+217	    @classmethod
+218	    def get_weights(cls, num_from: float, num_to: float, length: int, method: str, reverse=False):
+219	        diff = num_to - num_from
+220	        if method == cls.LINEAR:
+221	            weights = torch.linspace(num_from, num_to, length)
+222	        elif method == cls.EASE_IN:
+223	            index = torch.linspace(0, 1, length)
+224	            weights = diff * np.power(index, 2) + num_from
+225	        elif method == cls.EASE_OUT:
+226	            index = torch.linspace(0, 1, length)
+227	            weights = diff * (1 - np.power(1 - index, 2)) + num_from
+228	        elif method == cls.EASE_IN_OUT:
+229	            index = torch.linspace(0, 1, length)
+230	            weights = diff * ((1 - np.cos(index * np.pi)) / 2) + num_from
+231	        else:
+232	            raise ValueError(f&quot;Unrecognized interpolation method &#x27;{method}&#x27;.&quot;)
+233	        if reverse:
+234	            weights = weights.flip(dims=(0,))
+235	        return weights
+236	
+237	
+238	class ScaleMethods:
+239	    NEAREST_EXACT = &quot;nearest-exact&quot;
+240	    BILINEAR = &quot;bilinear&quot;
+241	    AREA = &quot;area&quot;
+242	    BICUBIC = &quot;bicubic&quot;
+243	    LANCZOS = &quot;lanczos&quot;
+244	
+245	    _LIST_IMAGE = [NEAREST_EXACT, BILINEAR, AREA, BICUBIC, LANCZOS]
+246	
+247	
+248	class CropMethods:
+249	    DISABLED = &quot;disabled&quot;
+250	    CENTER = &quot;center&quot;
+251	
+252	    _LIST = [DISABLED, CENTER]
+253	
+254	
+255	class Folders:
+256	    ANIMATEDIFF_MODELS = &quot;animatediff_models&quot;
+257	    MOTION_LORA = &quot;animatediff_motion_lora&quot;
+258	    VIDEO_FORMATS = &quot;animatediff_video_formats&quot;
+259	
+260	
+261	def add_extension_to_folder_path(folder_name: str, extensions: Union[str, list[str]]):
+262	    if folder_name in folder_paths.folder_names_and_paths:
+263	        if isinstance(extensions, str):
+264	            folder_paths.folder_names_and_paths[folder_name][1].add(extensions)
+265	        elif isinstance(extensions, Iterable):
+266	            for ext in extensions:
+267	                folder_paths.folder_names_and_paths[folder_name][1].add(ext) 
+268	
+269	
+270	def try_mkdir(full_path: str):
+271	    try:
 272	        Path(full_path).mkdir()
 273	    except Exception:
 274	        pass
 275	
+276	
+277	# register motion models folder(s)
+278	folder_paths.add_model_folder_path(Folders.ANIMATEDIFF_MODELS, str(Path(__file__).parent.parent / &quot;models&quot;))
+279	folder_paths.add_model_folder_path(Folders.ANIMATEDIFF_MODELS, str(Path(folder_paths.models_dir) / Folders.ANIMATEDIFF_MODELS))
+280	add_extension_to_folder_path(Folders.ANIMATEDIFF_MODELS, folder_paths.supported_pt_extensions)
+281	try_mkdir(str(Path(folder_paths.models_dir) / Folders.ANIMATEDIFF_MODELS))
+282	
+283	# register motion LoRA folder(s)
+284	folder_paths.add_model_folder_path(Folders.MOTION_LORA, str(Path(__file__).parent.parent / &quot;motion_lora&quot;))
+285	folder_paths.add_model_folder_path(Folders.MOTION_LORA, str(Path(folder_paths.models_dir) / Folders.MOTION_LORA))
+286	add_extension_to_folder_path(Folders.MOTION_LORA, folder_paths.supported_pt_extensions)
+287	try_mkdir(str(Path(folder_paths.models_dir) / Folders.MOTION_LORA))
+288	
+289	# register video_formats folder
+290	folder_paths.add_model_folder_path(Folders.VIDEO_FORMATS, str(Path(__file__).parent.parent / &quot;video_formats&quot;))
+291	add_extension_to_folder_path(Folders.VIDEO_FORMATS, &quot;.json&quot;)
+292	
+293	
+294	def get_available_motion_models():
+295	    return folder_paths.get_filename_list(Folders.ANIMATEDIFF_MODELS)
+296	
+297	
+298	def get_motion_model_path(model_name: str):
+299	    return folder_paths.get_full_path(Folders.ANIMATEDIFF_MODELS, model_name)
+300	
+301	
+302	def get_available_motion_loras():
+303	    return folder_paths.get_filename_list(Folders.MOTION_LORA)
+304	
+305	
+306	def get_motion_lora_path(lora_name: str):
+307	    return folder_paths.get_full_path(Folders.MOTION_LORA, lora_name)
+308	
+309	
+310	# modified from https://stackoverflow.com/questions/22058048/hashing-a-file-in-python
+311	def calculate_file_hash(filename: str, hash_every_n: int = 50):
+312	    h = hashlib.sha256()
+313	    b = bytearray(1024*1024)
+314	    mv = memoryview(b)
+315	    with open(filename, &#x27;rb&#x27;, buffering=0) as f:
+316	        i = 0
+317	        # don&#x27;t hash entire file, only portions of it
+318	        while n := f.readinto(mv):
+319	            if i%hash_every_n == 0:
+320	                h.update(mv[:n])
+321	            i += 1
+322	    return h.hexdigest()
+323	
+324	
+325	def calculate_model_hash(model: ModelPatcher):
+326	    unet = model.model.diff
+327	    t = unet.input_blocks[1]
+328	    m = hashlib.sha256()
+329	    for buf in t.buffers():
+330	        m.update(buf.cpu().numpy().view(np.uint8))
+331	    return m.hexdigest()
+332	
+333	
 </pre>
 </div>
 

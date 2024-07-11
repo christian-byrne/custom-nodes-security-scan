@@ -92,121 +92,6 @@ pre {
 <div id="results">
     
 <div id="issue-0">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/actions/scale_dims.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/actions/scale_dims.py</a><br>
-    <b>Line number: </b>40<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-39	            extracted_arg = arg[0]
-40	            assert isinstance(extracted_arg, PromptSegment)
-41	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-1">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/actions/set_dims.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/actions/set_dims.py</a><br>
-    <b>Line number: </b>40<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-39	            extracted_arg = arg[0]
-40	            assert isinstance(extracted_arg, PromptSegment)
-41	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-2">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/clip_model.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/clip_model.py</a><br>
-    <b>Line number: </b>31<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-30	        super().__init__()
-31	        assert layer in self.LAYERS
-32	        self.num_layers = 12
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-3">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/clip_model.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/clip_model.py</a><br>
-    <b>Line number: </b>62<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-61	        if layer == &quot;hidden&quot;:
-62	            assert layer_idx is not None
-63	            assert abs(layer_idx) &lt;= self.num_layers
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-4">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/clip_model.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/KepPromptLang/lib/clip_model.py</a><br>
-    <b>Line number: </b>63<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-62	            assert layer_idx is not None
-63	            assert abs(layer_idx) &lt;= self.num_layers
-64	            self.clip_layer(layer_idx)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-5">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
     <b>Test ID:</b> B310<br>
@@ -219,9 +104,115 @@ pre {
 
 <div class="code">
 <pre>
+1	#This is an example that uses the websockets api to know when a prompt execution is done
+2	#Once the prompt execution is done it downloads the images using the /history endpoint
+3	import os
+4	
+5	import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
+6	import uuid
+7	import json
+8	import urllib.request
+9	import urllib.parse
+10	
+11	server_address = &quot;127.0.0.1:8188&quot;
+12	client_id = str(uuid.uuid4())
+13	
+14	def queue_prompt(prompt):
+15	    p = {&quot;prompt&quot;: prompt, &quot;client_id&quot;: client_id}
+16	    data = json.dumps(p).encode(&#x27;utf-8&#x27;)
+17	    req =  urllib.request.Request(&quot;http://{}/prompt&quot;.format(server_address), data=data)
+18	
 19	    try:
 20	        response = urllib.request.urlopen(req)
 21	        return json.loads(response.read())
+22	    except urllib.error.HTTPError as e:
+23	        print(f&quot;HTTP Error {e.code}: {e.reason}&quot;)
+24	        error_body = e.read()
+25	        # Attempt to read and print the JSON error body
+26	        try:
+27	            json_error_body = json.loads(error_body)
+28	            print(json_error_body)
+29	            raise e
+30	        except json.JSONDecodeError:
+31	            print(&quot;Failed to decode error response as JSON.&quot;)
+32	            print(error_body)
+33	            raise e
+34	    except Exception as e:
+35	        print(f&quot;An unexpected error occurred: {e}&quot;)
+36	        raise e
+37	
+38	def get_image(filename, subfolder, folder_type):
+39	    data = {&quot;filename&quot;: filename, &quot;subfolder&quot;: subfolder, &quot;type&quot;: folder_type}
+40	    url_values = urllib.parse.urlencode(data)
+41	    with urllib.request.urlopen(&quot;http://{}/view?{}&quot;.format(server_address, url_values)) as response:
+42	        return response.read()
+43	
+44	def get_history(prompt_id):
+45	    with urllib.request.urlopen(&quot;http://{}/history/{}&quot;.format(server_address, prompt_id)) as response:
+46	        return json.loads(response.read())
+47	
+48	def get_images(ws, prompt):
+49	    prompt_id = queue_prompt(prompt)[&#x27;prompt_id&#x27;]
+50	    output_images = {}
+51	    while True:
+52	        out = ws.recv()
+53	        if isinstance(out, str):
+54	            message = json.loads(out)
+55	            if message[&#x27;type&#x27;] == &#x27;executing&#x27;:
+56	                data = message[&#x27;data&#x27;]
+57	                if data[&#x27;node&#x27;] is None and data[&#x27;prompt_id&#x27;] == prompt_id:
+58	                    break #Execution is done
+59	        else:
+60	            continue #previews are binary data
+61	
+62	    history = get_history(prompt_id)[prompt_id]
+63	    for o in history[&#x27;outputs&#x27;]:
+64	        for node_id in history[&#x27;outputs&#x27;]:
+65	            node_output = history[&#x27;outputs&#x27;][node_id]
+66	            if &#x27;images&#x27; in node_output:
+67	                images_output = []
+68	                for image in node_output[&#x27;images&#x27;]:
+69	                    image_data = get_image(image[&#x27;filename&#x27;], image[&#x27;subfolder&#x27;], image[&#x27;type&#x27;])
+70	                    images_output.append(image_data)
+71	            output_images[node_id] = images_output
+72	
+73	    return output_images
+74	
+75	# Load json from file relative to this script
+76	prompt = json.load(open(os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;workflow_api.json&quot;)))
+77	
+78	#set the text prompt for our positive CLIPTextEncode
+79	# prompt[&quot;6&quot;][&quot;inputs&quot;][&quot;text&quot;] = &quot;masterpiece best quality man&quot;
+80	
+81	#set the seed for our KSampler node
+82	print(queue_prompt(prompt))
+83	ws = websocket.WebSocket()
+84	ws.connect(&quot;ws://{}/ws?clientId={}&quot;.format(server_address, client_id))
+85	while True:
+86	    out = ws.recv()
+87	    if isinstance(out, str):
+88	        message = json.loads(out)
+89	        # print(message)
+90	        if message[&quot;type&quot;] == &quot;executing&quot; and message[&quot;data&quot;][&quot;node&quot;] is None:
+91	            print(&quot;Execution is done&quot;)
+92	            break
+93	
+94	        if message[&quot;type&quot;] == &quot;execution_error&quot;:
+95	            print(&quot;Execution error&quot;)
+96	            print(json.dumps(message[&quot;data&quot;], indent=4))
+97	            raise Exception(&quot;Execution error&quot;)
+98	
+99	# images = get_images(ws, prompt)
+100	
+101	#Commented out code to display the output images:
+102	
+103	# for node_id in images:
+104	#     for image_data in images[node_id]:
+105	#         from PIL import Image
+106	#         import io
+107	#         image = Image.open(io.BytesIO(image_data))
+108	#         image.show()
+109	
 </pre>
 </div>
 
@@ -229,7 +220,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-6">
+<div id="issue-1">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
     <b>Test ID:</b> B310<br>
@@ -242,9 +233,115 @@ pre {
 
 <div class="code">
 <pre>
+1	#This is an example that uses the websockets api to know when a prompt execution is done
+2	#Once the prompt execution is done it downloads the images using the /history endpoint
+3	import os
+4	
+5	import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
+6	import uuid
+7	import json
+8	import urllib.request
+9	import urllib.parse
+10	
+11	server_address = &quot;127.0.0.1:8188&quot;
+12	client_id = str(uuid.uuid4())
+13	
+14	def queue_prompt(prompt):
+15	    p = {&quot;prompt&quot;: prompt, &quot;client_id&quot;: client_id}
+16	    data = json.dumps(p).encode(&#x27;utf-8&#x27;)
+17	    req =  urllib.request.Request(&quot;http://{}/prompt&quot;.format(server_address), data=data)
+18	
+19	    try:
+20	        response = urllib.request.urlopen(req)
+21	        return json.loads(response.read())
+22	    except urllib.error.HTTPError as e:
+23	        print(f&quot;HTTP Error {e.code}: {e.reason}&quot;)
+24	        error_body = e.read()
+25	        # Attempt to read and print the JSON error body
+26	        try:
+27	            json_error_body = json.loads(error_body)
+28	            print(json_error_body)
+29	            raise e
+30	        except json.JSONDecodeError:
+31	            print(&quot;Failed to decode error response as JSON.&quot;)
+32	            print(error_body)
+33	            raise e
+34	    except Exception as e:
+35	        print(f&quot;An unexpected error occurred: {e}&quot;)
+36	        raise e
+37	
+38	def get_image(filename, subfolder, folder_type):
+39	    data = {&quot;filename&quot;: filename, &quot;subfolder&quot;: subfolder, &quot;type&quot;: folder_type}
 40	    url_values = urllib.parse.urlencode(data)
 41	    with urllib.request.urlopen(&quot;http://{}/view?{}&quot;.format(server_address, url_values)) as response:
 42	        return response.read()
+43	
+44	def get_history(prompt_id):
+45	    with urllib.request.urlopen(&quot;http://{}/history/{}&quot;.format(server_address, prompt_id)) as response:
+46	        return json.loads(response.read())
+47	
+48	def get_images(ws, prompt):
+49	    prompt_id = queue_prompt(prompt)[&#x27;prompt_id&#x27;]
+50	    output_images = {}
+51	    while True:
+52	        out = ws.recv()
+53	        if isinstance(out, str):
+54	            message = json.loads(out)
+55	            if message[&#x27;type&#x27;] == &#x27;executing&#x27;:
+56	                data = message[&#x27;data&#x27;]
+57	                if data[&#x27;node&#x27;] is None and data[&#x27;prompt_id&#x27;] == prompt_id:
+58	                    break #Execution is done
+59	        else:
+60	            continue #previews are binary data
+61	
+62	    history = get_history(prompt_id)[prompt_id]
+63	    for o in history[&#x27;outputs&#x27;]:
+64	        for node_id in history[&#x27;outputs&#x27;]:
+65	            node_output = history[&#x27;outputs&#x27;][node_id]
+66	            if &#x27;images&#x27; in node_output:
+67	                images_output = []
+68	                for image in node_output[&#x27;images&#x27;]:
+69	                    image_data = get_image(image[&#x27;filename&#x27;], image[&#x27;subfolder&#x27;], image[&#x27;type&#x27;])
+70	                    images_output.append(image_data)
+71	            output_images[node_id] = images_output
+72	
+73	    return output_images
+74	
+75	# Load json from file relative to this script
+76	prompt = json.load(open(os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;workflow_api.json&quot;)))
+77	
+78	#set the text prompt for our positive CLIPTextEncode
+79	# prompt[&quot;6&quot;][&quot;inputs&quot;][&quot;text&quot;] = &quot;masterpiece best quality man&quot;
+80	
+81	#set the seed for our KSampler node
+82	print(queue_prompt(prompt))
+83	ws = websocket.WebSocket()
+84	ws.connect(&quot;ws://{}/ws?clientId={}&quot;.format(server_address, client_id))
+85	while True:
+86	    out = ws.recv()
+87	    if isinstance(out, str):
+88	        message = json.loads(out)
+89	        # print(message)
+90	        if message[&quot;type&quot;] == &quot;executing&quot; and message[&quot;data&quot;][&quot;node&quot;] is None:
+91	            print(&quot;Execution is done&quot;)
+92	            break
+93	
+94	        if message[&quot;type&quot;] == &quot;execution_error&quot;:
+95	            print(&quot;Execution error&quot;)
+96	            print(json.dumps(message[&quot;data&quot;], indent=4))
+97	            raise Exception(&quot;Execution error&quot;)
+98	
+99	# images = get_images(ws, prompt)
+100	
+101	#Commented out code to display the output images:
+102	
+103	# for node_id in images:
+104	#     for image_data in images[node_id]:
+105	#         from PIL import Image
+106	#         import io
+107	#         image = Image.open(io.BytesIO(image_data))
+108	#         image.show()
+109	
 </pre>
 </div>
 
@@ -252,7 +349,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-7">
+<div id="issue-2">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
     <b>Test ID:</b> B310<br>
@@ -265,9 +362,115 @@ pre {
 
 <div class="code">
 <pre>
+1	#This is an example that uses the websockets api to know when a prompt execution is done
+2	#Once the prompt execution is done it downloads the images using the /history endpoint
+3	import os
+4	
+5	import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
+6	import uuid
+7	import json
+8	import urllib.request
+9	import urllib.parse
+10	
+11	server_address = &quot;127.0.0.1:8188&quot;
+12	client_id = str(uuid.uuid4())
+13	
+14	def queue_prompt(prompt):
+15	    p = {&quot;prompt&quot;: prompt, &quot;client_id&quot;: client_id}
+16	    data = json.dumps(p).encode(&#x27;utf-8&#x27;)
+17	    req =  urllib.request.Request(&quot;http://{}/prompt&quot;.format(server_address), data=data)
+18	
+19	    try:
+20	        response = urllib.request.urlopen(req)
+21	        return json.loads(response.read())
+22	    except urllib.error.HTTPError as e:
+23	        print(f&quot;HTTP Error {e.code}: {e.reason}&quot;)
+24	        error_body = e.read()
+25	        # Attempt to read and print the JSON error body
+26	        try:
+27	            json_error_body = json.loads(error_body)
+28	            print(json_error_body)
+29	            raise e
+30	        except json.JSONDecodeError:
+31	            print(&quot;Failed to decode error response as JSON.&quot;)
+32	            print(error_body)
+33	            raise e
+34	    except Exception as e:
+35	        print(f&quot;An unexpected error occurred: {e}&quot;)
+36	        raise e
+37	
+38	def get_image(filename, subfolder, folder_type):
+39	    data = {&quot;filename&quot;: filename, &quot;subfolder&quot;: subfolder, &quot;type&quot;: folder_type}
+40	    url_values = urllib.parse.urlencode(data)
+41	    with urllib.request.urlopen(&quot;http://{}/view?{}&quot;.format(server_address, url_values)) as response:
+42	        return response.read()
+43	
 44	def get_history(prompt_id):
 45	    with urllib.request.urlopen(&quot;http://{}/history/{}&quot;.format(server_address, prompt_id)) as response:
 46	        return json.loads(response.read())
+47	
+48	def get_images(ws, prompt):
+49	    prompt_id = queue_prompt(prompt)[&#x27;prompt_id&#x27;]
+50	    output_images = {}
+51	    while True:
+52	        out = ws.recv()
+53	        if isinstance(out, str):
+54	            message = json.loads(out)
+55	            if message[&#x27;type&#x27;] == &#x27;executing&#x27;:
+56	                data = message[&#x27;data&#x27;]
+57	                if data[&#x27;node&#x27;] is None and data[&#x27;prompt_id&#x27;] == prompt_id:
+58	                    break #Execution is done
+59	        else:
+60	            continue #previews are binary data
+61	
+62	    history = get_history(prompt_id)[prompt_id]
+63	    for o in history[&#x27;outputs&#x27;]:
+64	        for node_id in history[&#x27;outputs&#x27;]:
+65	            node_output = history[&#x27;outputs&#x27;][node_id]
+66	            if &#x27;images&#x27; in node_output:
+67	                images_output = []
+68	                for image in node_output[&#x27;images&#x27;]:
+69	                    image_data = get_image(image[&#x27;filename&#x27;], image[&#x27;subfolder&#x27;], image[&#x27;type&#x27;])
+70	                    images_output.append(image_data)
+71	            output_images[node_id] = images_output
+72	
+73	    return output_images
+74	
+75	# Load json from file relative to this script
+76	prompt = json.load(open(os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;workflow_api.json&quot;)))
+77	
+78	#set the text prompt for our positive CLIPTextEncode
+79	# prompt[&quot;6&quot;][&quot;inputs&quot;][&quot;text&quot;] = &quot;masterpiece best quality man&quot;
+80	
+81	#set the seed for our KSampler node
+82	print(queue_prompt(prompt))
+83	ws = websocket.WebSocket()
+84	ws.connect(&quot;ws://{}/ws?clientId={}&quot;.format(server_address, client_id))
+85	while True:
+86	    out = ws.recv()
+87	    if isinstance(out, str):
+88	        message = json.loads(out)
+89	        # print(message)
+90	        if message[&quot;type&quot;] == &quot;executing&quot; and message[&quot;data&quot;][&quot;node&quot;] is None:
+91	            print(&quot;Execution is done&quot;)
+92	            break
+93	
+94	        if message[&quot;type&quot;] == &quot;execution_error&quot;:
+95	            print(&quot;Execution error&quot;)
+96	            print(json.dumps(message[&quot;data&quot;], indent=4))
+97	            raise Exception(&quot;Execution error&quot;)
+98	
+99	# images = get_images(ws, prompt)
+100	
+101	#Commented out code to display the output images:
+102	
+103	# for node_id in images:
+104	#     for image_data in images[node_id]:
+105	#         from PIL import Image
+106	#         import io
+107	#         image = Image.open(io.BytesIO(image_data))
+108	#         image.show()
+109	
 </pre>
 </div>
 

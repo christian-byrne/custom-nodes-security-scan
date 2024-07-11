@@ -104,9 +104,126 @@ pre {
 
 <div class="code">
 <pre>
+1	import folder_paths
+2	from comfy.sd import load_lora_for_models
+3	from comfy.utils import load_torch_file
+4	import hashlib
+5	import requests
+6	import json
+7	
+8	def load_json_from_file(file_path):
+9	    try:
+10	        with open(file_path, &#x27;r&#x27;) as json_file:
+11	            data = json.load(json_file)
+12	            return data
+13	    except FileNotFoundError:
+14	        print(f&quot;File not found: {file_path}&quot;)
+15	        return None
+16	    except json.JSONDecodeError:
+17	        print(f&quot;Error decoding JSON in file: {file_path}&quot;)
+18	        return None
+19	
+20	def save_dict_to_json(data_dict, file_path):
+21	    try:
+22	        with open(file_path, &#x27;w&#x27;) as json_file:
+23	            json.dump(data_dict, json_file, indent=4)
+24	            print(f&quot;Data saved to {file_path}&quot;)
+25	    except Exception as e:
+26	        print(f&quot;Error saving JSON to file: {e}&quot;)
+27	
+28	def get_model_version_info(hash_value):
 29	    api_url = f&quot;https://civitai.com/api/v1/model-versions/by-hash/{hash_value}&quot;
 30	    response = requests.get(api_url)
 31	    
+32	    if response.status_code == 200:
+33	        return response.json()
+34	    else:
+35	        return None
+36	    
+37	def calculate_sha256(file_path):
+38	    sha256_hash = hashlib.sha256()
+39	    with open(file_path, &quot;rb&quot;) as f:
+40	        for chunk in iter(lambda: f.read(4096), b&quot;&quot;):
+41	            sha256_hash.update(chunk)
+42	    return sha256_hash.hexdigest()
+43	
+44	class LoraLoaderTagsQuery:
+45	    def __init__(self):
+46	        self.loaded_lora = None
+47	
+48	    @classmethod
+49	    def INPUT_TYPES(s):
+50	        LORA_LIST = sorted(folder_paths.get_filename_list(&quot;loras&quot;), key=str.lower)
+51	        return {&quot;required&quot;: { &quot;model&quot;: (&quot;MODEL&quot;,),
+52	                              &quot;clip&quot;: (&quot;CLIP&quot;, ),
+53	                              &quot;lora_name&quot;: (LORA_LIST, ),
+54	                              &quot;strength_model&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 2.0, &quot;step&quot;: 0.1}),
+55	                              &quot;strength_clip&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 2.0, &quot;step&quot;: 0.1}),
+56	                              &quot;query_tags&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: True}),
+57	                              &quot;tags_out&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: True}),
+58	                              &quot;print_tags&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False}),
+59	                              &quot;bypass&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False}),
+60	                              &quot;force_fetch&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: False}),
+61	                              },
+62	                &quot;optional&quot;:
+63	                            {
+64	                                &quot;opt_prompt&quot;: (&quot;STRING&quot;, {&quot;forceInput&quot;: True}),
+65	                            }
+66	                }
+67	    
+68	    RETURN_TYPES = (&quot;MODEL&quot;, &quot;CLIP&quot;, &quot;STRING&quot;)
+69	    FUNCTION = &quot;load_lora&quot;
+70	    CATEGORY = &quot;loaders&quot;
+71	
+72	    def load_lora(self, model, clip, lora_name, strength_model, strength_clip, query_tags, tags_out, print_tags, bypass, force_fetch, opt_prompt=None):
+73	        if strength_model == 0 and strength_clip == 0 or bypass:
+74	            if opt_prompt is not None:
+75	                out_string = opt_prompt
+76	            else:
+77	                out_string = &quot;&quot;
+78	            return (model, clip, out_string,)
+79	        
+80	        json_tags_path = &quot;./loras_tags.json&quot;
+81	        lora_tags = load_json_from_file(json_tags_path)
+82	        output_tags = lora_tags.get(lora_name, None) if lora_tags is not None else None
+83	        if output_tags is not None:
+84	            output_tags = &quot;, &quot;.join(output_tags)
+85	            if print_tags:
+86	                    print(&quot;trainedWords:&quot;,output_tags)
+87	        else:
+88	            output_tags = &quot;&quot;
+89	
+90	        lora_path = folder_paths.get_full_path(&quot;loras&quot;, lora_name)
+91	        if (query_tags and output_tags == &quot;&quot;) or force_fetch:
+92	            print(&quot;calculating lora hash&quot;)
+93	            LORAsha256 = calculate_sha256(lora_path)
+94	            print(&quot;requesting infos&quot;)
+95	            model_info = get_model_version_info(LORAsha256)
+96	            if model_info is not None:
+97	                if &quot;trainedWords&quot; in model_info:
+98	                    print(&quot;tags found!&quot;)
+99	                    if lora_tags is None:
+100	                        lora_tags = {}
+101	                    lora_tags[lora_name] = model_info[&quot;trainedWords&quot;]
+102	                    save_dict_to_json(lora_tags,json_tags_path)
+103	                    output_tags = &quot;, &quot;.join(model_info[&quot;trainedWords&quot;])
+104	                    if print_tags:
+105	                        print(&quot;trainedWords:&quot;,output_tags)
+106	            else:
+107	                print(&quot;No informations found.&quot;)
+108	                if lora_tags is None:
+109	                        lora_tags = {}
+110	                lora_tags[lora_name] = []
+111	                save_dict_to_json(lora_tags,json_tags_path)
+112	
+113	        lora = None
+114	        if self.loaded_lora is not None:
+115	            if self.loaded_lora[0] == lora_path:
+116	                lora = self.loaded_lora[1]
+117	            else:
+118	                temp = self.loaded_lora
+119	                self.loaded_lora = None
+120	                del temp
 </pre>
 </div>
 

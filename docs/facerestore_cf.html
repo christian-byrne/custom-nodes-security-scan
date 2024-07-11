@@ -93,680 +93,6 @@ pre {
     
 <div id="issue-0">
 <div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/archs/arch_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/archs/arch_util.py</a><br>
-    <b>Line number: </b>133<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-132	    &quot;&quot;&quot;
-133	    assert x.size()[-2:] == flow.size()[1:3]
-134	    _, _, h, w = x.size()
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-1">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/archs/arch_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/archs/arch_util.py</a><br>
-    <b>Line number: </b>202<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-201	    out_channel = c * (scale**2)
-202	    assert hh % scale == 0 and hw % scale == 0
-203	    h = hh // scale
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-2">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/archs/codeformer_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/archs/codeformer_arch.py</a><br>
-    <b>Line number: </b>21<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-20	    size = feat.size()
-21	    assert len(size) == 4, &#x27;The input feature should be 4D tensor.&#x27;
-22	    b, c = size[:2]
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-3">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_sampler.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_sampler.py</a><br>
-    <b>Line number: </b>40<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-39	        indices = indices[self.rank:self.total_size:self.num_replicas]
-40	        assert len(indices) == self.num_samples
-41	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-4">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>55<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-54	    &quot;&quot;&quot;
-55	    assert num_frames % 2 == 1, &#x27;num_frames should be an odd number.&#x27;
-56	    assert padding in (&#x27;replicate&#x27;, &#x27;reflection&#x27;, &#x27;reflection_circle&#x27;, &#x27;circle&#x27;), f&#x27;Wrong padding mode: {padding}.&#x27;
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-5">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>56<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-55	    assert num_frames % 2 == 1, &#x27;num_frames should be an odd number.&#x27;
-56	    assert padding in (&#x27;replicate&#x27;, &#x27;reflection&#x27;, &#x27;reflection_circle&#x27;, &#x27;circle&#x27;), f&#x27;Wrong padding mode: {padding}.&#x27;
-57	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-6">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>122<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-121	    &quot;&quot;&quot;
-122	    assert len(folders) == 2, (&#x27;The len of folders should be 2 with [input_folder, gt_folder]. &#x27;
-123	                               f&#x27;But got {len(folders)}&#x27;)
-124	    assert len(keys) == 2, (&#x27;The len of keys should be 2 with [input_key, gt_key]. &#x27; f&#x27;But got {len(keys)}&#x27;)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-7">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>124<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-123	                               f&#x27;But got {len(folders)}&#x27;)
-124	    assert len(keys) == 2, (&#x27;The len of keys should be 2 with [input_key, gt_key]. &#x27; f&#x27;But got {len(keys)}&#x27;)
-125	    input_folder, gt_folder = folders
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-8">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>171<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-170	    &quot;&quot;&quot;
-171	    assert len(folders) == 2, (&#x27;The len of folders should be 2 with [input_folder, gt_folder]. &#x27;
-172	                               f&#x27;But got {len(folders)}&#x27;)
-173	    assert len(keys) == 2, (&#x27;The len of keys should be 2 with [input_key, gt_key]. &#x27; f&#x27;But got {len(keys)}&#x27;)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-9">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>173<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-172	                               f&#x27;But got {len(folders)}&#x27;)
-173	    assert len(keys) == 2, (&#x27;The len of keys should be 2 with [input_key, gt_key]. &#x27; f&#x27;But got {len(keys)}&#x27;)
-174	    input_folder, gt_folder = folders
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-10">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>205<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-204	    &quot;&quot;&quot;
-205	    assert len(folders) == 2, (&#x27;The len of folders should be 2 with [input_folder, gt_folder]. &#x27;
-206	                               f&#x27;But got {len(folders)}&#x27;)
-207	    assert len(keys) == 2, (&#x27;The len of keys should be 2 with [input_key, gt_key]. &#x27; f&#x27;But got {len(keys)}&#x27;)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-11">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>207<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-206	                               f&#x27;But got {len(folders)}&#x27;)
-207	    assert len(keys) == 2, (&#x27;The len of keys should be 2 with [input_key, gt_key]. &#x27; f&#x27;But got {len(keys)}&#x27;)
-208	    input_folder, gt_folder = folders
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-12">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>213<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-212	    gt_paths = list(scandir(gt_folder))
-213	    assert len(input_paths) == len(gt_paths), (f&#x27;{input_key} and {gt_key} datasets have different number of images: &#x27;
-214	                                               f&#x27;{len(input_paths)}, {len(gt_paths)}.&#x27;)
-215	    paths = []
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-13">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>220<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-219	        input_path = osp.join(input_folder, input_name)
-220	        assert input_name in input_paths, (f&#x27;{input_name} is not in &#x27; f&#x27;{input_key}_paths.&#x27;)
-221	        gt_path = osp.join(gt_folder, gt_path)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-14">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/data_util.py</a><br>
-    <b>Line number: </b>287<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-286	    &quot;&quot;&quot;
-287	    assert scale in (2, 3, 4), f&#x27;Only support scale (2, 3, 4), but got {scale}.&#x27;
-288	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-15">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py</a><br>
-    <b>Line number: </b>64<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-63	    # randomly choose top and left coordinates for lq patch
-64	    top = random.randint(0, h_lq - lq_patch_size)
-65	    left = random.randint(0, w_lq - lq_patch_size)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-16">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py</a><br>
-    <b>Line number: </b>65<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-64	    top = random.randint(0, h_lq - lq_patch_size)
-65	    left = random.randint(0, w_lq - lq_patch_size)
-66	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-17">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py</a><br>
-    <b>Line number: </b>102<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-101	    &quot;&quot;&quot;
-102	    hflip = hflip and random.random() &lt; 0.5
-103	    vflip = rotation and random.random() &lt; 0.5
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-18">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py</a><br>
-    <b>Line number: </b>103<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-102	    hflip = hflip and random.random() &lt; 0.5
-103	    vflip = rotation and random.random() &lt; 0.5
-104	    rot90 = rotation and random.random() &lt; 0.5
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-19">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/data/transforms.py</a><br>
-    <b>Line number: </b>104<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-103	    vflip = rotation and random.random() &lt; 0.5
-104	    rot90 = rotation and random.random() &lt; 0.5
-105	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-20">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/losses/loss_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/losses/loss_util.py</a><br>
-    <b>Line number: </b>39<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-38	    if weight is not None:
-39	        assert weight.dim() == loss.dim()
-40	        assert weight.size(1) == 1 or weight.size(1) == loss.size(1)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-21">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/losses/loss_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/losses/loss_util.py</a><br>
-    <b>Line number: </b>40<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-39	        assert weight.dim() == loss.dim()
-40	        assert weight.size(1) == 1 or weight.size(1) == loss.size(1)
-41	        loss = loss * weight
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-22">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/metrics/psnr_ssim.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/metrics/psnr_ssim.py</a><br>
-    <b>Line number: </b>27<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-26	
-27	    assert img1.shape == img2.shape, (f&#x27;Image shapes are differnet: {img1.shape}, {img2.shape}.&#x27;)
-28	    if input_order not in [&#x27;HWC&#x27;, &#x27;CHW&#x27;]:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-23">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/metrics/psnr_ssim.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/metrics/psnr_ssim.py</a><br>
-    <b>Line number: </b>109<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-108	
-109	    assert img1.shape == img2.shape, (f&#x27;Image shapes are differnet: {img1.shape}, {img2.shape}.&#x27;)
-110	    if input_order not in [&#x27;HWC&#x27;, &#x27;CHW&#x27;]:
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-24">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py</a><br>
-    <b>Line number: </b>59<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-58	            cur_im2col_step = min(ctx.im2col_step, input.shape[0])
-59	            assert (input.shape[0] % cur_im2col_step) == 0, &#x27;im2col step must divide batchsize&#x27;
-60	            deform_conv_ext.deform_conv_forward(input, weight,
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-25">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py</a><br>
-    <b>Line number: </b>78<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-77	            cur_im2col_step = min(ctx.im2col_step, input.shape[0])
-78	            assert (input.shape[0] % cur_im2col_step) == 0, &#x27;im2col step must divide batchsize&#x27;
-79	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-26">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py</a><br>
-    <b>Line number: </b>200<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-199	
-200	        assert not bias
-201	        assert in_channels % groups == 0, \
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-27">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py</a><br>
-    <b>Line number: </b>201<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-200	        assert not bias
-201	        assert in_channels % groups == 0, \
-202	            f&#x27;in_channels {in_channels} is not divisible by groups {groups}&#x27;
-203	        assert out_channels % groups == 0, \
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-28">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/ops/dcn/deform_conv.py</a><br>
-    <b>Line number: </b>203<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-202	            f&#x27;in_channels {in_channels} is not divisible by groups {groups}&#x27;
-203	        assert out_channels % groups == 0, \
-204	            f&#x27;out_channels {out_channels} is not divisible &#x27; \
-205	            f&#x27;by groups {groups}&#x27;
-206	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-29">
-<div class="issue-block issue-sev-low">
     <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
     <b>Test ID:</b> B404<br>
     <b>Severity: </b>LOW<br>
@@ -778,9 +104,126 @@ pre {
 
 <div class="code">
 <pre>
+1	#!/usr/bin/env python
+2	
+3	from setuptools import find_packages, setup
+4	
 5	import os
 6	import subprocess
 7	import sys
+8	import time
+9	import torch
+10	from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
+11	
+12	version_file = &#x27;./basicsr/version.py&#x27;
+13	
+14	
+15	def readme():
+16	    with open(&#x27;README.md&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+17	        content = f.read()
+18	    return content
+19	
+20	
+21	def get_git_hash():
+22	
+23	    def _minimal_ext_cmd(cmd):
+24	        # construct minimal environment
+25	        env = {}
+26	        for k in [&#x27;SYSTEMROOT&#x27;, &#x27;PATH&#x27;, &#x27;HOME&#x27;]:
+27	            v = os.environ.get(k)
+28	            if v is not None:
+29	                env[k] = v
+30	        # LANGUAGE is used on win32
+31	        env[&#x27;LANGUAGE&#x27;] = &#x27;C&#x27;
+32	        env[&#x27;LANG&#x27;] = &#x27;C&#x27;
+33	        env[&#x27;LC_ALL&#x27;] = &#x27;C&#x27;
+34	        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=env).communicate()[0]
+35	        return out
+36	
+37	    try:
+38	        out = _minimal_ext_cmd([&#x27;git&#x27;, &#x27;rev-parse&#x27;, &#x27;HEAD&#x27;])
+39	        sha = out.strip().decode(&#x27;ascii&#x27;)
+40	    except OSError:
+41	        sha = &#x27;unknown&#x27;
+42	
+43	    return sha
+44	
+45	
+46	def get_hash():
+47	    if os.path.exists(&#x27;.git&#x27;):
+48	        sha = get_git_hash()[:7]
+49	    elif os.path.exists(version_file):
+50	        try:
+51	            from version import __version__
+52	            sha = __version__.split(&#x27;+&#x27;)[-1]
+53	        except ImportError:
+54	            raise ImportError(&#x27;Unable to get git version&#x27;)
+55	    else:
+56	        sha = &#x27;unknown&#x27;
+57	
+58	    return sha
+59	
+60	
+61	def write_version_py():
+62	    content = &quot;&quot;&quot;# GENERATED VERSION FILE
+63	# TIME: {}
+64	__version__ = &#x27;{}&#x27;
+65	__gitsha__ = &#x27;{}&#x27;
+66	version_info = ({})
+67	&quot;&quot;&quot;
+68	    sha = get_hash()
+69	    with open(&#x27;./basicsr/VERSION&#x27;, &#x27;r&#x27;) as f:
+70	        SHORT_VERSION = f.read().strip()
+71	    VERSION_INFO = &#x27;, &#x27;.join([x if x.isdigit() else f&#x27;&quot;{x}&quot;&#x27; for x in SHORT_VERSION.split(&#x27;.&#x27;)])
+72	
+73	    version_file_str = content.format(time.asctime(), SHORT_VERSION, sha, VERSION_INFO)
+74	    with open(version_file, &#x27;w&#x27;) as f:
+75	        f.write(version_file_str)
+76	
+77	
+78	def get_version():
+79	    with open(version_file, &#x27;r&#x27;) as f:
+80	        exec(compile(f.read(), version_file, &#x27;exec&#x27;))
+81	    return locals()[&#x27;__version__&#x27;]
+82	
+83	
+84	def make_cuda_ext(name, module, sources, sources_cuda=None):
+85	    if sources_cuda is None:
+86	        sources_cuda = []
+87	    define_macros = []
+88	    extra_compile_args = {&#x27;cxx&#x27;: []}
+89	
+90	    if torch.cuda.is_available() or os.getenv(&#x27;FORCE_CUDA&#x27;, &#x27;0&#x27;) == &#x27;1&#x27;:
+91	        define_macros += [(&#x27;WITH_CUDA&#x27;, None)]
+92	        extension = CUDAExtension
+93	        extra_compile_args[&#x27;nvcc&#x27;] = [
+94	            &#x27;-D__CUDA_NO_HALF_OPERATORS__&#x27;,
+95	            &#x27;-D__CUDA_NO_HALF_CONVERSIONS__&#x27;,
+96	            &#x27;-D__CUDA_NO_HALF2_OPERATORS__&#x27;,
+97	        ]
+98	        sources += sources_cuda
+99	    else:
+100	        print(f&#x27;Compiling {name} without CUDA&#x27;)
+101	        extension = CppExtension
+102	
+103	    return extension(
+104	        name=f&#x27;{module}.{name}&#x27;,
+105	        sources=[os.path.join(*module.split(&#x27;.&#x27;), p) for p in sources],
+106	        define_macros=define_macros,
+107	        extra_compile_args=extra_compile_args)
+108	
+109	
+110	def get_requirements(filename=&#x27;requirements.txt&#x27;):
+111	    with open(os.path.join(&#x27;.&#x27;, filename), &#x27;r&#x27;) as f:
+112	        requires = [line.replace(&#x27;\n&#x27;, &#x27;&#x27;) for line in f.readlines()]
+113	    return requires
+114	
+115	
+116	if __name__ == &#x27;__main__&#x27;:
+117	    if &#x27;--cuda_ext&#x27; in sys.argv:
+118	        ext_modules = [
+119	            make_cuda_ext(
+120	                name=&#x27;deform_conv_ext&#x27;,
 </pre>
 </div>
 
@@ -788,7 +231,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-30">
+<div id="issue-1">
 <div class="issue-block issue-sev-low">
     <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
     <b>Test ID:</b> B603<br>
@@ -801,9 +244,126 @@ pre {
 
 <div class="code">
 <pre>
+1	#!/usr/bin/env python
+2	
+3	from setuptools import find_packages, setup
+4	
+5	import os
+6	import subprocess
+7	import sys
+8	import time
+9	import torch
+10	from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
+11	
+12	version_file = &#x27;./basicsr/version.py&#x27;
+13	
+14	
+15	def readme():
+16	    with open(&#x27;README.md&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+17	        content = f.read()
+18	    return content
+19	
+20	
+21	def get_git_hash():
+22	
+23	    def _minimal_ext_cmd(cmd):
+24	        # construct minimal environment
+25	        env = {}
+26	        for k in [&#x27;SYSTEMROOT&#x27;, &#x27;PATH&#x27;, &#x27;HOME&#x27;]:
+27	            v = os.environ.get(k)
+28	            if v is not None:
+29	                env[k] = v
+30	        # LANGUAGE is used on win32
+31	        env[&#x27;LANGUAGE&#x27;] = &#x27;C&#x27;
+32	        env[&#x27;LANG&#x27;] = &#x27;C&#x27;
 33	        env[&#x27;LC_ALL&#x27;] = &#x27;C&#x27;
 34	        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=env).communicate()[0]
 35	        return out
+36	
+37	    try:
+38	        out = _minimal_ext_cmd([&#x27;git&#x27;, &#x27;rev-parse&#x27;, &#x27;HEAD&#x27;])
+39	        sha = out.strip().decode(&#x27;ascii&#x27;)
+40	    except OSError:
+41	        sha = &#x27;unknown&#x27;
+42	
+43	    return sha
+44	
+45	
+46	def get_hash():
+47	    if os.path.exists(&#x27;.git&#x27;):
+48	        sha = get_git_hash()[:7]
+49	    elif os.path.exists(version_file):
+50	        try:
+51	            from version import __version__
+52	            sha = __version__.split(&#x27;+&#x27;)[-1]
+53	        except ImportError:
+54	            raise ImportError(&#x27;Unable to get git version&#x27;)
+55	    else:
+56	        sha = &#x27;unknown&#x27;
+57	
+58	    return sha
+59	
+60	
+61	def write_version_py():
+62	    content = &quot;&quot;&quot;# GENERATED VERSION FILE
+63	# TIME: {}
+64	__version__ = &#x27;{}&#x27;
+65	__gitsha__ = &#x27;{}&#x27;
+66	version_info = ({})
+67	&quot;&quot;&quot;
+68	    sha = get_hash()
+69	    with open(&#x27;./basicsr/VERSION&#x27;, &#x27;r&#x27;) as f:
+70	        SHORT_VERSION = f.read().strip()
+71	    VERSION_INFO = &#x27;, &#x27;.join([x if x.isdigit() else f&#x27;&quot;{x}&quot;&#x27; for x in SHORT_VERSION.split(&#x27;.&#x27;)])
+72	
+73	    version_file_str = content.format(time.asctime(), SHORT_VERSION, sha, VERSION_INFO)
+74	    with open(version_file, &#x27;w&#x27;) as f:
+75	        f.write(version_file_str)
+76	
+77	
+78	def get_version():
+79	    with open(version_file, &#x27;r&#x27;) as f:
+80	        exec(compile(f.read(), version_file, &#x27;exec&#x27;))
+81	    return locals()[&#x27;__version__&#x27;]
+82	
+83	
+84	def make_cuda_ext(name, module, sources, sources_cuda=None):
+85	    if sources_cuda is None:
+86	        sources_cuda = []
+87	    define_macros = []
+88	    extra_compile_args = {&#x27;cxx&#x27;: []}
+89	
+90	    if torch.cuda.is_available() or os.getenv(&#x27;FORCE_CUDA&#x27;, &#x27;0&#x27;) == &#x27;1&#x27;:
+91	        define_macros += [(&#x27;WITH_CUDA&#x27;, None)]
+92	        extension = CUDAExtension
+93	        extra_compile_args[&#x27;nvcc&#x27;] = [
+94	            &#x27;-D__CUDA_NO_HALF_OPERATORS__&#x27;,
+95	            &#x27;-D__CUDA_NO_HALF_CONVERSIONS__&#x27;,
+96	            &#x27;-D__CUDA_NO_HALF2_OPERATORS__&#x27;,
+97	        ]
+98	        sources += sources_cuda
+99	    else:
+100	        print(f&#x27;Compiling {name} without CUDA&#x27;)
+101	        extension = CppExtension
+102	
+103	    return extension(
+104	        name=f&#x27;{module}.{name}&#x27;,
+105	        sources=[os.path.join(*module.split(&#x27;.&#x27;), p) for p in sources],
+106	        define_macros=define_macros,
+107	        extra_compile_args=extra_compile_args)
+108	
+109	
+110	def get_requirements(filename=&#x27;requirements.txt&#x27;):
+111	    with open(os.path.join(&#x27;.&#x27;, filename), &#x27;r&#x27;) as f:
+112	        requires = [line.replace(&#x27;\n&#x27;, &#x27;&#x27;) for line in f.readlines()]
+113	    return requires
+114	
+115	
+116	if __name__ == &#x27;__main__&#x27;:
+117	    if &#x27;--cuda_ext&#x27; in sys.argv:
+118	        ext_modules = [
+119	            make_cuda_ext(
+120	                name=&#x27;deform_conv_ext&#x27;,
 </pre>
 </div>
 
@@ -811,7 +371,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-31">
+<div id="issue-2">
 <div class="issue-block issue-sev-medium">
     <b>exec_used: </b> Use of exec detected.<br>
     <b>Test ID:</b> B102<br>
@@ -824,9 +384,126 @@ pre {
 
 <div class="code">
 <pre>
+20	
+21	def get_git_hash():
+22	
+23	    def _minimal_ext_cmd(cmd):
+24	        # construct minimal environment
+25	        env = {}
+26	        for k in [&#x27;SYSTEMROOT&#x27;, &#x27;PATH&#x27;, &#x27;HOME&#x27;]:
+27	            v = os.environ.get(k)
+28	            if v is not None:
+29	                env[k] = v
+30	        # LANGUAGE is used on win32
+31	        env[&#x27;LANGUAGE&#x27;] = &#x27;C&#x27;
+32	        env[&#x27;LANG&#x27;] = &#x27;C&#x27;
+33	        env[&#x27;LC_ALL&#x27;] = &#x27;C&#x27;
+34	        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=env).communicate()[0]
+35	        return out
+36	
+37	    try:
+38	        out = _minimal_ext_cmd([&#x27;git&#x27;, &#x27;rev-parse&#x27;, &#x27;HEAD&#x27;])
+39	        sha = out.strip().decode(&#x27;ascii&#x27;)
+40	    except OSError:
+41	        sha = &#x27;unknown&#x27;
+42	
+43	    return sha
+44	
+45	
+46	def get_hash():
+47	    if os.path.exists(&#x27;.git&#x27;):
+48	        sha = get_git_hash()[:7]
+49	    elif os.path.exists(version_file):
+50	        try:
+51	            from version import __version__
+52	            sha = __version__.split(&#x27;+&#x27;)[-1]
+53	        except ImportError:
+54	            raise ImportError(&#x27;Unable to get git version&#x27;)
+55	    else:
+56	        sha = &#x27;unknown&#x27;
+57	
+58	    return sha
+59	
+60	
+61	def write_version_py():
+62	    content = &quot;&quot;&quot;# GENERATED VERSION FILE
+63	# TIME: {}
+64	__version__ = &#x27;{}&#x27;
+65	__gitsha__ = &#x27;{}&#x27;
+66	version_info = ({})
+67	&quot;&quot;&quot;
+68	    sha = get_hash()
+69	    with open(&#x27;./basicsr/VERSION&#x27;, &#x27;r&#x27;) as f:
+70	        SHORT_VERSION = f.read().strip()
+71	    VERSION_INFO = &#x27;, &#x27;.join([x if x.isdigit() else f&#x27;&quot;{x}&quot;&#x27; for x in SHORT_VERSION.split(&#x27;.&#x27;)])
+72	
+73	    version_file_str = content.format(time.asctime(), SHORT_VERSION, sha, VERSION_INFO)
+74	    with open(version_file, &#x27;w&#x27;) as f:
+75	        f.write(version_file_str)
+76	
+77	
+78	def get_version():
 79	    with open(version_file, &#x27;r&#x27;) as f:
 80	        exec(compile(f.read(), version_file, &#x27;exec&#x27;))
 81	    return locals()[&#x27;__version__&#x27;]
+82	
+83	
+84	def make_cuda_ext(name, module, sources, sources_cuda=None):
+85	    if sources_cuda is None:
+86	        sources_cuda = []
+87	    define_macros = []
+88	    extra_compile_args = {&#x27;cxx&#x27;: []}
+89	
+90	    if torch.cuda.is_available() or os.getenv(&#x27;FORCE_CUDA&#x27;, &#x27;0&#x27;) == &#x27;1&#x27;:
+91	        define_macros += [(&#x27;WITH_CUDA&#x27;, None)]
+92	        extension = CUDAExtension
+93	        extra_compile_args[&#x27;nvcc&#x27;] = [
+94	            &#x27;-D__CUDA_NO_HALF_OPERATORS__&#x27;,
+95	            &#x27;-D__CUDA_NO_HALF_CONVERSIONS__&#x27;,
+96	            &#x27;-D__CUDA_NO_HALF2_OPERATORS__&#x27;,
+97	        ]
+98	        sources += sources_cuda
+99	    else:
+100	        print(f&#x27;Compiling {name} without CUDA&#x27;)
+101	        extension = CppExtension
+102	
+103	    return extension(
+104	        name=f&#x27;{module}.{name}&#x27;,
+105	        sources=[os.path.join(*module.split(&#x27;.&#x27;), p) for p in sources],
+106	        define_macros=define_macros,
+107	        extra_compile_args=extra_compile_args)
+108	
+109	
+110	def get_requirements(filename=&#x27;requirements.txt&#x27;):
+111	    with open(os.path.join(&#x27;.&#x27;, filename), &#x27;r&#x27;) as f:
+112	        requires = [line.replace(&#x27;\n&#x27;, &#x27;&#x27;) for line in f.readlines()]
+113	    return requires
+114	
+115	
+116	if __name__ == &#x27;__main__&#x27;:
+117	    if &#x27;--cuda_ext&#x27; in sys.argv:
+118	        ext_modules = [
+119	            make_cuda_ext(
+120	                name=&#x27;deform_conv_ext&#x27;,
+121	                module=&#x27;ops.dcn&#x27;,
+122	                sources=[&#x27;src/deform_conv_ext.cpp&#x27;],
+123	                sources_cuda=[&#x27;src/deform_conv_cuda.cpp&#x27;, &#x27;src/deform_conv_cuda_kernel.cu&#x27;]),
+124	            make_cuda_ext(
+125	                name=&#x27;fused_act_ext&#x27;,
+126	                module=&#x27;ops.fused_act&#x27;,
+127	                sources=[&#x27;src/fused_bias_act.cpp&#x27;],
+128	                sources_cuda=[&#x27;src/fused_bias_act_kernel.cu&#x27;]),
+129	            make_cuda_ext(
+130	                name=&#x27;upfirdn2d_ext&#x27;,
+131	                module=&#x27;ops.upfirdn2d&#x27;,
+132	                sources=[&#x27;src/upfirdn2d.cpp&#x27;],
+133	                sources_cuda=[&#x27;src/upfirdn2d_kernel.cu&#x27;]),
+134	        ]
+135	        sys.argv.remove(&#x27;--cuda_ext&#x27;)
+136	    else:
+137	        ext_modules = []
+138	
+139	    write_version_py()
 </pre>
 </div>
 
@@ -834,53 +511,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-32">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/train.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/train.py</a><br>
-    <b>Line number: </b>48<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-47	    if seed is None:
-48	        seed = random.randint(1, 10000)
-49	        opt[&#x27;manual_seed&#x27;] = seed
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-33">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/train.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/train.py</a><br>
-    <b>Line number: </b>63<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-62	    if (opt[&#x27;logger&#x27;].get(&#x27;wandb&#x27;) is not None) and (opt[&#x27;logger&#x27;][&#x27;wandb&#x27;].get(&#x27;project&#x27;) is not None):
-63	        assert opt[&#x27;logger&#x27;].get(&#x27;use_tb_logger&#x27;) is True, (&#x27;should turn on tensorboard when using wandb&#x27;)
-64	        init_wandb_logger(opt)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-34">
+<div id="issue-3">
 <div class="issue-block issue-sev-low">
     <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
     <b>Test ID:</b> B404<br>
@@ -893,9 +524,88 @@ pre {
 
 <div class="code">
 <pre>
+1	# Modified from https://github.com/open-mmlab/mmcv/blob/master/mmcv/runner/dist_utils.py  # noqa: E501
+2	import functools
 3	import os
 4	import subprocess
 5	import torch
+6	import torch.distributed as dist
+7	import torch.multiprocessing as mp
+8	
+9	
+10	def init_dist(launcher, backend=&#x27;nccl&#x27;, **kwargs):
+11	    if mp.get_start_method(allow_none=True) is None:
+12	        mp.set_start_method(&#x27;spawn&#x27;)
+13	    if launcher == &#x27;pytorch&#x27;:
+14	        _init_dist_pytorch(backend, **kwargs)
+15	    elif launcher == &#x27;slurm&#x27;:
+16	        _init_dist_slurm(backend, **kwargs)
+17	    else:
+18	        raise ValueError(f&#x27;Invalid launcher type: {launcher}&#x27;)
+19	
+20	
+21	def _init_dist_pytorch(backend, **kwargs):
+22	    rank = int(os.environ[&#x27;RANK&#x27;])
+23	    num_gpus = torch.cuda.device_count()
+24	    torch.cuda.set_device(rank % num_gpus)
+25	    dist.init_process_group(backend=backend, **kwargs)
+26	
+27	
+28	def _init_dist_slurm(backend, port=None):
+29	    &quot;&quot;&quot;Initialize slurm distributed training environment.
+30	
+31	    If argument ``port`` is not specified, then the master port will be system
+32	    environment variable ``MASTER_PORT``. If ``MASTER_PORT`` is not in system
+33	    environment variable, then a default port ``29500`` will be used.
+34	
+35	    Args:
+36	        backend (str): Backend of torch.distributed.
+37	        port (int, optional): Master port. Defaults to None.
+38	    &quot;&quot;&quot;
+39	    proc_id = int(os.environ[&#x27;SLURM_PROCID&#x27;])
+40	    ntasks = int(os.environ[&#x27;SLURM_NTASKS&#x27;])
+41	    node_list = os.environ[&#x27;SLURM_NODELIST&#x27;]
+42	    num_gpus = torch.cuda.device_count()
+43	    torch.cuda.set_device(proc_id % num_gpus)
+44	    addr = subprocess.getoutput(f&#x27;scontrol show hostname {node_list} | head -n1&#x27;)
+45	    # specify master port
+46	    if port is not None:
+47	        os.environ[&#x27;MASTER_PORT&#x27;] = str(port)
+48	    elif &#x27;MASTER_PORT&#x27; in os.environ:
+49	        pass  # use MASTER_PORT in the environment variable
+50	    else:
+51	        # 29500 is torch.distributed default port
+52	        os.environ[&#x27;MASTER_PORT&#x27;] = &#x27;29500&#x27;
+53	    os.environ[&#x27;MASTER_ADDR&#x27;] = addr
+54	    os.environ[&#x27;WORLD_SIZE&#x27;] = str(ntasks)
+55	    os.environ[&#x27;LOCAL_RANK&#x27;] = str(proc_id % num_gpus)
+56	    os.environ[&#x27;RANK&#x27;] = str(proc_id)
+57	    dist.init_process_group(backend=backend)
+58	
+59	
+60	def get_dist_info():
+61	    if dist.is_available():
+62	        initialized = dist.is_initialized()
+63	    else:
+64	        initialized = False
+65	    if initialized:
+66	        rank = dist.get_rank()
+67	        world_size = dist.get_world_size()
+68	    else:
+69	        rank = 0
+70	        world_size = 1
+71	    return rank, world_size
+72	
+73	
+74	def master_only(func):
+75	
+76	    @functools.wraps(func)
+77	    def wrapper(*args, **kwargs):
+78	        rank, _ = get_dist_info()
+79	        if rank == 0:
+80	            return func(*args, **kwargs)
+81	
+82	    return wrapper
 </pre>
 </div>
 
@@ -903,7 +613,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-35">
+<div id="issue-4">
 <div class="issue-block issue-sev-high">
     <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
     <b>Test ID:</b> B605<br>
@@ -916,9 +626,88 @@ pre {
 
 <div class="code">
 <pre>
+1	# Modified from https://github.com/open-mmlab/mmcv/blob/master/mmcv/runner/dist_utils.py  # noqa: E501
+2	import functools
+3	import os
+4	import subprocess
+5	import torch
+6	import torch.distributed as dist
+7	import torch.multiprocessing as mp
+8	
+9	
+10	def init_dist(launcher, backend=&#x27;nccl&#x27;, **kwargs):
+11	    if mp.get_start_method(allow_none=True) is None:
+12	        mp.set_start_method(&#x27;spawn&#x27;)
+13	    if launcher == &#x27;pytorch&#x27;:
+14	        _init_dist_pytorch(backend, **kwargs)
+15	    elif launcher == &#x27;slurm&#x27;:
+16	        _init_dist_slurm(backend, **kwargs)
+17	    else:
+18	        raise ValueError(f&#x27;Invalid launcher type: {launcher}&#x27;)
+19	
+20	
+21	def _init_dist_pytorch(backend, **kwargs):
+22	    rank = int(os.environ[&#x27;RANK&#x27;])
+23	    num_gpus = torch.cuda.device_count()
+24	    torch.cuda.set_device(rank % num_gpus)
+25	    dist.init_process_group(backend=backend, **kwargs)
+26	
+27	
+28	def _init_dist_slurm(backend, port=None):
+29	    &quot;&quot;&quot;Initialize slurm distributed training environment.
+30	
+31	    If argument ``port`` is not specified, then the master port will be system
+32	    environment variable ``MASTER_PORT``. If ``MASTER_PORT`` is not in system
+33	    environment variable, then a default port ``29500`` will be used.
+34	
+35	    Args:
+36	        backend (str): Backend of torch.distributed.
+37	        port (int, optional): Master port. Defaults to None.
+38	    &quot;&quot;&quot;
+39	    proc_id = int(os.environ[&#x27;SLURM_PROCID&#x27;])
+40	    ntasks = int(os.environ[&#x27;SLURM_NTASKS&#x27;])
+41	    node_list = os.environ[&#x27;SLURM_NODELIST&#x27;]
+42	    num_gpus = torch.cuda.device_count()
 43	    torch.cuda.set_device(proc_id % num_gpus)
 44	    addr = subprocess.getoutput(f&#x27;scontrol show hostname {node_list} | head -n1&#x27;)
 45	    # specify master port
+46	    if port is not None:
+47	        os.environ[&#x27;MASTER_PORT&#x27;] = str(port)
+48	    elif &#x27;MASTER_PORT&#x27; in os.environ:
+49	        pass  # use MASTER_PORT in the environment variable
+50	    else:
+51	        # 29500 is torch.distributed default port
+52	        os.environ[&#x27;MASTER_PORT&#x27;] = &#x27;29500&#x27;
+53	    os.environ[&#x27;MASTER_ADDR&#x27;] = addr
+54	    os.environ[&#x27;WORLD_SIZE&#x27;] = str(ntasks)
+55	    os.environ[&#x27;LOCAL_RANK&#x27;] = str(proc_id % num_gpus)
+56	    os.environ[&#x27;RANK&#x27;] = str(proc_id)
+57	    dist.init_process_group(backend=backend)
+58	
+59	
+60	def get_dist_info():
+61	    if dist.is_available():
+62	        initialized = dist.is_initialized()
+63	    else:
+64	        initialized = False
+65	    if initialized:
+66	        rank = dist.get_rank()
+67	        world_size = dist.get_world_size()
+68	    else:
+69	        rank = 0
+70	        world_size = 1
+71	    return rank, world_size
+72	
+73	
+74	def master_only(func):
+75	
+76	    @functools.wraps(func)
+77	    def wrapper(*args, **kwargs):
+78	        rank, _ = get_dist_info()
+79	        if rank == 0:
+80	            return func(*args, **kwargs)
+81	
+82	    return wrapper
 </pre>
 </div>
 
@@ -926,78 +715,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-36">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/file_client.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/file_client.py</a><br>
-    <b>Line number: </b>107<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-106	            self.db_paths = [str(db_paths)]
-107	        assert len(client_keys) == len(self.db_paths), (&#x27;client_keys and db_paths should have the same length, &#x27;
-108	                                                        f&#x27;but received {len(client_keys)} and {len(self.db_paths)}.&#x27;)
-109	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-37">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/file_client.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/file_client.py</a><br>
-    <b>Line number: </b>122<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-121	        filepath = str(filepath)
-122	        assert client_key in self._client, (f&#x27;client_key {client_key} is not &#x27; &#x27;in lmdb clients.&#x27;)
-123	        client = self._client[client_key]
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-38">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/lmdb_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/lmdb_util.py</a><br>
-    <b>Line number: </b>61<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-60	
-61	    assert len(img_path_list) == len(keys), (&#x27;img_path_list and keys should have the same length, &#x27;
-62	                                             f&#x27;but got {len(img_path_list)} and {len(keys)}&#x27;)
-63	    print(f&#x27;Create lmdb for {data_path}, save to {lmdb_path}...&#x27;)
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-39">
+<div id="issue-5">
 <div class="issue-block issue-sev-medium">
     <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
     <b>Test ID:</b> B506<br>
@@ -1010,9 +728,114 @@ pre {
 
 <div class="code">
 <pre>
+1	import yaml
+2	import time
+3	from collections import OrderedDict
+4	from os import path as osp
+5	from custom_nodes.facerestore_cf.basicsr.utils.misc import get_time_str
+6	
+7	def ordered_yaml():
+8	    &quot;&quot;&quot;Support OrderedDict for yaml.
+9	
+10	    Returns:
+11	        yaml Loader and Dumper.
+12	    &quot;&quot;&quot;
+13	    try:
+14	        from yaml import CDumper as Dumper
+15	        from yaml import CLoader as Loader
+16	    except ImportError:
+17	        from yaml import Dumper, Loader
+18	
+19	    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
+20	
+21	    def dict_representer(dumper, data):
+22	        return dumper.represent_dict(data.items())
+23	
+24	    def dict_constructor(loader, node):
+25	        return OrderedDict(loader.construct_pairs(node))
+26	
+27	    Dumper.add_representer(OrderedDict, dict_representer)
+28	    Loader.add_constructor(_mapping_tag, dict_constructor)
+29	    return Loader, Dumper
+30	
+31	
+32	def parse(opt_path, root_path, is_train=True):
+33	    &quot;&quot;&quot;Parse option file.
+34	
+35	    Args:
+36	        opt_path (str): Option file path.
+37	        is_train (str): Indicate whether in training or not. Default: True.
+38	
+39	    Returns:
+40	        (dict): Options.
+41	    &quot;&quot;&quot;
+42	    with open(opt_path, mode=&#x27;r&#x27;) as f:
 43	        Loader, _ = ordered_yaml()
 44	        opt = yaml.load(f, Loader=Loader)
 45	
+46	    opt[&#x27;is_train&#x27;] = is_train
+47	
+48	    # opt[&#x27;name&#x27;] = f&quot;{get_time_str()}_{opt[&#x27;name&#x27;]}&quot;
+49	    if opt[&#x27;path&#x27;].get(&#x27;resume_state&#x27;, None): # Shangchen added
+50	        resume_state_path = opt[&#x27;path&#x27;].get(&#x27;resume_state&#x27;)
+51	        opt[&#x27;name&#x27;] = resume_state_path.split(&quot;/&quot;)[-3]
+52	    else:
+53	        opt[&#x27;name&#x27;] = f&quot;{get_time_str()}_{opt[&#x27;name&#x27;]}&quot;
+54	
+55	
+56	    # datasets
+57	    for phase, dataset in opt[&#x27;datasets&#x27;].items():
+58	        # for several datasets, e.g., test_1, test_2
+59	        phase = phase.split(&#x27;_&#x27;)[0]
+60	        dataset[&#x27;phase&#x27;] = phase
+61	        if &#x27;scale&#x27; in opt:
+62	            dataset[&#x27;scale&#x27;] = opt[&#x27;scale&#x27;]
+63	        if dataset.get(&#x27;dataroot_gt&#x27;) is not None:
+64	            dataset[&#x27;dataroot_gt&#x27;] = osp.expanduser(dataset[&#x27;dataroot_gt&#x27;])
+65	        if dataset.get(&#x27;dataroot_lq&#x27;) is not None:
+66	            dataset[&#x27;dataroot_lq&#x27;] = osp.expanduser(dataset[&#x27;dataroot_lq&#x27;])
+67	
+68	    # paths
+69	    for key, val in opt[&#x27;path&#x27;].items():
+70	        if (val is not None) and (&#x27;resume_state&#x27; in key or &#x27;pretrain_network&#x27; in key):
+71	            opt[&#x27;path&#x27;][key] = osp.expanduser(val)
+72	
+73	    if is_train:
+74	        experiments_root = osp.join(root_path, &#x27;experiments&#x27;, opt[&#x27;name&#x27;])
+75	        opt[&#x27;path&#x27;][&#x27;experiments_root&#x27;] = experiments_root
+76	        opt[&#x27;path&#x27;][&#x27;models&#x27;] = osp.join(experiments_root, &#x27;models&#x27;)
+77	        opt[&#x27;path&#x27;][&#x27;training_states&#x27;] = osp.join(experiments_root, &#x27;training_states&#x27;)
+78	        opt[&#x27;path&#x27;][&#x27;log&#x27;] = experiments_root
+79	        opt[&#x27;path&#x27;][&#x27;visualization&#x27;] = osp.join(experiments_root, &#x27;visualization&#x27;)
+80	
+81	    else:  # test
+82	        results_root = osp.join(root_path, &#x27;results&#x27;, opt[&#x27;name&#x27;])
+83	        opt[&#x27;path&#x27;][&#x27;results_root&#x27;] = results_root
+84	        opt[&#x27;path&#x27;][&#x27;log&#x27;] = results_root
+85	        opt[&#x27;path&#x27;][&#x27;visualization&#x27;] = osp.join(results_root, &#x27;visualization&#x27;)
+86	
+87	    return opt
+88	
+89	
+90	def dict2str(opt, indent_level=1):
+91	    &quot;&quot;&quot;dict to string for printing options.
+92	
+93	    Args:
+94	        opt (dict): Option dict.
+95	        indent_level (int): Indent level. Default: 1.
+96	
+97	    Return:
+98	        (str): Option string for printing.
+99	    &quot;&quot;&quot;
+100	    msg = &#x27;\n&#x27;
+101	    for k, v in opt.items():
+102	        if isinstance(v, dict):
+103	            msg += &#x27; &#x27; * (indent_level * 2) + k + &#x27;:[&#x27;
+104	            msg += dict2str(v, indent_level + 1)
+105	            msg += &#x27; &#x27; * (indent_level * 2) + &#x27;]\n&#x27;
+106	        else:
+107	            msg += &#x27; &#x27; * (indent_level * 2) + k + &#x27;: &#x27; + str(v) + &#x27;\n&#x27;
+108	    return msg
 </pre>
 </div>
 
@@ -1020,77 +843,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-40">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/registry.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/basicsr/utils/registry.py</a><br>
-    <b>Line number: </b>39<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-38	    def _do_register(self, name, obj):
-39	        assert (name not in self._obj_map), (f&quot;An object named &#x27;{name}&#x27; was already registered &quot;
-40	                                             f&quot;in &#x27;{self._name}&#x27; registry!&quot;)
-41	        self._obj_map[name] = obj
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-41">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/codeformer_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/codeformer_arch.py</a><br>
-    <b>Line number: </b>21<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-20	    size = feat.size()
-21	    assert len(size) == 4, &#x27;The input feature should be 4D tensor.&#x27;
-22	    b, c = size[:2]
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-42">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/detection/retinaface/retinaface_net.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/detection/retinaface/retinaface_net.py</a><br>
-    <b>Line number: </b>40<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-39	        super(SSH, self).__init__()
-40	        assert out_channel % 4 == 0
-41	        leaky = 0
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-43">
+<div id="issue-6">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
     <b>Test ID:</b> B307<br>
@@ -1103,9 +856,114 @@ pre {
 
 <div class="code">
 <pre>
+128	
+129	            x = m(x)  # run
+130	            y.append(x if m.i in self.save else None)  # save output
+131	
+132	        return x
+133	
+134	    def _initialize_biases(self, cf=None):  # initialize biases into Detect(), cf is class frequency
+135	        # https://arxiv.org/abs/1708.02002 section 3.3
+136	        m = self.model[-1]  # Detect() module
+137	        for mi, s in zip(m.m, m.stride):  # from
+138	            b = mi.bias.view(m.na, -1)  # conv.bias(255) to (3,85)
+139	            b.data[:, 4] += math.log(8 / (640 / s) ** 2)  # obj (8 objects per 640 image)
+140	            b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
+141	            mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
+142	
+143	    def _print_biases(self):
+144	        m = self.model[-1]  # Detect() module
+145	        for mi in m.m:  # from
+146	            b = mi.bias.detach().view(m.na, -1).T  # conv.bias(255) to (3,85)
+147	            print((&quot;%6g Conv2d.bias:&quot; + &quot;%10.3g&quot; * 6) % (mi.weight.shape[1], *b[:5].mean(1).tolist(), b[5:].mean()))
+148	
+149	    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
+150	        print(&quot;Fusing layers... &quot;)
+151	        for m in self.model.modules():
+152	            if isinstance(m, Conv) and hasattr(m, &quot;bn&quot;):
+153	                m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+154	                delattr(m, &quot;bn&quot;)  # remove batchnorm
+155	                m.forward = m.fuseforward  # update forward
+156	            elif type(m) is nn.Upsample:
+157	                m.recompute_scale_factor = None  # torch 1.11.0 compatibility
+158	        return self
+159	
+160	    def nms(self, mode=True):  # add or remove NMS module
+161	        present = isinstance(self.model[-1], NMS)  # last layer is NMS
+162	        if mode and not present:
+163	            print(&quot;Adding NMS... &quot;)
+164	            m = NMS()  # module
+165	            m.f = -1  # from
+166	            m.i = self.model[-1].i + 1  # index
+167	            self.model.add_module(name=str(m.i), module=m)  # add
+168	            self.eval()
+169	        elif not mode and present:
+170	            print(&quot;Removing NMS... &quot;)
+171	            self.model = self.model[:-1]  # remove
+172	        return self
+173	
+174	    def autoshape(self):  # add autoShape module
+175	        print(&quot;Adding autoShape... &quot;)
+176	        m = AutoShape(self)  # wrap model
+177	        copy_attr(m, self, include=(&quot;yaml&quot;, &quot;nc&quot;, &quot;hyp&quot;, &quot;names&quot;, &quot;stride&quot;), exclude=())  # copy attributes
+178	        return m
+179	
+180	
+181	def parse_model(d, ch):  # model_dict, input_channels(3)
+182	    anchors, nc, gd, gw = d[&quot;anchors&quot;], d[&quot;nc&quot;], d[&quot;depth_multiple&quot;], d[&quot;width_multiple&quot;]
+183	    na = (len(anchors[0]) // 2) if isinstance(anchors, list) else anchors  # number of anchors
+184	    no = na * (nc + 5)  # number of outputs = anchors * (classes + 5)
+185	
+186	    layers, save, c2 = [], [], ch[-1]  # layers, savelist, ch out
 187	    for i, (f, n, m, args) in enumerate(d[&quot;backbone&quot;] + d[&quot;head&quot;]):  # from, number, module, args
 188	        m = eval(m) if isinstance(m, str) else m  # eval strings
 189	        for j, a in enumerate(args):
+190	            try:
+191	                args[j] = eval(a) if isinstance(a, str) else a  # eval strings
+192	            except:
+193	                pass
+194	
+195	        n = max(round(n * gd), 1) if n &gt; 1 else n  # depth gain
+196	        if m in [
+197	            Conv,
+198	            Bottleneck,
+199	            SPP,
+200	            DWConv,
+201	            MixConv2d,
+202	            Focus,
+203	            CrossConv,
+204	            BottleneckCSP,
+205	            C3,
+206	            ShuffleV2Block,
+207	            StemBlock,
+208	        ]:
+209	            c1, c2 = ch[f], args[0]
+210	
+211	            c2 = make_divisible(c2 * gw, 8) if c2 != no else c2
+212	
+213	            args = [c1, c2, *args[1:]]
+214	            if m in [BottleneckCSP, C3]:
+215	                args.insert(2, n)
+216	                n = 1
+217	        elif m is nn.BatchNorm2d:
+218	            args = [ch[f]]
+219	        elif m is Concat:
+220	            c2 = sum(ch[-1 if x == -1 else x + 1] for x in f)
+221	        elif m is Detect:
+222	            args.append([ch[x + 1] for x in f])
+223	            if isinstance(args[1], int):  # number of anchors
+224	                args[1] = [list(range(args[1] * 2))] * len(f)
+225	        else:
+226	            c2 = ch[f]
+227	
+228	        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module
+229	        t = str(m)[8:-2].replace(&quot;__main__.&quot;, &quot;&quot;)  # module type
+230	        np = sum(x.numel() for x in m_.parameters())  # number params
+231	        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#x27;from&#x27; index, type, number params
+232	        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
+233	        layers.append(m_)
+234	        ch.append(c2)
+235	    return nn.Sequential(*layers), sorted(save)
 </pre>
 </div>
 
@@ -1113,7 +971,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-44">
+<div id="issue-7">
 <div class="issue-block issue-sev-medium">
     <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
     <b>Test ID:</b> B307<br>
@@ -1126,9 +984,111 @@ pre {
 
 <div class="code">
 <pre>
+131	
+132	        return x
+133	
+134	    def _initialize_biases(self, cf=None):  # initialize biases into Detect(), cf is class frequency
+135	        # https://arxiv.org/abs/1708.02002 section 3.3
+136	        m = self.model[-1]  # Detect() module
+137	        for mi, s in zip(m.m, m.stride):  # from
+138	            b = mi.bias.view(m.na, -1)  # conv.bias(255) to (3,85)
+139	            b.data[:, 4] += math.log(8 / (640 / s) ** 2)  # obj (8 objects per 640 image)
+140	            b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
+141	            mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
+142	
+143	    def _print_biases(self):
+144	        m = self.model[-1]  # Detect() module
+145	        for mi in m.m:  # from
+146	            b = mi.bias.detach().view(m.na, -1).T  # conv.bias(255) to (3,85)
+147	            print((&quot;%6g Conv2d.bias:&quot; + &quot;%10.3g&quot; * 6) % (mi.weight.shape[1], *b[:5].mean(1).tolist(), b[5:].mean()))
+148	
+149	    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
+150	        print(&quot;Fusing layers... &quot;)
+151	        for m in self.model.modules():
+152	            if isinstance(m, Conv) and hasattr(m, &quot;bn&quot;):
+153	                m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+154	                delattr(m, &quot;bn&quot;)  # remove batchnorm
+155	                m.forward = m.fuseforward  # update forward
+156	            elif type(m) is nn.Upsample:
+157	                m.recompute_scale_factor = None  # torch 1.11.0 compatibility
+158	        return self
+159	
+160	    def nms(self, mode=True):  # add or remove NMS module
+161	        present = isinstance(self.model[-1], NMS)  # last layer is NMS
+162	        if mode and not present:
+163	            print(&quot;Adding NMS... &quot;)
+164	            m = NMS()  # module
+165	            m.f = -1  # from
+166	            m.i = self.model[-1].i + 1  # index
+167	            self.model.add_module(name=str(m.i), module=m)  # add
+168	            self.eval()
+169	        elif not mode and present:
+170	            print(&quot;Removing NMS... &quot;)
+171	            self.model = self.model[:-1]  # remove
+172	        return self
+173	
+174	    def autoshape(self):  # add autoShape module
+175	        print(&quot;Adding autoShape... &quot;)
+176	        m = AutoShape(self)  # wrap model
+177	        copy_attr(m, self, include=(&quot;yaml&quot;, &quot;nc&quot;, &quot;hyp&quot;, &quot;names&quot;, &quot;stride&quot;), exclude=())  # copy attributes
+178	        return m
+179	
+180	
+181	def parse_model(d, ch):  # model_dict, input_channels(3)
+182	    anchors, nc, gd, gw = d[&quot;anchors&quot;], d[&quot;nc&quot;], d[&quot;depth_multiple&quot;], d[&quot;width_multiple&quot;]
+183	    na = (len(anchors[0]) // 2) if isinstance(anchors, list) else anchors  # number of anchors
+184	    no = na * (nc + 5)  # number of outputs = anchors * (classes + 5)
+185	
+186	    layers, save, c2 = [], [], ch[-1]  # layers, savelist, ch out
+187	    for i, (f, n, m, args) in enumerate(d[&quot;backbone&quot;] + d[&quot;head&quot;]):  # from, number, module, args
+188	        m = eval(m) if isinstance(m, str) else m  # eval strings
+189	        for j, a in enumerate(args):
 190	            try:
 191	                args[j] = eval(a) if isinstance(a, str) else a  # eval strings
 192	            except:
+193	                pass
+194	
+195	        n = max(round(n * gd), 1) if n &gt; 1 else n  # depth gain
+196	        if m in [
+197	            Conv,
+198	            Bottleneck,
+199	            SPP,
+200	            DWConv,
+201	            MixConv2d,
+202	            Focus,
+203	            CrossConv,
+204	            BottleneckCSP,
+205	            C3,
+206	            ShuffleV2Block,
+207	            StemBlock,
+208	        ]:
+209	            c1, c2 = ch[f], args[0]
+210	
+211	            c2 = make_divisible(c2 * gw, 8) if c2 != no else c2
+212	
+213	            args = [c1, c2, *args[1:]]
+214	            if m in [BottleneckCSP, C3]:
+215	                args.insert(2, n)
+216	                n = 1
+217	        elif m is nn.BatchNorm2d:
+218	            args = [ch[f]]
+219	        elif m is Concat:
+220	            c2 = sum(ch[-1 if x == -1 else x + 1] for x in f)
+221	        elif m is Detect:
+222	            args.append([ch[x + 1] for x in f])
+223	            if isinstance(args[1], int):  # number of anchors
+224	                args[1] = [list(range(args[1] * 2))] * len(f)
+225	        else:
+226	            c2 = ch[f]
+227	
+228	        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module
+229	        t = str(m)[8:-2].replace(&quot;__main__.&quot;, &quot;&quot;)  # module type
+230	        np = sum(x.numel() for x in m_.parameters())  # number params
+231	        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#x27;from&#x27; index, type, number params
+232	        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
+233	        layers.append(m_)
+234	        ch.append(c2)
+235	    return nn.Sequential(*layers), sorted(save)
 </pre>
 </div>
 
@@ -1136,7 +1096,7 @@ pre {
 </div>
 </div>
 
-<div id="issue-45">
+<div id="issue-8">
 <div class="issue-block issue-sev-low">
     <b>try_except_pass: </b> Try, Except, Pass detected.<br>
     <b>Test ID:</b> B110<br>
@@ -1149,127 +1109,110 @@ pre {
 
 <div class="code">
 <pre>
+132	        return x
+133	
+134	    def _initialize_biases(self, cf=None):  # initialize biases into Detect(), cf is class frequency
+135	        # https://arxiv.org/abs/1708.02002 section 3.3
+136	        m = self.model[-1]  # Detect() module
+137	        for mi, s in zip(m.m, m.stride):  # from
+138	            b = mi.bias.view(m.na, -1)  # conv.bias(255) to (3,85)
+139	            b.data[:, 4] += math.log(8 / (640 / s) ** 2)  # obj (8 objects per 640 image)
+140	            b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
+141	            mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
+142	
+143	    def _print_biases(self):
+144	        m = self.model[-1]  # Detect() module
+145	        for mi in m.m:  # from
+146	            b = mi.bias.detach().view(m.na, -1).T  # conv.bias(255) to (3,85)
+147	            print((&quot;%6g Conv2d.bias:&quot; + &quot;%10.3g&quot; * 6) % (mi.weight.shape[1], *b[:5].mean(1).tolist(), b[5:].mean()))
+148	
+149	    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
+150	        print(&quot;Fusing layers... &quot;)
+151	        for m in self.model.modules():
+152	            if isinstance(m, Conv) and hasattr(m, &quot;bn&quot;):
+153	                m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+154	                delattr(m, &quot;bn&quot;)  # remove batchnorm
+155	                m.forward = m.fuseforward  # update forward
+156	            elif type(m) is nn.Upsample:
+157	                m.recompute_scale_factor = None  # torch 1.11.0 compatibility
+158	        return self
+159	
+160	    def nms(self, mode=True):  # add or remove NMS module
+161	        present = isinstance(self.model[-1], NMS)  # last layer is NMS
+162	        if mode and not present:
+163	            print(&quot;Adding NMS... &quot;)
+164	            m = NMS()  # module
+165	            m.f = -1  # from
+166	            m.i = self.model[-1].i + 1  # index
+167	            self.model.add_module(name=str(m.i), module=m)  # add
+168	            self.eval()
+169	        elif not mode and present:
+170	            print(&quot;Removing NMS... &quot;)
+171	            self.model = self.model[:-1]  # remove
+172	        return self
+173	
+174	    def autoshape(self):  # add autoShape module
+175	        print(&quot;Adding autoShape... &quot;)
+176	        m = AutoShape(self)  # wrap model
+177	        copy_attr(m, self, include=(&quot;yaml&quot;, &quot;nc&quot;, &quot;hyp&quot;, &quot;names&quot;, &quot;stride&quot;), exclude=())  # copy attributes
+178	        return m
+179	
+180	
+181	def parse_model(d, ch):  # model_dict, input_channels(3)
+182	    anchors, nc, gd, gw = d[&quot;anchors&quot;], d[&quot;nc&quot;], d[&quot;depth_multiple&quot;], d[&quot;width_multiple&quot;]
+183	    na = (len(anchors[0]) // 2) if isinstance(anchors, list) else anchors  # number of anchors
+184	    no = na * (nc + 5)  # number of outputs = anchors * (classes + 5)
+185	
+186	    layers, save, c2 = [], [], ch[-1]  # layers, savelist, ch out
+187	    for i, (f, n, m, args) in enumerate(d[&quot;backbone&quot;] + d[&quot;head&quot;]):  # from, number, module, args
+188	        m = eval(m) if isinstance(m, str) else m  # eval strings
+189	        for j, a in enumerate(args):
+190	            try:
 191	                args[j] = eval(a) if isinstance(a, str) else a  # eval strings
 192	            except:
 193	                pass
 194	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-46">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/parsing/parsenet.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/parsing/parsenet.py</a><br>
-    <b>Line number: </b>33<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-32	        else:
-33	            assert 1 == 0, f&#x27;Norm type {norm_type} not support.&#x27;
-34	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-47">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/parsing/parsenet.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/parsing/parsenet.py</a><br>
-    <b>Line number: </b>68<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-67	        else:
-68	            assert 1 == 0, f&#x27;Relu type {relu_type} not support.&#x27;
-69	
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-48">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/utils/face_restoration_helper.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/utils/face_restoration_helper.py</a><br>
-    <b>Line number: </b>65<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-64	        self.crop_ratio = crop_ratio  # (h, w)
-65	        assert (self.crop_ratio[0] &gt;= 1 and self.crop_ratio[1] &gt;= 1), &#x27;crop ration only supports &gt;=1&#x27;
-66	        self.face_size = (int(face_size * self.crop_ratio[1]), int(face_size * self.crop_ratio[0]))
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-49">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/utils/face_restoration_helper.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/utils/face_restoration_helper.py</a><br>
-    <b>Line number: </b>257<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-256	        if self.pad_blur:
-257	            assert len(self.pad_input_imgs) == len(
-258	                self.all_landmarks_5), f&#x27;Mismatched samples: {len(self.pad_input_imgs)} and {len(self.all_landmarks_5)}&#x27;
-259	        for idx, landmark in enumerate(self.all_landmarks_5):
-</pre>
-</div>
-
-
-</div>
-</div>
-
-<div id="issue-50">
-<div class="issue-block issue-sev-low">
-    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
-    <b>Test ID:</b> B101<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/utils/face_restoration_helper.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/facerestore_cf/facelib/utils/face_restoration_helper.py</a><br>
-    <b>Line number: </b>313<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
-
-<div class="code">
-<pre>
-312	
-313	        assert len(self.restored_faces) == len(
-314	            self.inverse_affine_matrices), (&#x27;length of restored_faces and affine_matrices are different.&#x27;)
-315	        
+195	        n = max(round(n * gd), 1) if n &gt; 1 else n  # depth gain
+196	        if m in [
+197	            Conv,
+198	            Bottleneck,
+199	            SPP,
+200	            DWConv,
+201	            MixConv2d,
+202	            Focus,
+203	            CrossConv,
+204	            BottleneckCSP,
+205	            C3,
+206	            ShuffleV2Block,
+207	            StemBlock,
+208	        ]:
+209	            c1, c2 = ch[f], args[0]
+210	
+211	            c2 = make_divisible(c2 * gw, 8) if c2 != no else c2
+212	
+213	            args = [c1, c2, *args[1:]]
+214	            if m in [BottleneckCSP, C3]:
+215	                args.insert(2, n)
+216	                n = 1
+217	        elif m is nn.BatchNorm2d:
+218	            args = [ch[f]]
+219	        elif m is Concat:
+220	            c2 = sum(ch[-1 if x == -1 else x + 1] for x in f)
+221	        elif m is Detect:
+222	            args.append([ch[x + 1] for x in f])
+223	            if isinstance(args[1], int):  # number of anchors
+224	                args[1] = [list(range(args[1] * 2))] * len(f)
+225	        else:
+226	            c2 = ch[f]
+227	
+228	        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module
+229	        t = str(m)[8:-2].replace(&quot;__main__.&quot;, &quot;&quot;)  # module type
+230	        np = sum(x.numel() for x in m_.parameters())  # number params
+231	        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#x27;from&#x27; index, type, number params
+232	        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
+233	        layers.append(m_)
+234	        ch.append(c2)
+235	    return nn.Sequential(*layers), sorted(save)
 </pre>
 </div>
 

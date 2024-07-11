@@ -91,29 +91,6 @@ pre {
 <br>
 <div id="results">
     
-<div id="issue-0">
-<div class="issue-block issue-sev-low">
-    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
-    <b>Test ID:</b> B311<br>
-    <b>Severity: </b>LOW<br>
-    <b>Confidence: </b>HIGH<br>
-    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/IPAdapterPlus.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/IPAdapterPlus.py</a><br>
-    <b>Line number: </b>1436<br>
-    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
-
-<div class="code">
-<pre>
-1435	                elif timing == &quot;random&quot;:
-1436	                    weights.append(random.uniform(start, end))
-1437	
-</pre>
-</div>
-
-
-</div>
-</div>
-
 </div>
 
 </body>

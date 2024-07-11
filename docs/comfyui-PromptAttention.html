@@ -104,10 +104,127 @@ pre {
 
 <div class="code">
 <pre>
+6	import numpy as np
+7	from sklearn.metrics import ConfusionMatrixDisplay
+8	
+9	def escape_important(text):
+10	    text = text.replace(&quot;\\)&quot;, &quot;\0\1&quot;)
+11	    text = text.replace(&quot;\\(&quot;, &quot;\0\2&quot;)
+12	    text = text.replace(&quot;\\&gt;&quot;, &quot;\0\3&quot;)
+13	    text = text.replace(&quot;\\&lt;&quot;, &quot;\0\4&quot;)
+14	    return text
+15	
+16	def unescape_important(text):
+17	    text = text.replace(&quot;\0\1&quot;, &quot;)&quot;)
+18	    text = text.replace(&quot;\0\2&quot;, &quot;(&quot;)
+19	    text = text.replace(&quot;\0\3&quot;, &quot;&gt;&quot;)
+20	    text = text.replace(&quot;\0\4&quot;, &quot;&lt;&quot;)
+21	    return text
+22	
+23	import networkx as nx
+24	
+25	def parse_parentheses(string):
+26	    result = []
+27	    current_item = &quot;&quot;
+28	    nesting_level = 0
+29	    for char in string:
+30	        if char == &quot;(&quot;:
+31	            if nesting_level == 0:
+32	                if current_item:
+33	                    result.append(current_item)
+34	                    current_item = &quot;(&quot;
+35	                else:
+36	                    current_item = &quot;(&quot;
+37	            else:
+38	                current_item += char
+39	            nesting_level += 1
+40	        elif char == &quot;)&quot;:
+41	            nesting_level -= 1
+42	            if nesting_level == 0:
+43	                result.append(current_item + &quot;)&quot;)
+44	                current_item = &quot;&quot;
+45	            else:
+46	                current_item += char
+47	        else:
+48	            current_item += char
+49	    if current_item:
+50	        result.append(current_item)
+51	    return result
+52	
+53	def token_weights(string, current_weight, default_weight=1.1):
+54	    a = parse_parentheses(string)
+55	    out = []
+56	    for x in a:
+57	        weight = current_weight
+58	        if len(x) &gt;= 2 and x[-1] == &#x27;)&#x27; and x[0] == &#x27;(&#x27;:
+59	            x = x[1:-1]
+60	            xx = x.rfind(&quot;:&quot;)
+61	            weight *= default_weight
+62	            if xx &gt; 0:
+63	                try:
+64	                    weight = float(x[xx+1:])
 65	                    x = x[:xx]
 66	                except:
 67	                    pass
 68	            out += [(&quot;(&quot;, 0.0)]+token_weights(x, weight, default_weight=default_weight)+[(&quot;)&quot;, 0.0)]
+69	        else:
+70	            out += [(x, weight)]
+71	    return out
+72	
+73	class NestedPrompt:
+74	    def __init__(self, text, direction):
+75	        self.direction = direction
+76	        self.root = text
+77	        self.graph = nx.DiGraph()
+78	        if text:
+79	            self.graph.add_node(text)
+80	
+81	    def __add__(self, other):
+82	        new = NestedPrompt(None, other.direction)
+83	        new.graph = nx.compose(self.graph, other.graph)
+84	        if self.direction == &quot;&gt;&quot;:
+85	            new.root = other.root
+86	            new.graph.add_edge(self.root, other.root)
+87	        elif self.direction == &quot;&lt;&quot;:
+88	            new.root = self.root
+89	            new.graph.add_edge(other.root, self.root)
+90	        else:
+91	            new.root = other.root #causal linkage
+92	            new.graph.add_edge(self.root, other.root)
+93	            new.graph.add_edge(other.root, self.root)
+94	        return new
+95	
+96	    def __repr__(self):
+97	        return f&quot;NestedPrompt({self.root}, {self.direction})&quot;
+98	
+99	N_UNIQUE_ITEMS = 0
+100	def split_by_arrow(string):
+101	    global N_UNIQUE_ITEMS
+102	    out = []
+103	    current_item = &quot;&quot;
+104	    string = string.replace(&#x27;&gt; &#x27;, &#x27;&gt;&#x27;).replace(&#x27;&lt; &#x27;, &#x27;&lt;&#x27;)
+105	    for char in string:
+106	        if char == &quot;&gt;&quot;:
+107	            out.append(NestedPrompt((N_UNIQUE_ITEMS,current_item), &quot;&gt;&quot;))
+108	            N_UNIQUE_ITEMS += 1
+109	            current_item = &quot;&quot;
+110	        elif char == &quot;&lt;&quot;:
+111	            out.append(NestedPrompt((N_UNIQUE_ITEMS,current_item), &quot;&lt;&quot;))
+112	            N_UNIQUE_ITEMS += 1
+113	            current_item = &quot;&quot;
+114	        else:
+115	            current_item += char
+116	    if current_item:
+117	        out.append(NestedPrompt((N_UNIQUE_ITEMS,current_item), &quot;&quot;))
+118	        N_UNIQUE_ITEMS += 1
+119	    return out
+120	
+121	def push(obj, l, depth, extend=False):
+122	    while depth:
+123	        l = l[-1]
+124	        depth -= 1
+125	    if extend:
+126	        l.extend(obj)
 </pre>
 </div>
 
