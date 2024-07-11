@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CUSTOM_NODES_DIR=$1
-HTML_DIR=$(dirname $0)/test-results
+HTML_DIR=$(dirname $0)/docs
 
 if [[ $CUSTOM_NODES_DIR != *"/custom_nodes" ]]; then
     CUSTOM_NODES_DIR="$CUSTOM_NODES_DIR/custom_nodes"
@@ -26,4 +26,3 @@ echo "$CUSTOM_NODES" | while read -r line; do
 done
 
 python3 ./score/bandit_scan_score.py $CUSTOM_NODES_DIR $HTML_DIR
-python3 ./prepend_front_matter.py
