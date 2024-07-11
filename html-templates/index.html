@@ -54,19 +54,22 @@
                 class="text-primary"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Custom Node Package Name"
-                aria-label="Custom Node Package Name"
+                title="{{ result.github_url}}"
+                aria-label="Package Name"
                 aria-details="{{ result.package_name }}"
               >
                 <a href="{{ result.github_url }}"
                   ><span class="fa fa-github text-primary"></span
                 ></a>
-                &nbsp; &nbsp; &nbsp; {{ result.package_name }}
+                &nbsp; &nbsp; &nbsp;
+                <a href="{{ result.github_url }}">
+                  {{ result.package_name }}
+                </a>
               </td>
               <td
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Risk Level"
+                title="Risk Level (Sum of Issues Weighted by Severity and Multiplied by Confidence)"
                 aria-label="Risk Level"
                 aria-details="{{ result.risk_level }}"
               >
@@ -75,7 +78,7 @@
               <td
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Z-Score"
+                title="Z-Score (Standard Deviations from the Mean)"
                 aria-label="Z-Score"
                 aria-details="{{ result.z_score }}"
               >
@@ -84,7 +87,7 @@
               <td
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Full Report"
+                title="Full Report (Issues and Associated Lines of Code) - Bandit"
                 aria-label="Full Report"
                 aria-details="{{ result.full_report_url }}"
               >
