@@ -98,14 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-DepthAnythingV2/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-DepthAnythingV2/nodes.py</a><br>
+    <b>File: </b><a href="ComfyUI-DepthAnythingV2/nodes.py" target="_blank">ComfyUI-DepthAnythingV2/nodes.py</a><br>
     <b>Line number: </b>19<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-1	
-2	import torch
 3	import torch.nn.functional as F
 4	from torchvision import transforms
 5	import os
@@ -139,92 +137,6 @@ pre {
 33	                        &#x27;depth_anything_v2_vitl_fp32.safetensors&#x27;,
 34	                        &#x27;depth_anything_v2_metric_hypersim_vitl_fp32.safetensors&#x27;,
 35	                        &#x27;depth_anything_v2_metric_vkitti_vitl_fp32.safetensors&#x27;
-36	                    ],
-37	                    {
-38	                    &quot;default&quot;: &#x27;depth_anything_v2_vitl_fp32.safetensors&#x27;
-39	                    }),
-40	            },
-41	        }
-42	
-43	    RETURN_TYPES = (&quot;DAMODEL&quot;,)
-44	    RETURN_NAMES = (&quot;da_v2_model&quot;,)
-45	    FUNCTION = &quot;loadmodel&quot;
-46	    CATEGORY = &quot;DepthAnythingV2&quot;
-47	    DESCRIPTION = &quot;&quot;&quot;
-48	Models autodownload to `ComfyUI\models\depthanything` from   
-49	https://huggingface.co/Kijai/DepthAnythingV2-safetensors/tree/main   
-50	   
-51	fp16 reduces quality by a LOT, not recommended.
-52	&quot;&quot;&quot;
-53	
-54	    def loadmodel(self, model):
-55	        device = mm.get_torch_device()
-56	        dtype = torch.float16 if &quot;fp16&quot; in model else torch.float32
-57	        model_configs = {
-58	            &#x27;vits&#x27;: {&#x27;encoder&#x27;: &#x27;vits&#x27;, &#x27;features&#x27;: 64, &#x27;out_channels&#x27;: [48, 96, 192, 384]},
-59	            &#x27;vitb&#x27;: {&#x27;encoder&#x27;: &#x27;vitb&#x27;, &#x27;features&#x27;: 128, &#x27;out_channels&#x27;: [96, 192, 384, 768]},
-60	            &#x27;vitl&#x27;: {&#x27;encoder&#x27;: &#x27;vitl&#x27;, &#x27;features&#x27;: 256, &#x27;out_channels&#x27;: [256, 512, 1024, 1024]},
-61	            #&#x27;vitg&#x27;: {&#x27;encoder&#x27;: &#x27;vitg&#x27;, &#x27;features&#x27;: 384, &#x27;out_channels&#x27;: [1536, 1536, 1536, 1536]}
-62	        }
-63	        custom_config = {
-64	            &#x27;model_name&#x27;: model,
-65	        }
-66	        if not hasattr(self, &#x27;model&#x27;) or self.model == None or custom_config != self.current_config:
-67	            self.current_config = custom_config
-68	            download_path = os.path.join(folder_paths.models_dir, &quot;depthanything&quot;)
-69	            model_path = os.path.join(download_path, model)
-70	
-71	            if not os.path.exists(model_path):
-72	                print(f&quot;Downloading model to: {model_path}&quot;)
-73	                from huggingface_hub import snapshot_download
-74	                snapshot_download(repo_id=&quot;Kijai/DepthAnythingV2-safetensors&quot;, 
-75	                                  allow_patterns=[f&quot;*{model}*&quot;],
-76	                                  local_dir=download_path, 
-77	                                  local_dir_use_symlinks=False)
-78	
-79	            print(f&quot;Loading model from: {model_path}&quot;)
-80	
-81	            if &quot;vitl&quot; in model:
-82	                encoder = &quot;vitl&quot;
-83	            elif &quot;vitb&quot; in model:
-84	                encoder = &quot;vitb&quot;
-85	            elif &quot;vits&quot; in model:
-86	                encoder = &quot;vits&quot;
-87	
-88	            if &quot;hypersim&quot; in model:
-89	                max_depth = 20.0
-90	            else:
-91	                max_depth = 80.0
-92	
-93	            with (init_empty_weights() if is_accelerate_available else nullcontext()):
-94	                if &#x27;metric&#x27; in model:
-95	                    self.model = DepthAnythingV2(**{**model_configs[encoder], &#x27;is_metric&#x27;: True, &#x27;max_depth&#x27;: max_depth})
-96	                else:
-97	                    self.model = DepthAnythingV2(**model_configs[encoder])
-98	            
-99	            state_dict = load_torch_file(model_path)
-100	            if is_accelerate_available:
-101	                for key in state_dict:
-102	                    set_module_tensor_to_device(self.model, key, device=device, dtype=dtype, value=state_dict[key])
-103	            else:
-104	                self.model.load_state_dict(state_dict)
-105	
-106	            self.model.eval()
-107	            da_model = {
-108	                &quot;model&quot;: self.model,
-109	                &quot;dtype&quot;: dtype,
-110	                &quot;is_metric&quot;: self.model.is_metric
-111	            }
-112	           
-113	        return (da_model,)
-114	    
-115	class DepthAnything_V2:
-116	    @classmethod
-117	    def INPUT_TYPES(s):
-118	        return {&quot;required&quot;: {
-119	            &quot;da_model&quot;: (&quot;DAMODEL&quot;, ),
-120	            &quot;images&quot;: (&quot;IMAGE&quot;, ),
-121	            },
 </pre>
 </div>
 

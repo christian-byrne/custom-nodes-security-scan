@@ -98,7 +98,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/install.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/install.py" target="_blank">comfyui_segment_anything/install.py</a><br>
     <b>Line number: </b>3<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -136,7 +136,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/install.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/install.py" target="_blank">comfyui_segment_anything/install.py</a><br>
     <b>Line number: </b>15<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
@@ -174,7 +174,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>13<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
 
@@ -212,94 +212,6 @@ pre {
 30	    from torchvision.ops.misc import _output_size
 31	
 32	
-33	class SmoothedValue(object):
-34	    &quot;&quot;&quot;Track a series of values and provide access to smoothed values over a
-35	    window or the global series average.
-36	    &quot;&quot;&quot;
-37	
-38	    def __init__(self, window_size=20, fmt=None):
-39	        if fmt is None:
-40	            fmt = &quot;{median:.4f} ({global_avg:.4f})&quot;
-41	        self.deque = deque(maxlen=window_size)
-42	        self.total = 0.0
-43	        self.count = 0
-44	        self.fmt = fmt
-45	
-46	    def update(self, value, n=1):
-47	        self.deque.append(value)
-48	        self.count += n
-49	        self.total += value * n
-50	
-51	    def synchronize_between_processes(self):
-52	        &quot;&quot;&quot;
-53	        Warning: does not synchronize the deque!
-54	        &quot;&quot;&quot;
-55	        if not is_dist_avail_and_initialized():
-56	            return
-57	        t = torch.tensor([self.count, self.total], dtype=torch.float64, device=&quot;cuda&quot;)
-58	        dist.barrier()
-59	        dist.all_reduce(t)
-60	        t = t.tolist()
-61	        self.count = int(t[0])
-62	        self.total = t[1]
-63	
-64	    @property
-65	    def median(self):
-66	        d = torch.tensor(list(self.deque))
-67	        if d.shape[0] == 0:
-68	            return 0
-69	        return d.median().item()
-70	
-71	    @property
-72	    def avg(self):
-73	        d = torch.tensor(list(self.deque), dtype=torch.float32)
-74	        return d.mean().item()
-75	
-76	    @property
-77	    def global_avg(self):
-78	        if os.environ.get(&quot;SHILONG_AMP&quot;, None) == &quot;1&quot;:
-79	            eps = 1e-4
-80	        else:
-81	            eps = 1e-6
-82	        return self.total / (self.count + eps)
-83	
-84	    @property
-85	    def max(self):
-86	        return max(self.deque)
-87	
-88	    @property
-89	    def value(self):
-90	        return self.deque[-1]
-91	
-92	    def __str__(self):
-93	        return self.fmt.format(
-94	            median=self.median,
-95	            avg=self.avg,
-96	            global_avg=self.global_avg,
-97	            max=self.max,
-98	            value=self.value,
-99	        )
-100	
-101	
-102	@functools.lru_cache()
-103	def _get_global_gloo_group():
-104	    &quot;&quot;&quot;
-105	    Return a process group based on gloo backend, containing all the ranks
-106	    The result is cached.
-107	    &quot;&quot;&quot;
-108	
-109	    if dist.get_backend() == &quot;nccl&quot;:
-110	        return dist.new_group(backend=&quot;gloo&quot;)
-111	
-112	    return dist.group.WORLD
-113	
-114	
-115	def all_gather_cpu(data):
-116	    &quot;&quot;&quot;
-117	    Run all_gather on arbitrary picklable data (not necessarily tensors)
-118	    Args:
-119	        data: any picklable object
-120	    Returns:
 </pre>
 </div>
 
@@ -314,7 +226,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>14<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -352,94 +264,6 @@ pre {
 30	    from torchvision.ops.misc import _output_size
 31	
 32	
-33	class SmoothedValue(object):
-34	    &quot;&quot;&quot;Track a series of values and provide access to smoothed values over a
-35	    window or the global series average.
-36	    &quot;&quot;&quot;
-37	
-38	    def __init__(self, window_size=20, fmt=None):
-39	        if fmt is None:
-40	            fmt = &quot;{median:.4f} ({global_avg:.4f})&quot;
-41	        self.deque = deque(maxlen=window_size)
-42	        self.total = 0.0
-43	        self.count = 0
-44	        self.fmt = fmt
-45	
-46	    def update(self, value, n=1):
-47	        self.deque.append(value)
-48	        self.count += n
-49	        self.total += value * n
-50	
-51	    def synchronize_between_processes(self):
-52	        &quot;&quot;&quot;
-53	        Warning: does not synchronize the deque!
-54	        &quot;&quot;&quot;
-55	        if not is_dist_avail_and_initialized():
-56	            return
-57	        t = torch.tensor([self.count, self.total], dtype=torch.float64, device=&quot;cuda&quot;)
-58	        dist.barrier()
-59	        dist.all_reduce(t)
-60	        t = t.tolist()
-61	        self.count = int(t[0])
-62	        self.total = t[1]
-63	
-64	    @property
-65	    def median(self):
-66	        d = torch.tensor(list(self.deque))
-67	        if d.shape[0] == 0:
-68	            return 0
-69	        return d.median().item()
-70	
-71	    @property
-72	    def avg(self):
-73	        d = torch.tensor(list(self.deque), dtype=torch.float32)
-74	        return d.mean().item()
-75	
-76	    @property
-77	    def global_avg(self):
-78	        if os.environ.get(&quot;SHILONG_AMP&quot;, None) == &quot;1&quot;:
-79	            eps = 1e-4
-80	        else:
-81	            eps = 1e-6
-82	        return self.total / (self.count + eps)
-83	
-84	    @property
-85	    def max(self):
-86	        return max(self.deque)
-87	
-88	    @property
-89	    def value(self):
-90	        return self.deque[-1]
-91	
-92	    def __str__(self):
-93	        return self.fmt.format(
-94	            median=self.median,
-95	            avg=self.avg,
-96	            global_avg=self.global_avg,
-97	            max=self.max,
-98	            value=self.value,
-99	        )
-100	
-101	
-102	@functools.lru_cache()
-103	def _get_global_gloo_group():
-104	    &quot;&quot;&quot;
-105	    Return a process group based on gloo backend, containing all the ranks
-106	    The result is cached.
-107	    &quot;&quot;&quot;
-108	
-109	    if dist.get_backend() == &quot;nccl&quot;:
-110	        return dist.new_group(backend=&quot;gloo&quot;)
-111	
-112	    return dist.group.WORLD
-113	
-114	
-115	def all_gather_cpu(data):
-116	    &quot;&quot;&quot;
-117	    Run all_gather on arbitrary picklable data (not necessarily tensors)
-118	    Args:
-119	        data: any picklable object
-120	    Returns:
 </pre>
 </div>
 
@@ -454,56 +278,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>215<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
 
 <div class="code">
 <pre>
-155	    if local_size != max_size:
-156	        padding = torch.empty(size=(max_size - local_size,), dtype=torch.uint8, device=device)
-157	        tensor = torch.cat((tensor, padding), dim=0)
-158	    if cpu_group is None:
-159	        dist.all_gather(tensor_list, tensor)
-160	    else:
-161	        dist.all_gather(tensor_list, tensor, group=cpu_group)
-162	
-163	    data_list = []
-164	    for size, tensor in zip(size_list, tensor_list):
-165	        tensor = torch.split(tensor, [size, max_size - size], dim=0)[0]
-166	        buffer = io.BytesIO(tensor.cpu().numpy())
-167	        obj = torch.load(buffer)
-168	        data_list.append(obj)
-169	
-170	    return data_list
-171	
-172	
-173	def all_gather(data):
-174	    &quot;&quot;&quot;
-175	    Run all_gather on arbitrary picklable data (not necessarily tensors)
-176	    Args:
-177	        data: any picklable object
-178	    Returns:
-179	        list[data]: list of data gathered from each rank
-180	    &quot;&quot;&quot;
-181	
-182	    if os.getenv(&quot;CPU_REDUCE&quot;) == &quot;1&quot;:
-183	        return all_gather_cpu(data)
-184	
-185	    world_size = get_world_size()
-186	    if world_size == 1:
-187	        return [data]
-188	
-189	    # serialized to a Tensor
-190	    buffer = pickle.dumps(data)
-191	    storage = torch.ByteStorage.from_buffer(buffer)
-192	    tensor = torch.ByteTensor(storage).to(&quot;cuda&quot;)
-193	
-194	    # obtain Tensor size of each rank
-195	    local_size = torch.tensor([tensor.numel()], device=&quot;cuda&quot;)
-196	    size_list = [torch.tensor([0], device=&quot;cuda&quot;) for _ in range(world_size)]
-197	    dist.all_gather(size_list, local_size)
-198	    size_list = [int(size.item()) for size in size_list]
 199	    max_size = max(size_list)
 200	
 201	    # receiving Tensor from all ranks
@@ -536,50 +316,6 @@ pre {
 228	    &quot;&quot;&quot;
 229	    world_size = get_world_size()
 230	    if world_size &lt; 2:
-231	        return input_dict
-232	    with torch.no_grad():
-233	        names = []
-234	        values = []
-235	        # sort the keys so that they are consistent across processes
-236	        for k in sorted(input_dict.keys()):
-237	            names.append(k)
-238	            values.append(input_dict[k])
-239	        values = torch.stack(values, dim=0)
-240	        dist.all_reduce(values)
-241	        if average:
-242	            values /= world_size
-243	        reduced_dict = {k: v for k, v in zip(names, values)}
-244	    return reduced_dict
-245	
-246	
-247	class MetricLogger(object):
-248	    def __init__(self, delimiter=&quot;\t&quot;):
-249	        self.meters = defaultdict(SmoothedValue)
-250	        self.delimiter = delimiter
-251	
-252	    def update(self, **kwargs):
-253	        for k, v in kwargs.items():
-254	            if isinstance(v, torch.Tensor):
-255	                v = v.item()
-256	            assert isinstance(v, (float, int))
-257	            self.meters[k].update(v)
-258	
-259	    def __getattr__(self, attr):
-260	        if attr in self.meters:
-261	            return self.meters[attr]
-262	        if attr in self.__dict__:
-263	            return self.__dict__[attr]
-264	        raise AttributeError(&quot;&#x27;{}&#x27; object has no attribute &#x27;{}&#x27;&quot;.format(type(self).__name__, attr))
-265	
-266	    def __str__(self):
-267	        loss_str = []
-268	        for name, meter in self.meters.items():
-269	            # print(name, str(meter))
-270	            # import ipdb;ipdb.set_trace()
-271	            if meter.count &gt; 0:
-272	                loss_str.append(&quot;{}: {}&quot;.format(name, str(meter)))
-273	        return self.delimiter.join(loss_str)
-274	
 </pre>
 </div>
 
@@ -594,56 +330,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>366<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-306	                ]
-307	            )
-308	        else:
-309	            log_msg = self.delimiter.join(
-310	                [
-311	                    header,
-312	                    &quot;[{0&quot; + space_fmt + &quot;}/{1}]&quot;,
-313	                    &quot;eta: {eta}&quot;,
-314	                    &quot;{meters}&quot;,
-315	                    &quot;time: {time}&quot;,
-316	                    &quot;data: {data}&quot;,
-317	                ]
-318	            )
-319	        MB = 1024.0 * 1024.0
-320	        for obj in iterable:
-321	            data_time.update(time.time() - end)
-322	            yield obj
-323	            # import ipdb; ipdb.set_trace()
-324	            iter_time.update(time.time() - end)
-325	            if i % print_freq == 0 or i == len(iterable) - 1:
-326	                eta_seconds = iter_time.global_avg * (len(iterable) - i)
-327	                eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
-328	                if torch.cuda.is_available():
-329	                    print_func(
-330	                        log_msg.format(
-331	                            i,
-332	                            len(iterable),
-333	                            eta=eta_string,
-334	                            meters=str(self),
-335	                            time=str(iter_time),
-336	                            data=str(data_time),
-337	                            memory=torch.cuda.max_memory_allocated() / MB,
-338	                        )
-339	                    )
-340	                else:
-341	                    print_func(
-342	                        log_msg.format(
-343	                            i,
-344	                            len(iterable),
-345	                            eta=eta_string,
-346	                            meters=str(self),
-347	                            time=str(iter_time),
-348	                            data=str(data_time),
-349	                        )
 350	                    )
 351	            i += 1
 352	            end = time.time()
@@ -676,50 +368,6 @@ pre {
 379	    message = f&quot;sha: {sha}, status: {diff}, branch: {branch}&quot;
 380	    return message
 381	
-382	
-383	def collate_fn(batch):
-384	    # import ipdb; ipdb.set_trace()
-385	    batch = list(zip(*batch))
-386	    batch[0] = nested_tensor_from_tensor_list(batch[0])
-387	    return tuple(batch)
-388	
-389	
-390	def _max_by_axis(the_list):
-391	    # type: (List[List[int]]) -&gt; List[int]
-392	    maxes = the_list[0]
-393	    for sublist in the_list[1:]:
-394	        for index, item in enumerate(sublist):
-395	            maxes[index] = max(maxes[index], item)
-396	    return maxes
-397	
-398	
-399	class NestedTensor(object):
-400	    def __init__(self, tensors, mask: Optional[Tensor]):
-401	        self.tensors = tensors
-402	        self.mask = mask
-403	        if mask == &quot;auto&quot;:
-404	            self.mask = torch.zeros_like(tensors).to(tensors.device)
-405	            if self.mask.dim() == 3:
-406	                self.mask = self.mask.sum(0).to(bool)
-407	            elif self.mask.dim() == 4:
-408	                self.mask = self.mask.sum(1).to(bool)
-409	            else:
-410	                raise ValueError(
-411	                    &quot;tensors dim must be 3 or 4 but {}({})&quot;.format(
-412	                        self.tensors.dim(), self.tensors.shape
-413	                    )
-414	                )
-415	
-416	    def imgsize(self):
-417	        res = []
-418	        for i in range(self.tensors.shape[0]):
-419	            mask = self.mask[i]
-420	            maxH = (~mask).sum(0).max()
-421	            maxW = (~mask).sum(1).max()
-422	            res.append(torch.Tensor([maxH, maxW]))
-423	        return res
-424	
-425	    def to(self, device):
 </pre>
 </div>
 
@@ -734,56 +382,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>373<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-313	                    &quot;eta: {eta}&quot;,
-314	                    &quot;{meters}&quot;,
-315	                    &quot;time: {time}&quot;,
-316	                    &quot;data: {data}&quot;,
-317	                ]
-318	            )
-319	        MB = 1024.0 * 1024.0
-320	        for obj in iterable:
-321	            data_time.update(time.time() - end)
-322	            yield obj
-323	            # import ipdb; ipdb.set_trace()
-324	            iter_time.update(time.time() - end)
-325	            if i % print_freq == 0 or i == len(iterable) - 1:
-326	                eta_seconds = iter_time.global_avg * (len(iterable) - i)
-327	                eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
-328	                if torch.cuda.is_available():
-329	                    print_func(
-330	                        log_msg.format(
-331	                            i,
-332	                            len(iterable),
-333	                            eta=eta_string,
-334	                            meters=str(self),
-335	                            time=str(iter_time),
-336	                            data=str(data_time),
-337	                            memory=torch.cuda.max_memory_allocated() / MB,
-338	                        )
-339	                    )
-340	                else:
-341	                    print_func(
-342	                        log_msg.format(
-343	                            i,
-344	                            len(iterable),
-345	                            eta=eta_string,
-346	                            meters=str(self),
-347	                            time=str(iter_time),
-348	                            data=str(data_time),
-349	                        )
-350	                    )
-351	            i += 1
-352	            end = time.time()
-353	        total_time = time.time() - start_time
-354	        total_time_str = str(datetime.timedelta(seconds=int(total_time)))
-355	        print_func(
-356	            &quot;{} Total time: {} ({:.4f} s / it)&quot;.format(
 357	                header, total_time_str, total_time / len(iterable)
 358	            )
 359	        )
@@ -816,50 +420,6 @@ pre {
 386	    batch[0] = nested_tensor_from_tensor_list(batch[0])
 387	    return tuple(batch)
 388	
-389	
-390	def _max_by_axis(the_list):
-391	    # type: (List[List[int]]) -&gt; List[int]
-392	    maxes = the_list[0]
-393	    for sublist in the_list[1:]:
-394	        for index, item in enumerate(sublist):
-395	            maxes[index] = max(maxes[index], item)
-396	    return maxes
-397	
-398	
-399	class NestedTensor(object):
-400	    def __init__(self, tensors, mask: Optional[Tensor]):
-401	        self.tensors = tensors
-402	        self.mask = mask
-403	        if mask == &quot;auto&quot;:
-404	            self.mask = torch.zeros_like(tensors).to(tensors.device)
-405	            if self.mask.dim() == 3:
-406	                self.mask = self.mask.sum(0).to(bool)
-407	            elif self.mask.dim() == 4:
-408	                self.mask = self.mask.sum(1).to(bool)
-409	            else:
-410	                raise ValueError(
-411	                    &quot;tensors dim must be 3 or 4 but {}({})&quot;.format(
-412	                        self.tensors.dim(), self.tensors.shape
-413	                    )
-414	                )
-415	
-416	    def imgsize(self):
-417	        res = []
-418	        for i in range(self.tensors.shape[0]):
-419	            mask = self.mask[i]
-420	            maxH = (~mask).sum(0).max()
-421	            maxW = (~mask).sum(1).max()
-422	            res.append(torch.Tensor([maxH, maxW]))
-423	        return res
-424	
-425	    def to(self, device):
-426	        # type: (Device) -&gt; NestedTensor # noqa
-427	        cast_tensor = self.tensors.to(device)
-428	        mask = self.mask
-429	        if mask is not None:
-430	            assert mask is not None
-431	            cast_mask = mask.to(device)
-432	        else:
 </pre>
 </div>
 
@@ -874,56 +434,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>373<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-313	                    &quot;eta: {eta}&quot;,
-314	                    &quot;{meters}&quot;,
-315	                    &quot;time: {time}&quot;,
-316	                    &quot;data: {data}&quot;,
-317	                ]
-318	            )
-319	        MB = 1024.0 * 1024.0
-320	        for obj in iterable:
-321	            data_time.update(time.time() - end)
-322	            yield obj
-323	            # import ipdb; ipdb.set_trace()
-324	            iter_time.update(time.time() - end)
-325	            if i % print_freq == 0 or i == len(iterable) - 1:
-326	                eta_seconds = iter_time.global_avg * (len(iterable) - i)
-327	                eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
-328	                if torch.cuda.is_available():
-329	                    print_func(
-330	                        log_msg.format(
-331	                            i,
-332	                            len(iterable),
-333	                            eta=eta_string,
-334	                            meters=str(self),
-335	                            time=str(iter_time),
-336	                            data=str(data_time),
-337	                            memory=torch.cuda.max_memory_allocated() / MB,
-338	                        )
-339	                    )
-340	                else:
-341	                    print_func(
-342	                        log_msg.format(
-343	                            i,
-344	                            len(iterable),
-345	                            eta=eta_string,
-346	                            meters=str(self),
-347	                            time=str(iter_time),
-348	                            data=str(data_time),
-349	                        )
-350	                    )
-351	            i += 1
-352	            end = time.time()
-353	        total_time = time.time() - start_time
-354	        total_time_str = str(datetime.timedelta(seconds=int(total_time)))
-355	        print_func(
-356	            &quot;{} Total time: {} ({:.4f} s / it)&quot;.format(
 357	                header, total_time_str, total_time / len(iterable)
 358	            )
 359	        )
@@ -956,50 +472,6 @@ pre {
 386	    batch[0] = nested_tensor_from_tensor_list(batch[0])
 387	    return tuple(batch)
 388	
-389	
-390	def _max_by_axis(the_list):
-391	    # type: (List[List[int]]) -&gt; List[int]
-392	    maxes = the_list[0]
-393	    for sublist in the_list[1:]:
-394	        for index, item in enumerate(sublist):
-395	            maxes[index] = max(maxes[index], item)
-396	    return maxes
-397	
-398	
-399	class NestedTensor(object):
-400	    def __init__(self, tensors, mask: Optional[Tensor]):
-401	        self.tensors = tensors
-402	        self.mask = mask
-403	        if mask == &quot;auto&quot;:
-404	            self.mask = torch.zeros_like(tensors).to(tensors.device)
-405	            if self.mask.dim() == 3:
-406	                self.mask = self.mask.sum(0).to(bool)
-407	            elif self.mask.dim() == 4:
-408	                self.mask = self.mask.sum(1).to(bool)
-409	            else:
-410	                raise ValueError(
-411	                    &quot;tensors dim must be 3 or 4 but {}({})&quot;.format(
-412	                        self.tensors.dim(), self.tensors.shape
-413	                    )
-414	                )
-415	
-416	    def imgsize(self):
-417	        res = []
-418	        for i in range(self.tensors.shape[0]):
-419	            mask = self.mask[i]
-420	            maxH = (~mask).sum(0).max()
-421	            maxW = (~mask).sum(1).max()
-422	            res.append(torch.Tensor([maxH, maxW]))
-423	        return res
-424	
-425	    def to(self, device):
-426	        # type: (Device) -&gt; NestedTensor # noqa
-427	        cast_tensor = self.tensors.to(device)
-428	        mask = self.mask
-429	        if mask is not None:
-430	            assert mask is not None
-431	            cast_mask = mask.to(device)
-432	        else:
 </pre>
 </div>
 
@@ -1014,56 +486,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/misc.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/misc.py</a><br>
     <b>Line number: </b>377<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-317	                ]
-318	            )
-319	        MB = 1024.0 * 1024.0
-320	        for obj in iterable:
-321	            data_time.update(time.time() - end)
-322	            yield obj
-323	            # import ipdb; ipdb.set_trace()
-324	            iter_time.update(time.time() - end)
-325	            if i % print_freq == 0 or i == len(iterable) - 1:
-326	                eta_seconds = iter_time.global_avg * (len(iterable) - i)
-327	                eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
-328	                if torch.cuda.is_available():
-329	                    print_func(
-330	                        log_msg.format(
-331	                            i,
-332	                            len(iterable),
-333	                            eta=eta_string,
-334	                            meters=str(self),
-335	                            time=str(iter_time),
-336	                            data=str(data_time),
-337	                            memory=torch.cuda.max_memory_allocated() / MB,
-338	                        )
-339	                    )
-340	                else:
-341	                    print_func(
-342	                        log_msg.format(
-343	                            i,
-344	                            len(iterable),
-345	                            eta=eta_string,
-346	                            meters=str(self),
-347	                            time=str(iter_time),
-348	                            data=str(data_time),
-349	                        )
-350	                    )
-351	            i += 1
-352	            end = time.time()
-353	        total_time = time.time() - start_time
-354	        total_time_str = str(datetime.timedelta(seconds=int(total_time)))
-355	        print_func(
-356	            &quot;{} Total time: {} ({:.4f} s / it)&quot;.format(
-357	                header, total_time_str, total_time / len(iterable)
-358	            )
-359	        )
-360	
 361	
 362	def get_sha():
 363	    cwd = os.path.dirname(os.path.abspath(__file__))
@@ -1097,50 +525,6 @@ pre {
 391	    # type: (List[List[int]]) -&gt; List[int]
 392	    maxes = the_list[0]
 393	    for sublist in the_list[1:]:
-394	        for index, item in enumerate(sublist):
-395	            maxes[index] = max(maxes[index], item)
-396	    return maxes
-397	
-398	
-399	class NestedTensor(object):
-400	    def __init__(self, tensors, mask: Optional[Tensor]):
-401	        self.tensors = tensors
-402	        self.mask = mask
-403	        if mask == &quot;auto&quot;:
-404	            self.mask = torch.zeros_like(tensors).to(tensors.device)
-405	            if self.mask.dim() == 3:
-406	                self.mask = self.mask.sum(0).to(bool)
-407	            elif self.mask.dim() == 4:
-408	                self.mask = self.mask.sum(1).to(bool)
-409	            else:
-410	                raise ValueError(
-411	                    &quot;tensors dim must be 3 or 4 but {}({})&quot;.format(
-412	                        self.tensors.dim(), self.tensors.shape
-413	                    )
-414	                )
-415	
-416	    def imgsize(self):
-417	        res = []
-418	        for i in range(self.tensors.shape[0]):
-419	            mask = self.mask[i]
-420	            maxH = (~mask).sum(0).max()
-421	            maxW = (~mask).sum(1).max()
-422	            res.append(torch.Tensor([maxH, maxW]))
-423	        return res
-424	
-425	    def to(self, device):
-426	        # type: (Device) -&gt; NestedTensor # noqa
-427	        cast_tensor = self.tensors.to(device)
-428	        mask = self.mask
-429	        if mask is not None:
-430	            assert mask is not None
-431	            cast_mask = mask.to(device)
-432	        else:
-433	            cast_mask = None
-434	        return NestedTensor(cast_tensor, cast_mask)
-435	
-436	    def to_img_list_single(self, tensor, mask):
-437	        assert tensor.dim() == 3, &quot;dim of tensor should be 3 but {}&quot;.format(tensor.dim())
 </pre>
 </div>
 
@@ -1155,7 +539,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/slio.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/slio.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/slio.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/slio.py</a><br>
     <b>Line number: </b>6<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
 
@@ -1193,94 +577,6 @@ pre {
 30	        pass
 31	
 32	    @abstractmethod
-33	    def dump_to_str(self, obj, **kwargs):
-34	        pass
-35	
-36	    def load_from_path(self, filepath, mode=&quot;r&quot;, **kwargs):
-37	        with open(filepath, mode) as f:
-38	            return self.load_from_fileobj(f, **kwargs)
-39	
-40	    def dump_to_path(self, obj, filepath, mode=&quot;w&quot;, **kwargs):
-41	        with open(filepath, mode) as f:
-42	            self.dump_to_fileobj(obj, f, **kwargs)
-43	
-44	
-45	class JsonHandler(BaseFileHandler):
-46	    def load_from_fileobj(self, file):
-47	        return json.load(file)
-48	
-49	    def dump_to_fileobj(self, obj, file, **kwargs):
-50	        json.dump(obj, file, **kwargs)
-51	
-52	    def dump_to_str(self, obj, **kwargs):
-53	        return json.dumps(obj, **kwargs)
-54	
-55	
-56	class PickleHandler(BaseFileHandler):
-57	    def load_from_fileobj(self, file, **kwargs):
-58	        return pickle.load(file, **kwargs)
-59	
-60	    def load_from_path(self, filepath, **kwargs):
-61	        return super(PickleHandler, self).load_from_path(filepath, mode=&quot;rb&quot;, **kwargs)
-62	
-63	    def dump_to_str(self, obj, **kwargs):
-64	        kwargs.setdefault(&quot;protocol&quot;, 2)
-65	        return pickle.dumps(obj, **kwargs)
-66	
-67	    def dump_to_fileobj(self, obj, file, **kwargs):
-68	        kwargs.setdefault(&quot;protocol&quot;, 2)
-69	        pickle.dump(obj, file, **kwargs)
-70	
-71	    def dump_to_path(self, obj, filepath, **kwargs):
-72	        super(PickleHandler, self).dump_to_path(obj, filepath, mode=&quot;wb&quot;, **kwargs)
-73	
-74	
-75	class YamlHandler(BaseFileHandler):
-76	    def load_from_fileobj(self, file, **kwargs):
-77	        kwargs.setdefault(&quot;Loader&quot;, Loader)
-78	        return yaml.load(file, **kwargs)
-79	
-80	    def dump_to_fileobj(self, obj, file, **kwargs):
-81	        kwargs.setdefault(&quot;Dumper&quot;, Dumper)
-82	        yaml.dump(obj, file, **kwargs)
-83	
-84	    def dump_to_str(self, obj, **kwargs):
-85	        kwargs.setdefault(&quot;Dumper&quot;, Dumper)
-86	        return yaml.dump(obj, **kwargs)
-87	
-88	
-89	file_handlers = {
-90	    &quot;json&quot;: JsonHandler(),
-91	    &quot;yaml&quot;: YamlHandler(),
-92	    &quot;yml&quot;: YamlHandler(),
-93	    &quot;pickle&quot;: PickleHandler(),
-94	    &quot;pkl&quot;: PickleHandler(),
-95	}
-96	
-97	# ===========================
-98	# load and dump
-99	# ===========================
-100	
-101	
-102	def is_str(x):
-103	    &quot;&quot;&quot;Whether the input is an string instance.
-104	
-105	    Note: This method is deprecated since python 2 is no longer supported.
-106	    &quot;&quot;&quot;
-107	    return isinstance(x, str)
-108	
-109	
-110	def slload(file, file_format=None, **kwargs):
-111	    &quot;&quot;&quot;Load data from json/yaml/pickle files.
-112	
-113	    This method provides a unified api for loading data from serialized files.
-114	
-115	    Args:
-116	        file (str or :obj:`Path` or file-like object): Filename or a file-like
-117	            object.
-118	        file_format (str, optional): If not specified, the file format will be
-119	            inferred from the file extension, otherwise use the specified one.
-120	            Currently supported formats include &quot;json&quot;, &quot;yaml/yml&quot; and
 </pre>
 </div>
 
@@ -1295,53 +591,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/slio.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/slio.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/slio.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/slio.py</a><br>
     <b>Line number: </b>58<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
 
 <div class="code">
 <pre>
-1	# ==========================================================
-2	# Modified from mmcv
-3	# ==========================================================
-4	
-5	import json
-6	import pickle
-7	from abc import ABCMeta, abstractmethod
-8	from pathlib import Path
-9	
-10	import yaml
-11	
-12	try:
-13	    from yaml import CLoader as Loader, CDumper as Dumper
-14	except ImportError:
-15	    from yaml import Loader, Dumper
-16	
-17	
-18	# ===========================
-19	# Rigister handler
-20	# ===========================
-21	
-22	
-23	class BaseFileHandler(metaclass=ABCMeta):
-24	    @abstractmethod
-25	    def load_from_fileobj(self, file, **kwargs):
-26	        pass
-27	
-28	    @abstractmethod
-29	    def dump_to_fileobj(self, obj, file, **kwargs):
-30	        pass
-31	
-32	    @abstractmethod
-33	    def dump_to_str(self, obj, **kwargs):
-34	        pass
-35	
-36	    def load_from_path(self, filepath, mode=&quot;r&quot;, **kwargs):
-37	        with open(filepath, mode) as f:
-38	            return self.load_from_fileobj(f, **kwargs)
-39	
-40	    def dump_to_path(self, obj, filepath, mode=&quot;w&quot;, **kwargs):
-41	        with open(filepath, mode) as f:
 42	            self.dump_to_fileobj(obj, f, **kwargs)
 43	
 44	
@@ -1374,53 +629,6 @@ pre {
 71	    def dump_to_path(self, obj, filepath, **kwargs):
 72	        super(PickleHandler, self).dump_to_path(obj, filepath, mode=&quot;wb&quot;, **kwargs)
 73	
-74	
-75	class YamlHandler(BaseFileHandler):
-76	    def load_from_fileobj(self, file, **kwargs):
-77	        kwargs.setdefault(&quot;Loader&quot;, Loader)
-78	        return yaml.load(file, **kwargs)
-79	
-80	    def dump_to_fileobj(self, obj, file, **kwargs):
-81	        kwargs.setdefault(&quot;Dumper&quot;, Dumper)
-82	        yaml.dump(obj, file, **kwargs)
-83	
-84	    def dump_to_str(self, obj, **kwargs):
-85	        kwargs.setdefault(&quot;Dumper&quot;, Dumper)
-86	        return yaml.dump(obj, **kwargs)
-87	
-88	
-89	file_handlers = {
-90	    &quot;json&quot;: JsonHandler(),
-91	    &quot;yaml&quot;: YamlHandler(),
-92	    &quot;yml&quot;: YamlHandler(),
-93	    &quot;pickle&quot;: PickleHandler(),
-94	    &quot;pkl&quot;: PickleHandler(),
-95	}
-96	
-97	# ===========================
-98	# load and dump
-99	# ===========================
-100	
-101	
-102	def is_str(x):
-103	    &quot;&quot;&quot;Whether the input is an string instance.
-104	
-105	    Note: This method is deprecated since python 2 is no longer supported.
-106	    &quot;&quot;&quot;
-107	    return isinstance(x, str)
-108	
-109	
-110	def slload(file, file_format=None, **kwargs):
-111	    &quot;&quot;&quot;Load data from json/yaml/pickle files.
-112	
-113	    This method provides a unified api for loading data from serialized files.
-114	
-115	    Args:
-116	        file (str or :obj:`Path` or file-like object): Filename or a file-like
-117	            object.
-118	        file_format (str, optional): If not specified, the file format will be
-119	            inferred from the file extension, otherwise use the specified one.
-120	            Currently supported formats include &quot;json&quot;, &quot;yaml/yml&quot; and
 </pre>
 </div>
 
@@ -1435,56 +643,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/slio.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui_segment_anything/local_groundingdino/util/slio.py</a><br>
+    <b>File: </b><a href="comfyui_segment_anything/local_groundingdino/util/slio.py" target="_blank">comfyui_segment_anything/local_groundingdino/util/slio.py</a><br>
     <b>Line number: </b>78<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
 
 <div class="code">
 <pre>
-18	# ===========================
-19	# Rigister handler
-20	# ===========================
-21	
-22	
-23	class BaseFileHandler(metaclass=ABCMeta):
-24	    @abstractmethod
-25	    def load_from_fileobj(self, file, **kwargs):
-26	        pass
-27	
-28	    @abstractmethod
-29	    def dump_to_fileobj(self, obj, file, **kwargs):
-30	        pass
-31	
-32	    @abstractmethod
-33	    def dump_to_str(self, obj, **kwargs):
-34	        pass
-35	
-36	    def load_from_path(self, filepath, mode=&quot;r&quot;, **kwargs):
-37	        with open(filepath, mode) as f:
-38	            return self.load_from_fileobj(f, **kwargs)
-39	
-40	    def dump_to_path(self, obj, filepath, mode=&quot;w&quot;, **kwargs):
-41	        with open(filepath, mode) as f:
-42	            self.dump_to_fileobj(obj, f, **kwargs)
-43	
-44	
-45	class JsonHandler(BaseFileHandler):
-46	    def load_from_fileobj(self, file):
-47	        return json.load(file)
-48	
-49	    def dump_to_fileobj(self, obj, file, **kwargs):
-50	        json.dump(obj, file, **kwargs)
-51	
-52	    def dump_to_str(self, obj, **kwargs):
-53	        return json.dumps(obj, **kwargs)
-54	
-55	
-56	class PickleHandler(BaseFileHandler):
-57	    def load_from_fileobj(self, file, **kwargs):
-58	        return pickle.load(file, **kwargs)
-59	
-60	    def load_from_path(self, filepath, **kwargs):
-61	        return super(PickleHandler, self).load_from_path(filepath, mode=&quot;rb&quot;, **kwargs)
 62	
 63	    def dump_to_str(self, obj, **kwargs):
 64	        kwargs.setdefault(&quot;protocol&quot;, 2)
@@ -1517,50 +681,6 @@ pre {
 91	    &quot;yaml&quot;: YamlHandler(),
 92	    &quot;yml&quot;: YamlHandler(),
 93	    &quot;pickle&quot;: PickleHandler(),
-94	    &quot;pkl&quot;: PickleHandler(),
-95	}
-96	
-97	# ===========================
-98	# load and dump
-99	# ===========================
-100	
-101	
-102	def is_str(x):
-103	    &quot;&quot;&quot;Whether the input is an string instance.
-104	
-105	    Note: This method is deprecated since python 2 is no longer supported.
-106	    &quot;&quot;&quot;
-107	    return isinstance(x, str)
-108	
-109	
-110	def slload(file, file_format=None, **kwargs):
-111	    &quot;&quot;&quot;Load data from json/yaml/pickle files.
-112	
-113	    This method provides a unified api for loading data from serialized files.
-114	
-115	    Args:
-116	        file (str or :obj:`Path` or file-like object): Filename or a file-like
-117	            object.
-118	        file_format (str, optional): If not specified, the file format will be
-119	            inferred from the file extension, otherwise use the specified one.
-120	            Currently supported formats include &quot;json&quot;, &quot;yaml/yml&quot; and
-121	            &quot;pickle/pkl&quot;.
-122	
-123	    Returns:
-124	        The content from the file.
-125	    &quot;&quot;&quot;
-126	    if isinstance(file, Path):
-127	        file = str(file)
-128	    if file_format is None and is_str(file):
-129	        file_format = file.split(&quot;.&quot;)[-1]
-130	    if file_format not in file_handlers:
-131	        raise TypeError(f&quot;Unsupported format: {file_format}&quot;)
-132	
-133	    handler = file_handlers[file_format]
-134	    if is_str(file):
-135	        obj = handler.load_from_path(file, **kwargs)
-136	    elif hasattr(file, &quot;read&quot;):
-137	        obj = handler.load_from_fileobj(file, **kwargs)
 </pre>
 </div>
 

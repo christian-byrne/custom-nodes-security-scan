@@ -98,41 +98,12 @@ pre {
     <b>Severity: </b>HIGH<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/install.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/install.py" target="_blank">ComfyUI-Frame-Interpolation/install.py</a><br>
     <b>Line number: </b>46<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	from pathlib import Path
-3	import sys
-4	import platform
-5	
-6	def get_cuda_ver_from_dir(cuda_home):
-7	    nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(cuda_home))
-8	    nvrtc = list(nvrtc)
-9	    if len(nvrtc) == 0:
-10	        return
-11	    nvrtc = nvrtc[0]
-12	    if (&#x27;102&#x27; in nvrtc) or (&#x27;10.2&#x27; in nvrtc):
-13	        return &#x27;102&#x27;
-14	    if &#x27;110&#x27; in nvrtc or (&#x27;11.0&#x27; in nvrtc):
-15	        return &#x27;110&#x27;
-16	    if &#x27;111&#x27; in nvrtc or (&#x27;11.1&#x27; in nvrtc):
-17	        return &#x27;111&#x27;
-18	    if &#x27;11&#x27; in nvrtc:
-19	        return &#x27;11x&#x27;
-20	    if &#x27;12&#x27; in nvrtc:
-21	        return &#x27;12x&#x27;
-22	
-23	s_param = &#x27;-s&#x27; if &quot;python_embeded&quot; in sys.executable else &#x27;&#x27; 
-24	
-25	def get_cuda_home_path():
-26	    if &quot;CUDA_HOME&quot; in os.environ:
-27	        return os.environ[&quot;CUDA_HOME&quot;]
-28	    import torch
-29	    torch_lib_path = Path(torch.__file__).parent / &quot;lib&quot;
 30	    torch_lib_path = str(torch_lib_path.resolve())
 31	    if os.path.exists(torch_lib_path):
 32	        nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(torch_lib_path))
@@ -177,45 +148,12 @@ pre {
     <b>Severity: </b>HIGH<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/install.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/install.py" target="_blank">ComfyUI-Frame-Interpolation/install.py</a><br>
     <b>Line number: </b>50<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	from pathlib import Path
-3	import sys
-4	import platform
-5	
-6	def get_cuda_ver_from_dir(cuda_home):
-7	    nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(cuda_home))
-8	    nvrtc = list(nvrtc)
-9	    if len(nvrtc) == 0:
-10	        return
-11	    nvrtc = nvrtc[0]
-12	    if (&#x27;102&#x27; in nvrtc) or (&#x27;10.2&#x27; in nvrtc):
-13	        return &#x27;102&#x27;
-14	    if &#x27;110&#x27; in nvrtc or (&#x27;11.0&#x27; in nvrtc):
-15	        return &#x27;110&#x27;
-16	    if &#x27;111&#x27; in nvrtc or (&#x27;11.1&#x27; in nvrtc):
-17	        return &#x27;111&#x27;
-18	    if &#x27;11&#x27; in nvrtc:
-19	        return &#x27;11x&#x27;
-20	    if &#x27;12&#x27; in nvrtc:
-21	        return &#x27;12x&#x27;
-22	
-23	s_param = &#x27;-s&#x27; if &quot;python_embeded&quot; in sys.executable else &#x27;&#x27; 
-24	
-25	def get_cuda_home_path():
-26	    if &quot;CUDA_HOME&quot; in os.environ:
-27	        return os.environ[&quot;CUDA_HOME&quot;]
-28	    import torch
-29	    torch_lib_path = Path(torch.__file__).parent / &quot;lib&quot;
-30	    torch_lib_path = str(torch_lib_path.resolve())
-31	    if os.path.exists(torch_lib_path):
-32	        nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(torch_lib_path))
-33	        nvrtc = list(nvrtc)
 34	        return torch_lib_path if len(nvrtc) &gt; 0 else None
 35	
 36	def install_cupy():
@@ -256,51 +194,12 @@ pre {
     <b>Severity: </b>HIGH<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/install.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/install.py" target="_blank">ComfyUI-Frame-Interpolation/install.py</a><br>
     <b>Line number: </b>56<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	from pathlib import Path
-3	import sys
-4	import platform
-5	
-6	def get_cuda_ver_from_dir(cuda_home):
-7	    nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(cuda_home))
-8	    nvrtc = list(nvrtc)
-9	    if len(nvrtc) == 0:
-10	        return
-11	    nvrtc = nvrtc[0]
-12	    if (&#x27;102&#x27; in nvrtc) or (&#x27;10.2&#x27; in nvrtc):
-13	        return &#x27;102&#x27;
-14	    if &#x27;110&#x27; in nvrtc or (&#x27;11.0&#x27; in nvrtc):
-15	        return &#x27;110&#x27;
-16	    if &#x27;111&#x27; in nvrtc or (&#x27;11.1&#x27; in nvrtc):
-17	        return &#x27;111&#x27;
-18	    if &#x27;11&#x27; in nvrtc:
-19	        return &#x27;11x&#x27;
-20	    if &#x27;12&#x27; in nvrtc:
-21	        return &#x27;12x&#x27;
-22	
-23	s_param = &#x27;-s&#x27; if &quot;python_embeded&quot; in sys.executable else &#x27;&#x27; 
-24	
-25	def get_cuda_home_path():
-26	    if &quot;CUDA_HOME&quot; in os.environ:
-27	        return os.environ[&quot;CUDA_HOME&quot;]
-28	    import torch
-29	    torch_lib_path = Path(torch.__file__).parent / &quot;lib&quot;
-30	    torch_lib_path = str(torch_lib_path.resolve())
-31	    if os.path.exists(torch_lib_path):
-32	        nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(torch_lib_path))
-33	        nvrtc = list(nvrtc)
-34	        return torch_lib_path if len(nvrtc) &gt; 0 else None
-35	
-36	def install_cupy():
-37	    cuda_home = get_cuda_home_path()
-38	    try:
-39	        if cuda_home is not None:
 40	            os.environ[&quot;CUDA_HOME&quot;] = cuda_home
 41	            os.environ[&quot;CUDA_PATH&quot;] = cuda_home
 42	        import cupy
@@ -335,32 +234,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/test.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/test.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/test.py" target="_blank">ComfyUI-Frame-Interpolation/test.py</a><br>
     <b>Line number: </b>37<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	import sys
-3	sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-4	
-5	import shutil
-6	import torch
-7	import torch.nn.functional as F
-8	import PIL
-9	import torchvision.transforms.functional as transform
-10	from vfi_utils import load_file_from_github_release
-11	from vfi_models import gmfss_fortuna, ifrnet, ifunet, m2m, rife, sepconv, amt, xvfi, cain, flavr
-12	import numpy as np
-13	
-14	frame_0 = torch.from_numpy(np.array(PIL.Image.open(&quot;demo_frames/anime0.png&quot;).convert(&quot;RGB&quot;)).astype(np.float32) / 255.0).unsqueeze(0)
-15	frame_1 = torch.from_numpy(np.array(PIL.Image.open(&quot;demo_frames/anime1.png&quot;).convert(&quot;RGB&quot;)).astype(np.float32) / 255.0).unsqueeze(0)
-16	
-17	
-18	if os.path.exists(&quot;test_result&quot;):
-19	    shutil.rmtree(&quot;test_result&quot;)
-20	
 21	vfi_node_class = gmfss_fortuna.GMFSS_Fortuna_VFI()
 22	for i, ckpt_name in enumerate(vfi_node_class.INPUT_TYPES()[&quot;required&quot;][&quot;ckpt_name&quot;][0][:2]):
 23	    result = vfi_node_class.vfi(ckpt_name, torch.cat([
@@ -393,56 +272,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1226<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
 
 <div class="code">
 <pre>
-1166	        b,
-1167	        None,
-1168	    ),
-1169	    2,
-1170	    0,
-1171	)[
-1172	    None,
-1173	]
-1174	
-1175	
-1176	def cv2flow(a, b, method=&quot;lucaskanade&quot;, back=False):
-1177	    if method == &quot;lucaskanade&quot;:
-1178	        f = _lucaskanade
-1179	        a = a.convert(&quot;L&quot;).cv2()
-1180	        b = b.convert(&quot;L&quot;).cv2()
-1181	    elif method == &quot;farneback&quot;:
-1182	        f = _farneback
-1183	        a = a.convert(&quot;L&quot;).cv2()
-1184	        b = b.convert(&quot;L&quot;).cv2()
-1185	    elif method == &quot;dtvl1&quot;:
-1186	        f = _dtvl1
-1187	        a = a.convert(&quot;L&quot;).cv2()
-1188	        b = b.convert(&quot;L&quot;).cv2()
-1189	    elif method == &quot;simple&quot;:
-1190	        f = _simple
-1191	        a = a.convert(&quot;RGB&quot;).cv2()
-1192	        b = b.convert(&quot;RGB&quot;).cv2()
-1193	    elif method == &quot;pca&quot;:
-1194	        f = _pca
-1195	        a = a.convert(&quot;L&quot;).cv2()
-1196	        b = b.convert(&quot;L&quot;).cv2()
-1197	    elif method == &quot;drlof&quot;:
-1198	        f = _drlof
-1199	        a = a.convert(&quot;RGB&quot;).cv2()
-1200	        b = b.convert(&quot;RGB&quot;).cv2()
-1201	    elif method == &quot;deepflow&quot;:
-1202	        f = _deepflow
-1203	        a = a.convert(&quot;L&quot;).cv2()
-1204	        b = b.convert(&quot;L&quot;).cv2()
-1205	    else:
-1206	        assert 0
-1207	    ans = f(b, a)
-1208	    if back:
-1209	        ans = np.concatenate(
 1210	            [
 1211	                ans,
 1212	                f(a, b),
@@ -475,50 +310,6 @@ pre {
 1239	            # &#x27;vis&#x27;: vis,
 1240	        },
 1241	    )
-1242	
-1243	    # return
-1244	    ans = {&quot;response&quot;: resp}
-1245	    if resp.status_code == 200:
-1246	        j = resp.json()
-1247	        ans[&quot;time&quot;] = j[&quot;time&quot;]
-1248	        ans[&quot;output&quot;] = {
-1249	            &quot;flow&quot;: torch.tensor(load(j[&quot;fn_flow&quot;])),
-1250	        }
-1251	        # if vis:
-1252	        #     ans[&#x27;output&#x27;][&#x27;vis&#x27;] = I(j[&#x27;fn_vis&#x27;])
-1253	    if mode == &quot;shm&quot;:
-1254	        shutil.rmtree(f&quot;/dev/shm/_flownet2/{t}&quot;)
-1255	    return ans
-1256	
-1257	
-1258	####################### VISUALIZATION #######################
-1259	
-1260	
-1261	class Gridnet(nn.Module):
-1262	    def __init__(self, channels_0, channels_1, channels_2, total_dropout_p, depth):
-1263	        super().__init__()
-1264	        self.channels_0 = ch0 = channels_0
-1265	        self.channels_1 = ch1 = channels_1
-1266	        self.channels_2 = ch2 = channels_2
-1267	        self.total_dropout_p = p = total_dropout_p
-1268	        self.depth = depth
-1269	        self.encoders = nn.ModuleList(
-1270	            [GridnetEncoder(ch0, ch1, ch2) for i in range(self.depth)]
-1271	        )
-1272	        self.decoders = nn.ModuleList(
-1273	            [GridnetDecoder(ch0, ch1, ch2) for i in range(self.depth)]
-1274	        )
-1275	        self.total_dropout = GridnetTotalDropout(p)
-1276	        return
-1277	
-1278	    def forward(self, x):
-1279	        for e, enc in enumerate(self.encoders):
-1280	            t = [self.total_dropout(i) for i in t] if e != 0 else x
-1281	            t = enc(t)
-1282	        for d, dec in enumerate(self.decoders):
-1283	            t = [self.total_dropout(i) for i in t]
-1284	            t = dec(t)
-1285	        return t
 </pre>
 </div>
 
@@ -533,56 +324,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1227<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
 
 <div class="code">
 <pre>
-1167	        None,
-1168	    ),
-1169	    2,
-1170	    0,
-1171	)[
-1172	    None,
-1173	]
-1174	
-1175	
-1176	def cv2flow(a, b, method=&quot;lucaskanade&quot;, back=False):
-1177	    if method == &quot;lucaskanade&quot;:
-1178	        f = _lucaskanade
-1179	        a = a.convert(&quot;L&quot;).cv2()
-1180	        b = b.convert(&quot;L&quot;).cv2()
-1181	    elif method == &quot;farneback&quot;:
-1182	        f = _farneback
-1183	        a = a.convert(&quot;L&quot;).cv2()
-1184	        b = b.convert(&quot;L&quot;).cv2()
-1185	    elif method == &quot;dtvl1&quot;:
-1186	        f = _dtvl1
-1187	        a = a.convert(&quot;L&quot;).cv2()
-1188	        b = b.convert(&quot;L&quot;).cv2()
-1189	    elif method == &quot;simple&quot;:
-1190	        f = _simple
-1191	        a = a.convert(&quot;RGB&quot;).cv2()
-1192	        b = b.convert(&quot;RGB&quot;).cv2()
-1193	    elif method == &quot;pca&quot;:
-1194	        f = _pca
-1195	        a = a.convert(&quot;L&quot;).cv2()
-1196	        b = b.convert(&quot;L&quot;).cv2()
-1197	    elif method == &quot;drlof&quot;:
-1198	        f = _drlof
-1199	        a = a.convert(&quot;RGB&quot;).cv2()
-1200	        b = b.convert(&quot;RGB&quot;).cv2()
-1201	    elif method == &quot;deepflow&quot;:
-1202	        f = _deepflow
-1203	        a = a.convert(&quot;L&quot;).cv2()
-1204	        b = b.convert(&quot;L&quot;).cv2()
-1205	    else:
-1206	        assert 0
-1207	    ans = f(b, a)
-1208	    if back:
-1209	        ans = np.concatenate(
-1210	            [
 1211	                ans,
 1212	                f(a, b),
 1213	            ]
@@ -615,50 +362,6 @@ pre {
 1240	        },
 1241	    )
 1242	
-1243	    # return
-1244	    ans = {&quot;response&quot;: resp}
-1245	    if resp.status_code == 200:
-1246	        j = resp.json()
-1247	        ans[&quot;time&quot;] = j[&quot;time&quot;]
-1248	        ans[&quot;output&quot;] = {
-1249	            &quot;flow&quot;: torch.tensor(load(j[&quot;fn_flow&quot;])),
-1250	        }
-1251	        # if vis:
-1252	        #     ans[&#x27;output&#x27;][&#x27;vis&#x27;] = I(j[&#x27;fn_vis&#x27;])
-1253	    if mode == &quot;shm&quot;:
-1254	        shutil.rmtree(f&quot;/dev/shm/_flownet2/{t}&quot;)
-1255	    return ans
-1256	
-1257	
-1258	####################### VISUALIZATION #######################
-1259	
-1260	
-1261	class Gridnet(nn.Module):
-1262	    def __init__(self, channels_0, channels_1, channels_2, total_dropout_p, depth):
-1263	        super().__init__()
-1264	        self.channels_0 = ch0 = channels_0
-1265	        self.channels_1 = ch1 = channels_1
-1266	        self.channels_2 = ch2 = channels_2
-1267	        self.total_dropout_p = p = total_dropout_p
-1268	        self.depth = depth
-1269	        self.encoders = nn.ModuleList(
-1270	            [GridnetEncoder(ch0, ch1, ch2) for i in range(self.depth)]
-1271	        )
-1272	        self.decoders = nn.ModuleList(
-1273	            [GridnetDecoder(ch0, ch1, ch2) for i in range(self.depth)]
-1274	        )
-1275	        self.total_dropout = GridnetTotalDropout(p)
-1276	        return
-1277	
-1278	    def forward(self, x):
-1279	        for e, enc in enumerate(self.encoders):
-1280	            t = [self.total_dropout(i) for i in t] if e != 0 else x
-1281	            t = enc(t)
-1282	        for d, dec in enumerate(self.decoders):
-1283	            t = [self.total_dropout(i) for i in t]
-1284	            t = dec(t)
-1285	        return t
-1286	
 </pre>
 </div>
 
@@ -673,56 +376,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>LOW<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1232<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
 
 <div class="code">
 <pre>
-1172	    None,
-1173	]
-1174	
-1175	
-1176	def cv2flow(a, b, method=&quot;lucaskanade&quot;, back=False):
-1177	    if method == &quot;lucaskanade&quot;:
-1178	        f = _lucaskanade
-1179	        a = a.convert(&quot;L&quot;).cv2()
-1180	        b = b.convert(&quot;L&quot;).cv2()
-1181	    elif method == &quot;farneback&quot;:
-1182	        f = _farneback
-1183	        a = a.convert(&quot;L&quot;).cv2()
-1184	        b = b.convert(&quot;L&quot;).cv2()
-1185	    elif method == &quot;dtvl1&quot;:
-1186	        f = _dtvl1
-1187	        a = a.convert(&quot;L&quot;).cv2()
-1188	        b = b.convert(&quot;L&quot;).cv2()
-1189	    elif method == &quot;simple&quot;:
-1190	        f = _simple
-1191	        a = a.convert(&quot;RGB&quot;).cv2()
-1192	        b = b.convert(&quot;RGB&quot;).cv2()
-1193	    elif method == &quot;pca&quot;:
-1194	        f = _pca
-1195	        a = a.convert(&quot;L&quot;).cv2()
-1196	        b = b.convert(&quot;L&quot;).cv2()
-1197	    elif method == &quot;drlof&quot;:
-1198	        f = _drlof
-1199	        a = a.convert(&quot;RGB&quot;).cv2()
-1200	        b = b.convert(&quot;RGB&quot;).cv2()
-1201	    elif method == &quot;deepflow&quot;:
-1202	        f = _deepflow
-1203	        a = a.convert(&quot;L&quot;).cv2()
-1204	        b = b.convert(&quot;L&quot;).cv2()
-1205	    else:
-1206	        assert 0
-1207	    ans = f(b, a)
-1208	    if back:
-1209	        ans = np.concatenate(
-1210	            [
-1211	                ans,
-1212	                f(a, b),
-1213	            ]
-1214	        )
-1215	    return torch.tensor(ans).flip(dims=(1,))
 1216	
 1217	
 1218	####################### FLOWNET2 #######################
@@ -764,50 +423,6 @@ pre {
 1254	        shutil.rmtree(f&quot;/dev/shm/_flownet2/{t}&quot;)
 1255	    return ans
 1256	
-1257	
-1258	####################### VISUALIZATION #######################
-1259	
-1260	
-1261	class Gridnet(nn.Module):
-1262	    def __init__(self, channels_0, channels_1, channels_2, total_dropout_p, depth):
-1263	        super().__init__()
-1264	        self.channels_0 = ch0 = channels_0
-1265	        self.channels_1 = ch1 = channels_1
-1266	        self.channels_2 = ch2 = channels_2
-1267	        self.total_dropout_p = p = total_dropout_p
-1268	        self.depth = depth
-1269	        self.encoders = nn.ModuleList(
-1270	            [GridnetEncoder(ch0, ch1, ch2) for i in range(self.depth)]
-1271	        )
-1272	        self.decoders = nn.ModuleList(
-1273	            [GridnetDecoder(ch0, ch1, ch2) for i in range(self.depth)]
-1274	        )
-1275	        self.total_dropout = GridnetTotalDropout(p)
-1276	        return
-1277	
-1278	    def forward(self, x):
-1279	        for e, enc in enumerate(self.encoders):
-1280	            t = [self.total_dropout(i) for i in t] if e != 0 else x
-1281	            t = enc(t)
-1282	        for d, dec in enumerate(self.decoders):
-1283	            t = [self.total_dropout(i) for i in t]
-1284	            t = dec(t)
-1285	        return t
-1286	
-1287	
-1288	class GridnetEncoder(nn.Module):
-1289	    def __init__(self, channels_0, channels_1, channels_2):
-1290	        super().__init__()
-1291	        self.channels_0 = ch0 = channels_0
-1292	        self.channels_1 = ch1 = channels_1
-1293	        self.channels_2 = ch2 = channels_2
-1294	        self.resnet_0 = GridnetResnet(ch0)
-1295	        self.resnet_1 = GridnetResnet(ch1)
-1296	        self.resnet_2 = GridnetResnet(ch2)
-1297	        self.downsample_01 = GridnetDownsample(ch0, ch1)
-1298	        self.downsample_12 = GridnetDownsample(ch1, ch2)
-1299	        return
-1300	
 </pre>
 </div>
 
@@ -822,56 +437,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1254<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
 
 <div class="code">
 <pre>
-1194	        f = _pca
-1195	        a = a.convert(&quot;L&quot;).cv2()
-1196	        b = b.convert(&quot;L&quot;).cv2()
-1197	    elif method == &quot;drlof&quot;:
-1198	        f = _drlof
-1199	        a = a.convert(&quot;RGB&quot;).cv2()
-1200	        b = b.convert(&quot;RGB&quot;).cv2()
-1201	    elif method == &quot;deepflow&quot;:
-1202	        f = _deepflow
-1203	        a = a.convert(&quot;L&quot;).cv2()
-1204	        b = b.convert(&quot;L&quot;).cv2()
-1205	    else:
-1206	        assert 0
-1207	    ans = f(b, a)
-1208	    if back:
-1209	        ans = np.concatenate(
-1210	            [
-1211	                ans,
-1212	                f(a, b),
-1213	            ]
-1214	        )
-1215	    return torch.tensor(ans).flip(dims=(1,))
-1216	
-1217	
-1218	####################### FLOWNET2 #######################
-1219	
-1220	
-1221	def flownet2(img_a, img_b, mode=&quot;shm&quot;, back=False):
-1222	    # package
-1223	    url = f&quot;http://localhost:8109/get-flow&quot;
-1224	    if mode == &quot;shm&quot;:
-1225	        t = time.time()
-1226	        fn_a = img_a.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_a.png&quot;))
-1227	        fn_b = img_b.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_b.png&quot;))
-1228	    elif mode == &quot;net&quot;:
-1229	        assert False, &quot;not impl&quot;
-1230	        q = u2d.img2uri(img.pil(&quot;RGB&quot;))
-1231	        q.decode()
-1232	    resp = requests.get(
-1233	        url,
-1234	        params={
-1235	            &quot;img_a&quot;: fn_a,
-1236	            &quot;img_b&quot;: fn_b,
-1237	            &quot;mode&quot;: mode,
 1238	            &quot;back&quot;: back,
 1239	            # &#x27;vis&#x27;: vis,
 1240	        },
@@ -904,50 +475,6 @@ pre {
 1267	        self.total_dropout_p = p = total_dropout_p
 1268	        self.depth = depth
 1269	        self.encoders = nn.ModuleList(
-1270	            [GridnetEncoder(ch0, ch1, ch2) for i in range(self.depth)]
-1271	        )
-1272	        self.decoders = nn.ModuleList(
-1273	            [GridnetDecoder(ch0, ch1, ch2) for i in range(self.depth)]
-1274	        )
-1275	        self.total_dropout = GridnetTotalDropout(p)
-1276	        return
-1277	
-1278	    def forward(self, x):
-1279	        for e, enc in enumerate(self.encoders):
-1280	            t = [self.total_dropout(i) for i in t] if e != 0 else x
-1281	            t = enc(t)
-1282	        for d, dec in enumerate(self.decoders):
-1283	            t = [self.total_dropout(i) for i in t]
-1284	            t = dec(t)
-1285	        return t
-1286	
-1287	
-1288	class GridnetEncoder(nn.Module):
-1289	    def __init__(self, channels_0, channels_1, channels_2):
-1290	        super().__init__()
-1291	        self.channels_0 = ch0 = channels_0
-1292	        self.channels_1 = ch1 = channels_1
-1293	        self.channels_2 = ch2 = channels_2
-1294	        self.resnet_0 = GridnetResnet(ch0)
-1295	        self.resnet_1 = GridnetResnet(ch1)
-1296	        self.resnet_2 = GridnetResnet(ch2)
-1297	        self.downsample_01 = GridnetDownsample(ch0, ch1)
-1298	        self.downsample_12 = GridnetDownsample(ch1, ch2)
-1299	        return
-1300	
-1301	    def forward(self, x):
-1302	        out = [
-1303	            None,
-1304	        ] * 3
-1305	        out[0] = self.resnet_0(x[0])
-1306	        out[1] = self.resnet_1(x[1]) + self.downsample_01(out[0])
-1307	        out[2] = self.resnet_2(x[2]) + self.downsample_12(out[1])
-1308	        return out
-1309	
-1310	
-1311	class GridnetDecoder(nn.Module):
-1312	    def __init__(self, channels_0, channels_1, channels_2):
-1313	        super().__init__()
 </pre>
 </div>
 
@@ -962,56 +489,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1741<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
 
 <div class="code">
 <pre>
-1681	# typically used to read dataset filters
-1682	def read_filter(fn, cast=None, sort=True, sort_key=None):
-1683	    if cast is None:
-1684	        cast = lambda x: x
-1685	    ans = [cast(line) for line in read(fn).split(&quot;\n&quot;) if line != &quot;&quot;]
-1686	    if sort:
-1687	        return sorted(ans, key=sort_key)
-1688	    else:
-1689	        return ans
-1690	
-1691	
-1692	################ FILE MANAGEMENT ################
-1693	
-1694	
-1695	def mkfile(fn, parents=True, exist_ok=True):
-1696	    dn = &quot;/&quot;.join(fn.split(&quot;/&quot;)[:-1])
-1697	    mkdir(dn, parents=parents, exist_ok=exist_ok)
-1698	    return fn
-1699	
-1700	
-1701	def mkdir(dn, parents=True, exist_ok=True):
-1702	    pathlib.Path(dn).mkdir(parents=parents, exist_ok=exist_ok)
-1703	    return dn if (not dn[-1] == &quot;/&quot; or dn == &quot;/&quot;) else dn[:-1]
-1704	
-1705	
-1706	def fstrip(fn, return_more=False):
-1707	    dspl = fn.split(&quot;/&quot;)
-1708	    dn = &quot;/&quot;.join(dspl[:-1]) if len(dspl) &gt; 1 else &quot;.&quot;
-1709	    fn = dspl[-1]
-1710	    fspl = fn.split(&quot;.&quot;)
-1711	    if len(fspl) == 1:
-1712	        bn = fspl[0]
-1713	        ext = &quot;&quot;
-1714	    else:
-1715	        bn = &quot;.&quot;.join(fspl[:-1])
-1716	        ext = fspl[-1]
-1717	    if return_more:
-1718	        return Namespace(
-1719	            dn=dn,
-1720	            fn=fn,
-1721	            path=f&quot;{dn}/{fn}&quot;,
-1722	            bn_path=f&quot;{dn}/{bn}&quot;,
-1723	            bn=bn,
-1724	            ext=ext,
 1725	        )
 1726	    else:
 1727	        return bn
@@ -1044,50 +527,6 @@ pre {
 1754	
 1755	import json
 1756	
-1757	
-1758	def jwrite(x, fn, mode=&quot;w&quot;, indent=&quot;\t&quot;, sort_keys=False):
-1759	    mkfile(fn, parents=True, exist_ok=True)
-1760	    with open(fn, mode) as handle:
-1761	        return json.dump(x, handle, indent=indent, sort_keys=sort_keys)
-1762	
-1763	
-1764	def jread(fn, mode=&quot;r&quot;):
-1765	    with open(fn, mode) as handle:
-1766	        return json.load(handle)
-1767	
-1768	
-1769	try:
-1770	    import yaml
-1771	
-1772	    def ywrite(x, fn, mode=&quot;w&quot;, default_flow_style=False):
-1773	        mkfile(fn, parents=True, exist_ok=True)
-1774	        with open(fn, mode) as handle:
-1775	            return yaml.dump(x, handle, default_flow_style=default_flow_style)
-1776	
-1777	    def yread(fn, mode=&quot;r&quot;):
-1778	        with open(fn, mode) as handle:
-1779	            return yaml.safe_load(handle)
-1780	
-1781	except:
-1782	    pass
-1783	
-1784	try:
-1785	    import pyunpack
-1786	except:
-1787	    pass
-1788	
-1789	try:
-1790	    import mysql
-1791	    import mysql.connector
-1792	except:
-1793	    pass
-1794	
-1795	
-1796	################ MISC ################
-1797	
-1798	hakase = &quot;./env/__hakase__.jpg&quot;
-1799	if not os.path.isfile(hakase):
-1800	    hakase = &quot;./__env__/__hakase__.jpg&quot;
 </pre>
 </div>
 
@@ -1102,56 +541,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1752<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
 
 <div class="code">
 <pre>
-1692	################ FILE MANAGEMENT ################
-1693	
-1694	
-1695	def mkfile(fn, parents=True, exist_ok=True):
-1696	    dn = &quot;/&quot;.join(fn.split(&quot;/&quot;)[:-1])
-1697	    mkdir(dn, parents=parents, exist_ok=exist_ok)
-1698	    return fn
-1699	
-1700	
-1701	def mkdir(dn, parents=True, exist_ok=True):
-1702	    pathlib.Path(dn).mkdir(parents=parents, exist_ok=exist_ok)
-1703	    return dn if (not dn[-1] == &quot;/&quot; or dn == &quot;/&quot;) else dn[:-1]
-1704	
-1705	
-1706	def fstrip(fn, return_more=False):
-1707	    dspl = fn.split(&quot;/&quot;)
-1708	    dn = &quot;/&quot;.join(dspl[:-1]) if len(dspl) &gt; 1 else &quot;.&quot;
-1709	    fn = dspl[-1]
-1710	    fspl = fn.split(&quot;.&quot;)
-1711	    if len(fspl) == 1:
-1712	        bn = fspl[0]
-1713	        ext = &quot;&quot;
-1714	    else:
-1715	        bn = &quot;.&quot;.join(fspl[:-1])
-1716	        ext = fspl[-1]
-1717	    if return_more:
-1718	        return Namespace(
-1719	            dn=dn,
-1720	            fn=fn,
-1721	            path=f&quot;{dn}/{fn}&quot;,
-1722	            bn_path=f&quot;{dn}/{bn}&quot;,
-1723	            bn=bn,
-1724	            ext=ext,
-1725	        )
-1726	    else:
-1727	        return bn
-1728	
-1729	
-1730	def read(fn, mode=&quot;r&quot;):
-1731	    with open(fn, mode) as handle:
-1732	        return handle.read()
-1733	
-1734	
-1735	def write(text, fn, mode=&quot;w&quot;):
 1736	    mkfile(fn, parents=True, exist_ok=True)
 1737	    with open(fn, mode) as handle:
 1738	        return handle.write(text)
@@ -1184,50 +579,6 @@ pre {
 1765	    with open(fn, mode) as handle:
 1766	        return json.load(handle)
 1767	
-1768	
-1769	try:
-1770	    import yaml
-1771	
-1772	    def ywrite(x, fn, mode=&quot;w&quot;, default_flow_style=False):
-1773	        mkfile(fn, parents=True, exist_ok=True)
-1774	        with open(fn, mode) as handle:
-1775	            return yaml.dump(x, handle, default_flow_style=default_flow_style)
-1776	
-1777	    def yread(fn, mode=&quot;r&quot;):
-1778	        with open(fn, mode) as handle:
-1779	            return yaml.safe_load(handle)
-1780	
-1781	except:
-1782	    pass
-1783	
-1784	try:
-1785	    import pyunpack
-1786	except:
-1787	    pass
-1788	
-1789	try:
-1790	    import mysql
-1791	    import mysql.connector
-1792	except:
-1793	    pass
-1794	
-1795	
-1796	################ MISC ################
-1797	
-1798	hakase = &quot;./env/__hakase__.jpg&quot;
-1799	if not os.path.isfile(hakase):
-1800	    hakase = &quot;./__env__/__hakase__.jpg&quot;
-1801	
-1802	
-1803	def mem(units=&quot;m&quot;):
-1804	    return (
-1805	        psProcess(os.getpid()).memory_info().rss
-1806	        / {
-1807	            &quot;b&quot;: 1,
-1808	            &quot;k&quot;: 1e3,
-1809	            &quot;m&quot;: 1e6,
-1810	            &quot;g&quot;: 1e9,
-1811	            &quot;t&quot;: 1e12,
 </pre>
 </div>
 
@@ -1242,56 +593,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1781<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-1721	            path=f&quot;{dn}/{fn}&quot;,
-1722	            bn_path=f&quot;{dn}/{bn}&quot;,
-1723	            bn=bn,
-1724	            ext=ext,
-1725	        )
-1726	    else:
-1727	        return bn
-1728	
-1729	
-1730	def read(fn, mode=&quot;r&quot;):
-1731	    with open(fn, mode) as handle:
-1732	        return handle.read()
-1733	
-1734	
-1735	def write(text, fn, mode=&quot;w&quot;):
-1736	    mkfile(fn, parents=True, exist_ok=True)
-1737	    with open(fn, mode) as handle:
-1738	        return handle.write(text)
-1739	
-1740	
-1741	import pickle
-1742	
-1743	
-1744	def dump(obj, fn, mode=&quot;wb&quot;):
-1745	    mkfile(fn, parents=True, exist_ok=True)
-1746	    with open(fn, mode) as handle:
-1747	        return pickle.dump(obj, handle)
-1748	
-1749	
-1750	def load(fn, mode=&quot;rb&quot;):
-1751	    with open(fn, mode) as handle:
-1752	        return pickle.load(handle)
-1753	
-1754	
-1755	import json
-1756	
-1757	
-1758	def jwrite(x, fn, mode=&quot;w&quot;, indent=&quot;\t&quot;, sort_keys=False):
-1759	    mkfile(fn, parents=True, exist_ok=True)
-1760	    with open(fn, mode) as handle:
-1761	        return json.dump(x, handle, indent=indent, sort_keys=sort_keys)
-1762	
-1763	
-1764	def jread(fn, mode=&quot;r&quot;):
 1765	    with open(fn, mode) as handle:
 1766	        return json.load(handle)
 1767	
@@ -1325,50 +632,6 @@ pre {
 1795	
 1796	################ MISC ################
 1797	
-1798	hakase = &quot;./env/__hakase__.jpg&quot;
-1799	if not os.path.isfile(hakase):
-1800	    hakase = &quot;./__env__/__hakase__.jpg&quot;
-1801	
-1802	
-1803	def mem(units=&quot;m&quot;):
-1804	    return (
-1805	        psProcess(os.getpid()).memory_info().rss
-1806	        / {
-1807	            &quot;b&quot;: 1,
-1808	            &quot;k&quot;: 1e3,
-1809	            &quot;m&quot;: 1e6,
-1810	            &quot;g&quot;: 1e9,
-1811	            &quot;t&quot;: 1e12,
-1812	        }[units[0].lower()]
-1813	    )
-1814	
-1815	
-1816	def chunk(array, length, colwise=True):
-1817	    if colwise:
-1818	        return [array[i : i + length] for i in range(0, len(array), length)]
-1819	    else:
-1820	        return chunk(array, int(math.ceil(len(array) / length)), colwise=True)
-1821	
-1822	
-1823	def classtree(x):
-1824	    return inspect.getclasstree(inspect.getmro(x))
-1825	
-1826	
-1827	################ AESTHETIC ################
-1828	
-1829	
-1830	class Table:
-1831	    def __init__(
-1832	        self,
-1833	        table,
-1834	        delimiter=&quot; &quot;,
-1835	        orientation=&quot;br&quot;,
-1836	        double_colon=True,
-1837	    ):
-1838	        self.delimiter = delimiter
-1839	        self.orientation = orientation
-1840	        self.t = Table.parse(table, delimiter, orientation, double_colon)
-1841	        return
 </pre>
 </div>
 
@@ -1383,56 +646,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1786<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-1726	    else:
-1727	        return bn
-1728	
-1729	
-1730	def read(fn, mode=&quot;r&quot;):
-1731	    with open(fn, mode) as handle:
-1732	        return handle.read()
-1733	
-1734	
-1735	def write(text, fn, mode=&quot;w&quot;):
-1736	    mkfile(fn, parents=True, exist_ok=True)
-1737	    with open(fn, mode) as handle:
-1738	        return handle.write(text)
-1739	
-1740	
-1741	import pickle
-1742	
-1743	
-1744	def dump(obj, fn, mode=&quot;wb&quot;):
-1745	    mkfile(fn, parents=True, exist_ok=True)
-1746	    with open(fn, mode) as handle:
-1747	        return pickle.dump(obj, handle)
-1748	
-1749	
-1750	def load(fn, mode=&quot;rb&quot;):
-1751	    with open(fn, mode) as handle:
-1752	        return pickle.load(handle)
-1753	
-1754	
-1755	import json
-1756	
-1757	
-1758	def jwrite(x, fn, mode=&quot;w&quot;, indent=&quot;\t&quot;, sort_keys=False):
-1759	    mkfile(fn, parents=True, exist_ok=True)
-1760	    with open(fn, mode) as handle:
-1761	        return json.dump(x, handle, indent=indent, sort_keys=sort_keys)
-1762	
-1763	
-1764	def jread(fn, mode=&quot;r&quot;):
-1765	    with open(fn, mode) as handle:
-1766	        return json.load(handle)
-1767	
-1768	
-1769	try:
 1770	    import yaml
 1771	
 1772	    def ywrite(x, fn, mode=&quot;w&quot;, default_flow_style=False):
@@ -1466,50 +685,6 @@ pre {
 1800	    hakase = &quot;./__env__/__hakase__.jpg&quot;
 1801	
 1802	
-1803	def mem(units=&quot;m&quot;):
-1804	    return (
-1805	        psProcess(os.getpid()).memory_info().rss
-1806	        / {
-1807	            &quot;b&quot;: 1,
-1808	            &quot;k&quot;: 1e3,
-1809	            &quot;m&quot;: 1e6,
-1810	            &quot;g&quot;: 1e9,
-1811	            &quot;t&quot;: 1e12,
-1812	        }[units[0].lower()]
-1813	    )
-1814	
-1815	
-1816	def chunk(array, length, colwise=True):
-1817	    if colwise:
-1818	        return [array[i : i + length] for i in range(0, len(array), length)]
-1819	    else:
-1820	        return chunk(array, int(math.ceil(len(array) / length)), colwise=True)
-1821	
-1822	
-1823	def classtree(x):
-1824	    return inspect.getclasstree(inspect.getmro(x))
-1825	
-1826	
-1827	################ AESTHETIC ################
-1828	
-1829	
-1830	class Table:
-1831	    def __init__(
-1832	        self,
-1833	        table,
-1834	        delimiter=&quot; &quot;,
-1835	        orientation=&quot;br&quot;,
-1836	        double_colon=True,
-1837	    ):
-1838	        self.delimiter = delimiter
-1839	        self.orientation = orientation
-1840	        self.t = Table.parse(table, delimiter, orientation, double_colon)
-1841	        return
-1842	
-1843	    # rendering
-1844	    def __str__(self):
-1845	        return self.render()
-1846	
 </pre>
 </div>
 
@@ -1524,56 +699,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1792<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-1732	        return handle.read()
-1733	
-1734	
-1735	def write(text, fn, mode=&quot;w&quot;):
-1736	    mkfile(fn, parents=True, exist_ok=True)
-1737	    with open(fn, mode) as handle:
-1738	        return handle.write(text)
-1739	
-1740	
-1741	import pickle
-1742	
-1743	
-1744	def dump(obj, fn, mode=&quot;wb&quot;):
-1745	    mkfile(fn, parents=True, exist_ok=True)
-1746	    with open(fn, mode) as handle:
-1747	        return pickle.dump(obj, handle)
-1748	
-1749	
-1750	def load(fn, mode=&quot;rb&quot;):
-1751	    with open(fn, mode) as handle:
-1752	        return pickle.load(handle)
-1753	
-1754	
-1755	import json
-1756	
-1757	
-1758	def jwrite(x, fn, mode=&quot;w&quot;, indent=&quot;\t&quot;, sort_keys=False):
-1759	    mkfile(fn, parents=True, exist_ok=True)
-1760	    with open(fn, mode) as handle:
-1761	        return json.dump(x, handle, indent=indent, sort_keys=sort_keys)
-1762	
-1763	
-1764	def jread(fn, mode=&quot;r&quot;):
-1765	    with open(fn, mode) as handle:
-1766	        return json.load(handle)
-1767	
-1768	
-1769	try:
-1770	    import yaml
-1771	
-1772	    def ywrite(x, fn, mode=&quot;w&quot;, default_flow_style=False):
-1773	        mkfile(fn, parents=True, exist_ok=True)
-1774	        with open(fn, mode) as handle:
-1775	            return yaml.dump(x, handle, default_flow_style=default_flow_style)
 1776	
 1777	    def yread(fn, mode=&quot;r&quot;):
 1778	        with open(fn, mode) as handle:
@@ -1607,50 +738,6 @@ pre {
 1806	        / {
 1807	            &quot;b&quot;: 1,
 1808	            &quot;k&quot;: 1e3,
-1809	            &quot;m&quot;: 1e6,
-1810	            &quot;g&quot;: 1e9,
-1811	            &quot;t&quot;: 1e12,
-1812	        }[units[0].lower()]
-1813	    )
-1814	
-1815	
-1816	def chunk(array, length, colwise=True):
-1817	    if colwise:
-1818	        return [array[i : i + length] for i in range(0, len(array), length)]
-1819	    else:
-1820	        return chunk(array, int(math.ceil(len(array) / length)), colwise=True)
-1821	
-1822	
-1823	def classtree(x):
-1824	    return inspect.getclasstree(inspect.getmro(x))
-1825	
-1826	
-1827	################ AESTHETIC ################
-1828	
-1829	
-1830	class Table:
-1831	    def __init__(
-1832	        self,
-1833	        table,
-1834	        delimiter=&quot; &quot;,
-1835	        orientation=&quot;br&quot;,
-1836	        double_colon=True,
-1837	    ):
-1838	        self.delimiter = delimiter
-1839	        self.orientation = orientation
-1840	        self.t = Table.parse(table, delimiter, orientation, double_colon)
-1841	        return
-1842	
-1843	    # rendering
-1844	    def __str__(self):
-1845	        return self.render()
-1846	
-1847	    def __repr__(self):
-1848	        return self.render()
-1849	
-1850	    def render(self):
-1851	        # set up empty entry
-1852	        empty = (&quot;&quot;, Table._spec(self.orientation, transpose=False))
 </pre>
 </div>
 
@@ -1665,56 +752,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
     <b>Line number: </b>1867<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
 
 <div class="code">
 <pre>
-1807	            &quot;b&quot;: 1,
-1808	            &quot;k&quot;: 1e3,
-1809	            &quot;m&quot;: 1e6,
-1810	            &quot;g&quot;: 1e9,
-1811	            &quot;t&quot;: 1e12,
-1812	        }[units[0].lower()]
-1813	    )
-1814	
-1815	
-1816	def chunk(array, length, colwise=True):
-1817	    if colwise:
-1818	        return [array[i : i + length] for i in range(0, len(array), length)]
-1819	    else:
-1820	        return chunk(array, int(math.ceil(len(array) / length)), colwise=True)
-1821	
-1822	
-1823	def classtree(x):
-1824	    return inspect.getclasstree(inspect.getmro(x))
-1825	
-1826	
-1827	################ AESTHETIC ################
-1828	
-1829	
-1830	class Table:
-1831	    def __init__(
-1832	        self,
-1833	        table,
-1834	        delimiter=&quot; &quot;,
-1835	        orientation=&quot;br&quot;,
-1836	        double_colon=True,
-1837	    ):
-1838	        self.delimiter = delimiter
-1839	        self.orientation = orientation
-1840	        self.t = Table.parse(table, delimiter, orientation, double_colon)
-1841	        return
-1842	
-1843	    # rendering
-1844	    def __str__(self):
-1845	        return self.render()
-1846	
-1847	    def __repr__(self):
-1848	        return self.render()
-1849	
-1850	    def render(self):
 1851	        # set up empty entry
 1852	        empty = (&quot;&quot;, Table._spec(self.orientation, transpose=False))
 1853	
@@ -1747,50 +790,6 @@ pre {
 1880	                    u, v = i, j
 1881	                    while 0 &lt;= u:
 1882	                        _, s = t[u][v]
-1883	                        if (i, j) != (u, v) and (s[2] and not s[10]):
-1884	                            break
-1885	                        Table._put((x, _repl(s)), t, (u, v), empty)
-1886	                        u -= 1
-1887	
-1888	                # expand delim_down(v)
-1889	                if s_own[4]:
-1890	                    u, v = i, j
-1891	                    while u &lt; totalrows:
-1892	                        _, s = t[u][v]
-1893	                        if (i, j) != (u, v) and (s[2] and not s[10]):
-1894	                            break
-1895	                        Table._put((x, _repl(s)), t, (u, v), empty)
-1896	                        u += 1
-1897	
-1898	                # expand delim_right(&gt;)
-1899	                if s_own[5]:
-1900	                    u, v = i, j
-1901	                    while v &lt; totalcols:
-1902	                        _, s = t[u][v]
-1903	                        if (i, j) != (u, v) and (s[2] and not s[10]):
-1904	                            break
-1905	                        Table._put((x, _repl(s)), t, (u, v), empty)
-1906	                        v += 1
-1907	
-1908	                # expand delim_left(&lt;)
-1909	                if s_own[6]:
-1910	                    u, v = i, j
-1911	                    while 0 &lt;= v:
-1912	                        _, s = t[u][v]
-1913	                        if (i, j) != (u, v) and (s[2] and not s[10]):
-1914	                            break
-1915	                        Table._put((x, _repl(s)), t, (u, v), empty)
-1916	                        v -= 1
-1917	
-1918	        # justification calculation
-1919	        widths = [
-1920	            0,
-1921	        ] * totalcols  # j
-1922	        heights = [
-1923	            0,
-1924	        ] * totalrows  # i
-1925	        for i, row in enumerate(t):
-1926	            for j, (x, s) in enumerate(row):
 </pre>
 </div>
 
@@ -1805,7 +804,7 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/ops/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_models/ops/__init__.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_models/ops/__init__.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_models/ops/__init__.py</a><br>
     <b>Line number: </b>11<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
 
@@ -1847,17 +846,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation/vfi_utils.py</a><br>
+    <b>File: </b><a href="ComfyUI-Frame-Interpolation/vfi_utils.py" target="_blank">ComfyUI-Frame-Interpolation/vfi_utils.py</a><br>
     <b>Line number: </b>22<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
 
 <div class="code">
 <pre>
-1	import yaml
-2	import os
-3	from torch.hub import download_url_to_file, get_dir
-4	from urllib.parse import urlparse
-5	import torch
 6	import typing
 7	import traceback
 8	import einops
@@ -1890,89 +884,6 @@ pre {
 35	        return self.is_skip_list and is_frame_in_list or not self.is_skip_list and not is_frame_in_list
 36	    
 37	
-38	class MakeInterpolationStateList:
-39	    @classmethod
-40	    def INPUT_TYPES(s):
-41	        return {
-42	            &quot;required&quot;: {
-43	                &quot;frame_indices&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: True, &quot;default&quot;: &quot;1,2,3&quot;}),
-44	                &quot;is_skip_list&quot;: (&quot;BOOLEAN&quot;, {&quot;default&quot;: True},),
-45	            },
-46	        }
-47	    
-48	    RETURN_TYPES = (&quot;INTERPOLATION_STATES&quot;,)
-49	    FUNCTION = &quot;create_options&quot;
-50	    CATEGORY = &quot;ComfyUI-Frame-Interpolation/VFI&quot;    
-51	
-52	    def create_options(self, frame_indices: str, is_skip_list: bool):
-53	        frame_indices_list = [int(item) for item in frame_indices.split(&#x27;,&#x27;)]
-54	        
-55	        interpolation_state_list = InterpolationStateList(
-56	            frame_indices=frame_indices_list,
-57	            is_skip_list=is_skip_list,
-58	        )
-59	        return (interpolation_state_list,)
-60	        
-61	        
-62	def get_ckpt_container_path(model_type):
-63	    return os.path.abspath(os.path.join(os.path.dirname(__file__), config[&quot;ckpts_path&quot;], model_type))
-64	
-65	def load_file_from_url(url, model_dir=None, progress=True, file_name=None):
-66	    &quot;&quot;&quot;Load file form http url, will download models if necessary.
-67	
-68	    Ref:https://github.com/1adrianb/face-alignment/blob/master/face_alignment/utils.py
-69	
-70	    Args:
-71	        url (str): URL to be downloaded.
-72	        model_dir (str): The path to save the downloaded model. Should be a full path. If None, use pytorch hub_dir.
-73	            Default: None.
-74	        progress (bool): Whether to show the download progress. Default: True.
-75	        file_name (str): The downloaded file name. If None, use the file name in the url. Default: None.
-76	
-77	    Returns:
-78	        str: The path to the downloaded file.
-79	    &quot;&quot;&quot;
-80	    if model_dir is None:  # use the pytorch hub_dir
-81	        hub_dir = get_dir()
-82	        model_dir = os.path.join(hub_dir, &#x27;checkpoints&#x27;)
-83	
-84	    os.makedirs(model_dir, exist_ok=True)
-85	
-86	    parts = urlparse(url)
-87	    file_name = os.path.basename(parts.path)
-88	    if file_name is not None:
-89	        file_name = file_name
-90	    cached_file = os.path.abspath(os.path.join(model_dir, file_name))
-91	    if not os.path.exists(cached_file):
-92	        print(f&#x27;Downloading: &quot;{url}&quot; to {cached_file}\n&#x27;)
-93	        download_url_to_file(url, cached_file, hash_prefix=None, progress=progress)
-94	    return cached_file
-95	
-96	def load_file_from_github_release(model_type, ckpt_name):
-97	    error_strs = []
-98	    for i, base_model_download_url in enumerate(BASE_MODEL_DOWNLOAD_URLS):
-99	        try:
-100	            return load_file_from_url(base_model_download_url + ckpt_name, get_ckpt_container_path(model_type))
-101	        except Exception:
-102	            traceback_str = traceback.format_exc()
-103	            if i &lt; len(BASE_MODEL_DOWNLOAD_URLS) - 1:
-104	                print(&quot;Failed! Trying another endpoint.&quot;)
-105	            error_strs.append(f&quot;Error when downloading from: {base_model_download_url + ckpt_name}\n\n{traceback_str}&quot;)
-106	
-107	    error_str = &#x27;\n\n&#x27;.join(error_strs)
-108	    raise Exception(f&quot;Tried all GitHub base urls to download {ckpt_name} but no suceess. Below is the error log:\n\n{error_str}&quot;)
-109	                
-110	
-111	def load_file_from_direct_url(model_type, url):
-112	    return load_file_from_url(url, get_ckpt_container_path(model_type))
-113	
-114	def preprocess_frames(frames):
-115	    return einops.rearrange(frames[..., :3], &quot;n h w c -&gt; n c h w&quot;)
-116	
-117	def postprocess_frames(frames):
-118	    return einops.rearrange(frames, &quot;n c h w -&gt; n h w c&quot;)[..., :3].cpu()
-119	
-120	def assert_batch_size(frames, batch_size=2, vfi_name=None):
 </pre>
 </div>
 

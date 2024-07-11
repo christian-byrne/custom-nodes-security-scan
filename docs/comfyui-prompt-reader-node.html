@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/format/a1111.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/format/a1111.py</a><br>
+    <b>File: </b><a href="comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/format/a1111.py" target="_blank">comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/format/a1111.py</a><br>
     <b>Line number: </b>111<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-51	        # w/ neg
-52	        if &quot;Negative prompt:&quot; in self._raw:
-53	            prompt_index = self._raw.find(&quot;\nNegative prompt:&quot;)
-54	            # w/ neg and w/ setting
-55	            if steps_index != -1:
-56	                self._negative = self._raw[
-57	                    prompt_index + len(&quot;Negative prompt:&quot;) + 1 : steps_index
-58	                ].strip()
-59	            # w/ neg and w/o setting
-60	            else:
-61	                self._negative = self._raw[
-62	                    prompt_index + len(&quot;Negative prompt:&quot;) + 1 :
-63	                ].strip()
-64	            self._positive = self._raw[:prompt_index].strip()
-65	        # w/o neg and w/o setting
-66	        elif steps_index == -1:
-67	            self._positive = self._raw
-68	
-69	        # match parameters like &quot;Steps: x&quot;,
-70	        pattern = r&quot;\s*([^:,]+):\s*([^,]+)&quot;
-71	        matches = re.findall(pattern, self._setting)
-72	        setting_dict = {}
-73	        for key, value in matches:
-74	            if key not in setting_dict:
-75	                setting_dict[key] = value
-76	
-77	        [self._width, self._height] = setting_dict.get(&quot;Size&quot;, &quot;0x0&quot;).split(&quot;x&quot;)
-78	
-79	        for p, s in zip(super().PARAMETER_KEY, A1111.SETTING_KEY):
-80	            self._parameter[p] = setting_dict.get(s)
-81	
-82	        if self._extra:
-83	            self._raw = concat_strings(self._raw, self._extra)
-84	            self._setting = concat_strings(self._setting, self._extra)
-85	
-86	    def prompt_to_line(self):
-87	        if not self._setting:
-88	            return &quot;&quot;
-89	        single_line_prompt = &quot;--prompt &quot; + add_quotes(self._positive).replace(&quot;\n&quot;, &quot;&quot;)
-90	        if self._negative:
-91	            single_line_prompt += &quot; --negative_prompt &quot; + add_quotes(
-92	                self._negative
-93	            ).replace(&quot;\n&quot;, &quot;&quot;)
-94	        setting = dict(
 95	            filter(
 96	                lambda x: len(x) == 2,
 97	                (param.split(&quot;: &quot;) for param in self._setting.split(&quot;, &quot;)),
@@ -186,7 +142,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
+    <b>File: </b><a href="comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
     <b>Line number: </b>7<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b408-import-xml-minidom" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b408-import-xml-minidom</a><br>
 
@@ -224,94 +180,6 @@ pre {
 30	        self._height = None
 31	        self._width = None
 32	        self._info = {}
-33	        self._positive = &quot;&quot;
-34	        self._negative = &quot;&quot;
-35	        self._positive_sdxl = {}
-36	        self._negative_sdxl = {}
-37	        self._setting = &quot;&quot;
-38	        self._raw = &quot;&quot;
-39	        self._tool = &quot;&quot;
-40	        self._parameter_key = [&quot;model&quot;, &quot;sampler&quot;, &quot;seed&quot;, &quot;cfg&quot;, &quot;steps&quot;, &quot;size&quot;]
-41	        self._parameter = dict.fromkeys(self._parameter_key, PARAMETER_PLACEHOLDER)
-42	        self._is_txt = is_txt
-43	        self._is_sdxl = False
-44	        self._format = &quot;&quot;
-45	        self._props = &quot;&quot;
-46	        self._parser = None
-47	        self._status = BaseFormat.Status.UNREAD
-48	        self.read_data(file)
-49	
-50	    def read_data(self, file):
-51	        if self._is_txt:
-52	            self._raw = file.read()
-53	            self._parser = A1111(raw=self._raw)
-54	            return
-55	        with Image.open(file) as f:
-56	            self._width = f.width
-57	            self._height = f.height
-58	            self._info = f.info
-59	            self._format = f.format
-60	            # swarm legacy format
-61	            try:
-62	                exif = json.loads(f.getexif().get(0x0110))
-63	                if &quot;sui_image_params&quot; in exif:
-64	                    self._tool = &quot;StableSwarmUI&quot;
-65	                    self._parser = SwarmUI(info=exif)
-66	            except TypeError:
-67	                if f.format == &quot;PNG&quot;:
-68	                    if &quot;parameters&quot; in self._info:
-69	                        # swarm format
-70	                        if &quot;sui_image_params&quot; in self._info.get(&quot;parameters&quot;):
-71	                            self._tool = &quot;StableSwarmUI&quot;
-72	                            self._parser = SwarmUI(raw=self._info.get(&quot;parameters&quot;))
-73	                        # a1111 png compatible format
-74	                        else:
-75	                            if &quot;prompt&quot; in self._info:
-76	                                self._tool = &quot;ComfyUI\n(A1111 compatible)&quot;
-77	                            else:
-78	                                self._tool = &quot;A1111 webUI&quot;
-79	                            self._parser = A1111(info=self._info)
-80	                    elif &quot;postprocessing&quot; in self._info:
-81	                        self._tool = &quot;A1111 webUI\n(Postprocessing)&quot;
-82	                        self._parser = A1111(info=self._info)
-83	                    # easydiff png format
-84	                    elif (
-85	                        &quot;negative_prompt&quot; in self._info
-86	                        or &quot;Negative Prompt&quot; in self._info
-87	                    ):
-88	                        self._tool = &quot;Easy Diffusion&quot;
-89	                        self._parser = EasyDiffusion(info=self._info)
-90	                    # invokeai3 format
-91	                    elif &quot;invokeai_metadata&quot; in self._info:
-92	                        self._tool = &quot;InvokeAI&quot;
-93	                        self._parser = InvokeAI(info=self._info)
-94	                    # invokeai2 format
-95	                    elif &quot;sd-metadata&quot; in self._info:
-96	                        self._tool = &quot;InvokeAI&quot;
-97	                        self._parser = InvokeAI(info=self._info)
-98	                    # invokeai legacy dream format
-99	                    elif &quot;Dream&quot; in self._info:
-100	                        self._tool = &quot;InvokeAI&quot;
-101	                        self._parser = InvokeAI(info=self._info)
-102	                    # novelai format
-103	                    elif self._info.get(&quot;Software&quot;) == &quot;NovelAI&quot;:
-104	                        self._tool = &quot;NovelAI&quot;
-105	                        self._parser = NovelAI(
-106	                            info=self._info, width=self._width, height=self._height
-107	                        )
-108	                    # comfyui format
-109	                    elif &quot;prompt&quot; in self._info:
-110	                        self._tool = &quot;ComfyUI&quot;
-111	                        self._parser = ComfyUI(
-112	                            info=self._info, width=self._width, height=self._height
-113	                        )
-114	                    # fooocus format
-115	                    elif &quot;Comment&quot; in self._info:
-116	                        try:
-117	                            self._tool = &quot;Fooocus&quot;
-118	                            self._parser = Fooocus(
-119	                                info=json.loads(self._info.get(&quot;Comment&quot;))
-120	                            )
 </pre>
 </div>
 
@@ -326,56 +194,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
+    <b>File: </b><a href="comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
     <b>Line number: </b>126<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b313-b320-xml-bad-minidom" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b313-b320-xml-bad-minidom</a><br>
 
 <div class="code">
 <pre>
-66	            except TypeError:
-67	                if f.format == &quot;PNG&quot;:
-68	                    if &quot;parameters&quot; in self._info:
-69	                        # swarm format
-70	                        if &quot;sui_image_params&quot; in self._info.get(&quot;parameters&quot;):
-71	                            self._tool = &quot;StableSwarmUI&quot;
-72	                            self._parser = SwarmUI(raw=self._info.get(&quot;parameters&quot;))
-73	                        # a1111 png compatible format
-74	                        else:
-75	                            if &quot;prompt&quot; in self._info:
-76	                                self._tool = &quot;ComfyUI\n(A1111 compatible)&quot;
-77	                            else:
-78	                                self._tool = &quot;A1111 webUI&quot;
-79	                            self._parser = A1111(info=self._info)
-80	                    elif &quot;postprocessing&quot; in self._info:
-81	                        self._tool = &quot;A1111 webUI\n(Postprocessing)&quot;
-82	                        self._parser = A1111(info=self._info)
-83	                    # easydiff png format
-84	                    elif (
-85	                        &quot;negative_prompt&quot; in self._info
-86	                        or &quot;Negative Prompt&quot; in self._info
-87	                    ):
-88	                        self._tool = &quot;Easy Diffusion&quot;
-89	                        self._parser = EasyDiffusion(info=self._info)
-90	                    # invokeai3 format
-91	                    elif &quot;invokeai_metadata&quot; in self._info:
-92	                        self._tool = &quot;InvokeAI&quot;
-93	                        self._parser = InvokeAI(info=self._info)
-94	                    # invokeai2 format
-95	                    elif &quot;sd-metadata&quot; in self._info:
-96	                        self._tool = &quot;InvokeAI&quot;
-97	                        self._parser = InvokeAI(info=self._info)
-98	                    # invokeai legacy dream format
-99	                    elif &quot;Dream&quot; in self._info:
-100	                        self._tool = &quot;InvokeAI&quot;
-101	                        self._parser = InvokeAI(info=self._info)
-102	                    # novelai format
-103	                    elif self._info.get(&quot;Software&quot;) == &quot;NovelAI&quot;:
-104	                        self._tool = &quot;NovelAI&quot;
-105	                        self._parser = NovelAI(
-106	                            info=self._info, width=self._width, height=self._height
-107	                        )
-108	                    # comfyui format
-109	                    elif &quot;prompt&quot; in self._info:
 110	                        self._tool = &quot;ComfyUI&quot;
 111	                        self._parser = ComfyUI(
 112	                            info=self._info, width=self._width, height=self._height
@@ -410,50 +234,6 @@ pre {
 141	                            self._parser = DrawThings(info=data_json)
 142	                elif f.format in [&quot;JPEG&quot;, &quot;WEBP&quot;]:
 143	                    # fooocus jpeg format
-144	                    if &quot;comment&quot; in self._info:
-145	                        try:
-146	                            self._tool = &quot;Fooocus&quot;
-147	                            self._parser = Fooocus(
-148	                                info=json.loads(self._info.get(&quot;comment&quot;))
-149	                            )
-150	                        except Exception:
-151	                            print(&quot;Fooocus format error&quot;)
-152	                            self._status = BaseFormat.Status.FORMAT_ERROR
-153	                    else:
-154	                        try:
-155	                            exif = piexif.load(self._info.get(&quot;exif&quot;)) or {}
-156	                            user_comment = exif.get(&quot;Exif&quot;).get(
-157	                                piexif.ExifIFD.UserComment
-158	                            )
-159	                        except TypeError:
-160	                            print(&quot;empty jpeg&quot;)
-161	                            self._status = BaseFormat.Status.FORMAT_ERROR
-162	                        except Exception:
-163	                            pass
-164	                        else:
-165	                            try:
-166	                                # swarm format
-167	                                if &quot;sui_image_params&quot; in user_comment[8:].decode(
-168	                                    &quot;utf-16&quot;
-169	                                ):
-170	                                    self._tool = &quot;StableSwarmUI&quot;
-171	                                    self._parser = SwarmUI(
-172	                                        raw=user_comment[8:].decode(&quot;utf-16&quot;)
-173	                                    )
-174	                                else:
-175	                                    self._raw = piexif.helper.UserComment.load(
-176	                                        user_comment
-177	                                    )
-178	                                    # easydiff jpeg and webp format
-179	                                    if self._raw[0] == &quot;{&quot;:
-180	                                        self._tool = &quot;Easy Diffusion&quot;
-181	                                        self._parser = EasyDiffusion(raw=self._raw)
-182	                                    # a1111 jpeg and webp format
-183	                                    else:
-184	                                        self._tool = &quot;A1111 webUI&quot;
-185	                                        self._parser = A1111(raw=self._raw)
-186	                            except Exception:
-187	                                self._status = BaseFormat.Status.FORMAT_ERROR
 </pre>
 </div>
 
@@ -468,56 +248,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
+    <b>File: </b><a href="comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
     <b>Line number: </b>162<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-102	                    # novelai format
-103	                    elif self._info.get(&quot;Software&quot;) == &quot;NovelAI&quot;:
-104	                        self._tool = &quot;NovelAI&quot;
-105	                        self._parser = NovelAI(
-106	                            info=self._info, width=self._width, height=self._height
-107	                        )
-108	                    # comfyui format
-109	                    elif &quot;prompt&quot; in self._info:
-110	                        self._tool = &quot;ComfyUI&quot;
-111	                        self._parser = ComfyUI(
-112	                            info=self._info, width=self._width, height=self._height
-113	                        )
-114	                    # fooocus format
-115	                    elif &quot;Comment&quot; in self._info:
-116	                        try:
-117	                            self._tool = &quot;Fooocus&quot;
-118	                            self._parser = Fooocus(
-119	                                info=json.loads(self._info.get(&quot;Comment&quot;))
-120	                            )
-121	                        except Exception:
-122	                            print(&quot;Fooocus format error&quot;)
-123	                    # drawthings format
-124	                    elif &quot;XML:com.adobe.xmp&quot; in self._info:
-125	                        try:
-126	                            data = minidom.parseString(
-127	                                self._info.get(&quot;XML:com.adobe.xmp&quot;)
-128	                            )
-129	                            data_json = json.loads(
-130	                                data.getElementsByTagName(&quot;exif:UserComment&quot;)[0]
-131	                                .childNodes[1]
-132	                                .childNodes[1]
-133	                                .childNodes[0]
-134	                                .data
-135	                            )
-136	                        except Exception:
-137	                            print(&quot;Draw things format error&quot;)
-138	                            self._status = BaseFormat.Status.FORMAT_ERROR
-139	                        else:
-140	                            self._tool = &quot;Draw Things&quot;
-141	                            self._parser = DrawThings(info=data_json)
-142	                elif f.format in [&quot;JPEG&quot;, &quot;WEBP&quot;]:
-143	                    # fooocus jpeg format
-144	                    if &quot;comment&quot; in self._info:
-145	                        try:
 146	                            self._tool = &quot;Fooocus&quot;
 147	                            self._parser = Fooocus(
 148	                                info=json.loads(self._info.get(&quot;comment&quot;))
@@ -551,50 +287,6 @@ pre {
 176	                                        user_comment
 177	                                    )
 178	                                    # easydiff jpeg and webp format
-179	                                    if self._raw[0] == &quot;{&quot;:
-180	                                        self._tool = &quot;Easy Diffusion&quot;
-181	                                        self._parser = EasyDiffusion(raw=self._raw)
-182	                                    # a1111 jpeg and webp format
-183	                                    else:
-184	                                        self._tool = &quot;A1111 webUI&quot;
-185	                                        self._parser = A1111(raw=self._raw)
-186	                            except Exception:
-187	                                self._status = BaseFormat.Status.FORMAT_ERROR
-188	            if self._tool and self._status == BaseFormat.Status.UNREAD:
-189	                self._status = self._parser.parse()
-190	            print(self._status.name)
-191	
-192	    @staticmethod
-193	    def remove_data(image_file):
-194	        with Image.open(image_file) as f:
-195	            image_data = list(f.getdata())
-196	            image_without_exif = Image.new(f.mode, f.size)
-197	            image_without_exif.putdata(image_data)
-198	            return image_without_exif
-199	
-200	    @staticmethod
-201	    def save_image(image_path, new_path, image_format, data=None):
-202	        metadata = None
-203	        if data:
-204	            match image_format:
-205	                case &quot;PNG&quot;:
-206	                    metadata = PngInfo()
-207	                    metadata.add_text(&quot;parameters&quot;, data)
-208	                case &quot;JPEG&quot; | &quot;WEBP&quot;:
-209	                    metadata = piexif.dump(
-210	                        {
-211	                            &quot;Exif&quot;: {
-212	                                piexif.ExifIFD.UserComment: (
-213	                                    piexif.helper.UserComment.dump(
-214	                                        data, encoding=&quot;unicode&quot;
-215	                                    )
-216	                                )
-217	                            },
-218	                        }
-219	                    )
-220	
-221	        with Image.open(image_path) as f:
-222	            try:
 </pre>
 </div>
 

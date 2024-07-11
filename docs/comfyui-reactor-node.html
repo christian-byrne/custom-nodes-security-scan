@@ -98,7 +98,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/install.py" target="_blank">comfyui-reactor-node/install.py</a><br>
     <b>Line number: </b>4<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -136,73 +136,6 @@ pre {
 30	
 31	def is_installed (
 32	        package: str, version: str = None, strict: bool = True
-33	):
-34	    has_package = None
-35	    try:
-36	        has_package = distributions(package)
-37	        if has_package is not None:
-38	            if version is not None:
-39	                installed_version = has_package.version
-40	                if (installed_version != version and strict == True) or (pv.parse(installed_version) &lt; pv.parse(version) and strict == False):
-41	                    return False
-42	                else:
-43	                    return True
-44	            else:
-45	                return True
-46	        else:
-47	            return False
-48	    except Exception as e:
-49	        print(f&quot;Status: {e}&quot;)
-50	        return False
-51	    
-52	def download(url, path, name):
-53	    request = urllib.request.urlopen(url)
-54	    total = int(request.headers.get(&#x27;Content-Length&#x27;, 0))
-55	    with tqdm(total=total, desc=f&#x27;[ReActor] Downloading {name} to {path}&#x27;, unit=&#x27;B&#x27;, unit_scale=True, unit_divisor=1024) as progress:
-56	        urllib.request.urlretrieve(url, path, reporthook=lambda count, block_size, total_size: progress.update(block_size))
-57	
-58	if not os.path.exists(models_dir_path):
-59	    os.makedirs(models_dir_path)
-60	
-61	if not os.path.exists(model_path):
-62	    download(model_url, model_path, model_name)
-63	
-64	with open(req_file) as file:
-65	    try:
-66	        ort = &quot;onnxruntime-gpu&quot;
-67	        import torch
-68	        cuda_version = None
-69	        if torch.cuda.is_available():
-70	            cuda_version = torch.version.cuda
-71	            print(f&quot;CUDA {cuda_version}&quot;)
-72	        elif torch.backends.mps.is_available() or hasattr(torch,&#x27;dml&#x27;) or hasattr(torch,&#x27;privateuseone&#x27;):
-73	            ort = &quot;onnxruntime&quot;
-74	        if cuda_version is not None and float(cuda_version)&gt;=12: # CU12
-75	            if not is_installed(ort,&quot;1.17.0&quot;,False):
-76	                run_pip(ort,&quot;--extra-index-url&quot;, &quot;https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/&quot;)
-77	        elif not is_installed(ort,&quot;1.16.1&quot;,False):
-78	            run_pip(ort, &quot;-U&quot;)
-79	    except Exception as e:
-80	        print(e)
-81	        print(f&quot;Warning: Failed to install {ort}, ReActor will not work.&quot;)
-82	        raise e
-83	    strict = True
-84	    for package in file:
-85	        package_version = None
-86	        try:
-87	            package = package.strip()
-88	            if &quot;==&quot; in package:
-89	                package_version = package.split(&#x27;==&#x27;)[1]
-90	            elif &quot;&gt;=&quot; in package:
-91	                package_version = package.split(&#x27;&gt;=&#x27;)[1]
-92	                strict = False
-93	            if not is_installed(package,package_version,strict):
-94	                run_pip(package)
-95	        except Exception as e:
-96	            print(e)
-97	            print(f&quot;Warning: Failed to install {package}, ReActor will not work.&quot;)
-98	            raise e
-99	print(&quot;Ok&quot;)
 </pre>
 </div>
 
@@ -217,24 +150,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/install.py" target="_blank">comfyui-reactor-node/install.py</a><br>
     <b>Line number: </b>29<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-1	import warnings
-2	warnings.filterwarnings(&quot;ignore&quot;, category=DeprecationWarning)
-3	
-4	import subprocess
-5	import os, sys
-6	try:
-7	    from pkg_resources import get_distribution as distributions
-8	except:
-9	    from importlib_metadata import distributions
-10	from tqdm import tqdm
-11	import urllib.request
-12	from packaging import version as pv
 13	try:
 14	    from folder_paths import models_dir
 15	except:
@@ -267,61 +188,6 @@ pre {
 42	                else:
 43	                    return True
 44	            else:
-45	                return True
-46	        else:
-47	            return False
-48	    except Exception as e:
-49	        print(f&quot;Status: {e}&quot;)
-50	        return False
-51	    
-52	def download(url, path, name):
-53	    request = urllib.request.urlopen(url)
-54	    total = int(request.headers.get(&#x27;Content-Length&#x27;, 0))
-55	    with tqdm(total=total, desc=f&#x27;[ReActor] Downloading {name} to {path}&#x27;, unit=&#x27;B&#x27;, unit_scale=True, unit_divisor=1024) as progress:
-56	        urllib.request.urlretrieve(url, path, reporthook=lambda count, block_size, total_size: progress.update(block_size))
-57	
-58	if not os.path.exists(models_dir_path):
-59	    os.makedirs(models_dir_path)
-60	
-61	if not os.path.exists(model_path):
-62	    download(model_url, model_path, model_name)
-63	
-64	with open(req_file) as file:
-65	    try:
-66	        ort = &quot;onnxruntime-gpu&quot;
-67	        import torch
-68	        cuda_version = None
-69	        if torch.cuda.is_available():
-70	            cuda_version = torch.version.cuda
-71	            print(f&quot;CUDA {cuda_version}&quot;)
-72	        elif torch.backends.mps.is_available() or hasattr(torch,&#x27;dml&#x27;) or hasattr(torch,&#x27;privateuseone&#x27;):
-73	            ort = &quot;onnxruntime&quot;
-74	        if cuda_version is not None and float(cuda_version)&gt;=12: # CU12
-75	            if not is_installed(ort,&quot;1.17.0&quot;,False):
-76	                run_pip(ort,&quot;--extra-index-url&quot;, &quot;https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/&quot;)
-77	        elif not is_installed(ort,&quot;1.16.1&quot;,False):
-78	            run_pip(ort, &quot;-U&quot;)
-79	    except Exception as e:
-80	        print(e)
-81	        print(f&quot;Warning: Failed to install {ort}, ReActor will not work.&quot;)
-82	        raise e
-83	    strict = True
-84	    for package in file:
-85	        package_version = None
-86	        try:
-87	            package = package.strip()
-88	            if &quot;==&quot; in package:
-89	                package_version = package.split(&#x27;==&#x27;)[1]
-90	            elif &quot;&gt;=&quot; in package:
-91	                package_version = package.split(&#x27;&gt;=&#x27;)[1]
-92	                strict = False
-93	            if not is_installed(package,package_version,strict):
-94	                run_pip(package)
-95	        except Exception as e:
-96	            print(e)
-97	            print(f&quot;Warning: Failed to install {package}, ReActor will not work.&quot;)
-98	            raise e
-99	print(&quot;Ok&quot;)
 </pre>
 </div>
 
@@ -336,48 +202,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/install.py" target="_blank">comfyui-reactor-node/install.py</a><br>
     <b>Line number: </b>53<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
 
 <div class="code">
 <pre>
-1	import warnings
-2	warnings.filterwarnings(&quot;ignore&quot;, category=DeprecationWarning)
-3	
-4	import subprocess
-5	import os, sys
-6	try:
-7	    from pkg_resources import get_distribution as distributions
-8	except:
-9	    from importlib_metadata import distributions
-10	from tqdm import tqdm
-11	import urllib.request
-12	from packaging import version as pv
-13	try:
-14	    from folder_paths import models_dir
-15	except:
-16	    from pathlib import Path
-17	    models_dir = os.path.join(Path(__file__).parents[2], &quot;models&quot;)
-18	
-19	sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-20	
-21	req_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;requirements.txt&quot;)
-22	
-23	model_url = &quot;https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/inswapper_128.onnx&quot;
-24	model_name = os.path.basename(model_url)
-25	models_dir_path = os.path.join(models_dir, &quot;insightface&quot;)
-26	model_path = os.path.join(models_dir_path, model_name)
-27	
-28	def run_pip(*args):
-29	    subprocess.run([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;--no-warn-script-location&quot;, *args])
-30	
-31	def is_installed (
-32	        package: str, version: str = None, strict: bool = True
-33	):
-34	    has_package = None
-35	    try:
-36	        has_package = distributions(package)
 37	        if has_package is not None:
 38	            if version is not None:
 39	                installed_version = has_package.version
@@ -410,37 +240,6 @@ pre {
 66	        ort = &quot;onnxruntime-gpu&quot;
 67	        import torch
 68	        cuda_version = None
-69	        if torch.cuda.is_available():
-70	            cuda_version = torch.version.cuda
-71	            print(f&quot;CUDA {cuda_version}&quot;)
-72	        elif torch.backends.mps.is_available() or hasattr(torch,&#x27;dml&#x27;) or hasattr(torch,&#x27;privateuseone&#x27;):
-73	            ort = &quot;onnxruntime&quot;
-74	        if cuda_version is not None and float(cuda_version)&gt;=12: # CU12
-75	            if not is_installed(ort,&quot;1.17.0&quot;,False):
-76	                run_pip(ort,&quot;--extra-index-url&quot;, &quot;https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/&quot;)
-77	        elif not is_installed(ort,&quot;1.16.1&quot;,False):
-78	            run_pip(ort, &quot;-U&quot;)
-79	    except Exception as e:
-80	        print(e)
-81	        print(f&quot;Warning: Failed to install {ort}, ReActor will not work.&quot;)
-82	        raise e
-83	    strict = True
-84	    for package in file:
-85	        package_version = None
-86	        try:
-87	            package = package.strip()
-88	            if &quot;==&quot; in package:
-89	                package_version = package.split(&#x27;==&#x27;)[1]
-90	            elif &quot;&gt;=&quot; in package:
-91	                package_version = package.split(&#x27;&gt;=&#x27;)[1]
-92	                strict = False
-93	            if not is_installed(package,package_version,strict):
-94	                run_pip(package)
-95	        except Exception as e:
-96	            print(e)
-97	            print(f&quot;Warning: Failed to install {package}, ReActor will not work.&quot;)
-98	            raise e
-99	print(&quot;Ok&quot;)
 </pre>
 </div>
 
@@ -455,51 +254,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/install.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/install.py" target="_blank">comfyui-reactor-node/install.py</a><br>
     <b>Line number: </b>56<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
 
 <div class="code">
 <pre>
-1	import warnings
-2	warnings.filterwarnings(&quot;ignore&quot;, category=DeprecationWarning)
-3	
-4	import subprocess
-5	import os, sys
-6	try:
-7	    from pkg_resources import get_distribution as distributions
-8	except:
-9	    from importlib_metadata import distributions
-10	from tqdm import tqdm
-11	import urllib.request
-12	from packaging import version as pv
-13	try:
-14	    from folder_paths import models_dir
-15	except:
-16	    from pathlib import Path
-17	    models_dir = os.path.join(Path(__file__).parents[2], &quot;models&quot;)
-18	
-19	sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-20	
-21	req_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), &quot;requirements.txt&quot;)
-22	
-23	model_url = &quot;https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/inswapper_128.onnx&quot;
-24	model_name = os.path.basename(model_url)
-25	models_dir_path = os.path.join(models_dir, &quot;insightface&quot;)
-26	model_path = os.path.join(models_dir_path, model_name)
-27	
-28	def run_pip(*args):
-29	    subprocess.run([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;--no-warn-script-location&quot;, *args])
-30	
-31	def is_installed (
-32	        package: str, version: str = None, strict: bool = True
-33	):
-34	    has_package = None
-35	    try:
-36	        has_package = distributions(package)
-37	        if has_package is not None:
-38	            if version is not None:
-39	                installed_version = has_package.version
 40	                if (installed_version != version and strict == True) or (pv.parse(installed_version) &lt; pv.parse(version) and strict == False):
 41	                    return False
 42	                else:
@@ -532,34 +292,6 @@ pre {
 69	        if torch.cuda.is_available():
 70	            cuda_version = torch.version.cuda
 71	            print(f&quot;CUDA {cuda_version}&quot;)
-72	        elif torch.backends.mps.is_available() or hasattr(torch,&#x27;dml&#x27;) or hasattr(torch,&#x27;privateuseone&#x27;):
-73	            ort = &quot;onnxruntime&quot;
-74	        if cuda_version is not None and float(cuda_version)&gt;=12: # CU12
-75	            if not is_installed(ort,&quot;1.17.0&quot;,False):
-76	                run_pip(ort,&quot;--extra-index-url&quot;, &quot;https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/&quot;)
-77	        elif not is_installed(ort,&quot;1.16.1&quot;,False):
-78	            run_pip(ort, &quot;-U&quot;)
-79	    except Exception as e:
-80	        print(e)
-81	        print(f&quot;Warning: Failed to install {ort}, ReActor will not work.&quot;)
-82	        raise e
-83	    strict = True
-84	    for package in file:
-85	        package_version = None
-86	        try:
-87	            package = package.strip()
-88	            if &quot;==&quot; in package:
-89	                package_version = package.split(&#x27;==&#x27;)[1]
-90	            elif &quot;&gt;=&quot; in package:
-91	                package_version = package.split(&#x27;&gt;=&#x27;)[1]
-92	                strict = False
-93	            if not is_installed(package,package_version,strict):
-94	                run_pip(package)
-95	        except Exception as e:
-96	            print(e)
-97	            print(f&quot;Warning: Failed to install {package}, ReActor will not work.&quot;)
-98	            raise e
-99	print(&quot;Ok&quot;)
 </pre>
 </div>
 
@@ -574,7 +306,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/dist_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/dist_util.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_basicsr/utils/dist_util.py" target="_blank">comfyui-reactor-node/r_basicsr/utils/dist_util.py</a><br>
     <b>Line number: </b>4<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -612,56 +344,6 @@ pre {
 30	
 31	    If argument ``port`` is not specified, then the master port will be system
 32	    environment variable ``MASTER_PORT``. If ``MASTER_PORT`` is not in system
-33	    environment variable, then a default port ``29500`` will be used.
-34	
-35	    Args:
-36	        backend (str): Backend of torch.distributed.
-37	        port (int, optional): Master port. Defaults to None.
-38	    &quot;&quot;&quot;
-39	    proc_id = int(os.environ[&#x27;SLURM_PROCID&#x27;])
-40	    ntasks = int(os.environ[&#x27;SLURM_NTASKS&#x27;])
-41	    node_list = os.environ[&#x27;SLURM_NODELIST&#x27;]
-42	    num_gpus = torch.cuda.device_count()
-43	    torch.cuda.set_device(proc_id % num_gpus)
-44	    addr = subprocess.getoutput(f&#x27;scontrol show hostname {node_list} | head -n1&#x27;)
-45	    # specify master port
-46	    if port is not None:
-47	        os.environ[&#x27;MASTER_PORT&#x27;] = str(port)
-48	    elif &#x27;MASTER_PORT&#x27; in os.environ:
-49	        pass  # use MASTER_PORT in the environment variable
-50	    else:
-51	        # 29500 is torch.distributed default port
-52	        os.environ[&#x27;MASTER_PORT&#x27;] = &#x27;29500&#x27;
-53	    os.environ[&#x27;MASTER_ADDR&#x27;] = addr
-54	    os.environ[&#x27;WORLD_SIZE&#x27;] = str(ntasks)
-55	    os.environ[&#x27;LOCAL_RANK&#x27;] = str(proc_id % num_gpus)
-56	    os.environ[&#x27;RANK&#x27;] = str(proc_id)
-57	    dist.init_process_group(backend=backend)
-58	
-59	
-60	def get_dist_info():
-61	    if dist.is_available():
-62	        initialized = dist.is_initialized()
-63	    else:
-64	        initialized = False
-65	    if initialized:
-66	        rank = dist.get_rank()
-67	        world_size = dist.get_world_size()
-68	    else:
-69	        rank = 0
-70	        world_size = 1
-71	    return rank, world_size
-72	
-73	
-74	def master_only(func):
-75	
-76	    @functools.wraps(func)
-77	    def wrapper(*args, **kwargs):
-78	        rank, _ = get_dist_info()
-79	        if rank == 0:
-80	            return func(*args, **kwargs)
-81	
-82	    return wrapper
 </pre>
 </div>
 
@@ -676,39 +358,12 @@ pre {
     <b>Severity: </b>HIGH<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/dist_util.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/dist_util.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_basicsr/utils/dist_util.py" target="_blank">comfyui-reactor-node/r_basicsr/utils/dist_util.py</a><br>
     <b>Line number: </b>44<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-1	# Modified from https://github.com/open-mmlab/mmcv/blob/master/mmcv/runner/dist_utils.py  # noqa: E501
-2	import functools
-3	import os
-4	import subprocess
-5	import torch
-6	import torch.distributed as dist
-7	import torch.multiprocessing as mp
-8	
-9	
-10	def init_dist(launcher, backend=&#x27;nccl&#x27;, **kwargs):
-11	    if mp.get_start_method(allow_none=True) is None:
-12	        mp.set_start_method(&#x27;spawn&#x27;)
-13	    if launcher == &#x27;pytorch&#x27;:
-14	        _init_dist_pytorch(backend, **kwargs)
-15	    elif launcher == &#x27;slurm&#x27;:
-16	        _init_dist_slurm(backend, **kwargs)
-17	    else:
-18	        raise ValueError(f&#x27;Invalid launcher type: {launcher}&#x27;)
-19	
-20	
-21	def _init_dist_pytorch(backend, **kwargs):
-22	    rank = int(os.environ[&#x27;RANK&#x27;])
-23	    num_gpus = torch.cuda.device_count()
-24	    torch.cuda.set_device(rank % num_gpus)
-25	    dist.init_process_group(backend=backend, **kwargs)
-26	
-27	
 28	def _init_dist_slurm(backend, port=None):
 29	    &quot;&quot;&quot;Initialize slurm distributed training environment.
 30	
@@ -741,29 +396,6 @@ pre {
 57	    dist.init_process_group(backend=backend)
 58	
 59	
-60	def get_dist_info():
-61	    if dist.is_available():
-62	        initialized = dist.is_initialized()
-63	    else:
-64	        initialized = False
-65	    if initialized:
-66	        rank = dist.get_rank()
-67	        world_size = dist.get_world_size()
-68	    else:
-69	        rank = 0
-70	        world_size = 1
-71	    return rank, world_size
-72	
-73	
-74	def master_only(func):
-75	
-76	    @functools.wraps(func)
-77	    def wrapper(*args, **kwargs):
-78	        rank, _ = get_dist_info()
-79	        if rank == 0:
-80	            return func(*args, **kwargs)
-81	
-82	    return wrapper
 </pre>
 </div>
 
@@ -778,56 +410,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/options.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/options.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_basicsr/utils/options.py" target="_blank">comfyui-reactor-node/r_basicsr/utils/options.py</a><br>
     <b>Line number: </b>77<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
 
 <div class="code">
 <pre>
-17	    &quot;&quot;&quot;
-18	    try:
-19	        from yaml import CDumper as Dumper
-20	        from yaml import CLoader as Loader
-21	    except ImportError:
-22	        from yaml import Dumper, Loader
-23	
-24	    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
-25	
-26	    def dict_representer(dumper, data):
-27	        return dumper.represent_dict(data.items())
-28	
-29	    def dict_constructor(loader, node):
-30	        return OrderedDict(loader.construct_pairs(node))
-31	
-32	    Dumper.add_representer(OrderedDict, dict_representer)
-33	    Loader.add_constructor(_mapping_tag, dict_constructor)
-34	    return Loader, Dumper
-35	
-36	
-37	def dict2str(opt, indent_level=1):
-38	    &quot;&quot;&quot;dict to string for printing options.
-39	
-40	    Args:
-41	        opt (dict): Option dict.
-42	        indent_level (int): Indent level. Default: 1.
-43	
-44	    Return:
-45	        (str): Option string for printing.
-46	    &quot;&quot;&quot;
-47	    msg = &#x27;\n&#x27;
-48	    for k, v in opt.items():
-49	        if isinstance(v, dict):
-50	            msg += &#x27; &#x27; * (indent_level * 2) + k + &#x27;:[&#x27;
-51	            msg += dict2str(v, indent_level + 1)
-52	            msg += &#x27; &#x27; * (indent_level * 2) + &#x27;]\n&#x27;
-53	        else:
-54	            msg += &#x27; &#x27; * (indent_level * 2) + k + &#x27;: &#x27; + str(v) + &#x27;\n&#x27;
-55	    return msg
-56	
-57	
-58	def _postprocess_yml_value(value):
-59	    # None
-60	    if value == &#x27;~&#x27; or value.lower() == &#x27;none&#x27;:
 61	        return None
 62	    # bool
 63	    if value.lower() == &#x27;true&#x27;:
@@ -860,50 +448,6 @@ pre {
 90	        &#x27;--force_yml&#x27;, nargs=&#x27;+&#x27;, default=None, help=&#x27;Force to update yml files. Examples: train:ema_decay=0.999&#x27;)
 91	    args = parser.parse_args()
 92	
-93	    # parse yml to dict
-94	    with open(args.opt, mode=&#x27;r&#x27;) as f:
-95	        opt = yaml.load(f, Loader=ordered_yaml()[0])
-96	
-97	    # distributed settings
-98	    if args.launcher == &#x27;none&#x27;:
-99	        opt[&#x27;dist&#x27;] = False
-100	        print(&#x27;Disable distributed.&#x27;, flush=True)
-101	    else:
-102	        opt[&#x27;dist&#x27;] = True
-103	        if args.launcher == &#x27;slurm&#x27; and &#x27;dist_params&#x27; in opt:
-104	            init_dist(args.launcher, **opt[&#x27;dist_params&#x27;])
-105	        else:
-106	            init_dist(args.launcher)
-107	    opt[&#x27;rank&#x27;], opt[&#x27;world_size&#x27;] = get_dist_info()
-108	
-109	    # random seed
-110	    seed = opt.get(&#x27;manual_seed&#x27;)
-111	    if seed is None:
-112	        seed = random.randint(1, 10000)
-113	        opt[&#x27;manual_seed&#x27;] = seed
-114	    set_random_seed(seed + opt[&#x27;rank&#x27;])
-115	
-116	    # force to update yml options
-117	    if args.force_yml is not None:
-118	        for entry in args.force_yml:
-119	            # now do not support creating new keys
-120	            keys, value = entry.split(&#x27;=&#x27;)
-121	            keys, value = keys.strip(), value.strip()
-122	            value = _postprocess_yml_value(value)
-123	            eval_str = &#x27;opt&#x27;
-124	            for key in keys.split(&#x27;:&#x27;):
-125	                eval_str += f&#x27;[&quot;{key}&quot;]&#x27;
-126	            eval_str += &#x27;=value&#x27;
-127	            # using exec function
-128	            exec(eval_str)
-129	
-130	    opt[&#x27;auto_resume&#x27;] = args.auto_resume
-131	    opt[&#x27;is_train&#x27;] = is_train
-132	
-133	    # debug setting
-134	    if args.debug and not opt[&#x27;name&#x27;].startswith(&#x27;debug&#x27;):
-135	        opt[&#x27;name&#x27;] = &#x27;debug_&#x27; + opt[&#x27;name&#x27;]
-136	
 </pre>
 </div>
 
@@ -918,56 +462,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/options.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/options.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_basicsr/utils/options.py" target="_blank">comfyui-reactor-node/r_basicsr/utils/options.py</a><br>
     <b>Line number: </b>95<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
 
 <div class="code">
 <pre>
-35	
-36	
-37	def dict2str(opt, indent_level=1):
-38	    &quot;&quot;&quot;dict to string for printing options.
-39	
-40	    Args:
-41	        opt (dict): Option dict.
-42	        indent_level (int): Indent level. Default: 1.
-43	
-44	    Return:
-45	        (str): Option string for printing.
-46	    &quot;&quot;&quot;
-47	    msg = &#x27;\n&#x27;
-48	    for k, v in opt.items():
-49	        if isinstance(v, dict):
-50	            msg += &#x27; &#x27; * (indent_level * 2) + k + &#x27;:[&#x27;
-51	            msg += dict2str(v, indent_level + 1)
-52	            msg += &#x27; &#x27; * (indent_level * 2) + &#x27;]\n&#x27;
-53	        else:
-54	            msg += &#x27; &#x27; * (indent_level * 2) + k + &#x27;: &#x27; + str(v) + &#x27;\n&#x27;
-55	    return msg
-56	
-57	
-58	def _postprocess_yml_value(value):
-59	    # None
-60	    if value == &#x27;~&#x27; or value.lower() == &#x27;none&#x27;:
-61	        return None
-62	    # bool
-63	    if value.lower() == &#x27;true&#x27;:
-64	        return True
-65	    elif value.lower() == &#x27;false&#x27;:
-66	        return False
-67	    # !!float number
-68	    if value.startswith(&#x27;!!float&#x27;):
-69	        return float(value.replace(&#x27;!!float&#x27;, &#x27;&#x27;))
-70	    # number
-71	    if value.isdigit():
-72	        return int(value)
-73	    elif value.replace(&#x27;.&#x27;, &#x27;&#x27;, 1).isdigit() and value.count(&#x27;.&#x27;) &lt; 2:
-74	        return float(value)
-75	    # list
-76	    if value.startswith(&#x27;[&#x27;):
-77	        return eval(value)
-78	    # str
 79	    return value
 80	
 81	
@@ -1000,50 +500,6 @@ pre {
 108	
 109	    # random seed
 110	    seed = opt.get(&#x27;manual_seed&#x27;)
-111	    if seed is None:
-112	        seed = random.randint(1, 10000)
-113	        opt[&#x27;manual_seed&#x27;] = seed
-114	    set_random_seed(seed + opt[&#x27;rank&#x27;])
-115	
-116	    # force to update yml options
-117	    if args.force_yml is not None:
-118	        for entry in args.force_yml:
-119	            # now do not support creating new keys
-120	            keys, value = entry.split(&#x27;=&#x27;)
-121	            keys, value = keys.strip(), value.strip()
-122	            value = _postprocess_yml_value(value)
-123	            eval_str = &#x27;opt&#x27;
-124	            for key in keys.split(&#x27;:&#x27;):
-125	                eval_str += f&#x27;[&quot;{key}&quot;]&#x27;
-126	            eval_str += &#x27;=value&#x27;
-127	            # using exec function
-128	            exec(eval_str)
-129	
-130	    opt[&#x27;auto_resume&#x27;] = args.auto_resume
-131	    opt[&#x27;is_train&#x27;] = is_train
-132	
-133	    # debug setting
-134	    if args.debug and not opt[&#x27;name&#x27;].startswith(&#x27;debug&#x27;):
-135	        opt[&#x27;name&#x27;] = &#x27;debug_&#x27; + opt[&#x27;name&#x27;]
-136	
-137	    if opt[&#x27;num_gpu&#x27;] == &#x27;auto&#x27;:
-138	        opt[&#x27;num_gpu&#x27;] = torch.cuda.device_count()
-139	
-140	    # datasets
-141	    for phase, dataset in opt[&#x27;datasets&#x27;].items():
-142	        # for multiple datasets, e.g., val_1, val_2; test_1, test_2
-143	        phase = phase.split(&#x27;_&#x27;)[0]
-144	        dataset[&#x27;phase&#x27;] = phase
-145	        if &#x27;scale&#x27; in opt:
-146	            dataset[&#x27;scale&#x27;] = opt[&#x27;scale&#x27;]
-147	        if dataset.get(&#x27;dataroot_gt&#x27;) is not None:
-148	            dataset[&#x27;dataroot_gt&#x27;] = osp.expanduser(dataset[&#x27;dataroot_gt&#x27;])
-149	        if dataset.get(&#x27;dataroot_lq&#x27;) is not None:
-150	            dataset[&#x27;dataroot_lq&#x27;] = osp.expanduser(dataset[&#x27;dataroot_lq&#x27;])
-151	
-152	    # paths
-153	    for key, val in opt[&#x27;path&#x27;].items():
-154	        if (val is not None) and (&#x27;resume_state&#x27; in key or &#x27;pretrain_network&#x27; in key):
 </pre>
 </div>
 
@@ -1058,56 +514,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/options.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_basicsr/utils/options.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_basicsr/utils/options.py" target="_blank">comfyui-reactor-node/r_basicsr/utils/options.py</a><br>
     <b>Line number: </b>128<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html</a><br>
 
 <div class="code">
 <pre>
-68	    if value.startswith(&#x27;!!float&#x27;):
-69	        return float(value.replace(&#x27;!!float&#x27;, &#x27;&#x27;))
-70	    # number
-71	    if value.isdigit():
-72	        return int(value)
-73	    elif value.replace(&#x27;.&#x27;, &#x27;&#x27;, 1).isdigit() and value.count(&#x27;.&#x27;) &lt; 2:
-74	        return float(value)
-75	    # list
-76	    if value.startswith(&#x27;[&#x27;):
-77	        return eval(value)
-78	    # str
-79	    return value
-80	
-81	
-82	def parse_options(root_path, is_train=True):
-83	    parser = argparse.ArgumentParser()
-84	    parser.add_argument(&#x27;-opt&#x27;, type=str, required=True, help=&#x27;Path to option YAML file.&#x27;)
-85	    parser.add_argument(&#x27;--launcher&#x27;, choices=[&#x27;none&#x27;, &#x27;pytorch&#x27;, &#x27;slurm&#x27;], default=&#x27;none&#x27;, help=&#x27;job launcher&#x27;)
-86	    parser.add_argument(&#x27;--auto_resume&#x27;, action=&#x27;store_true&#x27;)
-87	    parser.add_argument(&#x27;--debug&#x27;, action=&#x27;store_true&#x27;)
-88	    parser.add_argument(&#x27;--local_rank&#x27;, type=int, default=0)
-89	    parser.add_argument(
-90	        &#x27;--force_yml&#x27;, nargs=&#x27;+&#x27;, default=None, help=&#x27;Force to update yml files. Examples: train:ema_decay=0.999&#x27;)
-91	    args = parser.parse_args()
-92	
-93	    # parse yml to dict
-94	    with open(args.opt, mode=&#x27;r&#x27;) as f:
-95	        opt = yaml.load(f, Loader=ordered_yaml()[0])
-96	
-97	    # distributed settings
-98	    if args.launcher == &#x27;none&#x27;:
-99	        opt[&#x27;dist&#x27;] = False
-100	        print(&#x27;Disable distributed.&#x27;, flush=True)
-101	    else:
-102	        opt[&#x27;dist&#x27;] = True
-103	        if args.launcher == &#x27;slurm&#x27; and &#x27;dist_params&#x27; in opt:
-104	            init_dist(args.launcher, **opt[&#x27;dist_params&#x27;])
-105	        else:
-106	            init_dist(args.launcher)
-107	    opt[&#x27;rank&#x27;], opt[&#x27;world_size&#x27;] = get_dist_info()
-108	
-109	    # random seed
-110	    seed = opt.get(&#x27;manual_seed&#x27;)
-111	    if seed is None:
 112	        seed = random.randint(1, 10000)
 113	        opt[&#x27;manual_seed&#x27;] = seed
 114	    set_random_seed(seed + opt[&#x27;rank&#x27;])
@@ -1140,50 +552,6 @@ pre {
 141	    for phase, dataset in opt[&#x27;datasets&#x27;].items():
 142	        # for multiple datasets, e.g., val_1, val_2; test_1, test_2
 143	        phase = phase.split(&#x27;_&#x27;)[0]
-144	        dataset[&#x27;phase&#x27;] = phase
-145	        if &#x27;scale&#x27; in opt:
-146	            dataset[&#x27;scale&#x27;] = opt[&#x27;scale&#x27;]
-147	        if dataset.get(&#x27;dataroot_gt&#x27;) is not None:
-148	            dataset[&#x27;dataroot_gt&#x27;] = osp.expanduser(dataset[&#x27;dataroot_gt&#x27;])
-149	        if dataset.get(&#x27;dataroot_lq&#x27;) is not None:
-150	            dataset[&#x27;dataroot_lq&#x27;] = osp.expanduser(dataset[&#x27;dataroot_lq&#x27;])
-151	
-152	    # paths
-153	    for key, val in opt[&#x27;path&#x27;].items():
-154	        if (val is not None) and (&#x27;resume_state&#x27; in key or &#x27;pretrain_network&#x27; in key):
-155	            opt[&#x27;path&#x27;][key] = osp.expanduser(val)
-156	
-157	    if is_train:
-158	        experiments_root = osp.join(root_path, &#x27;experiments&#x27;, opt[&#x27;name&#x27;])
-159	        opt[&#x27;path&#x27;][&#x27;experiments_root&#x27;] = experiments_root
-160	        opt[&#x27;path&#x27;][&#x27;models&#x27;] = osp.join(experiments_root, &#x27;models&#x27;)
-161	        opt[&#x27;path&#x27;][&#x27;training_states&#x27;] = osp.join(experiments_root, &#x27;training_states&#x27;)
-162	        opt[&#x27;path&#x27;][&#x27;log&#x27;] = experiments_root
-163	        opt[&#x27;path&#x27;][&#x27;visualization&#x27;] = osp.join(experiments_root, &#x27;visualization&#x27;)
-164	
-165	        # change some options for debug mode
-166	        if &#x27;debug&#x27; in opt[&#x27;name&#x27;]:
-167	            if &#x27;val&#x27; in opt:
-168	                opt[&#x27;val&#x27;][&#x27;val_freq&#x27;] = 8
-169	            opt[&#x27;logger&#x27;][&#x27;print_freq&#x27;] = 1
-170	            opt[&#x27;logger&#x27;][&#x27;save_checkpoint_freq&#x27;] = 8
-171	    else:  # test
-172	        results_root = osp.join(root_path, &#x27;results&#x27;, opt[&#x27;name&#x27;])
-173	        opt[&#x27;path&#x27;][&#x27;results_root&#x27;] = results_root
-174	        opt[&#x27;path&#x27;][&#x27;log&#x27;] = results_root
-175	        opt[&#x27;path&#x27;][&#x27;visualization&#x27;] = osp.join(results_root, &#x27;visualization&#x27;)
-176	
-177	    return opt, args
-178	
-179	
-180	@master_only
-181	def copy_opt_file(opt_file, experiments_root):
-182	    # copy the yml file to the experiment root
-183	    import sys
-184	    import time
-185	    from shutil import copyfile
-186	    cmd = &#x27; &#x27;.join(sys.argv)
-187	    filename = osp.join(experiments_root, osp.basename(opt_file))
 </pre>
 </div>
 
@@ -1198,56 +566,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py" target="_blank">comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py</a><br>
     <b>Line number: </b>188<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
 
 <div class="code">
 <pre>
-128	
-129	            x = m(x)  # run
-130	            y.append(x if m.i in self.save else None)  # save output
-131	
-132	        return x
-133	
-134	    def _initialize_biases(self, cf=None):  # initialize biases into Detect(), cf is class frequency
-135	        # https://arxiv.org/abs/1708.02002 section 3.3
-136	        m = self.model[-1]  # Detect() module
-137	        for mi, s in zip(m.m, m.stride):  # from
-138	            b = mi.bias.view(m.na, -1)  # conv.bias(255) to (3,85)
-139	            b.data[:, 4] += math.log(8 / (640 / s) ** 2)  # obj (8 objects per 640 image)
-140	            b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
-141	            mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
-142	
-143	    def _print_biases(self):
-144	        m = self.model[-1]  # Detect() module
-145	        for mi in m.m:  # from
-146	            b = mi.bias.detach().view(m.na, -1).T  # conv.bias(255) to (3,85)
-147	            print((&quot;%6g Conv2d.bias:&quot; + &quot;%10.3g&quot; * 6) % (mi.weight.shape[1], *b[:5].mean(1).tolist(), b[5:].mean()))
-148	
-149	    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
-150	        print(&quot;Fusing layers... &quot;)
-151	        for m in self.model.modules():
-152	            if isinstance(m, Conv) and hasattr(m, &quot;bn&quot;):
-153	                m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
-154	                delattr(m, &quot;bn&quot;)  # remove batchnorm
-155	                m.forward = m.fuseforward  # update forward
-156	            elif type(m) is nn.Upsample:
-157	                m.recompute_scale_factor = None  # torch 1.11.0 compatibility
-158	        return self
-159	
-160	    def nms(self, mode=True):  # add or remove NMS module
-161	        present = isinstance(self.model[-1], NMS)  # last layer is NMS
-162	        if mode and not present:
-163	            print(&quot;Adding NMS... &quot;)
-164	            m = NMS()  # module
-165	            m.f = -1  # from
-166	            m.i = self.model[-1].i + 1  # index
-167	            self.model.add_module(name=str(m.i), module=m)  # add
-168	            self.eval()
-169	        elif not mode and present:
-170	            print(&quot;Removing NMS... &quot;)
-171	            self.model = self.model[:-1]  # remove
 172	        return self
 173	
 174	    def autoshape(self):  # add autoShape module
@@ -1280,38 +604,6 @@ pre {
 201	            MixConv2d,
 202	            Focus,
 203	            CrossConv,
-204	            BottleneckCSP,
-205	            C3,
-206	            ShuffleV2Block,
-207	            StemBlock,
-208	        ]:
-209	            c1, c2 = ch[f], args[0]
-210	
-211	            c2 = make_divisible(c2 * gw, 8) if c2 != no else c2
-212	
-213	            args = [c1, c2, *args[1:]]
-214	            if m in [BottleneckCSP, C3]:
-215	                args.insert(2, n)
-216	                n = 1
-217	        elif m is nn.BatchNorm2d:
-218	            args = [ch[f]]
-219	        elif m is Concat:
-220	            c2 = sum(ch[-1 if x == -1 else x + 1] for x in f)
-221	        elif m is Detect:
-222	            args.append([ch[x + 1] for x in f])
-223	            if isinstance(args[1], int):  # number of anchors
-224	                args[1] = [list(range(args[1] * 2))] * len(f)
-225	        else:
-226	            c2 = ch[f]
-227	
-228	        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module
-229	        t = str(m)[8:-2].replace(&quot;__main__.&quot;, &quot;&quot;)  # module type
-230	        np = sum(x.numel() for x in m_.parameters())  # number params
-231	        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#x27;from&#x27; index, type, number params
-232	        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
-233	        layers.append(m_)
-234	        ch.append(c2)
-235	    return nn.Sequential(*layers), sorted(save)
 </pre>
 </div>
 
@@ -1326,56 +618,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py" target="_blank">comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py</a><br>
     <b>Line number: </b>191<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
 
 <div class="code">
 <pre>
-131	
-132	        return x
-133	
-134	    def _initialize_biases(self, cf=None):  # initialize biases into Detect(), cf is class frequency
-135	        # https://arxiv.org/abs/1708.02002 section 3.3
-136	        m = self.model[-1]  # Detect() module
-137	        for mi, s in zip(m.m, m.stride):  # from
-138	            b = mi.bias.view(m.na, -1)  # conv.bias(255) to (3,85)
-139	            b.data[:, 4] += math.log(8 / (640 / s) ** 2)  # obj (8 objects per 640 image)
-140	            b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
-141	            mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
-142	
-143	    def _print_biases(self):
-144	        m = self.model[-1]  # Detect() module
-145	        for mi in m.m:  # from
-146	            b = mi.bias.detach().view(m.na, -1).T  # conv.bias(255) to (3,85)
-147	            print((&quot;%6g Conv2d.bias:&quot; + &quot;%10.3g&quot; * 6) % (mi.weight.shape[1], *b[:5].mean(1).tolist(), b[5:].mean()))
-148	
-149	    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
-150	        print(&quot;Fusing layers... &quot;)
-151	        for m in self.model.modules():
-152	            if isinstance(m, Conv) and hasattr(m, &quot;bn&quot;):
-153	                m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
-154	                delattr(m, &quot;bn&quot;)  # remove batchnorm
-155	                m.forward = m.fuseforward  # update forward
-156	            elif type(m) is nn.Upsample:
-157	                m.recompute_scale_factor = None  # torch 1.11.0 compatibility
-158	        return self
-159	
-160	    def nms(self, mode=True):  # add or remove NMS module
-161	        present = isinstance(self.model[-1], NMS)  # last layer is NMS
-162	        if mode and not present:
-163	            print(&quot;Adding NMS... &quot;)
-164	            m = NMS()  # module
-165	            m.f = -1  # from
-166	            m.i = self.model[-1].i + 1  # index
-167	            self.model.add_module(name=str(m.i), module=m)  # add
-168	            self.eval()
-169	        elif not mode and present:
-170	            print(&quot;Removing NMS... &quot;)
-171	            self.model = self.model[:-1]  # remove
-172	        return self
-173	
-174	    def autoshape(self):  # add autoShape module
 175	        print(&quot;Adding autoShape... &quot;)
 176	        m = AutoShape(self)  # wrap model
 177	        copy_attr(m, self, include=(&quot;yaml&quot;, &quot;nc&quot;, &quot;hyp&quot;, &quot;names&quot;, &quot;stride&quot;), exclude=())  # copy attributes
@@ -1408,35 +656,6 @@ pre {
 204	            BottleneckCSP,
 205	            C3,
 206	            ShuffleV2Block,
-207	            StemBlock,
-208	        ]:
-209	            c1, c2 = ch[f], args[0]
-210	
-211	            c2 = make_divisible(c2 * gw, 8) if c2 != no else c2
-212	
-213	            args = [c1, c2, *args[1:]]
-214	            if m in [BottleneckCSP, C3]:
-215	                args.insert(2, n)
-216	                n = 1
-217	        elif m is nn.BatchNorm2d:
-218	            args = [ch[f]]
-219	        elif m is Concat:
-220	            c2 = sum(ch[-1 if x == -1 else x + 1] for x in f)
-221	        elif m is Detect:
-222	            args.append([ch[x + 1] for x in f])
-223	            if isinstance(args[1], int):  # number of anchors
-224	                args[1] = [list(range(args[1] * 2))] * len(f)
-225	        else:
-226	            c2 = ch[f]
-227	
-228	        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module
-229	        t = str(m)[8:-2].replace(&quot;__main__.&quot;, &quot;&quot;)  # module type
-230	        np = sum(x.numel() for x in m_.parameters())  # number params
-231	        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#x27;from&#x27; index, type, number params
-232	        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
-233	        layers.append(m_)
-234	        ch.append(c2)
-235	    return nn.Sequential(*layers), sorted(save)
 </pre>
 </div>
 
@@ -1451,56 +670,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py" target="_blank">comfyui-reactor-node/r_facelib/detection/yolov5face/models/yolo.py</a><br>
     <b>Line number: </b>192<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-132	        return x
-133	
-134	    def _initialize_biases(self, cf=None):  # initialize biases into Detect(), cf is class frequency
-135	        # https://arxiv.org/abs/1708.02002 section 3.3
-136	        m = self.model[-1]  # Detect() module
-137	        for mi, s in zip(m.m, m.stride):  # from
-138	            b = mi.bias.view(m.na, -1)  # conv.bias(255) to (3,85)
-139	            b.data[:, 4] += math.log(8 / (640 / s) ** 2)  # obj (8 objects per 640 image)
-140	            b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
-141	            mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
-142	
-143	    def _print_biases(self):
-144	        m = self.model[-1]  # Detect() module
-145	        for mi in m.m:  # from
-146	            b = mi.bias.detach().view(m.na, -1).T  # conv.bias(255) to (3,85)
-147	            print((&quot;%6g Conv2d.bias:&quot; + &quot;%10.3g&quot; * 6) % (mi.weight.shape[1], *b[:5].mean(1).tolist(), b[5:].mean()))
-148	
-149	    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
-150	        print(&quot;Fusing layers... &quot;)
-151	        for m in self.model.modules():
-152	            if isinstance(m, Conv) and hasattr(m, &quot;bn&quot;):
-153	                m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
-154	                delattr(m, &quot;bn&quot;)  # remove batchnorm
-155	                m.forward = m.fuseforward  # update forward
-156	            elif type(m) is nn.Upsample:
-157	                m.recompute_scale_factor = None  # torch 1.11.0 compatibility
-158	        return self
-159	
-160	    def nms(self, mode=True):  # add or remove NMS module
-161	        present = isinstance(self.model[-1], NMS)  # last layer is NMS
-162	        if mode and not present:
-163	            print(&quot;Adding NMS... &quot;)
-164	            m = NMS()  # module
-165	            m.f = -1  # from
-166	            m.i = self.model[-1].i + 1  # index
-167	            self.model.add_module(name=str(m.i), module=m)  # add
-168	            self.eval()
-169	        elif not mode and present:
-170	            print(&quot;Removing NMS... &quot;)
-171	            self.model = self.model[:-1]  # remove
-172	        return self
-173	
-174	    def autoshape(self):  # add autoShape module
-175	        print(&quot;Adding autoShape... &quot;)
 176	        m = AutoShape(self)  # wrap model
 177	        copy_attr(m, self, include=(&quot;yaml&quot;, &quot;nc&quot;, &quot;hyp&quot;, &quot;names&quot;, &quot;stride&quot;), exclude=())  # copy attributes
 178	        return m
@@ -1534,33 +709,6 @@ pre {
 206	            ShuffleV2Block,
 207	            StemBlock,
 208	        ]:
-209	            c1, c2 = ch[f], args[0]
-210	
-211	            c2 = make_divisible(c2 * gw, 8) if c2 != no else c2
-212	
-213	            args = [c1, c2, *args[1:]]
-214	            if m in [BottleneckCSP, C3]:
-215	                args.insert(2, n)
-216	                n = 1
-217	        elif m is nn.BatchNorm2d:
-218	            args = [ch[f]]
-219	        elif m is Concat:
-220	            c2 = sum(ch[-1 if x == -1 else x + 1] for x in f)
-221	        elif m is Detect:
-222	            args.append([ch[x + 1] for x in f])
-223	            if isinstance(args[1], int):  # number of anchors
-224	                args[1] = [list(range(args[1] * 2))] * len(f)
-225	        else:
-226	            c2 = ch[f]
-227	
-228	        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module
-229	        t = str(m)[8:-2].replace(&quot;__main__.&quot;, &quot;&quot;)  # module type
-230	        np = sum(x.numel() for x in m_.parameters())  # number params
-231	        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#x27;from&#x27; index, type, number params
-232	        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
-233	        layers.append(m_)
-234	        ch.append(c2)
-235	    return nn.Sequential(*layers), sorted(save)
 </pre>
 </div>
 
@@ -1575,56 +723,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/reactor_utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/reactor_utils.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/reactor_utils.py" target="_blank">comfyui-reactor-node/reactor_utils.py</a><br>
     <b>Line number: </b>113<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
 
 <div class="code">
 <pre>
-53	            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-54	        img = torch.from_numpy(img.transpose(2, 0, 1))
-55	        if float32:
-56	            img = img.float()
-57	        return img
-58	
-59	    if isinstance(imgs, list):
-60	        return [_totensor(img, bgr2rgb, float32) for img in imgs]
-61	    else:
-62	        return _totensor(imgs, bgr2rgb, float32)
-63	
-64	
-65	def tensor2img(tensor, rgb2bgr=True, out_type=np.uint8, min_max=(0, 1)):
-66	
-67	    if not (torch.is_tensor(tensor) or (isinstance(tensor, list) and all(torch.is_tensor(t) for t in tensor))):
-68	        raise TypeError(f&#x27;tensor or list of tensors expected, got {type(tensor)}&#x27;)
-69	
-70	    if torch.is_tensor(tensor):
-71	        tensor = [tensor]
-72	    result = []
-73	    for _tensor in tensor:
-74	        _tensor = _tensor.squeeze(0).float().detach().cpu().clamp_(*min_max)
-75	        _tensor = (_tensor - min_max[0]) / (min_max[1] - min_max[0])
-76	
-77	        n_dim = _tensor.dim()
-78	        if n_dim == 4:
-79	            img_np = make_grid(_tensor, nrow=int(math.sqrt(_tensor.size(0))), normalize=False).numpy()
-80	            img_np = img_np.transpose(1, 2, 0)
-81	            if rgb2bgr:
-82	                img_np = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
-83	        elif n_dim == 3:
-84	            img_np = _tensor.numpy()
-85	            img_np = img_np.transpose(1, 2, 0)
-86	            if img_np.shape[2] == 1:  # gray image
-87	                img_np = np.squeeze(img_np, axis=2)
-88	            else:
-89	                if rgb2bgr:
-90	                    img_np = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
-91	        elif n_dim == 2:
-92	            img_np = _tensor.numpy()
-93	        else:
-94	            raise TypeError(&#x27;Only support 4D, 3D or 2D tensor. &#x27; f&#x27;But received with dimension: {n_dim}&#x27;)
-95	        if out_type == np.uint8:
-96	            # Unlike MATLAB, numpy.unit8() WILL NOT round by default.
 97	            img_np = (img_np * 255.0).round()
 98	        img_np = img_np.astype(out_type)
 99	        result.append(img_np)
@@ -1657,50 +761,6 @@ pre {
 126	                os.rename(move_old_path, move_new_path)
 127	            os.rmdir(old_path)
 128	        except Exception as e:
-129	            print(f&quot;Error: {e}&quot;)
-130	            new_path = old_path
-131	
-132	
-133	def addLoggingLevel(levelName, levelNum, methodName=None):
-134	    if not methodName:
-135	        methodName = levelName.lower()
-136	
-137	    def logForLevel(self, message, *args, **kwargs):
-138	        if self.isEnabledFor(levelNum):
-139	            self._log(levelNum, message, args, **kwargs)
-140	
-141	    def logToRoot(message, *args, **kwargs):
-142	        logging.log(levelNum, message, *args, **kwargs)
-143	
-144	    logging.addLevelName(levelNum, levelName)
-145	    setattr(logging, levelName, levelNum)
-146	    setattr(logging.getLoggerClass(), methodName, logForLevel)
-147	    setattr(logging, methodName, logToRoot)
-148	
-149	
-150	def get_image_md5hash(image: Image.Image):
-151	    md5hash = hashlib.md5(image.tobytes())
-152	    return md5hash.hexdigest()
-153	
-154	
-155	def save_face_model(face: Face, filename: str) -&gt; None:
-156	    try:
-157	        tensors = {
-158	            &quot;bbox&quot;: torch.tensor(face[&quot;bbox&quot;]),
-159	            &quot;kps&quot;: torch.tensor(face[&quot;kps&quot;]),
-160	            &quot;det_score&quot;: torch.tensor(face[&quot;det_score&quot;]),
-161	            &quot;landmark_3d_68&quot;: torch.tensor(face[&quot;landmark_3d_68&quot;]),
-162	            &quot;pose&quot;: torch.tensor(face[&quot;pose&quot;]),
-163	            &quot;landmark_2d_106&quot;: torch.tensor(face[&quot;landmark_2d_106&quot;]),
-164	            &quot;embedding&quot;: torch.tensor(face[&quot;embedding&quot;]),
-165	            &quot;gender&quot;: torch.tensor(face[&quot;gender&quot;]),
-166	            &quot;age&quot;: torch.tensor(face[&quot;age&quot;]),
-167	        }
-168	        save_file(tensors, filename)
-169	        print(f&quot;Face model has been saved to &#x27;{filename}&#x27;&quot;)
-170	    except Exception as e:
-171	        print(f&quot;Error: {e}&quot;)
-172	
 </pre>
 </div>
 
@@ -1715,56 +775,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/reactor_utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/reactor_utils.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/reactor_utils.py" target="_blank">comfyui-reactor-node/reactor_utils.py</a><br>
     <b>Line number: </b>116<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
 
 <div class="code">
 <pre>
-56	            img = img.float()
-57	        return img
-58	
-59	    if isinstance(imgs, list):
-60	        return [_totensor(img, bgr2rgb, float32) for img in imgs]
-61	    else:
-62	        return _totensor(imgs, bgr2rgb, float32)
-63	
-64	
-65	def tensor2img(tensor, rgb2bgr=True, out_type=np.uint8, min_max=(0, 1)):
-66	
-67	    if not (torch.is_tensor(tensor) or (isinstance(tensor, list) and all(torch.is_tensor(t) for t in tensor))):
-68	        raise TypeError(f&#x27;tensor or list of tensors expected, got {type(tensor)}&#x27;)
-69	
-70	    if torch.is_tensor(tensor):
-71	        tensor = [tensor]
-72	    result = []
-73	    for _tensor in tensor:
-74	        _tensor = _tensor.squeeze(0).float().detach().cpu().clamp_(*min_max)
-75	        _tensor = (_tensor - min_max[0]) / (min_max[1] - min_max[0])
-76	
-77	        n_dim = _tensor.dim()
-78	        if n_dim == 4:
-79	            img_np = make_grid(_tensor, nrow=int(math.sqrt(_tensor.size(0))), normalize=False).numpy()
-80	            img_np = img_np.transpose(1, 2, 0)
-81	            if rgb2bgr:
-82	                img_np = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
-83	        elif n_dim == 3:
-84	            img_np = _tensor.numpy()
-85	            img_np = img_np.transpose(1, 2, 0)
-86	            if img_np.shape[2] == 1:  # gray image
-87	                img_np = np.squeeze(img_np, axis=2)
-88	            else:
-89	                if rgb2bgr:
-90	                    img_np = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
-91	        elif n_dim == 2:
-92	            img_np = _tensor.numpy()
-93	        else:
-94	            raise TypeError(&#x27;Only support 4D, 3D or 2D tensor. &#x27; f&#x27;But received with dimension: {n_dim}&#x27;)
-95	        if out_type == np.uint8:
-96	            # Unlike MATLAB, numpy.unit8() WILL NOT round by default.
-97	            img_np = (img_np * 255.0).round()
-98	        img_np = img_np.astype(out_type)
-99	        result.append(img_np)
 100	    if len(result) == 1:
 101	        result = result[0]
 102	    return result
@@ -1797,50 +813,6 @@ pre {
 129	            print(f&quot;Error: {e}&quot;)
 130	            new_path = old_path
 131	
-132	
-133	def addLoggingLevel(levelName, levelNum, methodName=None):
-134	    if not methodName:
-135	        methodName = levelName.lower()
-136	
-137	    def logForLevel(self, message, *args, **kwargs):
-138	        if self.isEnabledFor(levelNum):
-139	            self._log(levelNum, message, args, **kwargs)
-140	
-141	    def logToRoot(message, *args, **kwargs):
-142	        logging.log(levelNum, message, *args, **kwargs)
-143	
-144	    logging.addLevelName(levelNum, levelName)
-145	    setattr(logging, levelName, levelNum)
-146	    setattr(logging.getLoggerClass(), methodName, logForLevel)
-147	    setattr(logging, methodName, logToRoot)
-148	
-149	
-150	def get_image_md5hash(image: Image.Image):
-151	    md5hash = hashlib.md5(image.tobytes())
-152	    return md5hash.hexdigest()
-153	
-154	
-155	def save_face_model(face: Face, filename: str) -&gt; None:
-156	    try:
-157	        tensors = {
-158	            &quot;bbox&quot;: torch.tensor(face[&quot;bbox&quot;]),
-159	            &quot;kps&quot;: torch.tensor(face[&quot;kps&quot;]),
-160	            &quot;det_score&quot;: torch.tensor(face[&quot;det_score&quot;]),
-161	            &quot;landmark_3d_68&quot;: torch.tensor(face[&quot;landmark_3d_68&quot;]),
-162	            &quot;pose&quot;: torch.tensor(face[&quot;pose&quot;]),
-163	            &quot;landmark_2d_106&quot;: torch.tensor(face[&quot;landmark_2d_106&quot;]),
-164	            &quot;embedding&quot;: torch.tensor(face[&quot;embedding&quot;]),
-165	            &quot;gender&quot;: torch.tensor(face[&quot;gender&quot;]),
-166	            &quot;age&quot;: torch.tensor(face[&quot;age&quot;]),
-167	        }
-168	        save_file(tensors, filename)
-169	        print(f&quot;Face model has been saved to &#x27;{filename}&#x27;&quot;)
-170	    except Exception as e:
-171	        print(f&quot;Error: {e}&quot;)
-172	
-173	
-174	def load_face_model(filename: str):
-175	    face = {}
 </pre>
 </div>
 
@@ -1855,56 +827,12 @@ pre {
     <b>Severity: </b>HIGH<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/reactor_utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/reactor_utils.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/reactor_utils.py" target="_blank">comfyui-reactor-node/reactor_utils.py</a><br>
     <b>Line number: </b>151<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
 
 <div class="code">
 <pre>
-91	        elif n_dim == 2:
-92	            img_np = _tensor.numpy()
-93	        else:
-94	            raise TypeError(&#x27;Only support 4D, 3D or 2D tensor. &#x27; f&#x27;But received with dimension: {n_dim}&#x27;)
-95	        if out_type == np.uint8:
-96	            # Unlike MATLAB, numpy.unit8() WILL NOT round by default.
-97	            img_np = (img_np * 255.0).round()
-98	        img_np = img_np.astype(out_type)
-99	        result.append(img_np)
-100	    if len(result) == 1:
-101	        result = result[0]
-102	    return result
-103	
-104	
-105	def rgba2rgb_tensor(rgba):
-106	    r = rgba[...,0]
-107	    g = rgba[...,1]
-108	    b = rgba[...,2]
-109	    return torch.stack([r, g, b], dim=3)
-110	
-111	
-112	def download(url, path, name):
-113	    request = urllib.request.urlopen(url)
-114	    total = int(request.headers.get(&#x27;Content-Length&#x27;, 0))
-115	    with tqdm(total=total, desc=f&#x27;[ReActor] Downloading {name} to {path}&#x27;, unit=&#x27;B&#x27;, unit_scale=True, unit_divisor=1024) as progress:
-116	        urllib.request.urlretrieve(url, path, reporthook=lambda count, block_size, total_size: progress.update(block_size))
-117	
-118	
-119	def move_path(old_path, new_path):
-120	    if os.path.exists(old_path):
-121	        try:
-122	            models = os.listdir(old_path)
-123	            for model in models:
-124	                move_old_path = os.path.join(old_path, model)
-125	                move_new_path = os.path.join(new_path, model)
-126	                os.rename(move_old_path, move_new_path)
-127	            os.rmdir(old_path)
-128	        except Exception as e:
-129	            print(f&quot;Error: {e}&quot;)
-130	            new_path = old_path
-131	
-132	
-133	def addLoggingLevel(levelName, levelNum, methodName=None):
-134	    if not methodName:
 135	        methodName = levelName.lower()
 136	
 137	    def logForLevel(self, message, *args, **kwargs):
@@ -1937,50 +865,6 @@ pre {
 164	            &quot;embedding&quot;: torch.tensor(face[&quot;embedding&quot;]),
 165	            &quot;gender&quot;: torch.tensor(face[&quot;gender&quot;]),
 166	            &quot;age&quot;: torch.tensor(face[&quot;age&quot;]),
-167	        }
-168	        save_file(tensors, filename)
-169	        print(f&quot;Face model has been saved to &#x27;{filename}&#x27;&quot;)
-170	    except Exception as e:
-171	        print(f&quot;Error: {e}&quot;)
-172	
-173	
-174	def load_face_model(filename: str):
-175	    face = {}
-176	    with safe_open(filename, framework=&quot;pt&quot;) as f:
-177	        for k in f.keys():
-178	            face[k] = f.get_tensor(k).numpy()
-179	    return Face(face)
-180	
-181	
-182	def get_ort_session():
-183	    global ORT_SESSION
-184	    return ORT_SESSION
-185	
-186	def set_ort_session(model_path, providers) -&gt; Any:
-187	    global ORT_SESSION
-188	    onnxruntime.set_default_logger_severity(3)
-189	    ORT_SESSION = onnxruntime.InferenceSession(model_path, providers=providers)
-190	    return ORT_SESSION
-191	
-192	def clear_ort_session() -&gt; None:
-193	    global ORT_SESSION
-194	    ORT_SESSION = None
-195	
-196	def prepare_cropped_face(cropped_face):
-197		cropped_face = cropped_face[:, :, ::-1] / 255.0
-198		cropped_face = (cropped_face - 0.5) / 0.5
-199		cropped_face = np.expand_dims(cropped_face.transpose(2, 0, 1), axis = 0).astype(np.float32)
-200		return cropped_face
-201	
-202	def normalize_cropped_face(cropped_face):
-203		cropped_face = np.clip(cropped_face, -1, 1)
-204		cropped_face = (cropped_face + 1) / 2
-205		cropped_face = cropped_face.transpose(1, 2, 0)
-206		cropped_face = (cropped_face * 255.0).round()
-207		cropped_face = cropped_face.astype(np.uint8)[:, :, ::-1]
-208		return cropped_face
-209	
-210	
 </pre>
 </div>
 
@@ -1995,56 +879,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/scripts/r_masking/core.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-reactor-node/scripts/r_masking/core.py</a><br>
+    <b>File: </b><a href="comfyui-reactor-node/scripts/r_masking/core.py" target="_blank">comfyui-reactor-node/scripts/r_masking/core.py</a><br>
     <b>Line number: </b>110<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
 
 <div class="code">
 <pre>
-50	    if isinstance(field_names, str):
-51	        field_names = field_names.replace(&#x27;,&#x27;, &#x27; &#x27;).split()
-52	    field_names = list(map(str, field_names))
-53	    typename = _sys.intern(str(typename))
-54	
-55	    if rename:
-56	        seen = set()
-57	        for index, name in enumerate(field_names):
-58	            if (not name.isidentifier()
-59	                or _iskeyword(name)
-60	                or name.startswith(&#x27;_&#x27;)
-61	                or name in seen):
-62	                field_names[index] = f&#x27;_{index}&#x27;
-63	            seen.add(name)
-64	
-65	    for name in [typename] + field_names:
-66	        if type(name) is not str:
-67	            raise TypeError(&#x27;Type names and field names must be strings&#x27;)
-68	        if not name.isidentifier():
-69	            raise ValueError(&#x27;Type names and field names must be valid &#x27;
-70	                             f&#x27;identifiers: {name!r}&#x27;)
-71	        if _iskeyword(name):
-72	            raise ValueError(&#x27;Type names and field names cannot be a &#x27;
-73	                             f&#x27;keyword: {name!r}&#x27;)
-74	
-75	    seen = set()
-76	    for name in field_names:
-77	        if name.startswith(&#x27;_&#x27;) and not rename:
-78	            raise ValueError(&#x27;Field names cannot start with an underscore: &#x27;
-79	                             f&#x27;{name!r}&#x27;)
-80	        if name in seen:
-81	            raise ValueError(f&#x27;Encountered duplicate field name: {name!r}&#x27;)
-82	        seen.add(name)
-83	
-84	    field_defaults = {}
-85	    if defaults is not None:
-86	        defaults = tuple(defaults)
-87	        if len(defaults) &gt; len(field_names):
-88	            raise TypeError(&#x27;Got more default values than field names&#x27;)
-89	        field_defaults = dict(reversed(list(zip(reversed(field_names),
-90	                                                reversed(defaults)))))
-91	
-92	    # Variables used in the methods and docstrings
-93	    field_names = tuple(map(_sys.intern, field_names))
 94	    num_fields = len(field_names)
 95	    arg_list = &#x27;, &#x27;.join(field_names)
 96	    if num_fields == 1:
@@ -2077,50 +917,6 @@ pre {
 123	    _make.__func__.__doc__ = (f&#x27;Make a new {typename} object from a sequence &#x27;
 124	                              &#x27;or iterable&#x27;)
 125	
-126	    def _replace(self, /, **kwds):
-127	        result = self._make(_map(kwds.pop, field_names, self))
-128	        if kwds:
-129	            raise ValueError(f&#x27;Got unexpected field names: {list(kwds)!r}&#x27;)
-130	        return result
-131	
-132	    _replace.__doc__ = (f&#x27;Return a new {typename} object replacing specified &#x27;
-133	                        &#x27;fields with new values&#x27;)
-134	
-135	    def __repr__(self):
-136	        &#x27;Return a nicely formatted representation string&#x27;
-137	        return self.__class__.__name__ + repr_fmt % self
-138	
-139	    def _asdict(self):
-140	        &#x27;Return a new dict which maps field names to their values.&#x27;
-141	        return _dict(_zip(self._fields, self))
-142	
-143	    def __getnewargs__(self):
-144	        &#x27;Return self as a plain tuple.  Used by copy and pickle.&#x27;
-145	        return _tuple(self)
-146	
-147	    # Modify function metadata to help with introspection and debugging
-148	    for method in (
-149	        __new__,
-150	        _make.__func__,
-151	        _replace,
-152	        __repr__,
-153	        _asdict,
-154	        __getnewargs__,
-155	    ):
-156	        method.__qualname__ = f&#x27;{typename}.{method.__name__}&#x27;
-157	
-158	    # Build-up the class namespace dictionary
-159	    # and use type() to build the result class
-160	    class_namespace = {
-161	        &#x27;__doc__&#x27;: f&#x27;{typename}({arg_list})&#x27;,
-162	        &#x27;__slots__&#x27;: (),
-163	        &#x27;_fields&#x27;: field_names,
-164	        &#x27;_field_defaults&#x27;: field_defaults,
-165	        &#x27;__new__&#x27;: __new__,
-166	        &#x27;_make&#x27;: _make,
-167	        &#x27;_replace&#x27;: _replace,
-168	        &#x27;__repr__&#x27;: __repr__,
-169	        &#x27;_asdict&#x27;: _asdict,
 </pre>
 </div>
 

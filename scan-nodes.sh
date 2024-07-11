@@ -18,7 +18,7 @@ EXCLUDED_FOLDERS=("__pycache__" "node_modules" "dist" "build" "public" "src" "as
 CUSTOM_NODES=$(ls $CUSTOM_NODES_DIR | grep -v -E '(__pycache__|node_modules|dist|build|public|src|assets|scripts|styles|images|fonts)')
 
 SKIP_TESTS="B101,B112,B311"
-MAX_SNIPPET_LINES=120
+MAX_SNIPPET_LINES=32
 
 echo "$CUSTOM_NODES" | while read -r line; do
     if [ ! -d "$CUSTOM_NODES_DIR/$line" ]; then
@@ -29,3 +29,4 @@ echo "$CUSTOM_NODES" | while read -r line; do
 done
 
 python3 ./score/bandit_scan_score.py $CUSTOM_NODES_DIR $HTML_DIR
+python3 ./clean/remove_path_roots.py

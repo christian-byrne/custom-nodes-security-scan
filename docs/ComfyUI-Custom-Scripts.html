@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Custom-Scripts/pysssss.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Custom-Scripts/pysssss.py</a><br>
+    <b>File: </b><a href="ComfyUI-Custom-Scripts/pysssss.py" target="_blank">ComfyUI-Custom-Scripts/pysssss.py</a><br>
     <b>Line number: </b>101<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-41	        os.makedirs(dir)
-42	    return dir
-43	
-44	
-45	def get_comfy_dir(subpath=None, mkdir=False):
-46	    dir = os.path.dirname(inspect.getfile(PromptServer))
-47	    if subpath is not None:
-48	        dir = os.path.join(dir, subpath)
-49	
-50	    dir = os.path.abspath(dir)
-51	
-52	    if mkdir and not os.path.exists(dir):
-53	        os.makedirs(dir)
-54	    return dir
-55	
-56	
-57	def get_web_ext_dir():
-58	    config = get_extension_config()
-59	    name = config[&quot;name&quot;]
-60	    dir = get_comfy_dir(&quot;web/extensions/pysssss&quot;)
-61	    if not os.path.exists(dir):
-62	        os.makedirs(dir)
-63	    dir = os.path.join(dir, name)
-64	    return dir
-65	
-66	
-67	def get_extension_config(reload=False):
-68	    global config
-69	    if reload == False and config is not None:
-70	        return config
-71	
-72	    config_path = get_ext_dir(&quot;pysssss.json&quot;)
-73	    default_config_path = get_ext_dir(&quot;pysssss.default.json&quot;)
-74	    if not os.path.exists(config_path):
-75	        if os.path.exists(default_config_path):
-76	            shutil.copy(default_config_path, config_path)
-77	            if not os.path.exists(config_path):
-78	                log(f&quot;Failed to create config at {config_path}&quot;, type=&quot;ERROR&quot;, always=True, name=&quot;???&quot;)
-79	                print(f&quot;Extension path: {get_ext_dir()}&quot;)
-80	                return {&quot;name&quot;: &quot;Unknown&quot;, &quot;version&quot;: -1}
-81	    
-82	        else:
-83	            log(&quot;Missing pysssss.default.json, this extension may not work correctly. Please reinstall the extension.&quot;,
-84	                type=&quot;ERROR&quot;, always=True, name=&quot;???&quot;)
 85	            print(f&quot;Extension path: {get_ext_dir()}&quot;)
 86	            return {&quot;name&quot;: &quot;Unknown&quot;, &quot;version&quot;: -1}
 87	
@@ -181,50 +137,6 @@ pre {
 115	    try:
 116	        return bool(os.readlink(path))
 117	    except OSError:
-118	        return False
-119	
-120	
-121	def install_js():
-122	    src_dir = get_ext_dir(&quot;web/js&quot;)
-123	    if not os.path.exists(src_dir):
-124	        log(&quot;No JS&quot;)
-125	        return
-126	
-127	    should_install = should_install_js()
-128	    if should_install:
-129	        log(&quot;it looks like you&#x27;re running an old version of ComfyUI that requires manual setup of web files, it is recommended you update your installation.&quot;, &quot;warning&quot;, True)
-130	    dst_dir = get_web_ext_dir()
-131	    linked = os.path.islink(dst_dir) or is_junction(dst_dir)
-132	    if linked or os.path.exists(dst_dir):
-133	        if linked:
-134	            if should_install:
-135	                log(&quot;JS already linked&quot;)
-136	            else:
-137	                os.unlink(dst_dir)
-138	                log(&quot;JS unlinked, PromptServer will serve extension&quot;)
-139	        elif not should_install:
-140	            shutil.rmtree(dst_dir)
-141	            log(&quot;JS deleted, PromptServer will serve extension&quot;)
-142	        return
-143	    
-144	    if not should_install:
-145	        log(&quot;JS skipped, PromptServer will serve extension&quot;)
-146	        return
-147	    
-148	    if link_js(src_dir, dst_dir):
-149	        log(&quot;JS linked&quot;)
-150	        return
-151	
-152	    log(&quot;Copying JS files&quot;)
-153	    shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
-154	
-155	
-156	def should_install_js():
-157	    return not hasattr(PromptServer.instance, &quot;supports&quot;) or &quot;custom_nodes_from_web&quot; not in PromptServer.instance.supports
-158	
-159	
-160	def init(check_imports=None):
-161	    log(&quot;Init&quot;)
 </pre>
 </div>
 

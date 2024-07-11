@@ -98,22 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py</a><br>
+    <b>File: </b><a href="ComfyI2I/ComfyI2I.py" target="_blank">ComfyI2I/ComfyI2I.py</a><br>
     <b>Line number: </b>27<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
 <div class="code">
 <pre>
-1	# By ManglerFTW (Discord: ManglerFTW)
-2	#
-3	# Copyright 2023 Peter Mango (ManglerFTW)
-4	#
-5	# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to
-6	# deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-7	# and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-8	#
-9	# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-10	#
 11	# THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 12	# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 13	# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
@@ -146,84 +136,6 @@ pre {
 40	    
 41	MODELS_DIR =  comfy_paths.models_dir
 42	
-43	class cstr(str):
-44	    class color:
-45	        END = &#x27;\33[0m&#x27;
-46	        BOLD = &#x27;\33[1m&#x27;
-47	        ITALIC = &#x27;\33[3m&#x27;
-48	        UNDERLINE = &#x27;\33[4m&#x27;
-49	        BLINK = &#x27;\33[5m&#x27;
-50	        BLINK2 = &#x27;\33[6m&#x27;
-51	        SELECTED = &#x27;\33[7m&#x27;
-52	
-53	        BLACK = &#x27;\33[30m&#x27;
-54	        RED = &#x27;\33[31m&#x27;
-55	        GREEN = &#x27;\33[32m&#x27;
-56	        YELLOW = &#x27;\33[33m&#x27;
-57	        BLUE = &#x27;\33[34m&#x27;
-58	        VIOLET = &#x27;\33[35m&#x27;
-59	        BEIGE = &#x27;\33[36m&#x27;
-60	        WHITE = &#x27;\33[37m&#x27;
-61	
-62	        BLACKBG = &#x27;\33[40m&#x27;
-63	        REDBG = &#x27;\33[41m&#x27;
-64	        GREENBG = &#x27;\33[42m&#x27;
-65	        YELLOWBG = &#x27;\33[43m&#x27;
-66	        BLUEBG = &#x27;\33[44m&#x27;
-67	        VIOLETBG = &#x27;\33[45m&#x27;
-68	        BEIGEBG = &#x27;\33[46m&#x27;
-69	        WHITEBG = &#x27;\33[47m&#x27;
-70	
-71	        GREY = &#x27;\33[90m&#x27;
-72	        LIGHTRED = &#x27;\33[91m&#x27;
-73	        LIGHTGREEN = &#x27;\33[92m&#x27;
-74	        LIGHTYELLOW = &#x27;\33[93m&#x27;
-75	        LIGHTBLUE = &#x27;\33[94m&#x27;
-76	        LIGHTVIOLET = &#x27;\33[95m&#x27;
-77	        LIGHTBEIGE = &#x27;\33[96m&#x27;
-78	        LIGHTWHITE = &#x27;\33[97m&#x27;
-79	
-80	        GREYBG = &#x27;\33[100m&#x27;
-81	        LIGHTREDBG = &#x27;\33[101m&#x27;
-82	        LIGHTGREENBG = &#x27;\33[102m&#x27;
-83	        LIGHTYELLOWBG = &#x27;\33[103m&#x27;
-84	        LIGHTBLUEBG = &#x27;\33[104m&#x27;
-85	        LIGHTVIOLETBG = &#x27;\33[105m&#x27;
-86	        LIGHTBEIGEBG = &#x27;\33[106m&#x27;
-87	        LIGHTWHITEBG = &#x27;\33[107m&#x27;
-88	
-89	        @staticmethod
-90	        def add_code(name, code):
-91	            if not hasattr(cstr.color, name.upper()):
-92	                setattr(cstr.color, name.upper(), code)
-93	            else:
-94	                raise ValueError(f&quot;&#x27;cstr&#x27; object already contains a code with the name &#x27;{name}&#x27;.&quot;)
-95	
-96	    def __new__(cls, text):
-97	        return super().__new__(cls, text)
-98	
-99	    def __getattr__(self, attr):
-100	        if attr.lower().startswith(&quot;_cstr&quot;):
-101	            code = getattr(self.color, attr.upper().lstrip(&quot;_cstr&quot;))
-102	            modified_text = self.replace(f&quot;__{attr[1:]}__&quot;, f&quot;{code}&quot;)
-103	            return cstr(modified_text)
-104	        elif attr.upper() in dir(self.color):
-105	            code = getattr(self.color, attr.upper())
-106	            modified_text = f&quot;{code}{self}{self.color.END}&quot;
-107	            return cstr(modified_text)
-108	        elif attr.lower() in dir(cstr):
-109	            return getattr(cstr, attr.lower())
-110	        else:
-111	            raise AttributeError(f&quot;&#x27;cstr&#x27; object has no attribute &#x27;{attr}&#x27;&quot;)
-112	
-113	    def print(self, **kwargs):
-114	        print(self, **kwargs)
-115	
-116	def tensor2rgb(t: torch.Tensor) -&gt; torch.Tensor:
-117	    size = t.size()
-118	    if (len(size) &lt; 4):
-119	        return t.unsqueeze(3).repeat(1, 1, 1, 3)
-120	    if size[3] == 1:
 </pre>
 </div>
 
@@ -238,56 +150,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py</a><br>
+    <b>File: </b><a href="ComfyI2I/ComfyI2I.py" target="_blank">ComfyI2I/ComfyI2I.py</a><br>
     <b>Line number: </b>932<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
 <div class="code">
 <pre>
-872	            if xmax &gt; W:
-873	                source_xmax -= (xmax - W)
-874	                xmax = W
-875	            if ymax &gt; H:
-876	                source_ymax -= (ymax - H)
-877	                ymax = H
-878	
-879	            pasting[ymin:ymax, xmin:xmax, :] = resized_image[0, source_ymin:source_ymax, source_xmin:source_xmax, :]
-880	            pasting[:, :, 3] = 1.
-881	
-882	            pasting_alpha = torch.zeros([H, W])
-883	            pasting_alpha[ymin:ymax, xmin:xmax] = resized_image[0, source_ymin:source_ymax, source_xmin:source_xmax, 3]
-884	
-885	            if resize_behavior == &quot;keep_ratio_fill&quot; or resize_behavior == &quot;source_size_unmasked&quot;:
-886	                # If we explicitly want to fill the area, we are ok with extending outside
-887	                paste_mask = pasting_alpha.unsqueeze(2).repeat(1, 1, 4)
-888	            else:
-889	                paste_mask = torch.min(pasting_alpha, mask[i]).unsqueeze(2).repeat(1, 1, 4)
-890	            result[image_index] = pasting * paste_mask + result[image_index] * (1. - paste_mask)
-891	    return result
-892	
-893	class Mask_Ops:
-894	    def __init__(self):
-895	        pass
-896	
-897	    @classmethod
-898	    def INPUT_TYPES(cls):
-899	        return {
-900	                &quot;required&quot;: {
-901	                    &quot;image&quot;: (&quot;IMAGE&quot;,),
-902	                    &quot;text&quot;: (&quot;STRING&quot;, {&quot;default&quot;:&quot;&quot;, &quot;multiline&quot;: False}),
-903	                    &quot;separate_mask&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-904	                    &quot;text_sigma&quot;: (&quot;INT&quot;, {&quot;default&quot;:30, &quot;min&quot;:0, &quot;max&quot;:150, &quot;step&quot;:1}),
-905	                    &quot;use_text&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-906	                    &quot;blend_percentage&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.01}),
-907	                    &quot;black_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0.0, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-908	                    &quot;mid_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 127.5, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-909	                    &quot;white_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 255, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-910	                    &quot;channel&quot;: ([&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;],),
-911	                    &quot;shrink_grow&quot;: (&quot;INT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: -128, &quot;max&quot;: 128, &quot;step&quot;: 1}),
-912	                    &quot;invert&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-913	                    &quot;blur_radius&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 5.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1024, &quot;step&quot;: 0.1}),
-914	                },
-915	                &quot;optional&quot;: {
 916	                    &quot;mask&quot;: (&quot;MASK&quot;,),
 917	                },
 918	        }
@@ -320,50 +188,6 @@ pre {
 945	
 946	        # scipy handling
 947	        if &#x27;scipy&#x27; not in packages():
-948	            cstr(&quot;Installing `scipy` ...&quot;).msg.print()
-949	            subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;scipy&#x27;])
-950	            try:
-951	                import scipy
-952	            except ImportError as e:
-953	                cstr(&quot;Unable to import tools for certain masking procedures.&quot;).msg.print()
-954	                print(e)
-955	
-956	        def smooth_region(image, tolerance):
-957	            from scipy.ndimage import gaussian_filter
-958	            image = image.convert(&quot;L&quot;)
-959	            mask_array = np.array(image)
-960	            smoothed_array = gaussian_filter(mask_array, sigma=tolerance)
-961	            threshold = np.max(smoothed_array) / 2
-962	            smoothed_mask = np.where(smoothed_array &gt;= threshold, 255, 0).astype(np.uint8)
-963	            smoothed_image = Image.fromarray(smoothed_mask, mode=&quot;L&quot;)
-964	            return ImageOps.invert(smoothed_image.convert(&quot;RGB&quot;))
-965	
-966	        def erode_region(image, iterations):
-967	            from scipy.ndimage import binary_erosion
-968	            image = image.convert(&quot;L&quot;)
-969	            binary_mask = np.array(image) &gt; 0
-970	            eroded_mask = binary_erosion(binary_mask, iterations=iterations)
-971	            eroded_image = Image.fromarray(eroded_mask.astype(np.uint8) * 255, mode=&quot;L&quot;)
-972	            return ImageOps.invert(eroded_image.convert(&quot;RGB&quot;))
-973	
-974	        def dilate_region(image, iterations):
-975	            from scipy.ndimage import binary_dilation
-976	            image = image.convert(&quot;L&quot;)
-977	            binary_mask = np.array(image) &gt; 0
-978	            dilated_mask = binary_dilation(binary_mask, iterations=iterations)
-979	            dilated_image = Image.fromarray(dilated_mask.astype(np.uint8) * 255, mode=&quot;L&quot;)
-980	            return ImageOps.invert(dilated_image.convert(&quot;RGB&quot;))
-981	
-982	        def erode(masks, iterations):
-983	            iterations = iterations * -1
-984	            if masks.ndim &gt; 3:
-985	                regions = []
-986	                for mask in masks:
-987	                    mask_np = np.clip(255. * mask.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
-988	                    pil_image = Image.fromarray(mask_np, mode=&quot;L&quot;)
-989	                    region_mask = erode_region(pil_image, iterations)
-990	                    region_tensor = pil2mask(region_mask).unsqueeze(0).unsqueeze(1)
-991	                    regions.append(region_tensor)
 </pre>
 </div>
 
@@ -378,56 +202,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py</a><br>
+    <b>File: </b><a href="ComfyI2I/ComfyI2I.py" target="_blank">ComfyI2I/ComfyI2I.py</a><br>
     <b>Line number: </b>933<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-873	                source_xmax -= (xmax - W)
-874	                xmax = W
-875	            if ymax &gt; H:
-876	                source_ymax -= (ymax - H)
-877	                ymax = H
-878	
-879	            pasting[ymin:ymax, xmin:xmax, :] = resized_image[0, source_ymin:source_ymax, source_xmin:source_xmax, :]
-880	            pasting[:, :, 3] = 1.
-881	
-882	            pasting_alpha = torch.zeros([H, W])
-883	            pasting_alpha[ymin:ymax, xmin:xmax] = resized_image[0, source_ymin:source_ymax, source_xmin:source_xmax, 3]
-884	
-885	            if resize_behavior == &quot;keep_ratio_fill&quot; or resize_behavior == &quot;source_size_unmasked&quot;:
-886	                # If we explicitly want to fill the area, we are ok with extending outside
-887	                paste_mask = pasting_alpha.unsqueeze(2).repeat(1, 1, 4)
-888	            else:
-889	                paste_mask = torch.min(pasting_alpha, mask[i]).unsqueeze(2).repeat(1, 1, 4)
-890	            result[image_index] = pasting * paste_mask + result[image_index] * (1. - paste_mask)
-891	    return result
-892	
-893	class Mask_Ops:
-894	    def __init__(self):
-895	        pass
-896	
-897	    @classmethod
-898	    def INPUT_TYPES(cls):
-899	        return {
-900	                &quot;required&quot;: {
-901	                    &quot;image&quot;: (&quot;IMAGE&quot;,),
-902	                    &quot;text&quot;: (&quot;STRING&quot;, {&quot;default&quot;:&quot;&quot;, &quot;multiline&quot;: False}),
-903	                    &quot;separate_mask&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-904	                    &quot;text_sigma&quot;: (&quot;INT&quot;, {&quot;default&quot;:30, &quot;min&quot;:0, &quot;max&quot;:150, &quot;step&quot;:1}),
-905	                    &quot;use_text&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-906	                    &quot;blend_percentage&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.01}),
-907	                    &quot;black_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0.0, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-908	                    &quot;mid_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 127.5, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-909	                    &quot;white_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 255, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-910	                    &quot;channel&quot;: ([&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;],),
-911	                    &quot;shrink_grow&quot;: (&quot;INT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: -128, &quot;max&quot;: 128, &quot;step&quot;: 1}),
-912	                    &quot;invert&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-913	                    &quot;blur_radius&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 5.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1024, &quot;step&quot;: 0.1}),
-914	                },
-915	                &quot;optional&quot;: {
-916	                    &quot;mask&quot;: (&quot;MASK&quot;,),
 917	                },
 918	        }
 919	
@@ -460,50 +240,6 @@ pre {
 946	        # scipy handling
 947	        if &#x27;scipy&#x27; not in packages():
 948	            cstr(&quot;Installing `scipy` ...&quot;).msg.print()
-949	            subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;scipy&#x27;])
-950	            try:
-951	                import scipy
-952	            except ImportError as e:
-953	                cstr(&quot;Unable to import tools for certain masking procedures.&quot;).msg.print()
-954	                print(e)
-955	
-956	        def smooth_region(image, tolerance):
-957	            from scipy.ndimage import gaussian_filter
-958	            image = image.convert(&quot;L&quot;)
-959	            mask_array = np.array(image)
-960	            smoothed_array = gaussian_filter(mask_array, sigma=tolerance)
-961	            threshold = np.max(smoothed_array) / 2
-962	            smoothed_mask = np.where(smoothed_array &gt;= threshold, 255, 0).astype(np.uint8)
-963	            smoothed_image = Image.fromarray(smoothed_mask, mode=&quot;L&quot;)
-964	            return ImageOps.invert(smoothed_image.convert(&quot;RGB&quot;))
-965	
-966	        def erode_region(image, iterations):
-967	            from scipy.ndimage import binary_erosion
-968	            image = image.convert(&quot;L&quot;)
-969	            binary_mask = np.array(image) &gt; 0
-970	            eroded_mask = binary_erosion(binary_mask, iterations=iterations)
-971	            eroded_image = Image.fromarray(eroded_mask.astype(np.uint8) * 255, mode=&quot;L&quot;)
-972	            return ImageOps.invert(eroded_image.convert(&quot;RGB&quot;))
-973	
-974	        def dilate_region(image, iterations):
-975	            from scipy.ndimage import binary_dilation
-976	            image = image.convert(&quot;L&quot;)
-977	            binary_mask = np.array(image) &gt; 0
-978	            dilated_mask = binary_dilation(binary_mask, iterations=iterations)
-979	            dilated_image = Image.fromarray(dilated_mask.astype(np.uint8) * 255, mode=&quot;L&quot;)
-980	            return ImageOps.invert(dilated_image.convert(&quot;RGB&quot;))
-981	
-982	        def erode(masks, iterations):
-983	            iterations = iterations * -1
-984	            if masks.ndim &gt; 3:
-985	                regions = []
-986	                for mask in masks:
-987	                    mask_np = np.clip(255. * mask.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
-988	                    pil_image = Image.fromarray(mask_np, mode=&quot;L&quot;)
-989	                    region_mask = erode_region(pil_image, iterations)
-990	                    region_tensor = pil2mask(region_mask).unsqueeze(0).unsqueeze(1)
-991	                    regions.append(region_tensor)
-992	                regions_tensor = torch.cat(regions, dim=0)
 </pre>
 </div>
 
@@ -518,56 +254,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyI2I/ComfyI2I.py</a><br>
+    <b>File: </b><a href="ComfyI2I/ComfyI2I.py" target="_blank">ComfyI2I/ComfyI2I.py</a><br>
     <b>Line number: </b>949<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-889	                paste_mask = torch.min(pasting_alpha, mask[i]).unsqueeze(2).repeat(1, 1, 4)
-890	            result[image_index] = pasting * paste_mask + result[image_index] * (1. - paste_mask)
-891	    return result
-892	
-893	class Mask_Ops:
-894	    def __init__(self):
-895	        pass
-896	
-897	    @classmethod
-898	    def INPUT_TYPES(cls):
-899	        return {
-900	                &quot;required&quot;: {
-901	                    &quot;image&quot;: (&quot;IMAGE&quot;,),
-902	                    &quot;text&quot;: (&quot;STRING&quot;, {&quot;default&quot;:&quot;&quot;, &quot;multiline&quot;: False}),
-903	                    &quot;separate_mask&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-904	                    &quot;text_sigma&quot;: (&quot;INT&quot;, {&quot;default&quot;:30, &quot;min&quot;:0, &quot;max&quot;:150, &quot;step&quot;:1}),
-905	                    &quot;use_text&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-906	                    &quot;blend_percentage&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.01}),
-907	                    &quot;black_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 0.0, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-908	                    &quot;mid_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 127.5, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-909	                    &quot;white_level&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 255, &quot;min&quot;: 0.0, &quot;max&quot;: 255.0, &quot;step&quot;: 0.1}),
-910	                    &quot;channel&quot;: ([&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;],),
-911	                    &quot;shrink_grow&quot;: (&quot;INT&quot;, {&quot;default&quot;: 0, &quot;min&quot;: -128, &quot;max&quot;: 128, &quot;step&quot;: 1}),
-912	                    &quot;invert&quot;: (&quot;INT&quot;, {&quot;default&quot;:0, &quot;min&quot;:0, &quot;max&quot;:1, &quot;step&quot;:1}),
-913	                    &quot;blur_radius&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 5.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1024, &quot;step&quot;: 0.1}),
-914	                },
-915	                &quot;optional&quot;: {
-916	                    &quot;mask&quot;: (&quot;MASK&quot;,),
-917	                },
-918	        }
-919	
-920	    CATEGORY = &quot;I2I&quot;
-921	
-922	    RETURN_TYPES = (&quot;IMAGE&quot;, &quot;MASK&quot;, &quot;MASK_MAPPING&quot;,)
-923	    RETURN_NAMES = (&quot;mask_image&quot;, &quot;mask&quot;, &quot;mask mapping&quot;)
-924	    FUNCTION = &quot;Mask_Ops&quot;
-925	
-926	    def Mask_Ops(self, image, text, separate_mask, text_sigma, use_text, blend_percentage, black_level, mid_level, white_level, channel, shrink_grow, invert=0, blur_radius=5.0, mask=None):
-927	        channels = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]
-928	
-929	        # Freeze PIP modules
-930	        def packages(versions=False):
-931	            import sys
-932	            import subprocess
 933	            return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
 934	
 935	        # PIL to Mask
@@ -600,50 +292,6 @@ pre {
 962	            smoothed_mask = np.where(smoothed_array &gt;= threshold, 255, 0).astype(np.uint8)
 963	            smoothed_image = Image.fromarray(smoothed_mask, mode=&quot;L&quot;)
 964	            return ImageOps.invert(smoothed_image.convert(&quot;RGB&quot;))
-965	
-966	        def erode_region(image, iterations):
-967	            from scipy.ndimage import binary_erosion
-968	            image = image.convert(&quot;L&quot;)
-969	            binary_mask = np.array(image) &gt; 0
-970	            eroded_mask = binary_erosion(binary_mask, iterations=iterations)
-971	            eroded_image = Image.fromarray(eroded_mask.astype(np.uint8) * 255, mode=&quot;L&quot;)
-972	            return ImageOps.invert(eroded_image.convert(&quot;RGB&quot;))
-973	
-974	        def dilate_region(image, iterations):
-975	            from scipy.ndimage import binary_dilation
-976	            image = image.convert(&quot;L&quot;)
-977	            binary_mask = np.array(image) &gt; 0
-978	            dilated_mask = binary_dilation(binary_mask, iterations=iterations)
-979	            dilated_image = Image.fromarray(dilated_mask.astype(np.uint8) * 255, mode=&quot;L&quot;)
-980	            return ImageOps.invert(dilated_image.convert(&quot;RGB&quot;))
-981	
-982	        def erode(masks, iterations):
-983	            iterations = iterations * -1
-984	            if masks.ndim &gt; 3:
-985	                regions = []
-986	                for mask in masks:
-987	                    mask_np = np.clip(255. * mask.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
-988	                    pil_image = Image.fromarray(mask_np, mode=&quot;L&quot;)
-989	                    region_mask = erode_region(pil_image, iterations)
-990	                    region_tensor = pil2mask(region_mask).unsqueeze(0).unsqueeze(1)
-991	                    regions.append(region_tensor)
-992	                regions_tensor = torch.cat(regions, dim=0)
-993	                return regions_tensor
-994	            else:
-995	                mask_np = np.clip(255. * masks.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
-996	                pil_image = Image.fromarray(mask_np, mode=&quot;L&quot;)
-997	                region_mask = erode_region(pil_image, iterations)
-998	                region_tensor = pil2mask(region_mask).unsqueeze(0).unsqueeze(1)
-999	                return region_tensor
-1000	
-1001	        def dilate(masks, iterations):
-1002	            if masks.ndim &gt; 3:
-1003	                regions = []
-1004	                for mask in masks:
-1005	                    mask_np = np.clip(255. * mask.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
-1006	                    pil_image = Image.fromarray(mask_np, mode=&quot;L&quot;)
-1007	                    region_mask = dilate_region(pil_image, iterations)
-1008	                    region_tensor = pil2mask(region_mask).unsqueeze(0).unsqueeze(1)
 </pre>
 </div>
 

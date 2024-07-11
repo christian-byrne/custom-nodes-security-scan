@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>240<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-180	
-181	        if options is None:
-182	            valid = True
-183	
-184	        if inp in options:
-185	            valid = True
-186	
-187	    return inp
-188	
-189	
-190	# -----==========-----
-191	
-192	def check_test_version():
-193	    print(&quot;Checking if old test version SeargeSDXL-Test is installed&quot;)
-194	
-195	    test_path = extensions_folder.joinpath(&quot;SeargeSDXL-Test&quot;)
-196	    test_path_exists = Path.exists(test_path)
-197	
-198	    if not test_path_exists:
-199	        return True
-200	
-201	    print(f&quot;Old test version of SeargeSDXL found in {test_path}&quot;)
-202	    inp = get_input(&quot;Should the test version be deleted?&quot;, &quot;n&quot;, [&quot;y&quot;, &quot;n&quot;])
-203	
-204	    if inp == &quot;y&quot;:
-205	        shutil.rmtree(test_path, ignore_errors=True)
-206	    else:
-207	        print(&quot;Please delete the old test version manually to avoid potential conflicts&quot;)
-208	
-209	    return True
-210	
-211	
-212	# -----==========-----
-213	
-214	def check_non_git_version():
-215	    print(&quot;Checking if SeargeSDXL is already installed&quot;)
-216	
-217	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-218	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-219	    if not Path.exists(ext_path) or Path.exists(ext_git_path):
-220	        return True
-221	
-222	    print(f&quot;Found a version of SeargeSDXL in {ext_path}&quot;)
-223	    print(f&quot;But it has not been installed via git, missing folder: {ext_git_path}&quot;)
 224	
 225	    inp = get_input(&quot;Should the old version be deleted and replaced?&quot;, &quot;y&quot;, [&quot;y&quot;, &quot;n&quot;])
 226	
@@ -180,50 +136,6 @@ pre {
 253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
 254	    ext_path_exists = Path.exists(ext_path)
 255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
-281	                  &quot;restart the install script to try again&quot;)
-282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
-288	
-289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
-290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
-291	
-292	    if inp == &quot;t&quot;:
-293	        os.chdir(ext_path)
-294	
-295	        ec = os.system(&quot;git stash&quot;)
-296	        if ec == 0:
-297	            ec = os.system(&quot;git switch -C dev origin/dev&quot;)
-298	
-299	        os.chdir(old_cwd)
 </pre>
 </div>
 
@@ -238,56 +150,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>240<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-180	
-181	        if options is None:
-182	            valid = True
-183	
-184	        if inp in options:
-185	            valid = True
-186	
-187	    return inp
-188	
-189	
-190	# -----==========-----
-191	
-192	def check_test_version():
-193	    print(&quot;Checking if old test version SeargeSDXL-Test is installed&quot;)
-194	
-195	    test_path = extensions_folder.joinpath(&quot;SeargeSDXL-Test&quot;)
-196	    test_path_exists = Path.exists(test_path)
-197	
-198	    if not test_path_exists:
-199	        return True
-200	
-201	    print(f&quot;Old test version of SeargeSDXL found in {test_path}&quot;)
-202	    inp = get_input(&quot;Should the test version be deleted?&quot;, &quot;n&quot;, [&quot;y&quot;, &quot;n&quot;])
-203	
-204	    if inp == &quot;y&quot;:
-205	        shutil.rmtree(test_path, ignore_errors=True)
-206	    else:
-207	        print(&quot;Please delete the old test version manually to avoid potential conflicts&quot;)
-208	
-209	    return True
-210	
-211	
-212	# -----==========-----
-213	
-214	def check_non_git_version():
-215	    print(&quot;Checking if SeargeSDXL is already installed&quot;)
-216	
-217	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-218	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-219	    if not Path.exists(ext_path) or Path.exists(ext_git_path):
-220	        return True
-221	
-222	    print(f&quot;Found a version of SeargeSDXL in {ext_path}&quot;)
-223	    print(f&quot;But it has not been installed via git, missing folder: {ext_git_path}&quot;)
 224	
 225	    inp = get_input(&quot;Should the old version be deleted and replaced?&quot;, &quot;y&quot;, [&quot;y&quot;, &quot;n&quot;])
 226	
@@ -320,50 +188,6 @@ pre {
 253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
 254	    ext_path_exists = Path.exists(ext_path)
 255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
-281	                  &quot;restart the install script to try again&quot;)
-282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
-288	
-289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
-290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
-291	
-292	    if inp == &quot;t&quot;:
-293	        os.chdir(ext_path)
-294	
-295	        ec = os.system(&quot;git stash&quot;)
-296	        if ec == 0:
-297	            ec = os.system(&quot;git switch -C dev origin/dev&quot;)
-298	
-299	        os.chdir(old_cwd)
 </pre>
 </div>
 
@@ -378,56 +202,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>267<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-207	        print(&quot;Please delete the old test version manually to avoid potential conflicts&quot;)
-208	
-209	    return True
-210	
-211	
-212	# -----==========-----
-213	
-214	def check_non_git_version():
-215	    print(&quot;Checking if SeargeSDXL is already installed&quot;)
-216	
-217	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-218	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-219	    if not Path.exists(ext_path) or Path.exists(ext_git_path):
-220	        return True
-221	
-222	    print(f&quot;Found a version of SeargeSDXL in {ext_path}&quot;)
-223	    print(f&quot;But it has not been installed via git, missing folder: {ext_git_path}&quot;)
-224	
-225	    inp = get_input(&quot;Should the old version be deleted and replaced?&quot;, &quot;y&quot;, [&quot;y&quot;, &quot;n&quot;])
-226	
-227	    if inp == &quot;y&quot;:
-228	        shutil.rmtree(ext_path, ignore_errors=True)
-229	    else:
-230	        print(&quot;Please delete the old version manually and restart the install script afterwards&quot;)
-231	        return False
-232	
-233	    return True
-234	
-235	
-236	# -----==========-----
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
 251	    print(&quot;Installing or updating SeargeSDXL&quot;)
 252	
 253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
@@ -460,50 +240,6 @@ pre {
 280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
 281	                  &quot;restart the install script to try again&quot;)
 282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
-288	
-289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
-290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
-291	
-292	    if inp == &quot;t&quot;:
-293	        os.chdir(ext_path)
-294	
-295	        ec = os.system(&quot;git stash&quot;)
-296	        if ec == 0:
-297	            ec = os.system(&quot;git switch -C dev origin/dev&quot;)
-298	
-299	        os.chdir(old_cwd)
-300	
-301	    elif inp == &quot;r&quot;:
-302	        os.chdir(ext_path)
-303	
-304	        ec = os.system(&quot;git stash&quot;)
-305	        if ec == 0:
-306	            ec = os.system(&quot;git switch -C main origin/main&quot;)
-307	
-308	        os.chdir(old_cwd)
-309	
-310	    else:
-311	        ec = 0
-312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
 </pre>
 </div>
 
@@ -518,56 +254,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>267<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-207	        print(&quot;Please delete the old test version manually to avoid potential conflicts&quot;)
-208	
-209	    return True
-210	
-211	
-212	# -----==========-----
-213	
-214	def check_non_git_version():
-215	    print(&quot;Checking if SeargeSDXL is already installed&quot;)
-216	
-217	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-218	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-219	    if not Path.exists(ext_path) or Path.exists(ext_git_path):
-220	        return True
-221	
-222	    print(f&quot;Found a version of SeargeSDXL in {ext_path}&quot;)
-223	    print(f&quot;But it has not been installed via git, missing folder: {ext_git_path}&quot;)
-224	
-225	    inp = get_input(&quot;Should the old version be deleted and replaced?&quot;, &quot;y&quot;, [&quot;y&quot;, &quot;n&quot;])
-226	
-227	    if inp == &quot;y&quot;:
-228	        shutil.rmtree(ext_path, ignore_errors=True)
-229	    else:
-230	        print(&quot;Please delete the old version manually and restart the install script afterwards&quot;)
-231	        return False
-232	
-233	    return True
-234	
-235	
-236	# -----==========-----
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
 251	    print(&quot;Installing or updating SeargeSDXL&quot;)
 252	
 253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
@@ -600,50 +292,6 @@ pre {
 280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
 281	                  &quot;restart the install script to try again&quot;)
 282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
-288	
-289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
-290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
-291	
-292	    if inp == &quot;t&quot;:
-293	        os.chdir(ext_path)
-294	
-295	        ec = os.system(&quot;git stash&quot;)
-296	        if ec == 0:
-297	            ec = os.system(&quot;git switch -C dev origin/dev&quot;)
-298	
-299	        os.chdir(old_cwd)
-300	
-301	    elif inp == &quot;r&quot;:
-302	        os.chdir(ext_path)
-303	
-304	        ec = os.system(&quot;git stash&quot;)
-305	        if ec == 0:
-306	            ec = os.system(&quot;git switch -C main origin/main&quot;)
-307	
-308	        os.chdir(old_cwd)
-309	
-310	    else:
-311	        ec = 0
-312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
 </pre>
 </div>
 
@@ -658,56 +306,12 @@ pre {
     <b>Severity: </b>HIGH<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>278<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-218	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-219	    if not Path.exists(ext_path) or Path.exists(ext_git_path):
-220	        return True
-221	
-222	    print(f&quot;Found a version of SeargeSDXL in {ext_path}&quot;)
-223	    print(f&quot;But it has not been installed via git, missing folder: {ext_git_path}&quot;)
-224	
-225	    inp = get_input(&quot;Should the old version be deleted and replaced?&quot;, &quot;y&quot;, [&quot;y&quot;, &quot;n&quot;])
-226	
-227	    if inp == &quot;y&quot;:
-228	        shutil.rmtree(ext_path, ignore_errors=True)
-229	    else:
-230	        print(&quot;Please delete the old version manually and restart the install script afterwards&quot;)
-231	        return False
-232	
-233	    return True
-234	
-235	
-236	# -----==========-----
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
 262	    old_cwd = os.getcwd()
 263	    if ext_path_exists:
 264	        os.chdir(ext_path)
@@ -740,50 +344,6 @@ pre {
 291	
 292	    if inp == &quot;t&quot;:
 293	        os.chdir(ext_path)
-294	
-295	        ec = os.system(&quot;git stash&quot;)
-296	        if ec == 0:
-297	            ec = os.system(&quot;git switch -C dev origin/dev&quot;)
-298	
-299	        os.chdir(old_cwd)
-300	
-301	    elif inp == &quot;r&quot;:
-302	        os.chdir(ext_path)
-303	
-304	        ec = os.system(&quot;git stash&quot;)
-305	        if ec == 0:
-306	            ec = os.system(&quot;git switch -C main origin/main&quot;)
-307	
-308	        os.chdir(old_cwd)
-309	
-310	    else:
-311	        ec = 0
-312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
 </pre>
 </div>
 
@@ -798,56 +358,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>295<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-235	
-236	# -----==========-----
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
 279	        if ec != 0:
 280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
 281	                  &quot;restart the install script to try again&quot;)
@@ -880,50 +396,6 @@ pre {
 308	        os.chdir(old_cwd)
 309	
 310	    else:
-311	        ec = 0
-312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
 </pre>
 </div>
 
@@ -938,56 +410,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>295<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-235	
-236	# -----==========-----
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
 279	        if ec != 0:
 280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
 281	                  &quot;restart the install script to try again&quot;)
@@ -1020,50 +448,6 @@ pre {
 308	        os.chdir(old_cwd)
 309	
 310	    else:
-311	        ec = 0
-312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
 </pre>
 </div>
 
@@ -1078,56 +462,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>297<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
 281	                  &quot;restart the install script to try again&quot;)
 282	            return False
 283	
@@ -1160,50 +500,6 @@ pre {
 310	    else:
 311	        ec = 0
 312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
-355	        models = None
-356	        model = None
 </pre>
 </div>
 
@@ -1218,56 +514,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>297<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-237	
-238	def check_git():
-239	    print(&quot;Checking git version&quot;)
-240	    ec = os.system(&quot;git --version&quot;)
-241	    if ec != 0:
-242	        print(&quot;Please make sure git is installed on your system&quot;)
-243	        return False
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
 281	                  &quot;restart the install script to try again&quot;)
 282	            return False
 283	
@@ -1300,50 +552,6 @@ pre {
 310	    else:
 311	        ec = 0
 312	
-313	    if ec != 0:
-314	        print(&quot;Could not switch to the selected branch, please restart the install script to try again&quot;)
-315	        return False
-316	
-317	    return True
-318	
-319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
-355	        models = None
-356	        model = None
 </pre>
 </div>
 
@@ -1358,56 +566,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>304<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
-281	                  &quot;restart the install script to try again&quot;)
-282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
 288	
 289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
 290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
@@ -1440,50 +604,6 @@ pre {
 317	    return True
 318	
 319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
-355	        models = None
-356	        model = None
-357	        if inp == &quot;d&quot;:
-358	            done = True
-359	        elif inp == &quot;q&quot;:
-360	            models = required
-361	        elif inp == &quot;r&quot;:
-362	            models = required + recommended
-363	        elif inp == &quot;a&quot;:
 </pre>
 </div>
 
@@ -1498,56 +618,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>304<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-244	
-245	    return True
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
-281	                  &quot;restart the install script to try again&quot;)
-282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
 288	
 289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
 290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
@@ -1580,50 +656,6 @@ pre {
 317	    return True
 318	
 319	
-320	# -----==========-----
-321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
-355	        models = None
-356	        model = None
-357	        if inp == &quot;d&quot;:
-358	            done = True
-359	        elif inp == &quot;q&quot;:
-360	            models = required
-361	        elif inp == &quot;r&quot;:
-362	            models = required + recommended
-363	        elif inp == &quot;a&quot;:
 </pre>
 </div>
 
@@ -1638,56 +670,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>306<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
 
 <div class="code">
 <pre>
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
-281	                  &quot;restart the install script to try again&quot;)
-282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
-288	
-289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
 290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
 291	
 292	    if inp == &quot;t&quot;:
@@ -1720,50 +708,6 @@ pre {
 319	
 320	# -----==========-----
 321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
-355	        models = None
-356	        model = None
-357	        if inp == &quot;d&quot;:
-358	            done = True
-359	        elif inp == &quot;q&quot;:
-360	            models = required
-361	        elif inp == &quot;r&quot;:
-362	            models = required + recommended
-363	        elif inp == &quot;a&quot;:
-364	            models = required + recommended + optional
-365	        elif inp.isnumeric() and inp in ids:
 </pre>
 </div>
 
@@ -1778,56 +722,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>306<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
 
 <div class="code">
 <pre>
-246	
-247	
-248	# -----==========-----
-249	
-250	def install_searge_sdxl():
-251	    print(&quot;Installing or updating SeargeSDXL&quot;)
-252	
-253	    ext_path = extensions_folder.joinpath(&quot;SeargeSDXL&quot;)
-254	    ext_path_exists = Path.exists(ext_path)
-255	    ext_git_path = ext_path.joinpath(&quot;.git&quot;)
-256	
-257	    if ext_path_exists and not Path.exists(ext_git_path):
-258	        print(&quot;The SeargeSDXL extension exists, but is incorrectly installed. Please remove the &quot;
-259	              f&quot;directory {ext_path} and restart the install script&quot;)
-260	        return False
-261	
-262	    old_cwd = os.getcwd()
-263	    if ext_path_exists:
-264	        os.chdir(ext_path)
-265	
-266	        print(&quot;Fetching latest commits from the git repository&quot;)
-267	        ec = os.system(&quot;git fetch --all&quot;)
-268	        if ec != 0:
-269	            print(&quot;The command &#x27;git fetch&#x27; failed, please restart the install script to try again&quot;)
-270	            return False
-271	
-272	        os.chdir(old_cwd)
-273	
-274	    else:
-275	        os.chdir(extensions_folder)
-276	
-277	        print(&quot;Cloning SeargeSDXL from the git repository&quot;)
-278	        ec = os.system(f&quot;git clone {SEARGE_SDXL_GIT_URL}&quot;)
-279	        if ec != 0:
-280	            print(f&quot;The command &#x27;git clone&#x27; failed, please delete the directory {ext_path} and &quot;
-281	                  &quot;restart the install script to try again&quot;)
-282	            return False
-283	
-284	        os.chdir(old_cwd)
-285	
-286	    print(&quot;\nUsually the release branch has the latest stable version and the test branch has the latest &quot;
-287	          &quot;test version.&quot;)
-288	
-289	    inp = get_input(&quot;Do you want to switch the latest [r]elease branch, latest [t]est branch, or stay on the &quot;
 290	                    &quot;[c]urrently installed version?&quot;, &quot;r&quot;, [&quot;r&quot;, &quot;t&quot;, &quot;c&quot;])
 291	
 292	    if inp == &quot;t&quot;:
@@ -1860,50 +760,6 @@ pre {
 319	
 320	# -----==========-----
 321	
-322	def install_models():
-323	    print(&quot;Installing required models and checkpoints&quot;)
-324	
-325	    done = False
-326	    while not done:
-327	        required, recommended, optional, ids = im_show_model_status()
-328	
-329	        if len(ids) == 0:
-330	            print(&quot;\nAll models and checkpoints are installed, nothing to do here&quot;)
-331	            return True
-332	
-333	        default = &quot;d&quot;
-334	
-335	        if len(required) &gt; 0:
-336	            info1 = &quot;re[q]uired, &quot;
-337	            ids += [&quot;q&quot;]
-338	            default = &quot;q&quot;
-339	        else:
-340	            info1 = &quot;&quot;
-341	
-342	        if len(recommended) &gt; 0:
-343	            if default == &quot;q&quot;:
-344	                info2 = &quot;[r]ecommended+required, &quot;
-345	            else:
-346	                info2 = &quot;[r]ecommended, &quot;
-347	            ids += [&quot;r&quot;]
-348	            default = &quot;r&quot;
-349	        else:
-350	            info2 = &quot;&quot;
-351	
-352	        print(&quot;&quot;)
-353	        inp = get_input(f&quot;Select a number for a model or: {info1}{info2}[a]ll, [d]one&quot;,
-354	                        default, ids + [&quot;a&quot;, &quot;d&quot;])
-355	        models = None
-356	        model = None
-357	        if inp == &quot;d&quot;:
-358	            done = True
-359	        elif inp == &quot;q&quot;:
-360	            models = required
-361	        elif inp == &quot;r&quot;:
-362	            models = required + recommended
-363	        elif inp == &quot;a&quot;:
-364	            models = required + recommended + optional
-365	        elif inp.isnumeric() and inp in ids:
 </pre>
 </div>
 
@@ -1918,56 +774,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
+    <b>File: </b><a href="SeargeSDXL/installer/SeargeSDXL-Installer.py" target="_blank">SeargeSDXL/installer/SeargeSDXL-Installer.py</a><br>
     <b>Line number: </b>447<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
 
 <div class="code">
 <pre>
-387	    optional = []
-388	    ids = []
-389	
-390	    for i in range(len(MODELS)):
-391	        model = MODELS[i]
-392	
-393	        folder = model[&quot;folder&quot;]
-394	        filename = model[&quot;filename&quot;]
-395	        importance = model[&quot;importance&quot;]
-396	
-397	        full_path = models_folder.joinpath(folder).joinpath(filename)
-398	        if Path.exists(full_path):
-399	            print(f&quot;[  ] - already installed: {folder}/{filename}&quot;)
-400	        else:
-401	            ids.append(str(i))
-402	            if importance == &quot;required&quot;:
-403	                print(f&quot;[{i:2}] - *** required *** : {folder}/{filename}&quot;)
-404	                required.append(model)
-405	
-406	            elif importance == &quot;recommended&quot;:
-407	                print(f&quot;[{i:2}] -  + recommended + : {folder}/{filename}&quot;)
-408	                recommended.append(model)
-409	
-410	            elif importance == &quot;optional&quot;:
-411	                print(f&quot;[{i:2}] -   ( optional )  : {folder}/{filename}&quot;)
-412	                optional.append(model)
-413	
-414	    return required, recommended, optional, ids
-415	
-416	
-417	# -----==========-----
-418	
-419	def install_model(model):
-420	    folder = model[&quot;folder&quot;]
-421	    filename = model[&quot;filename&quot;]
-422	    url = model[&quot;url&quot;]
-423	
-424	    dl_url = f&quot;{url}{filename}&quot;
-425	    full_folder = models_folder.joinpath(folder)
-426	    full_path = full_folder.joinpath(filename)
-427	
-428	    if not Path.exists(full_folder):
-429	        os.makedirs(full_folder, exist_ok=True)
-430	
 431	    print(f&quot;Downloading {folder}/{filename}\n from {dl_url}&quot;)
 432	
 433	    counter = {&quot;last&quot;: 0}
@@ -2000,50 +812,6 @@ pre {
 460	
 461	    return True
 462	
-463	
-464	# -----==========-----
-465	
-466	def check_opencv():
-467	    print(&quot;Checking if opencv-python is installed&quot;)
-468	    try:
-469	        import cv2
-470	        print(&quot;The library opencv-python is correctly installed&quot;)
-471	    except ImportError:
-472	        print(&quot;The library opencv-python is not installed properly, please run the SeargeSDXL-Installer.bat file!&quot;)
-473	        return False
-474	
-475	    return True
-476	
-477	
-478	# -----==========-----
-479	
-480	def do_install():
-481	    if running_in_extension_directory:
-482	        print(f&quot;Switched to directory: {os.getcwd()}&quot;)
-483	
-484	    correct_directory = os.getcwd() == comfy_path
-485	    if not correct_directory:
-486	        print(&quot;The script is NOT running in the correct directory&quot;)
-487	        return False
-488	
-489	    if found_comfyui_folder:
-490	        print(f&quot;Found ComfyUI folder: {comfyui_folder}&quot;)
-491	    else:
-492	        print(f&quot;Could NOT find ComfyUI folder: {comfyui_folder}&quot;)
-493	        return False
-494	
-495	    if found_models_folder:
-496	        print(f&quot;Found models folder: {models_folder}&quot;)
-497	    else:
-498	        print(f&quot;Could NOT find models folder: {models_folder}&quot;)
-499	        return False
-500	
-501	    if found_extensions_folder:
-502	        print(f&quot;Found extensions folder: {extensions_folder}&quot;)
-503	    else:
-504	        print(f&quot;Could NOT find extensions folder: {extensions_folder}&quot;)
-505	        return False
-506	
 </pre>
 </div>
 

@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_lllite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_lllite.py</a><br>
+    <b>File: </b><a href="ComfyUI-Advanced-ControlNet/adv_control/control_lllite.py" target="_blank">ComfyUI-Advanced-ControlNet/adv_control/control_lllite.py</a><br>
     <b>Line number: </b>112<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-52	        if self.control.timestep_range is not None:
-53	            # it turns out comparing single-value tensors to floats is extremely slow
-54	            # a: Tensor = extra_options[&quot;sigmas&quot;][0]
-55	            if self.control.t &gt; self.control.timestep_range[0] or self.control.t &lt; self.control.timestep_range[1]:
-56	                return q, k, v
-57	
-58	        module_pfx = extra_options_to_module_prefix(extra_options)
-59	
-60	        is_attn1 = q.shape[-1] == k.shape[-1]  # self attention
-61	        if is_attn1:
-62	            module_pfx = module_pfx + &quot;_attn1&quot;
-63	        else:
-64	            module_pfx = module_pfx + &quot;_attn2&quot;
-65	
-66	        module_pfx_to_q = module_pfx + &quot;_to_q&quot;
-67	        module_pfx_to_k = module_pfx + &quot;_to_k&quot;
-68	        module_pfx_to_v = module_pfx + &quot;_to_v&quot;
-69	
-70	        if module_pfx_to_q in self.modules:
-71	            q = q + self.modules[module_pfx_to_q](q, self.control)
-72	        if module_pfx_to_k in self.modules:
-73	            k = k + self.modules[module_pfx_to_k](k, self.control)
-74	        if module_pfx_to_v in self.modules:
-75	            v = v + self.modules[module_pfx_to_v](v, self.control)
-76	
-77	        return q, k, v
-78	
-79	    def to(self, device):
-80	        #logger.info(f&quot;to... has control? {self.control}&quot;)
-81	        for d in self.modules.keys():
-82	            self.modules[d] = self.modules[d].to(device)
-83	        return self
-84	    
-85	    def set_control(self, control: Union[AdvancedControlBase, ControlBase]) -&gt; &#x27;LLLitePatch&#x27;:
-86	        self.control = control
-87	        return self
-88	        #logger.error(f&quot;set control for LLLitePatch: {id(self)}, cn: {id(control)}&quot;)
-89	
-90	    def clone_with_control(self, control: AdvancedControlBase):
-91	        #logger.error(f&quot;clone-set control for LLLitePatch: {id(self)},{id(control)}&quot;)
-92	        return LLLitePatch(self.modules, self.patch_type, control)
-93	
-94	    def cleanup(self):
-95	        #total_cleaned = 0
 96	        for module in self.modules.values():
 97	            module.cleanup()
 98	        #    total_cleaned += 1
@@ -181,50 +137,6 @@ pre {
 126	        mlp_dim: int,
 127	    ):
 128	        super().__init__()
-129	        self.name = name
-130	        self.is_conv2d = is_conv2d
-131	        self.is_first = False
-132	
-133	        modules = []
-134	        modules.append(torch.nn.Conv2d(3, cond_emb_dim // 2, kernel_size=4, stride=4, padding=0))  # to latent (from VAE) size*2
-135	        if depth == 1:
-136	            modules.append(torch.nn.ReLU(inplace=True))
-137	            modules.append(torch.nn.Conv2d(cond_emb_dim // 2, cond_emb_dim, kernel_size=2, stride=2, padding=0))
-138	        elif depth == 2:
-139	            modules.append(torch.nn.ReLU(inplace=True))
-140	            modules.append(torch.nn.Conv2d(cond_emb_dim // 2, cond_emb_dim, kernel_size=4, stride=4, padding=0))
-141	        elif depth == 3:
-142	            # kernel size 8 is too large, so set it to 4
-143	            modules.append(torch.nn.ReLU(inplace=True))
-144	            modules.append(torch.nn.Conv2d(cond_emb_dim // 2, cond_emb_dim // 2, kernel_size=4, stride=4, padding=0))
-145	            modules.append(torch.nn.ReLU(inplace=True))
-146	            modules.append(torch.nn.Conv2d(cond_emb_dim // 2, cond_emb_dim, kernel_size=2, stride=2, padding=0))
-147	
-148	        self.conditioning1 = torch.nn.Sequential(*modules)
-149	
-150	        if self.is_conv2d:
-151	            self.down = torch.nn.Sequential(
-152	                torch.nn.Conv2d(in_dim, mlp_dim, kernel_size=1, stride=1, padding=0),
-153	                torch.nn.ReLU(inplace=True),
-154	            )
-155	            self.mid = torch.nn.Sequential(
-156	                torch.nn.Conv2d(mlp_dim + cond_emb_dim, mlp_dim, kernel_size=1, stride=1, padding=0),
-157	                torch.nn.ReLU(inplace=True),
-158	            )
-159	            self.up = torch.nn.Sequential(
-160	                torch.nn.Conv2d(mlp_dim, in_dim, kernel_size=1, stride=1, padding=0),
-161	            )
-162	        else:
-163	            self.down = torch.nn.Sequential(
-164	                torch.nn.Linear(in_dim, mlp_dim),
-165	                torch.nn.ReLU(inplace=True),
-166	            )
-167	            self.mid = torch.nn.Sequential(
-168	                torch.nn.Linear(mlp_dim + cond_emb_dim, mlp_dim),
-169	                torch.nn.ReLU(inplace=True),
-170	            )
-171	            self.up = torch.nn.Sequential(
-172	                torch.nn.Linear(mlp_dim, in_dim),
 </pre>
 </div>
 
@@ -239,56 +151,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_reference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_reference.py</a><br>
+    <b>File: </b><a href="ComfyUI-Advanced-ControlNet/adv_control/control_reference.py" target="_blank">ComfyUI-Advanced-ControlNet/adv_control/control_reference.py</a><br>
     <b>Line number: </b>473<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-413	
-414	    def get_avg_mean_bank(self):
-415	        return sum(self.mean_bank) / float(len(self.mean_bank))
-416	    
-417	    def get_avg_style_fidelity(self):
-418	        return sum(self.style_cfgs) / float(len(self.style_cfgs))
-419	
-420	    def clean(self):
-421	        del self.mean_bank
-422	        self.mean_bank = []
-423	        del self.var_bank
-424	        self.var_bank = []
-425	        del self.style_cfgs
-426	        self.style_cfgs = []
-427	        del self.cn_idx
-428	        self.cn_idx = []
-429	
-430	
-431	class InjectionBasicTransformerBlockHolder:
-432	    def __init__(self, block: BasicTransformerBlock, idx=None):
-433	        self.original_forward = block._forward
-434	        self.idx = idx
-435	        self.attn_weight = 1.0
-436	        self.is_middle = False
-437	        self.bank_styles = BankStylesBasicTransformerBlock()
-438	    
-439	    def restore(self, block: BasicTransformerBlock):
-440	        block._forward = self.original_forward
-441	
-442	    def clean(self):
-443	        self.bank_styles.clean()
-444	
-445	
-446	class InjectionTimestepEmbedSequentialHolder:
-447	    def __init__(self, block: openaimodel.TimestepEmbedSequential, idx=None, is_middle=False, is_input=False, is_output=False):
-448	        self.original_forward = block.forward
-449	        self.idx = idx
-450	        self.gn_weight = 1.0
-451	        self.is_middle = is_middle
-452	        self.is_input = is_input
-453	        self.is_output = is_output
-454	        self.bank_styles = BankStylesTimestepEmbedSequential()
-455	    
-456	    def restore(self, block: openaimodel.TimestepEmbedSequential):
 457	        block.forward = self.original_forward
 458	    
 459	    def clean(self):
@@ -322,50 +190,6 @@ pre {
 487	        self.diffusion_model_orig_forward = None
 488	
 489	
-490	def factory_forward_inject_UNetModel(reference_injections: ReferenceInjections):
-491	    def forward_inject_UNetModel(self, x: Tensor, *args, **kwargs):
-492	        # get control and transformer_options from kwargs
-493	        real_args = list(args)
-494	        real_kwargs = list(kwargs.keys())
-495	        control = kwargs.get(&quot;control&quot;, None)
-496	        transformer_options = kwargs.get(&quot;transformer_options&quot;, None)
-497	        # look for ReferenceAttnPatch objects to get ReferenceAdvanced objects
-498	        ref_controlnets: list[ReferenceAdvanced] = transformer_options[REF_CONTROL_LIST_ALL]
-499	        # discard any controlnets that should not run
-500	        ref_controlnets = [x for x in ref_controlnets if x.should_run()]
-501	        # if nothing related to reference controlnets, do nothing special
-502	        if len(ref_controlnets) == 0:
-503	            return reference_injections.diffusion_model_orig_forward(x, *args, **kwargs)
-504	        try:
-505	            # assign cond and uncond idxs
-506	            batched_number = len(transformer_options[&quot;cond_or_uncond&quot;])
-507	            per_batch = x.shape[0] // batched_number
-508	            indiv_conds = []
-509	            for cond_type in transformer_options[&quot;cond_or_uncond&quot;]:
-510	                indiv_conds.extend([cond_type] * per_batch)
-511	            transformer_options[REF_UNCOND_IDXS] = [i for i, x in enumerate(indiv_conds) if x == 1]
-512	            transformer_options[REF_COND_IDXS] = [i for i, x in enumerate(indiv_conds) if x == 0]
-513	            # check which controlnets do which thing
-514	            attn_controlnets = []
-515	            adain_controlnets = []
-516	            for control in ref_controlnets:
-517	                if ReferenceType.is_attn(control.ref_opts.reference_type):
-518	                    attn_controlnets.append(control)
-519	                if ReferenceType.is_adain(control.ref_opts.reference_type):
-520	                    adain_controlnets.append(control)
-521	            if len(adain_controlnets) &gt; 0:
-522	                # ComfyUI uses forward_timestep_embed with the TimestepEmbedSequential passed into it
-523	                orig_forward_timestep_embed = openaimodel.forward_timestep_embed
-524	                openaimodel.forward_timestep_embed = forward_timestep_embed_ref_inject_factory(orig_forward_timestep_embed)
-525	            # handle running diffusion with ref cond hints
-526	            for control in ref_controlnets:
-527	                if ReferenceType.is_attn(control.ref_opts.reference_type):
-528	                    transformer_options[REF_ATTN_MACHINE_STATE] = MachineState.WRITE
-529	                else:
-530	                    transformer_options[REF_ATTN_MACHINE_STATE] = MachineState.OFF
-531	                if ReferenceType.is_adain(control.ref_opts.reference_type):
-532	                    transformer_options[REF_ADAIN_MACHINE_STATE] = MachineState.WRITE
-533	                else:
 </pre>
 </div>
 
@@ -380,56 +204,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_reference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_reference.py</a><br>
+    <b>File: </b><a href="ComfyUI-Advanced-ControlNet/adv_control/control_reference.py" target="_blank">ComfyUI-Advanced-ControlNet/adv_control/control_reference.py</a><br>
     <b>Line number: </b>478<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-418	        return sum(self.style_cfgs) / float(len(self.style_cfgs))
-419	
-420	    def clean(self):
-421	        del self.mean_bank
-422	        self.mean_bank = []
-423	        del self.var_bank
-424	        self.var_bank = []
-425	        del self.style_cfgs
-426	        self.style_cfgs = []
-427	        del self.cn_idx
-428	        self.cn_idx = []
-429	
-430	
-431	class InjectionBasicTransformerBlockHolder:
-432	    def __init__(self, block: BasicTransformerBlock, idx=None):
-433	        self.original_forward = block._forward
-434	        self.idx = idx
-435	        self.attn_weight = 1.0
-436	        self.is_middle = False
-437	        self.bank_styles = BankStylesBasicTransformerBlock()
-438	    
-439	    def restore(self, block: BasicTransformerBlock):
-440	        block._forward = self.original_forward
-441	
-442	    def clean(self):
-443	        self.bank_styles.clean()
-444	
-445	
-446	class InjectionTimestepEmbedSequentialHolder:
-447	    def __init__(self, block: openaimodel.TimestepEmbedSequential, idx=None, is_middle=False, is_input=False, is_output=False):
-448	        self.original_forward = block.forward
-449	        self.idx = idx
-450	        self.gn_weight = 1.0
-451	        self.is_middle = is_middle
-452	        self.is_input = is_input
-453	        self.is_output = is_output
-454	        self.bank_styles = BankStylesTimestepEmbedSequential()
-455	    
-456	    def restore(self, block: openaimodel.TimestepEmbedSequential):
-457	        block.forward = self.original_forward
-458	    
-459	    def clean(self):
-460	        self.bank_styles.clean()
-461	
 462	
 463	class ReferenceInjections:
 464	    def __init__(self, attn_modules: list[&#x27;RefBasicTransformerBlock&#x27;]=None, gn_modules: list[&#x27;RefTimestepEmbedSequential&#x27;]=None):
@@ -463,50 +243,6 @@ pre {
 492	        # get control and transformer_options from kwargs
 493	        real_args = list(args)
 494	        real_kwargs = list(kwargs.keys())
-495	        control = kwargs.get(&quot;control&quot;, None)
-496	        transformer_options = kwargs.get(&quot;transformer_options&quot;, None)
-497	        # look for ReferenceAttnPatch objects to get ReferenceAdvanced objects
-498	        ref_controlnets: list[ReferenceAdvanced] = transformer_options[REF_CONTROL_LIST_ALL]
-499	        # discard any controlnets that should not run
-500	        ref_controlnets = [x for x in ref_controlnets if x.should_run()]
-501	        # if nothing related to reference controlnets, do nothing special
-502	        if len(ref_controlnets) == 0:
-503	            return reference_injections.diffusion_model_orig_forward(x, *args, **kwargs)
-504	        try:
-505	            # assign cond and uncond idxs
-506	            batched_number = len(transformer_options[&quot;cond_or_uncond&quot;])
-507	            per_batch = x.shape[0] // batched_number
-508	            indiv_conds = []
-509	            for cond_type in transformer_options[&quot;cond_or_uncond&quot;]:
-510	                indiv_conds.extend([cond_type] * per_batch)
-511	            transformer_options[REF_UNCOND_IDXS] = [i for i, x in enumerate(indiv_conds) if x == 1]
-512	            transformer_options[REF_COND_IDXS] = [i for i, x in enumerate(indiv_conds) if x == 0]
-513	            # check which controlnets do which thing
-514	            attn_controlnets = []
-515	            adain_controlnets = []
-516	            for control in ref_controlnets:
-517	                if ReferenceType.is_attn(control.ref_opts.reference_type):
-518	                    attn_controlnets.append(control)
-519	                if ReferenceType.is_adain(control.ref_opts.reference_type):
-520	                    adain_controlnets.append(control)
-521	            if len(adain_controlnets) &gt; 0:
-522	                # ComfyUI uses forward_timestep_embed with the TimestepEmbedSequential passed into it
-523	                orig_forward_timestep_embed = openaimodel.forward_timestep_embed
-524	                openaimodel.forward_timestep_embed = forward_timestep_embed_ref_inject_factory(orig_forward_timestep_embed)
-525	            # handle running diffusion with ref cond hints
-526	            for control in ref_controlnets:
-527	                if ReferenceType.is_attn(control.ref_opts.reference_type):
-528	                    transformer_options[REF_ATTN_MACHINE_STATE] = MachineState.WRITE
-529	                else:
-530	                    transformer_options[REF_ATTN_MACHINE_STATE] = MachineState.OFF
-531	                if ReferenceType.is_adain(control.ref_opts.reference_type):
-532	                    transformer_options[REF_ADAIN_MACHINE_STATE] = MachineState.WRITE
-533	                else:
-534	                    transformer_options[REF_ADAIN_MACHINE_STATE] = MachineState.OFF
-535	                transformer_options[REF_ATTN_CONTROL_LIST] = [control]
-536	                transformer_options[REF_ADAIN_CONTROL_LIST] = [control]
-537	
-538	                orig_kwargs = kwargs
 </pre>
 </div>
 
@@ -521,56 +257,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py</a><br>
+    <b>File: </b><a href="ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py" target="_blank">ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py</a><br>
     <b>Line number: </b>111<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-51	    def __init__(self, *args,**kwargs):
-52	        super().__init__(*args, **kwargs)
-53	        hint_channels = kwargs.get(&quot;hint_channels&quot;)
-54	        operations: disable_weight_init_clean_groupnorm = kwargs.get(&quot;operations&quot;, disable_weight_init_clean_groupnorm)
-55	        device = kwargs.get(&quot;device&quot;, None)
-56	        self.use_simplified_conditioning_embedding = kwargs.get(&quot;use_simplified_conditioning_embedding&quot;, False)
-57	        if self.use_simplified_conditioning_embedding:
-58	            self.input_hint_block = TimestepEmbedSequential(
-59	                zero_module(operations.conv_nd(self.dims, hint_channels, self.model_channels, 3, padding=1, dtype=self.dtype, device=device)),
-60	            )
-61	        self.motion_wrapper: SparseCtrlMotionWrapper = None
-62	    
-63	    def set_actual_length(self, actual_length: int, full_length: int):
-64	        if self.motion_wrapper is not None:
-65	            self.motion_wrapper.set_video_length(video_length=actual_length, full_length=full_length)
-66	
-67	    def forward(self, x: Tensor, hint: Tensor, timesteps, context, y=None, **kwargs):
-68	        t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False).to(x.dtype)
-69	        emb = self.time_embed(t_emb)
-70	
-71	        # SparseCtrl sets noisy input to zeros
-72	        x = torch.zeros_like(x)
-73	        guided_hint = self.input_hint_block(hint, emb, context)
-74	
-75	        outs = []
-76	
-77	        hs = []
-78	        if self.num_classes is not None:
-79	            assert y.shape[0] == x.shape[0]
-80	            emb = emb + self.label_emb(y)
-81	
-82	        h = x
-83	        for module, zero_conv in zip(self.input_blocks, self.zero_convs):
-84	            if guided_hint is not None:
-85	                h = module(h, emb, context)
-86	                h += guided_hint
-87	                guided_hint = None
-88	            else:
-89	                h = module(h, emb, context)
-90	            outs.append(zero_conv(h, emb, context))
-91	
-92	        h = self.middle_block(h, emb, context)
-93	        outs.append(self.middle_block_out(h, emb, context))
-94	
 95	        return outs
 96	
 97	
@@ -604,50 +296,6 @@ pre {
 125	
 126	    def clone(self):
 127	        # normal ModelPatcher clone actions
-128	        n = SparseModelPatcher(self.model, self.load_device, self.offload_device, self.size, self.current_device, weight_inplace_update=self.weight_inplace_update)
-129	        n.patches = {}
-130	        for k in self.patches:
-131	            n.patches[k] = self.patches[k][:]
-132	        if hasattr(n, &quot;patches_uuid&quot;):
-133	            self.patches_uuid = n.patches_uuid
-134	
-135	        n.object_patches = self.object_patches.copy()
-136	        n.model_options = copy.deepcopy(self.model_options)
-137	        n.model_keys = self.model_keys
-138	        if hasattr(n, &quot;backup&quot;):
-139	            self.backup = n.backup
-140	        if hasattr(n, &quot;object_patches_backup&quot;):
-141	            self.object_patches_backup = n.object_patches_backup
-142	
-143	
-144	class PreprocSparseRGBWrapper:
-145	    error_msg = &quot;Invalid use of RGB SparseCtrl output. The output of RGB SparseCtrl preprocessor is NOT a usual image, but a latent pretending to be an image - you must connect the output directly to an Apply ControlNet node (advanced or otherwise). It cannot be used for anything else that accepts IMAGE input.&quot;
-146	    def __init__(self, condhint: Tensor):
-147	        self.condhint = condhint
-148	    
-149	    def movedim(self, *args, **kwargs):
-150	        return self
-151	
-152	    def __getattr__(self, *args, **kwargs):
-153	        raise AttributeError(self.error_msg)
-154	    
-155	    def __setattr__(self, name, value):
-156	        if name != &quot;condhint&quot;:
-157	            raise AttributeError(self.error_msg)
-158	        super().__setattr__(name, value)
-159	    
-160	    def __iter__(self, *args, **kwargs):
-161	        raise AttributeError(self.error_msg)
-162	    
-163	    def __next__(self, *args, **kwargs):
-164	        raise AttributeError(self.error_msg)
-165	
-166	    def __len__(self, *args, **kwargs):
-167	        raise AttributeError(self.error_msg)
-168	    
-169	    def __getitem__(self, *args, **kwargs):
-170	        raise AttributeError(self.error_msg)
-171	    
 </pre>
 </div>
 
@@ -662,56 +310,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py</a><br>
+    <b>File: </b><a href="ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py" target="_blank">ComfyUI-Advanced-ControlNet/adv_control/control_sparsectrl.py</a><br>
     <b>Line number: </b>119<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-59	                zero_module(operations.conv_nd(self.dims, hint_channels, self.model_channels, 3, padding=1, dtype=self.dtype, device=device)),
-60	            )
-61	        self.motion_wrapper: SparseCtrlMotionWrapper = None
-62	    
-63	    def set_actual_length(self, actual_length: int, full_length: int):
-64	        if self.motion_wrapper is not None:
-65	            self.motion_wrapper.set_video_length(video_length=actual_length, full_length=full_length)
-66	
-67	    def forward(self, x: Tensor, hint: Tensor, timesteps, context, y=None, **kwargs):
-68	        t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False).to(x.dtype)
-69	        emb = self.time_embed(t_emb)
-70	
-71	        # SparseCtrl sets noisy input to zeros
-72	        x = torch.zeros_like(x)
-73	        guided_hint = self.input_hint_block(hint, emb, context)
-74	
-75	        outs = []
-76	
-77	        hs = []
-78	        if self.num_classes is not None:
-79	            assert y.shape[0] == x.shape[0]
-80	            emb = emb + self.label_emb(y)
-81	
-82	        h = x
-83	        for module, zero_conv in zip(self.input_blocks, self.zero_convs):
-84	            if guided_hint is not None:
-85	                h = module(h, emb, context)
-86	                h += guided_hint
-87	                guided_hint = None
-88	            else:
-89	                h = module(h, emb, context)
-90	            outs.append(zero_conv(h, emb, context))
-91	
-92	        h = self.middle_block(h, emb, context)
-93	        outs.append(self.middle_block_out(h, emb, context))
-94	
-95	        return outs
-96	
-97	
-98	class SparseModelPatcher(ModelPatcher):
-99	    def __init__(self, *args, **kwargs):
-100	        self.model: SparseControlNet
-101	        super().__init__(*args, **kwargs)
-102	    
 103	    def patch_model(self, device_to=None, patch_weights=True):
 104	        if patch_weights:
 105	            patched_model = super().patch_model(device_to)
@@ -745,50 +349,6 @@ pre {
 133	            self.patches_uuid = n.patches_uuid
 134	
 135	        n.object_patches = self.object_patches.copy()
-136	        n.model_options = copy.deepcopy(self.model_options)
-137	        n.model_keys = self.model_keys
-138	        if hasattr(n, &quot;backup&quot;):
-139	            self.backup = n.backup
-140	        if hasattr(n, &quot;object_patches_backup&quot;):
-141	            self.object_patches_backup = n.object_patches_backup
-142	
-143	
-144	class PreprocSparseRGBWrapper:
-145	    error_msg = &quot;Invalid use of RGB SparseCtrl output. The output of RGB SparseCtrl preprocessor is NOT a usual image, but a latent pretending to be an image - you must connect the output directly to an Apply ControlNet node (advanced or otherwise). It cannot be used for anything else that accepts IMAGE input.&quot;
-146	    def __init__(self, condhint: Tensor):
-147	        self.condhint = condhint
-148	    
-149	    def movedim(self, *args, **kwargs):
-150	        return self
-151	
-152	    def __getattr__(self, *args, **kwargs):
-153	        raise AttributeError(self.error_msg)
-154	    
-155	    def __setattr__(self, name, value):
-156	        if name != &quot;condhint&quot;:
-157	            raise AttributeError(self.error_msg)
-158	        super().__setattr__(name, value)
-159	    
-160	    def __iter__(self, *args, **kwargs):
-161	        raise AttributeError(self.error_msg)
-162	    
-163	    def __next__(self, *args, **kwargs):
-164	        raise AttributeError(self.error_msg)
-165	
-166	    def __len__(self, *args, **kwargs):
-167	        raise AttributeError(self.error_msg)
-168	    
-169	    def __getitem__(self, *args, **kwargs):
-170	        raise AttributeError(self.error_msg)
-171	    
-172	    def __setitem__(self, *args, **kwargs):
-173	        raise AttributeError(self.error_msg)
-174	
-175	
-176	class SparseSettings:
-177	    def __init__(self, sparse_method: &#x27;SparseMethod&#x27;, use_motion: bool=True, motion_strength=1.0, motion_scale=1.0, merged=False):
-178	        self.sparse_method = sparse_method
-179	        self.use_motion = use_motion
 </pre>
 </div>
 

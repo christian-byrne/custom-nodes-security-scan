@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/259.html" target="_blank">CWE-259</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Cutoff/cutoff.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Cutoff/cutoff.py</a><br>
+    <b>File: </b><a href="ComfyUI_Cutoff/cutoff.py" target="_blank">ComfyUI_Cutoff/cutoff.py</a><br>
     <b>Line number: </b>217<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b107_hardcoded_password_default.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b107_hardcoded_password_default.html</a><br>
 
 <div class="code">
 <pre>
-157	        region_mask_list.extend(region_outputs)
-158	        target_mask_list = clip_regions[&#x27;targets&#x27;].copy()
-159	        target_mask_list.extend(target_outputs)
-160	        weight_list = clip_regions[&#x27;weights&#x27;].copy()
-161	        weight_list.extend([weight]*len(region_outputs))
-162	
-163	        return ({
-164	            &quot;clip&quot; : clip,
-165	            &quot;base_tokens&quot; : clip_regions[&quot;base_tokens&quot;],
-166	            &quot;regions&quot; : region_mask_list,
-167	            &quot;targets&quot; : target_mask_list,
-168	            &quot;weights&quot; : weight_list,
-169	        },)
-170	def create_masked_prompt(weighted_tokens, mask, mask_token):
-171	    if isinstance(weighted_tokens, dict):
-172	        result = dict()
-173	        for k in weighted_tokens.keys():
-174	            result[k] = _create_masked_prompt(weighted_tokens[k], mask, mask_token)
-175	        return result
-176	    else:
-177	        return _create_masked_prompt(weighted_tokens, mask, mask_token)
-178	
-179	def _create_masked_prompt(weighted_tokens, mask, mask_token):
-180	    mask_ids = list(zip(*np.nonzero(mask.reshape((len(weighted_tokens), -1)))))  
-181	    new_prompt = copy.deepcopy(weighted_tokens)
-182	    for x,y in mask_ids:
-183	        new_prompt[x][y] = (mask_token,) + new_prompt[x][y][1:]
-184	    return new_prompt
-185	
-186	def encode_from_tokens(clip, tokenized, token_normalization, weight_interpretation, return_pooled=False):
-187	    if isinstance(clip.cond_stage_model, (SDXLClipModel, SDXLRefinerClipModel, SDXLClipG)):
-188	        embs_l = None
-189	        embs_g = None
-190	        pooled = None
-191	        if &#x27;l&#x27; in tokenized and isinstance(clip.cond_stage_model, SDXLClipModel):
-192	            embs_l, _ = advanced_encode_from_tokens(tokenized[&#x27;l&#x27;], 
-193	                                                 token_normalization, 
-194	                                                 weight_interpretation, 
-195	                                                 lambda x: encode_token_weights(clip, x, encode_token_weights_l),
-196	                                                 w_max=1.0, 
-197	                                                 return_pooled=False)
-198	        if &#x27;g&#x27; in tokenized:
-199	            embs_g, pooled = advanced_encode_from_tokens(tokenized[&#x27;g&#x27;], 
-200	                                                         token_normalization, 
 201	                                                         weight_interpretation,
 202	                                                         lambda x: encode_token_weights(clip, x, encode_token_weights_g),
 203	                                                         w_max=1.0, 
@@ -229,40 +185,6 @@ pre {
 279	    CATEGORY = &quot;conditioning/cutoff&quot;
 280	
 281	    def finalize(self, clip_regions, mask_token, strict_mask, start_from_masked):
-282	        return finalize_clip_regions(clip_regions, mask_token, strict_mask, start_from_masked)
-283	
-284	class CLIPRegionsToConditioningADV:
-285	    @classmethod
-286	    def INPUT_TYPES(s):
-287	        return {&quot;required&quot;: {&quot;clip_regions&quot;: (&quot;CLIPREGION&quot;, ),
-288	                             &quot;mask_token&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: False, &quot;default&quot; : &quot;&quot;}),
-289	                             &quot;strict_mask&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.05}),
-290	                             &quot;start_from_masked&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.05}),
-291	                             &quot;token_normalization&quot;: ([&quot;none&quot;, &quot;mean&quot;, &quot;length&quot;, &quot;length+mean&quot;],),
-292	                             &quot;weight_interpretation&quot;: ([&quot;comfy&quot;, &quot;A1111&quot;, &quot;compel&quot;, &quot;comfy++&quot;],),
-293	                             }}
-294	    RETURN_TYPES = (&quot;CONDITIONING&quot;,)
-295	    FUNCTION = &quot;finalize&quot;
-296	
-297	    CATEGORY = &quot;conditioning/cutoff&quot;
-298	
-299	    def finalize(self, clip_regions, mask_token, strict_mask, start_from_masked, token_normalization, weight_interpretation):
-300	        return finalize_clip_regions(clip_regions, mask_token, strict_mask, start_from_masked, token_normalization, weight_interpretation)
-301	
-302	    
-303	NODE_CLASS_MAPPINGS = {
-304	    &quot;BNK_CutoffBasePrompt&quot;: CLIPRegionsBasePrompt,
-305	    &quot;BNK_CutoffSetRegions&quot;: CLIPSetRegion,
-306	    &quot;BNK_CutoffRegionsToConditioning&quot;: CLIPRegionsToConditioning,
-307	    &quot;BNK_CutoffRegionsToConditioning_ADV&quot;: CLIPRegionsToConditioningADV,
-308	}
-309	
-310	NODE_DISPLAY_NAME_MAPPINGS = {
-311	    &quot;BNK_CutoffBasePrompt&quot;: &quot;Cutoff Base Prompt&quot;,
-312	    &quot;BNK_CutoffSetRegions&quot;: &quot;Cutoff Set Regions&quot;,
-313	    &quot;BNK_CutoffRegionsToConditioning&quot;: &quot;Cutoff Regions To Conditioning&quot;,
-314	    &quot;BNK_CutoffRegionsToConditioning_ADV&quot;: &quot;Cutoff Regions To Conditioning (ADV)&quot;,
-315	}
 </pre>
 </div>
 
@@ -277,56 +199,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/259.html" target="_blank">CWE-259</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Cutoff/cutoff.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Cutoff/cutoff.py</a><br>
+    <b>File: </b><a href="ComfyUI_Cutoff/cutoff.py" target="_blank">ComfyUI_Cutoff/cutoff.py</a><br>
     <b>Line number: </b>231<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b105_hardcoded_password_string.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b105_hardcoded_password_string.html</a><br>
 
 <div class="code">
 <pre>
-171	    if isinstance(weighted_tokens, dict):
-172	        result = dict()
-173	        for k in weighted_tokens.keys():
-174	            result[k] = _create_masked_prompt(weighted_tokens[k], mask, mask_token)
-175	        return result
-176	    else:
-177	        return _create_masked_prompt(weighted_tokens, mask, mask_token)
-178	
-179	def _create_masked_prompt(weighted_tokens, mask, mask_token):
-180	    mask_ids = list(zip(*np.nonzero(mask.reshape((len(weighted_tokens), -1)))))  
-181	    new_prompt = copy.deepcopy(weighted_tokens)
-182	    for x,y in mask_ids:
-183	        new_prompt[x][y] = (mask_token,) + new_prompt[x][y][1:]
-184	    return new_prompt
-185	
-186	def encode_from_tokens(clip, tokenized, token_normalization, weight_interpretation, return_pooled=False):
-187	    if isinstance(clip.cond_stage_model, (SDXLClipModel, SDXLRefinerClipModel, SDXLClipG)):
-188	        embs_l = None
-189	        embs_g = None
-190	        pooled = None
-191	        if &#x27;l&#x27; in tokenized and isinstance(clip.cond_stage_model, SDXLClipModel):
-192	            embs_l, _ = advanced_encode_from_tokens(tokenized[&#x27;l&#x27;], 
-193	                                                 token_normalization, 
-194	                                                 weight_interpretation, 
-195	                                                 lambda x: encode_token_weights(clip, x, encode_token_weights_l),
-196	                                                 w_max=1.0, 
-197	                                                 return_pooled=False)
-198	        if &#x27;g&#x27; in tokenized:
-199	            embs_g, pooled = advanced_encode_from_tokens(tokenized[&#x27;g&#x27;], 
-200	                                                         token_normalization, 
-201	                                                         weight_interpretation,
-202	                                                         lambda x: encode_token_weights(clip, x, encode_token_weights_g),
-203	                                                         w_max=1.0, 
-204	                                                         return_pooled=True)
-205	        emb, pool = prepareXL(embs_l, embs_g, pooled, .5)
-206	    else:
-207	        emb, pool = advanced_encode_from_tokens(tokenized[&#x27;l&#x27;], 
-208	                                           token_normalization, 
-209	                                           weight_interpretation, 
-210	                                           lambda x: (clip.encode_from_tokens({&#x27;l&#x27;: x}), None),
-211	                                           w_max=1.0)
-212	    if return_pooled:
-213	        return emb, pool
-214	    else:
 215	        return emb
 216	
 217	def finalize_clip_regions(clip_regions, mask_token, strict_mask, start_from_masked, token_normalization=&#x27;none&#x27;, weight_interpretation=&#x27;comfy&#x27;):
@@ -359,50 +237,6 @@ pre {
 244	    regions_sum = np.sum(np.stack(clip_regions[&quot;regions&quot;]), axis=0)
 245	    regions_normalized = np.divide(1, regions_sum, out=np.zeros_like(regions_sum), where=regions_sum!=0)
 246	
-247	    #mask base embeddings
-248	    base_embedding_masked = encode_from_tokens(clip, create_masked_prompt(base_weighted_tokens, global_target_mask, mask_token), token_normalization, weight_interpretation)
-249	    base_embedding_start = base_embedding_full * (1-start_from_masked) + base_embedding_masked * start_from_masked
-250	    base_embedding_outer = base_embedding_full * (1-strict_mask) + base_embedding_masked * strict_mask
-251	
-252	    region_embeddings = []
-253	    for region, target, weight in zip (clip_regions[&quot;regions&quot;],clip_regions[&quot;targets&quot;],clip_regions[&quot;weights&quot;]):
-254	        region_masking = torch.tensor(regions_normalized * region * weight, dtype=base_embedding_full.dtype, device=base_embedding_full.device).unsqueeze(-1)
-255	
-256	        region_emb = encode_from_tokens(clip, create_masked_prompt(base_weighted_tokens, global_target_mask - target, mask_token), token_normalization, weight_interpretation)
-257	        region_emb -= base_embedding_start
-258	        region_emb *= region_masking
-259	
-260	        region_embeddings.append(region_emb)
-261	    region_embeddings = torch.stack(region_embeddings).sum(axis=0)
-262	
-263	    embeddings_final_mask = torch.tensor(global_region_mask, dtype=base_embedding_full.dtype, device=base_embedding_full.device).unsqueeze(-1)
-264	    embeddings_final = base_embedding_start * embeddings_final_mask + base_embedding_outer * (1 - embeddings_final_mask)
-265	    embeddings_final += region_embeddings
-266	    return ([[embeddings_final, {&quot;pooled_output&quot;: pool}]], )
-267	
-268	
-269	class CLIPRegionsToConditioning:
-270	    @classmethod
-271	    def INPUT_TYPES(s):
-272	        return {&quot;required&quot;: {&quot;clip_regions&quot;: (&quot;CLIPREGION&quot;, ),
-273	                             &quot;mask_token&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: False, &quot;default&quot; : &quot;&quot;}),
-274	                             &quot;strict_mask&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.05}),
-275	                             &quot;start_from_masked&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.05})}}
-276	    RETURN_TYPES = (&quot;CONDITIONING&quot;,)
-277	    FUNCTION = &quot;finalize&quot;
-278	
-279	    CATEGORY = &quot;conditioning/cutoff&quot;
-280	
-281	    def finalize(self, clip_regions, mask_token, strict_mask, start_from_masked):
-282	        return finalize_clip_regions(clip_regions, mask_token, strict_mask, start_from_masked)
-283	
-284	class CLIPRegionsToConditioningADV:
-285	    @classmethod
-286	    def INPUT_TYPES(s):
-287	        return {&quot;required&quot;: {&quot;clip_regions&quot;: (&quot;CLIPREGION&quot;, ),
-288	                             &quot;mask_token&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: False, &quot;default&quot; : &quot;&quot;}),
-289	                             &quot;strict_mask&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.05}),
-290	                             &quot;start_from_masked&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: 0.0, &quot;max&quot;: 1.0, &quot;step&quot;: 0.05}),
 </pre>
 </div>
 

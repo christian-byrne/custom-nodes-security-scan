@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/259.html" target="_blank">CWE-259</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-control/prompt_control/node_clip.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-control/prompt_control/node_clip.py</a><br>
+    <b>File: </b><a href="comfyui-prompt-control/prompt_control/node_clip.py" target="_blank">comfyui-prompt-control/prompt_control/node_clip.py</a><br>
     <b>Line number: </b>205<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b107_hardcoded_password_default.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b107_hardcoded_password_default.html</a><br>
 
 <div class="code">
 <pre>
-145	class EditableCLIPEncode:
-146	    @classmethod
-147	    def INPUT_TYPES(s):
-148	        return {
-149	            &quot;required&quot;: {
-150	                &quot;clip&quot;: (&quot;CLIP&quot;,),
-151	                &quot;text&quot;: (&quot;STRING&quot;, {&quot;multiline&quot;: True}),
-152	            },
-153	            &quot;optional&quot;: {&quot;filter_tags&quot;: (&quot;STRING&quot;, {&quot;default&quot;: &quot;&quot;})},
-154	        }
-155	
-156	    RETURN_TYPES = (&quot;CONDITIONING&quot;,)
-157	    CATEGORY = &quot;promptcontrol/old&quot;
-158	    FUNCTION = &quot;parse&quot;
-159	
-160	    def parse(self, clip, text, filter_tags=&quot;&quot;):
-161	        parsed = parse_prompt_schedules(text).with_filters(filter_tags)
-162	        return (control_to_clip_common(clip, parsed),)
-163	
-164	
-165	def get_sdxl(text, defaults):
-166	    # Defaults fail to parse and get looked up from the defaults dict
-167	    text, sdxl = get_function(text, &quot;SDXL&quot;, [&quot;none&quot;, &quot;none&quot;, &quot;none&quot;])
-168	    if not sdxl:
-169	        return text, {}
-170	    args = sdxl[0]
-171	    d = defaults
-172	    w, h = parse_floats(args[0], [d.get(&quot;sdxl_width&quot;, 1024), d.get(&quot;sdxl_height&quot;, 1024)], split_re=&quot;\\s+&quot;)
-173	    tw, th = parse_floats(args[1], [d.get(&quot;sdxl_twidth&quot;, 1024), d.get(&quot;sdxl_theight&quot;, 1024)], split_re=&quot;\\s+&quot;)
-174	    cropw, croph = parse_floats(args[2], [d.get(&quot;sdxl_cwidth&quot;, 0), d.get(&quot;sdxl_cheight&quot;, 0)], split_re=&quot;\\s+&quot;)
-175	
-176	    opts = {
-177	        &quot;width&quot;: int(w),
-178	        &quot;height&quot;: int(h),
-179	        &quot;target_width&quot;: int(tw),
-180	        &quot;target_height&quot;: int(th),
-181	        &quot;crop_w&quot;: int(cropw),
-182	        &quot;crop_h&quot;: int(croph),
-183	    }
-184	    return text, opts
-185	
-186	
-187	def get_style(text, default_style=&quot;comfy&quot;, default_normalization=&quot;none&quot;):
-188	    text, styles = get_function(text, &quot;STYLE&quot;, [default_style, default_normalization])
 189	    if not styles:
 190	        return default_style, default_normalization, text
 191	    style, normalization = styles[0]
@@ -215,50 +171,6 @@ pre {
 253	    if not separator:
 254	        separator = &quot;,&quot;
 255	
-256	    joiner = {
-257	        &quot;default&quot;: &quot;,&quot;,
-258	        &quot;separator&quot;: separator,
-259	    }.get(joiner, joiner)
-260	
-261	    log.info(&quot;%s arg=%s sep=%s join=%s&quot;, func, shuffle_count, separator, joiner)
-262	    separated = c.split(separator)
-263	    if func == &quot;SHIFT&quot;:
-264	        shuffle_count = shuffle_count % len(separated)
-265	        permutation = separated[shuffle_count:] + separated[:shuffle_count]
-266	    elif func == &quot;SHUFFLE&quot;:
-267	        SHUFFLE_GEN.manual_seed(shuffle_count)
-268	        permutation = [separated[i] for i in torch.randperm(len(separated), generator=SHUFFLE_GEN)]
-269	    else:
-270	        # ??? should never get here
-271	        permutation = separated
-272	
-273	    permutation = [p for p in permutation if p.strip()]
-274	    if permutation != separated:
-275	        c = joiner.join(permutation)
-276	    return c
-277	
-278	
-279	def encode_prompt(clip, text, default_style=&quot;comfy&quot;, default_normalization=&quot;none&quot;):
-280	    style, normalization, text = get_style(text, default_style, default_normalization)
-281	    text, regions = parse_cuts(text)
-282	    # defaults=None means there is no argument parsing at all
-283	    text, l_prompts = get_function(text, &quot;CLIP_L&quot;, defaults=None)
-284	    chunks = re.split(r&quot;\bBREAK\b&quot;, text)
-285	    token_chunks = []
-286	    for c in chunks:
-287	        c, shuffles = get_function(c.strip(), &quot;(SHIFT|SHUFFLE)&quot;, [&quot;0&quot;, &quot;default&quot;, &quot;default&quot;], return_func_name=True)
-288	        r = c
-289	        for s in shuffles:
-290	            r = shuffle_chunk(s, r)
-291	        if r != c:
-292	            log.info(&quot;Shuffled prompt chunk to %s&quot;, r)
-293	            c = r
-294	        # Tokenizer returns padded results
-295	        t = clip.tokenize(c, return_word_ids=len(regions) &gt; 0 or (have_advanced_encode and style != &quot;perp&quot;))
-296	        token_chunks.append(t)
-297	    tokens = token_chunks[0]
-298	    for c in token_chunks[1:]:
-299	        for key in tokens:
 </pre>
 </div>
 
@@ -273,56 +185,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>MEDIUM<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/259.html" target="_blank">CWE-259</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-control/prompt_control/node_clip.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-control/prompt_control/node_clip.py</a><br>
+    <b>File: </b><a href="comfyui-prompt-control/prompt_control/node_clip.py" target="_blank">comfyui-prompt-control/prompt_control/node_clip.py</a><br>
     <b>Line number: </b>218<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b105_hardcoded_password_string.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b105_hardcoded_password_string.html</a><br>
 
 <div class="code">
 <pre>
-158	    FUNCTION = &quot;parse&quot;
-159	
-160	    def parse(self, clip, text, filter_tags=&quot;&quot;):
-161	        parsed = parse_prompt_schedules(text).with_filters(filter_tags)
-162	        return (control_to_clip_common(clip, parsed),)
-163	
-164	
-165	def get_sdxl(text, defaults):
-166	    # Defaults fail to parse and get looked up from the defaults dict
-167	    text, sdxl = get_function(text, &quot;SDXL&quot;, [&quot;none&quot;, &quot;none&quot;, &quot;none&quot;])
-168	    if not sdxl:
-169	        return text, {}
-170	    args = sdxl[0]
-171	    d = defaults
-172	    w, h = parse_floats(args[0], [d.get(&quot;sdxl_width&quot;, 1024), d.get(&quot;sdxl_height&quot;, 1024)], split_re=&quot;\\s+&quot;)
-173	    tw, th = parse_floats(args[1], [d.get(&quot;sdxl_twidth&quot;, 1024), d.get(&quot;sdxl_theight&quot;, 1024)], split_re=&quot;\\s+&quot;)
-174	    cropw, croph = parse_floats(args[2], [d.get(&quot;sdxl_cwidth&quot;, 0), d.get(&quot;sdxl_cheight&quot;, 0)], split_re=&quot;\\s+&quot;)
-175	
-176	    opts = {
-177	        &quot;width&quot;: int(w),
-178	        &quot;height&quot;: int(h),
-179	        &quot;target_width&quot;: int(tw),
-180	        &quot;target_height&quot;: int(th),
-181	        &quot;crop_w&quot;: int(cropw),
-182	        &quot;crop_h&quot;: int(croph),
-183	    }
-184	    return text, opts
-185	
-186	
-187	def get_style(text, default_style=&quot;comfy&quot;, default_normalization=&quot;none&quot;):
-188	    text, styles = get_function(text, &quot;STYLE&quot;, [default_style, default_normalization])
-189	    if not styles:
-190	        return default_style, default_normalization, text
-191	    style, normalization = styles[0]
-192	    style = style.strip()
-193	    normalization = normalization.strip()
-194	    if style not in AVAILABLE_STYLES:
-195	        log.warning(&quot;Unrecognized prompt style: %s. Using %s&quot;, style, default_style)
-196	        style = default_style
-197	
-198	    if normalization not in AVAILABLE_NORMALIZATIONS:
-199	        log.warning(&quot;Unrecognized prompt normalization: %s. Using %s&quot;, normalization, default_normalization)
-200	        normalization = default_normalization
-201	
 202	    return style, normalization, text
 203	
 204	
@@ -355,50 +223,6 @@ pre {
 231	            mask_token = mt
 232	        log.info(&quot;Region: text %s, target %s, weight %s&quot;, region_text.strip(), target_text.strip(), w)
 233	        (clip_regions,) = CLIPSetRegion.add_clip_region(None, clip_regions, region_text, target_text, w)
-234	    log.info(&quot;Regions: mask_token=%s strict_mask=%s start_from_masked=%s&quot;, mask_token, strict_mask, start_from_masked)
-235	
-236	    (r,) = finalize_clip_regions(
-237	        clip_regions, mask_token, strict_mask, start_from_masked, token_normalization, weight_interpretation
-238	    )
-239	    cond, pooled = r[0][0], r[0][1].get(&quot;pooled_output&quot;)
-240	    return cond, pooled
-241	
-242	
-243	SHUFFLE_GEN = torch.Generator(device=&quot;cpu&quot;)
-244	
-245	
-246	def shuffle_chunk(shuffle, c):
-247	    func, shuffle = shuffle
-248	    shuffle_count = int(safe_float(shuffle[0], 0))
-249	    _, separator, joiner = shuffle
-250	    if separator == &quot;default&quot;:
-251	        separator = &quot;,&quot;
-252	
-253	    if not separator:
-254	        separator = &quot;,&quot;
-255	
-256	    joiner = {
-257	        &quot;default&quot;: &quot;,&quot;,
-258	        &quot;separator&quot;: separator,
-259	    }.get(joiner, joiner)
-260	
-261	    log.info(&quot;%s arg=%s sep=%s join=%s&quot;, func, shuffle_count, separator, joiner)
-262	    separated = c.split(separator)
-263	    if func == &quot;SHIFT&quot;:
-264	        shuffle_count = shuffle_count % len(separated)
-265	        permutation = separated[shuffle_count:] + separated[:shuffle_count]
-266	    elif func == &quot;SHUFFLE&quot;:
-267	        SHUFFLE_GEN.manual_seed(shuffle_count)
-268	        permutation = [separated[i] for i in torch.randperm(len(separated), generator=SHUFFLE_GEN)]
-269	    else:
-270	        # ??? should never get here
-271	        permutation = separated
-272	
-273	    permutation = [p for p in permutation if p.strip()]
-274	    if permutation != separated:
-275	        c = joiner.join(permutation)
-276	    return c
-277	
 </pre>
 </div>
 

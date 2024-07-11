@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>LOW<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-KJNodes/nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-KJNodes/nodes/nodes.py</a><br>
+    <b>File: </b><a href="ComfyUI-KJNodes/nodes/nodes.py" target="_blank">ComfyUI-KJNodes/nodes/nodes.py</a><br>
     <b>Line number: </b>1630<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
 
 <div class="code">
 <pre>
-1570	   
-1571	sd3 requires 6.5 credits per generation  
-1572	sd3-turbo requires 4 credits per generation  
-1573	
-1574	If no image is provided, mode is set to text-to-image  
-1575	
-1576	&quot;&quot;&quot;
-1577	
-1578	    def apicall(self, prompt, n_prompt, model, seed, aspect_ratio, output_format, 
-1579	                img2img_strength=0.5, image=None, disable_metadata=True, api_key=&quot;&quot;):
-1580	        from comfy.cli_args import args
-1581	        if disable_metadata:
-1582	            args.disable_metadata = True
-1583	        else:
-1584	            args.disable_metadata = False
-1585	        
-1586	        import requests
-1587	        from torchvision import transforms
-1588	        
-1589	        data = {
-1590	                &quot;mode&quot;: &quot;text-to-image&quot;,
-1591	                &quot;prompt&quot;: prompt,
-1592	                &quot;model&quot;: model,
-1593	                &quot;seed&quot;: seed,
-1594	                &quot;output_format&quot;: output_format
-1595	                }
-1596	        
-1597	        if image is not None:
-1598	            image = image.permute(0, 3, 1, 2).squeeze(0)
-1599	            to_pil = transforms.ToPILImage()
-1600	            pil_image = to_pil(image)
-1601	            # Save the PIL Image to a BytesIO object
-1602	            buffer = io.BytesIO()
-1603	            pil_image.save(buffer, format=&#x27;PNG&#x27;)
-1604	            buffer.seek(0)
-1605	            files = {&quot;image&quot;: (&quot;image.png&quot;, buffer, &quot;image/png&quot;)}
-1606	           
-1607	            data[&quot;mode&quot;] = &quot;image-to-image&quot;
-1608	            data[&quot;image&quot;] = pil_image
-1609	            data[&quot;strength&quot;] = img2img_strength
-1610	        else:
-1611	            data[&quot;aspect_ratio&quot;] = aspect_ratio,
-1612	            files = {&quot;none&quot;: &#x27;&#x27;}
-1613	        
 1614	        if model != &quot;sd3-turbo&quot;:
 1615	            data[&quot;negative_prompt&quot;] = n_prompt
 1616	
@@ -185,50 +141,6 @@ pre {
 1648	                # Attempt to parse the response as JSON
 1649	                error_data = response.json()
 1650	                raise Exception(f&quot;Server error: {error_data}&quot;)
-1651	            except json.JSONDecodeError:
-1652	                # If the response is not valid JSON, raise a different exception
-1653	                raise Exception(f&quot;Server error: {response.text}&quot;)
-1654	            
-1655	class LoadICLightUnet:
-1656	    @classmethod
-1657	    def INPUT_TYPES(s):
-1658	        return {
-1659	            &quot;required&quot;: {
-1660	                &quot;model&quot;: (&quot;MODEL&quot;,),
-1661	                &quot;model_path&quot;: (folder_paths.get_filename_list(&quot;unet&quot;), )
-1662	            } 
-1663	        }
-1664	
-1665	    RETURN_TYPES = (&quot;MODEL&quot;,)
-1666	    FUNCTION = &quot;load&quot;
-1667	    CATEGORY = &quot;KJNodes/experimental&quot;
-1668	    DESCRIPTION = &quot;&quot;&quot;
-1669	LoadICLightUnet: Loads an ICLightUnet model. (Experimental)
-1670	WORK IN PROGRESS  
-1671	Very hacky (but currently working) way to load the converted IC-Light model available here:  
-1672	https://huggingface.co/Kijai/iclight-comfy/blob/main/iclight_fc_converted.safetensors  
-1673	
-1674	Used with InstructPixToPixConditioning -node
-1675	
-1676	&quot;&quot;&quot;
-1677	
-1678	    def load(self, model, model_path):
-1679	        print(&quot;LoadICLightUnet: Checking LoadICLightUnet path&quot;)
-1680	        model_full_path = folder_paths.get_full_path(&quot;unet&quot;, model_path)
-1681	        if not os.path.exists(model_full_path):
-1682	            raise Exception(&quot;Invalid model path&quot;)
-1683	        else:
-1684	            print(&quot;LoadICLightUnet: Loading LoadICLightUnet weights&quot;)
-1685	            from comfy.utils import load_torch_file
-1686	            model_clone = model.clone()
-1687	
-1688	            conv_layer = model_clone.model.diffusion_model.input_blocks[0][0]
-1689	            print(f&quot;Current number of input channels: {conv_layer.in_channels}&quot;)
-1690	            
-1691	            # Create a new Conv2d layer with 8 input channels
-1692	            new_conv_layer = torch.nn.Conv2d(8, conv_layer.out_channels, kernel_size=conv_layer.kernel_size, stride=conv_layer.stride, padding=conv_layer.padding)
-1693	            new_conv_layer.weight.zero_()
-1694	            new_conv_layer.weight[:, :4, :, :].copy_(conv_layer.weight)
 </pre>
 </div>
 

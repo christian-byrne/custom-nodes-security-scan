@@ -98,56 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_UltimateSDUpscale/repositories/ultimate_sd_upscale/scripts/ultimate-upscale.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_UltimateSDUpscale/repositories/ultimate_sd_upscale/scripts/ultimate-upscale.py</a><br>
+    <b>File: </b><a href="ComfyUI_UltimateSDUpscale/repositories/ultimate_sd_upscale/scripts/ultimate-upscale.py" target="_blank">ComfyUI_UltimateSDUpscale/repositories/ultimate_sd_upscale/scripts/ultimate-upscale.py</a><br>
     <b>Line number: </b>515<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-455	            custom_scale = gr.Slider(label=&#x27;Scale&#x27;, elem_id=f&quot;{elem_id_prefix}_custom_scale&quot;, minimum=1, maximum=16, step=0.01, value=2, visible=False, interactive=True)
-456	
-457	        gr.HTML(&quot;&lt;p style=\&quot;margin-bottom:0.75em\&quot;&gt;Redraw options:&lt;/p&gt;&quot;)
-458	        with gr.Row():
-459	            upscaler_index = gr.Radio(label=&#x27;Upscaler&#x27;, elem_id=f&quot;{elem_id_prefix}_upscaler_index&quot;, choices=[x.name for x in shared.sd_upscalers],
-460	                                value=shared.sd_upscalers[0].name, type=&quot;index&quot;)
-461	        with gr.Row():
-462	            redraw_mode = gr.Dropdown(label=&quot;Type&quot;, elem_id=f&quot;{elem_id_prefix}_redraw_mode&quot;, choices=[k for k in redrow_modes], type=&quot;index&quot;, value=next(iter(redrow_modes)))
-463	            tile_width = gr.Slider(elem_id=f&quot;{elem_id_prefix}_tile_width&quot;, minimum=0, maximum=2048, step=64, label=&#x27;Tile width&#x27;, value=512)
-464	            tile_height = gr.Slider(elem_id=f&quot;{elem_id_prefix}_tile_height&quot;, minimum=0, maximum=2048, step=64, label=&#x27;Tile height&#x27;, value=0)
-465	            mask_blur = gr.Slider(elem_id=f&quot;{elem_id_prefix}_mask_blur&quot;, label=&#x27;Mask blur&#x27;, minimum=0, maximum=64, step=1, value=8)
-466	            padding = gr.Slider(elem_id=f&quot;{elem_id_prefix}_padding&quot;, label=&#x27;Padding&#x27;, minimum=0, maximum=512, step=1, value=32)
-467	        gr.HTML(&quot;&lt;p style=\&quot;margin-bottom:0.75em\&quot;&gt;Seams fix:&lt;/p&gt;&quot;)
-468	        with gr.Row():
-469	            seams_fix_type = gr.Dropdown(label=&quot;Type&quot;, elem_id=f&quot;{elem_id_prefix}_seams_fix_type&quot;, choices=[k for k in seams_fix_types], type=&quot;index&quot;, value=next(iter(seams_fix_types)))
-470	            seams_fix_denoise = gr.Slider(label=&#x27;Denoise&#x27;, elem_id=f&quot;{elem_id_prefix}_seams_fix_denoise&quot;, minimum=0, maximum=1, step=0.01, value=0.35, visible=False, interactive=True)
-471	            seams_fix_width = gr.Slider(label=&#x27;Width&#x27;, elem_id=f&quot;{elem_id_prefix}_seams_fix_width&quot;, minimum=0, maximum=128, step=1, value=64, visible=False, interactive=True)
-472	            seams_fix_mask_blur = gr.Slider(label=&#x27;Mask blur&#x27;, elem_id=f&quot;{elem_id_prefix}_seams_fix_mask_blur&quot;, minimum=0, maximum=64, step=1, value=4, visible=False, interactive=True)
-473	            seams_fix_padding = gr.Slider(label=&#x27;Padding&#x27;, elem_id=f&quot;{elem_id_prefix}_seams_fix_padding&quot;, minimum=0, maximum=128, step=1, value=16, visible=False, interactive=True)
-474	        gr.HTML(&quot;&lt;p style=\&quot;margin-bottom:0.75em\&quot;&gt;Save options:&lt;/p&gt;&quot;)
-475	        with gr.Row():
-476	            save_upscaled_image = gr.Checkbox(label=&quot;Upscaled&quot;, elem_id=f&quot;{elem_id_prefix}_save_upscaled_image&quot;, value=True)
-477	            save_seams_fix_image = gr.Checkbox(label=&quot;Seams fix&quot;, elem_id=f&quot;{elem_id_prefix}_save_seams_fix_image&quot;, value=False)
-478	
-479	        def select_fix_type(fix_index):
-480	            all_visible = fix_index != 0
-481	            mask_blur_visible = fix_index == 2 or fix_index == 3
-482	            width_visible = fix_index == 1
-483	
-484	            return [gr.update(visible=all_visible),
-485	                    gr.update(visible=width_visible),
-486	                    gr.update(visible=mask_blur_visible),
-487	                    gr.update(visible=all_visible)]
-488	
-489	        seams_fix_type.change(
-490	            fn=select_fix_type,
-491	            inputs=seams_fix_type,
-492	            outputs=[seams_fix_denoise, seams_fix_width, seams_fix_mask_blur, seams_fix_padding]
-493	        )
-494	
-495	        def select_scale_type(scale_index):
-496	            is_custom_size = scale_index == 1
-497	            is_custom_scale = scale_index == 2
-498	
 499	            return [gr.update(visible=is_custom_size),
 500	                    gr.update(visible=is_custom_size),
 501	                    gr.update(visible=is_custom_scale),
@@ -181,44 +137,6 @@ pre {
 529	        processing.fix_seed(p)
 530	        devices.torch_gc()
 531	
-532	        p.do_not_save_grid = True
-533	        p.do_not_save_samples = True
-534	        p.inpaint_full_res = False
-535	
-536	        p.inpainting_fill = 1
-537	        p.n_iter = 1
-538	        p.batch_size = 1
-539	
-540	        seed = p.seed
-541	
-542	        # Init image
-543	        init_img = p.init_images[0]
-544	        if init_img == None:
-545	            return Processed(p, [], seed, &quot;Empty image&quot;)
-546	        init_img = images.flatten(init_img, opts.img2img_background_color)
-547	
-548	        #override size
-549	        if target_size_type == 1:
-550	            p.width = custom_width
-551	            p.height = custom_height
-552	        if target_size_type == 2:
-553	            p.width = math.ceil((init_img.width * custom_scale) / 64) * 64
-554	            p.height = math.ceil((init_img.height * custom_scale) / 64) * 64
-555	
-556	        # Upscaling
-557	        upscaler = USDUpscaler(p, init_img, upscaler_index, save_upscaled_image, save_seams_fix_image, tile_width, tile_height)
-558	        upscaler.upscale()
-559	        
-560	        # Drawing
-561	        upscaler.setup_redraw(redraw_mode, padding, mask_blur)
-562	        upscaler.setup_seams_fix(seams_fix_padding, seams_fix_denoise, seams_fix_mask_blur, seams_fix_width, seams_fix_type)
-563	        upscaler.print_info()
-564	        upscaler.add_extra_info()
-565	        upscaler.process()
-566	        result_images = upscaler.result_images
-567	
-568	        return Processed(p, result_images, seed, upscaler.initial_info if upscaler.initial_info is not None else &quot;&quot;)
-569	
 </pre>
 </div>
 

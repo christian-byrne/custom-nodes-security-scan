@@ -98,43 +98,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/__init__.py</a><br>
+    <b>File: </b><a href="ComfyUI-Inspire-Pack/__init__.py" target="_blank">ComfyUI-Inspire-Pack/__init__.py</a><br>
     <b>Line number: </b>48<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
 
 <div class="code">
 <pre>
-1	&quot;&quot;&quot;
-2	@author: Dr.Lt.Data
-3	@title: Inspire Pack
-4	@nickname: Inspire Pack
-5	@description: This extension provides various nodes to support Lora Block Weight and the Impact Pack.
-6	&quot;&quot;&quot;
-7	
-8	import importlib
-9	
-10	version_code = [0, 70]
-11	version_str = f&quot;V{version_code[0]}.{version_code[1]}&quot; + (f&#x27;.{version_code[2]}&#x27; if len(version_code) &gt; 2 else &#x27;&#x27;)
-12	print(f&quot;### Loading: ComfyUI-Inspire-Pack ({version_str})&quot;)
-13	
-14	node_list = [
-15	    &quot;lora_block_weight&quot;,
-16	    &quot;segs_support&quot;,
-17	    &quot;a1111_compat&quot;,
-18	    &quot;prompt_support&quot;,
-19	    &quot;inspire_server&quot;,
-20	    &quot;image_util&quot;,
-21	    &quot;regional_nodes&quot;,
-22	    &quot;sampler_nodes&quot;,
-23	    &quot;backend_support&quot;,
-24	    &quot;list_nodes&quot;,
-25	    &quot;conditioning_nodes&quot;,
-26	    &quot;model_nodes&quot;
-27	]
-28	
-29	NODE_CLASS_MAPPINGS = {}
-30	NODE_DISPLAY_NAME_MAPPINGS = {}
-31	
 32	for module_name in node_list:
 33	    imported_module = importlib.import_module(&quot;.inspire.{}&quot;.format(module_name), __name__)
 34	
@@ -167,33 +136,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/prompt_support.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-Inspire-Pack/inspire/prompt_support.py</a><br>
+    <b>File: </b><a href="ComfyUI-Inspire-Pack/inspire/prompt_support.py" target="_blank">ComfyUI-Inspire-Pack/inspire/prompt_support.py</a><br>
     <b>Line number: </b>38<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	import re
-3	import json
-4	import shutil
-5	import yaml
-6	
-7	from PIL import Image
-8	import nodes
-9	import torch
-10	
-11	import folder_paths
-12	import comfy
-13	import traceback
-14	import random
-15	
-16	from server import PromptServer
-17	from .libs import utils, common
-18	from .backend_support import CheckpointLoaderSimpleShared
-19	
-20	prompt_builder_preset = {}
-21	
 22	
 23	resource_path = os.path.join(os.path.dirname(__file__), &quot;..&quot;, &quot;resources&quot;)
 24	resource_path = os.path.abspath(resource_path)
@@ -226,73 +174,6 @@ pre {
 51	
 52	        return {&quot;required&quot;: {&quot;prompt_dir&quot;: (prompt_dirs,)}}
 53	
-54	    RETURN_TYPES = (&quot;ZIPPED_PROMPT&quot;,)
-55	    OUTPUT_IS_LIST = (True,)
-56	
-57	    FUNCTION = &quot;doit&quot;
-58	
-59	    CATEGORY = &quot;InspirePack/Prompt&quot;
-60	
-61	    def doit(self, prompt_dir):
-62	        global prompts_path
-63	        prompt_dir = os.path.join(prompts_path, prompt_dir)
-64	        files = [f for f in os.listdir(prompt_dir) if f.endswith(&quot;.txt&quot;)]
-65	        files.sort()
-66	
-67	        prompts = []
-68	        for file_name in files:
-69	            print(f&quot;file_name: {file_name}&quot;)
-70	            try:
-71	                with open(os.path.join(prompt_dir, file_name), &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
-72	                    prompt_data = file.read()
-73	                    prompt_list = re.split(r&#x27;\n\s*-+\s*\n&#x27;, prompt_data)
-74	
-75	                    for prompt in prompt_list:
-76	                        pattern = r&quot;positive:(.*?)(?:\n*|$)negative:(.*)&quot;
-77	                        matches = re.search(pattern, prompt, re.DOTALL)
-78	
-79	                        if matches:
-80	                            positive_text = matches.group(1).strip()
-81	                            negative_text = matches.group(2).strip()
-82	                            result_tuple = (positive_text, negative_text, file_name)
-83	                            prompts.append(result_tuple)
-84	                        else:
-85	                            print(f&quot;[WARN] LoadPromptsFromDir: invalid prompt format in &#x27;{file_name}&#x27;&quot;)
-86	            except Exception as e:
-87	                print(f&quot;[ERROR] LoadPromptsFromDir: an error occurred while processing &#x27;{file_name}&#x27;: {str(e)}&quot;)
-88	
-89	        return (prompts, )
-90	
-91	
-92	class LoadPromptsFromFile:
-93	    @classmethod
-94	    def INPUT_TYPES(cls):
-95	        global prompts_path
-96	        try:
-97	            prompt_files = []
-98	            for root, dirs, files in os.walk(prompts_path):
-99	                for file in files:
-100	                    if file.endswith(&quot;.txt&quot;):
-101	                        file_path = os.path.join(root, file)
-102	                        rel_path = os.path.relpath(file_path, prompts_path)
-103	                        prompt_files.append(rel_path)
-104	        except Exception:
-105	            prompt_files = []
-106	
-107	        return {&quot;required&quot;: {&quot;prompt_file&quot;: (prompt_files,)}}
-108	
-109	    RETURN_TYPES = (&quot;ZIPPED_PROMPT&quot;,)
-110	    OUTPUT_IS_LIST = (True,)
-111	
-112	    FUNCTION = &quot;doit&quot;
-113	
-114	    CATEGORY = &quot;InspirePack/Prompt&quot;
-115	
-116	    def doit(self, prompt_file):
-117	        prompt_path = os.path.join(prompts_path, prompt_file)
-118	
-119	        prompts = []
-120	        try:
 </pre>
 </div>
 

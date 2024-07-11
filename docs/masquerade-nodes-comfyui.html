@@ -98,7 +98,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py</a><br>
+    <b>File: </b><a href="masquerade-nodes-comfyui/MaskNodes.py" target="_blank">masquerade-nodes-comfyui/MaskNodes.py</a><br>
     <b>Line number: </b>9<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -136,94 +136,6 @@ pre {
 30	
 31	    if package_name not in package_list:
 32	        print(&quot;(First Run) Installing missing package %s&quot; % package_name)
-33	        subprocess.check_call([sys.executable, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, import_path])
-34	        update_package_list()
-35	
-36	def tensor2mask(t: torch.Tensor) -&gt; torch.Tensor:
-37	    size = t.size()
-38	    if (len(size) &lt; 4):
-39	        return t
-40	    if size[3] == 1:
-41	        return t[:,:,:,0]
-42	    elif size[3] == 4:
-43	        # Not sure what the right thing to do here is. Going to try to be a little smart and use alpha unless all alpha is 1 in case we&#x27;ll fallback to RGB behavior
-44	        if torch.min(t[:, :, :, 3]).item() != 1.:
-45	            return t[:,:,:,3]
-46	
-47	    return TF.rgb_to_grayscale(tensor2rgb(t).permute(0,3,1,2), num_output_channels=1)[:,0,:,:]
-48	
-49	def tensor2rgb(t: torch.Tensor) -&gt; torch.Tensor:
-50	    size = t.size()
-51	    if (len(size) &lt; 4):
-52	        return t.unsqueeze(3).repeat(1, 1, 1, 3)
-53	    if size[3] == 1:
-54	        return t.repeat(1, 1, 1, 3)
-55	    elif size[3] == 4:
-56	        return t[:, :, :, :3]
-57	    else:
-58	        return t
-59	
-60	def tensor2rgba(t: torch.Tensor) -&gt; torch.Tensor:
-61	    size = t.size()
-62	    if (len(size) &lt; 4):
-63	        return t.unsqueeze(3).repeat(1, 1, 1, 4)
-64	    elif size[3] == 1:
-65	        return t.repeat(1, 1, 1, 4)
-66	    elif size[3] == 3:
-67	        alpha_tensor = torch.ones((size[0], size[1], size[2], 1))
-68	        return torch.cat((t, alpha_tensor), dim=3)
-69	    else:
-70	        return t
-71	
-72	def tensor2batch(t: torch.Tensor, bs: torch.Size) -&gt; torch.Tensor:
-73	    if len(t.size()) &lt; len(bs):
-74	        t = t.unsqueeze(3)
-75	    if t.size()[0] &lt; bs[0]:
-76	        t.repeat(bs[0], 1, 1, 1)
-77	    dim = bs[3]
-78	    if dim == 1:
-79	        return tensor2mask(t)
-80	    elif dim == 3:
-81	        return tensor2rgb(t)
-82	    elif dim == 4:
-83	        return tensor2rgba(t)
-84	
-85	def tensors2common(t1: torch.Tensor, t2: torch.Tensor) -&gt; (torch.Tensor, torch.Tensor):
-86	    t1s = t1.size()
-87	    t2s = t2.size()
-88	    if len(t1s) &lt; len(t2s):
-89	        t1 = t1.unsqueeze(3)
-90	    elif len(t1s) &gt; len(t2s):
-91	        t2 = t2.unsqueeze(3)
-92	
-93	    if len(t1.size()) == 3:
-94	        if t1s[0] &lt; t2s[0]:
-95	            t1 = t1.repeat(t2s[0], 1, 1)
-96	        elif t1s[0] &gt; t2s[0]:
-97	            t2 = t2.repeat(t1s[0], 1, 1)
-98	    else:
-99	        if t1s[0] &lt; t2s[0]:
-100	            t1 = t1.repeat(t2s[0], 1, 1, 1)
-101	        elif t1s[0] &gt; t2s[0]:
-102	            t2 = t2.repeat(t1s[0], 1, 1, 1)
-103	
-104	    t1s = t1.size()
-105	    t2s = t2.size()
-106	    if len(t1s) &gt; 3 and t1s[3] &lt; t2s[3]:
-107	        return tensor2batch(t1, t2s), t2
-108	    elif len(t1s) &gt; 3 and t1s[3] &gt; t2s[3]:
-109	        return t1, tensor2batch(t2, t1s)
-110	    else:
-111	        return t1, t2
-112	
-113	class ClipSegNode:
-114	    &quot;&quot;&quot;
-115	        Automatically calculates a mask based on the text prompt
-116	    &quot;&quot;&quot;
-117	    def __init__(self):
-118	        pass
-119	
-120	    @classmethod
 </pre>
 </div>
 
@@ -238,14 +150,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py</a><br>
+    <b>File: </b><a href="masquerade-nodes-comfyui/MaskNodes.py" target="_blank">masquerade-nodes-comfyui/MaskNodes.py</a><br>
     <b>Line number: </b>19<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	import torch
 3	import numpy as np
 4	import math
 5	from torchvision import transforms
@@ -278,92 +188,6 @@ pre {
 32	        print(&quot;(First Run) Installing missing package %s&quot; % package_name)
 33	        subprocess.check_call([sys.executable, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, import_path])
 34	        update_package_list()
-35	
-36	def tensor2mask(t: torch.Tensor) -&gt; torch.Tensor:
-37	    size = t.size()
-38	    if (len(size) &lt; 4):
-39	        return t
-40	    if size[3] == 1:
-41	        return t[:,:,:,0]
-42	    elif size[3] == 4:
-43	        # Not sure what the right thing to do here is. Going to try to be a little smart and use alpha unless all alpha is 1 in case we&#x27;ll fallback to RGB behavior
-44	        if torch.min(t[:, :, :, 3]).item() != 1.:
-45	            return t[:,:,:,3]
-46	
-47	    return TF.rgb_to_grayscale(tensor2rgb(t).permute(0,3,1,2), num_output_channels=1)[:,0,:,:]
-48	
-49	def tensor2rgb(t: torch.Tensor) -&gt; torch.Tensor:
-50	    size = t.size()
-51	    if (len(size) &lt; 4):
-52	        return t.unsqueeze(3).repeat(1, 1, 1, 3)
-53	    if size[3] == 1:
-54	        return t.repeat(1, 1, 1, 3)
-55	    elif size[3] == 4:
-56	        return t[:, :, :, :3]
-57	    else:
-58	        return t
-59	
-60	def tensor2rgba(t: torch.Tensor) -&gt; torch.Tensor:
-61	    size = t.size()
-62	    if (len(size) &lt; 4):
-63	        return t.unsqueeze(3).repeat(1, 1, 1, 4)
-64	    elif size[3] == 1:
-65	        return t.repeat(1, 1, 1, 4)
-66	    elif size[3] == 3:
-67	        alpha_tensor = torch.ones((size[0], size[1], size[2], 1))
-68	        return torch.cat((t, alpha_tensor), dim=3)
-69	    else:
-70	        return t
-71	
-72	def tensor2batch(t: torch.Tensor, bs: torch.Size) -&gt; torch.Tensor:
-73	    if len(t.size()) &lt; len(bs):
-74	        t = t.unsqueeze(3)
-75	    if t.size()[0] &lt; bs[0]:
-76	        t.repeat(bs[0], 1, 1, 1)
-77	    dim = bs[3]
-78	    if dim == 1:
-79	        return tensor2mask(t)
-80	    elif dim == 3:
-81	        return tensor2rgb(t)
-82	    elif dim == 4:
-83	        return tensor2rgba(t)
-84	
-85	def tensors2common(t1: torch.Tensor, t2: torch.Tensor) -&gt; (torch.Tensor, torch.Tensor):
-86	    t1s = t1.size()
-87	    t2s = t2.size()
-88	    if len(t1s) &lt; len(t2s):
-89	        t1 = t1.unsqueeze(3)
-90	    elif len(t1s) &gt; len(t2s):
-91	        t2 = t2.unsqueeze(3)
-92	
-93	    if len(t1.size()) == 3:
-94	        if t1s[0] &lt; t2s[0]:
-95	            t1 = t1.repeat(t2s[0], 1, 1)
-96	        elif t1s[0] &gt; t2s[0]:
-97	            t2 = t2.repeat(t1s[0], 1, 1)
-98	    else:
-99	        if t1s[0] &lt; t2s[0]:
-100	            t1 = t1.repeat(t2s[0], 1, 1, 1)
-101	        elif t1s[0] &gt; t2s[0]:
-102	            t2 = t2.repeat(t1s[0], 1, 1, 1)
-103	
-104	    t1s = t1.size()
-105	    t2s = t2.size()
-106	    if len(t1s) &gt; 3 and t1s[3] &lt; t2s[3]:
-107	        return tensor2batch(t1, t2s), t2
-108	    elif len(t1s) &gt; 3 and t1s[3] &gt; t2s[3]:
-109	        return t1, tensor2batch(t2, t1s)
-110	    else:
-111	        return t1, t2
-112	
-113	class ClipSegNode:
-114	    &quot;&quot;&quot;
-115	        Automatically calculates a mask based on the text prompt
-116	    &quot;&quot;&quot;
-117	    def __init__(self):
-118	        pass
-119	
-120	    @classmethod
 </pre>
 </div>
 
@@ -378,17 +202,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py</a><br>
+    <b>File: </b><a href="masquerade-nodes-comfyui/MaskNodes.py" target="_blank">masquerade-nodes-comfyui/MaskNodes.py</a><br>
     <b>Line number: </b>22<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	import torch
-3	import numpy as np
-4	import math
-5	from torchvision import transforms
 6	from torchvision.ops import masks_to_boxes
 7	import torchvision.transforms.functional as TF
 8	import torch.nn.functional as torchfn
@@ -421,89 +240,6 @@ pre {
 35	
 36	def tensor2mask(t: torch.Tensor) -&gt; torch.Tensor:
 37	    size = t.size()
-38	    if (len(size) &lt; 4):
-39	        return t
-40	    if size[3] == 1:
-41	        return t[:,:,:,0]
-42	    elif size[3] == 4:
-43	        # Not sure what the right thing to do here is. Going to try to be a little smart and use alpha unless all alpha is 1 in case we&#x27;ll fallback to RGB behavior
-44	        if torch.min(t[:, :, :, 3]).item() != 1.:
-45	            return t[:,:,:,3]
-46	
-47	    return TF.rgb_to_grayscale(tensor2rgb(t).permute(0,3,1,2), num_output_channels=1)[:,0,:,:]
-48	
-49	def tensor2rgb(t: torch.Tensor) -&gt; torch.Tensor:
-50	    size = t.size()
-51	    if (len(size) &lt; 4):
-52	        return t.unsqueeze(3).repeat(1, 1, 1, 3)
-53	    if size[3] == 1:
-54	        return t.repeat(1, 1, 1, 3)
-55	    elif size[3] == 4:
-56	        return t[:, :, :, :3]
-57	    else:
-58	        return t
-59	
-60	def tensor2rgba(t: torch.Tensor) -&gt; torch.Tensor:
-61	    size = t.size()
-62	    if (len(size) &lt; 4):
-63	        return t.unsqueeze(3).repeat(1, 1, 1, 4)
-64	    elif size[3] == 1:
-65	        return t.repeat(1, 1, 1, 4)
-66	    elif size[3] == 3:
-67	        alpha_tensor = torch.ones((size[0], size[1], size[2], 1))
-68	        return torch.cat((t, alpha_tensor), dim=3)
-69	    else:
-70	        return t
-71	
-72	def tensor2batch(t: torch.Tensor, bs: torch.Size) -&gt; torch.Tensor:
-73	    if len(t.size()) &lt; len(bs):
-74	        t = t.unsqueeze(3)
-75	    if t.size()[0] &lt; bs[0]:
-76	        t.repeat(bs[0], 1, 1, 1)
-77	    dim = bs[3]
-78	    if dim == 1:
-79	        return tensor2mask(t)
-80	    elif dim == 3:
-81	        return tensor2rgb(t)
-82	    elif dim == 4:
-83	        return tensor2rgba(t)
-84	
-85	def tensors2common(t1: torch.Tensor, t2: torch.Tensor) -&gt; (torch.Tensor, torch.Tensor):
-86	    t1s = t1.size()
-87	    t2s = t2.size()
-88	    if len(t1s) &lt; len(t2s):
-89	        t1 = t1.unsqueeze(3)
-90	    elif len(t1s) &gt; len(t2s):
-91	        t2 = t2.unsqueeze(3)
-92	
-93	    if len(t1.size()) == 3:
-94	        if t1s[0] &lt; t2s[0]:
-95	            t1 = t1.repeat(t2s[0], 1, 1)
-96	        elif t1s[0] &gt; t2s[0]:
-97	            t2 = t2.repeat(t1s[0], 1, 1)
-98	    else:
-99	        if t1s[0] &lt; t2s[0]:
-100	            t1 = t1.repeat(t2s[0], 1, 1, 1)
-101	        elif t1s[0] &gt; t2s[0]:
-102	            t2 = t2.repeat(t1s[0], 1, 1, 1)
-103	
-104	    t1s = t1.size()
-105	    t2s = t2.size()
-106	    if len(t1s) &gt; 3 and t1s[3] &lt; t2s[3]:
-107	        return tensor2batch(t1, t2s), t2
-108	    elif len(t1s) &gt; 3 and t1s[3] &gt; t2s[3]:
-109	        return t1, tensor2batch(t2, t1s)
-110	    else:
-111	        return t1, t2
-112	
-113	class ClipSegNode:
-114	    &quot;&quot;&quot;
-115	        Automatically calculates a mask based on the text prompt
-116	    &quot;&quot;&quot;
-117	    def __init__(self):
-118	        pass
-119	
-120	    @classmethod
 </pre>
 </div>
 
@@ -518,28 +254,12 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py</a><br>
+    <b>File: </b><a href="masquerade-nodes-comfyui/MaskNodes.py" target="_blank">masquerade-nodes-comfyui/MaskNodes.py</a><br>
     <b>Line number: </b>33<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
 
 <div class="code">
 <pre>
-1	import os
-2	import torch
-3	import numpy as np
-4	import math
-5	from torchvision import transforms
-6	from torchvision.ops import masks_to_boxes
-7	import torchvision.transforms.functional as TF
-8	import torch.nn.functional as torchfn
-9	import subprocess
-10	import sys
-11	
-12	DELIMITER = &#x27;|&#x27;
-13	cached_clipseg_model = None
-14	VERY_BIG_SIZE = 1024 * 1024
-15	
-16	package_list = None
 17	def update_package_list():
 18	    import sys
 19	    import subprocess
@@ -572,78 +292,6 @@ pre {
 46	
 47	    return TF.rgb_to_grayscale(tensor2rgb(t).permute(0,3,1,2), num_output_channels=1)[:,0,:,:]
 48	
-49	def tensor2rgb(t: torch.Tensor) -&gt; torch.Tensor:
-50	    size = t.size()
-51	    if (len(size) &lt; 4):
-52	        return t.unsqueeze(3).repeat(1, 1, 1, 3)
-53	    if size[3] == 1:
-54	        return t.repeat(1, 1, 1, 3)
-55	    elif size[3] == 4:
-56	        return t[:, :, :, :3]
-57	    else:
-58	        return t
-59	
-60	def tensor2rgba(t: torch.Tensor) -&gt; torch.Tensor:
-61	    size = t.size()
-62	    if (len(size) &lt; 4):
-63	        return t.unsqueeze(3).repeat(1, 1, 1, 4)
-64	    elif size[3] == 1:
-65	        return t.repeat(1, 1, 1, 4)
-66	    elif size[3] == 3:
-67	        alpha_tensor = torch.ones((size[0], size[1], size[2], 1))
-68	        return torch.cat((t, alpha_tensor), dim=3)
-69	    else:
-70	        return t
-71	
-72	def tensor2batch(t: torch.Tensor, bs: torch.Size) -&gt; torch.Tensor:
-73	    if len(t.size()) &lt; len(bs):
-74	        t = t.unsqueeze(3)
-75	    if t.size()[0] &lt; bs[0]:
-76	        t.repeat(bs[0], 1, 1, 1)
-77	    dim = bs[3]
-78	    if dim == 1:
-79	        return tensor2mask(t)
-80	    elif dim == 3:
-81	        return tensor2rgb(t)
-82	    elif dim == 4:
-83	        return tensor2rgba(t)
-84	
-85	def tensors2common(t1: torch.Tensor, t2: torch.Tensor) -&gt; (torch.Tensor, torch.Tensor):
-86	    t1s = t1.size()
-87	    t2s = t2.size()
-88	    if len(t1s) &lt; len(t2s):
-89	        t1 = t1.unsqueeze(3)
-90	    elif len(t1s) &gt; len(t2s):
-91	        t2 = t2.unsqueeze(3)
-92	
-93	    if len(t1.size()) == 3:
-94	        if t1s[0] &lt; t2s[0]:
-95	            t1 = t1.repeat(t2s[0], 1, 1)
-96	        elif t1s[0] &gt; t2s[0]:
-97	            t2 = t2.repeat(t1s[0], 1, 1)
-98	    else:
-99	        if t1s[0] &lt; t2s[0]:
-100	            t1 = t1.repeat(t2s[0], 1, 1, 1)
-101	        elif t1s[0] &gt; t2s[0]:
-102	            t2 = t2.repeat(t1s[0], 1, 1, 1)
-103	
-104	    t1s = t1.size()
-105	    t2s = t2.size()
-106	    if len(t1s) &gt; 3 and t1s[3] &lt; t2s[3]:
-107	        return tensor2batch(t1, t2s), t2
-108	    elif len(t1s) &gt; 3 and t1s[3] &gt; t2s[3]:
-109	        return t1, tensor2batch(t2, t1s)
-110	    else:
-111	        return t1, t2
-112	
-113	class ClipSegNode:
-114	    &quot;&quot;&quot;
-115	        Automatically calculates a mask based on the text prompt
-116	    &quot;&quot;&quot;
-117	    def __init__(self):
-118	        pass
-119	
-120	    @classmethod
 </pre>
 </div>
 
@@ -658,56 +306,12 @@ pre {
     <b>Severity: </b>MEDIUM<br>
     <b>Confidence: </b>LOW<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/masquerade-nodes-comfyui/MaskNodes.py</a><br>
+    <b>File: </b><a href="masquerade-nodes-comfyui/MaskNodes.py" target="_blank">masquerade-nodes-comfyui/MaskNodes.py</a><br>
     <b>Line number: </b>209<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
 
 <div class="code">
 <pre>
-149	            transforms.Resize((used_dim, used_dim), antialias=True) ])
-150	        img = transform(image.permute(0, 3, 1, 2))
-151	
-152	        prompts = prompt.split(DELIMITER)
-153	        negative_prompts = negative_prompt.split(DELIMITER) if negative_prompt != &#x27;&#x27; else []
-154	        with torch.no_grad():
-155	            # Optimize me: Could do positive and negative prompts as part of one batch
-156	            dup_prompts = [item for item in prompts for _ in range(B)]
-157	            preds = model(img.repeat(len(prompts), 1, 1, 1), dup_prompts)[0]
-158	            dup_neg_prompts = [item for item in negative_prompts for _ in range(B)]
-159	            negative_preds = model(img.repeat(len(negative_prompts), 1, 1, 1), dup_neg_prompts)[0] if len(negative_prompts) &gt; 0 else None
-160	
-161	        preds = torch.nn.functional.interpolate(preds, size=(H, W), mode=&#x27;nearest&#x27;)
-162	        preds = torch.sigmoid(preds)
-163	        preds = preds.reshape(len(prompts), B, H, W)
-164	        mask = torch.max(preds, dim=0).values
-165	
-166	        if len(negative_prompts) &gt; 0:
-167	            negative_preds = torch.nn.functional.interpolate(negative_preds, size=(H, W), mode=&#x27;nearest&#x27;)
-168	            negative_preds = torch.sigmoid(negative_preds)
-169	            negative_preds = negative_preds.reshape(len(negative_prompts), B, H, W)
-170	            mask_neg = torch.max(negative_preds, dim=0).values
-171	            mask = torch.min(mask, 1. - mask_neg)
-172	
-173	        if normalize == &quot;yes&quot;:
-174	            mask_min = torch.min(mask)
-175	            mask_max = torch.max(mask)
-176	            mask_range = mask_max - mask_min
-177	            mask = (mask - mask_min) / mask_range
-178	        thresholded = torch.where(mask &gt;= precision, 1., 0.)
-179	        # import code
-180	        # code.interact(local=locals())
-181	        return (thresholded.to(device=image.device), mask.to(device=image.device),)
-182	
-183	    def load_model(self):
-184	        global cached_clipseg_model
-185	        if cached_clipseg_model == None:
-186	            ensure_package(&quot;clipseg&quot;, &quot;clipseg@git+https://github.com/timojl/clipseg.git@bbc86cfbb7e6a47fb6dae47ba01d3e1c2d6158b0&quot;)
-187	            from clipseg.clipseg import CLIPDensePredT
-188	            model = CLIPDensePredT(version=&#x27;ViT-B/16&#x27;, reduce_dim=64, complex_trans_conv=True)
-189	            model.eval()
-190	
-191	            d64_file = self.download_and_cache(&#x27;rd64-uni-refined.pth&#x27;, &#x27;https://owncloud.gwdg.de/index.php/s/ioHbRzFx6th32hn/download?path=%2F&amp;files=rd64-uni-refined.pth&#x27;)
-192	            d16_file = self.download_and_cache(&#x27;rd16-uni.pth&#x27;, &#x27;https://owncloud.gwdg.de/index.php/s/ioHbRzFx6th32hn/download?path=%2F&amp;files=rd16-uni.pth&#x27;)
 193	            # Use CUDA if it&#x27;s available
 194	            device = torch.device(&#x27;cuda&#x27; if torch.cuda.is_available() else &#x27;cpu&#x27;)
 195	            model.load_state_dict(torch.load(d64_file, map_location=device), strict=False)
@@ -740,50 +344,6 @@ pre {
 222	    def INPUT_TYPES(cls):
 223	        return {
 224	            &quot;required&quot;: {
-225	                &quot;image&quot;: (&quot;IMAGE&quot;,),
-226	                &quot;distance&quot;: (&quot;INT&quot;, {&quot;default&quot;: 5, &quot;min&quot;: 0, &quot;max&quot;: 128, &quot;step&quot;: 1}),
-227	                &quot;op&quot;: ([&quot;dilate&quot;, &quot;erode&quot;, &quot;open&quot;, &quot;close&quot;],),
-228	            },
-229	        }
-230	
-231	    RETURN_TYPES = (&quot;IMAGE&quot;,)
-232	    FUNCTION = &quot;morph&quot;
-233	
-234	    CATEGORY = &quot;Masquerade Nodes&quot;
-235	
-236	    def morph(self, image, distance, op):
-237	        image = tensor2mask(image)
-238	        if op == &quot;dilate&quot;:
-239	            image = self.dilate(image, distance)
-240	        elif op == &quot;erode&quot;:
-241	            image = self.erode(image, distance)
-242	        elif op == &quot;open&quot;:
-243	            image = self.erode(image, distance)
-244	            image = self.dilate(image, distance)
-245	        elif op == &quot;close&quot;:
-246	            image = self.dilate(image, distance)
-247	            image = self.erode(image, distance)
-248	        return (image,)
-249	
-250	    def erode(self, image, distance):
-251	        return 1. - self.dilate(1. - image, distance)
-252	
-253	    def dilate(self, image, distance):
-254	        kernel_size = 1 + distance * 2
-255	        # Add the channels dimension
-256	        image = image.unsqueeze(1)
-257	        out = torchfn.max_pool2d(image, kernel_size=kernel_size, stride=1, padding=kernel_size // 2).squeeze(1)
-258	        return out
-259	
-260	class MaskCombineOp:
-261	    def __init__(self):
-262	        pass
-263	
-264	    @classmethod
-265	    def INPUT_TYPES(cls):
-266	        return {
-267	            &quot;required&quot;: {
-268	                &quot;image1&quot;: (&quot;IMAGE&quot;,),
 </pre>
 </div>
 

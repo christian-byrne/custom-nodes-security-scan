@@ -98,7 +98,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/efficiency-nodes-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/efficiency-nodes-comfyui/__init__.py</a><br>
+    <b>File: </b><a href="efficiency-nodes-comfyui/__init__.py" target="_blank">efficiency-nodes-comfyui/__init__.py</a><br>
     <b>Line number: </b>2<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -136,7 +136,7 @@ pre {
     <b>Severity: </b>LOW<br>
     <b>Confidence: </b>HIGH<br>
     <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
-    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/efficiency-nodes-comfyui/efficiency_nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/efficiency-nodes-comfyui/efficiency_nodes.py</a><br>
+    <b>File: </b><a href="efficiency-nodes-comfyui/efficiency_nodes.py" target="_blank">efficiency-nodes-comfyui/efficiency_nodes.py</a><br>
     <b>Line number: </b>17<br>
     <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
 
@@ -174,94 +174,6 @@ pre {
 30	sys.path.append(comfy_dir)
 31	from nodes import LatentUpscaleBy, KSampler, KSamplerAdvanced, VAEDecode, VAEDecodeTiled, VAEEncode, VAEEncodeTiled, \
 32	    ImageScaleBy, CLIPSetLastLayer, CLIPTextEncode, ControlNetLoader, ControlNetApply, ControlNetApplyAdvanced, \
-33	    PreviewImage, MAX_RESOLUTION
-34	from comfy_extras.nodes_upscale_model import UpscaleModelLoader, ImageUpscaleWithModel
-35	from comfy_extras.nodes_clip_sdxl import CLIPTextEncodeSDXL, CLIPTextEncodeSDXLRefiner
-36	import comfy.sample
-37	import comfy.samplers
-38	import comfy.sd
-39	import comfy.utils
-40	import comfy.latent_formats
-41	sys.path.remove(comfy_dir)
-42	
-43	# Append my_dir to sys.path &amp; import files
-44	sys.path.append(my_dir)
-45	from tsc_utils import *
-46	from .py import smZ_cfg_denoiser
-47	from .py import smZ_rng_source
-48	from .py import cg_mixed_seed_noise
-49	from .py import city96_latent_upscaler
-50	from .py import ttl_nn_latent_upscaler
-51	from .py import bnk_tiled_samplers
-52	from .py import bnk_adv_encode
-53	sys.path.remove(my_dir)
-54	
-55	# Append custom_nodes_dir to sys.path
-56	sys.path.append(custom_nodes_dir)
-57	
-58	# GLOBALS
-59	REFINER_CFG_OFFSET = 0 #Refiner CFG Offset
-60	
-61	########################################################################################################################
-62	# Common function for encoding prompts
-63	def encode_prompts(positive_prompt, negative_prompt, token_normalization, weight_interpretation, clip, clip_skip,
-64	                   refiner_clip, refiner_clip_skip, ascore, is_sdxl, empty_latent_width, empty_latent_height,
-65	                   return_type=&quot;both&quot;):
-66	
-67	    positive_encoded = negative_encoded = refiner_positive_encoded = refiner_negative_encoded = None
-68	
-69	    # Process base encodings if needed
-70	    if return_type in [&quot;base&quot;, &quot;both&quot;]:
-71	        clip = CLIPSetLastLayer().set_last_layer(clip, clip_skip)[0]
-72	
-73	        positive_encoded = bnk_adv_encode.AdvancedCLIPTextEncode().encode(clip, positive_prompt, token_normalization, weight_interpretation)[0]
-74	        negative_encoded = bnk_adv_encode.AdvancedCLIPTextEncode().encode(clip, negative_prompt, token_normalization, weight_interpretation)[0]
-75	
-76	    # Process refiner encodings if needed
-77	    if return_type in [&quot;refiner&quot;, &quot;both&quot;] and is_sdxl and refiner_clip and refiner_clip_skip and ascore:
-78	        refiner_clip = CLIPSetLastLayer().set_last_layer(refiner_clip, refiner_clip_skip)[0]
-79	
-80	        refiner_positive_encoded = bnk_adv_encode.AdvancedCLIPTextEncode().encode(refiner_clip, positive_prompt, token_normalization, weight_interpretation)[0]
-81	        refiner_positive_encoded = bnk_adv_encode.AddCLIPSDXLRParams().encode(refiner_positive_encoded, empty_latent_width, empty_latent_height, ascore[0])[0]
-82	
-83	        refiner_negative_encoded = bnk_adv_encode.AdvancedCLIPTextEncode().encode(refiner_clip, negative_prompt, token_normalization, weight_interpretation)[0]
-84	        refiner_negative_encoded = bnk_adv_encode.AddCLIPSDXLRParams().encode(refiner_negative_encoded, empty_latent_width, empty_latent_height, ascore[1])[0]
-85	
-86	    # Return results based on return_type
-87	    if return_type == &quot;base&quot;:
-88	        return positive_encoded, negative_encoded, clip
-89	    elif return_type == &quot;refiner&quot;:
-90	        return refiner_positive_encoded, refiner_negative_encoded, refiner_clip
-91	    elif return_type == &quot;both&quot;:
-92	        return positive_encoded, negative_encoded, clip, refiner_positive_encoded, refiner_negative_encoded, refiner_clip
-93	
-94	########################################################################################################################
-95	# TSC Efficient Loader
-96	class TSC_EfficientLoader:
-97	
-98	    @classmethod
-99	    def INPUT_TYPES(cls):
-100	        return {&quot;required&quot;: { &quot;ckpt_name&quot;: (folder_paths.get_filename_list(&quot;checkpoints&quot;),),
-101	                              &quot;vae_name&quot;: ([&quot;Baked VAE&quot;] + folder_paths.get_filename_list(&quot;vae&quot;),),
-102	                              &quot;clip_skip&quot;: (&quot;INT&quot;, {&quot;default&quot;: -1, &quot;min&quot;: -24, &quot;max&quot;: -1, &quot;step&quot;: 1}),
-103	                              &quot;lora_name&quot;: ([&quot;None&quot;] + folder_paths.get_filename_list(&quot;loras&quot;),),
-104	                              &quot;lora_model_strength&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: -10.0, &quot;max&quot;: 10.0, &quot;step&quot;: 0.01}),
-105	                              &quot;lora_clip_strength&quot;: (&quot;FLOAT&quot;, {&quot;default&quot;: 1.0, &quot;min&quot;: -10.0, &quot;max&quot;: 10.0, &quot;step&quot;: 0.01}),
-106	                              &quot;positive&quot;: (&quot;STRING&quot;, {&quot;default&quot;: &quot;CLIP_POSITIVE&quot;,&quot;multiline&quot;: True}),
-107	                              &quot;negative&quot;: (&quot;STRING&quot;, {&quot;default&quot;: &quot;CLIP_NEGATIVE&quot;, &quot;multiline&quot;: True}),
-108	                              &quot;token_normalization&quot;: ([&quot;none&quot;, &quot;mean&quot;, &quot;length&quot;, &quot;length+mean&quot;],),
-109	                              &quot;weight_interpretation&quot;: ([&quot;comfy&quot;, &quot;A1111&quot;, &quot;compel&quot;, &quot;comfy++&quot;, &quot;down_weight&quot;],),
-110	                              &quot;empty_latent_width&quot;: (&quot;INT&quot;, {&quot;default&quot;: 512, &quot;min&quot;: 64, &quot;max&quot;: MAX_RESOLUTION, &quot;step&quot;: 64}),
-111	                              &quot;empty_latent_height&quot;: (&quot;INT&quot;, {&quot;default&quot;: 512, &quot;min&quot;: 64, &quot;max&quot;: MAX_RESOLUTION, &quot;step&quot;: 64}),
-112	                              &quot;batch_size&quot;: (&quot;INT&quot;, {&quot;default&quot;: 1, &quot;min&quot;: 1, &quot;max&quot;: 262144})},
-113	                &quot;optional&quot;: {&quot;lora_stack&quot;: (&quot;LORA_STACK&quot;, ),
-114	                             &quot;cnet_stack&quot;: (&quot;CONTROL_NET_STACK&quot;,)},
-115	                &quot;hidden&quot;: { &quot;prompt&quot;: &quot;PROMPT&quot;,
-116	                            &quot;my_unique_id&quot;: &quot;UNIQUE_ID&quot;,},
-117	                }
-118	
-119	    RETURN_TYPES = (&quot;MODEL&quot;, &quot;CONDITIONING&quot;, &quot;CONDITIONING&quot;, &quot;LATENT&quot;, &quot;VAE&quot;, &quot;CLIP&quot;, &quot;DEPENDENCIES&quot;,)
-120	    RETURN_NAMES = (&quot;MODEL&quot;, &quot;CONDITIONING+&quot;, &quot;CONDITIONING-&quot;, &quot;LATENT&quot;, &quot;VAE&quot;, &quot;CLIP&quot;, &quot;DEPENDENCIES&quot;, )
 </pre>
 </div>
 
