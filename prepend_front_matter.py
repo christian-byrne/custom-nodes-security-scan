@@ -1,7 +1,6 @@
 import os
-import sys
 
-dir_ = os.path.join(os.path.dirname(__file__), "_posts")
+dir_ = os.path.join(os.path.dirname(__file__), "test-results")
 
 for filename in os.listdir(dir_):
     if filename.endswith(".html"):

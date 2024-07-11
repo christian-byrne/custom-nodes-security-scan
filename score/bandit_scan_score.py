@@ -156,6 +156,7 @@ for i in range(len(z_scores)):
 
     all_html += html_row
 
+print(f"Saving to {os.path.join(html_src_dir, 'index.html')}")
 with open(os.path.join(html_src_dir, "index.html"), "w") as f:
     f.write(all_html)
 

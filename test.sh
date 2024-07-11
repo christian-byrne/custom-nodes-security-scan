@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CUSTOM_NODES_DIR=$1
-HTML_DIR=$(dirname $0)/_posts
+HTML_DIR=$(dirname $0)/test-results
 
 if [[ $CUSTOM_NODES_DIR != *"/custom_nodes" ]]; then
     CUSTOM_NODES_DIR="$CUSTOM_NODES_DIR/custom_nodes"
