@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">1028</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/anynode/nodes/any.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/anynode/nodes/any.py</a><br>
+    <b>Line number: </b>333<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+273	        &quot;&quot;&quot;Get the globals dict prepared for safe_exec&quot;&quot;&quot;
+274	        for imp in self.imports:
+275	            parts = imp.split()
+276	            try:
+277	                if imp.startswith(&#x27;import&#x27;):
+278	                    # Handle &#x27;import module&#x27;
+279	                    if len(parts) == 2:
+280	                        module_name = parts[1]
+281	                        globals_dict[module_name] = importlib.import_module(module_name)
+282	                        self.import_submodules(module_name, globals_dict)
+283	                    # Handle &#x27;import module as alias&#x27;
+284	                    elif len(parts) == 4 and parts[2] == &#x27;as&#x27;:
+285	                        module_name = parts[1]
+286	                        alias = parts[3]
+287	                        globals_dict[alias] = importlib.import_module(module_name)
+288	                        self.import_submodules(module_name, globals_dict)
+289	                elif imp.startswith(&#x27;from&#x27;):
+290	                    # Handle &#x27;from module import name&#x27;
+291	                    if len(parts) == 4:
+292	                        module_name = parts[1]
+293	                        name = parts[3]
+294	                        globals_dict[name] = importlib.import_module(f&quot;{module_name}.{name}&quot;)
+295	                    # Handle &#x27;from module import name as alias&#x27;
+296	                    elif len(parts) == 6 and parts[4] == &#x27;as&#x27;:
+297	                        module_name = parts[1]
+298	                        name = parts[3]
+299	                        alias = parts[5]
+300	                        globals_dict[alias] = importlib.import_module(f&quot;{module_name}.{name}&quot;)
+301	            except ImportError as e:
+302	                print(f&quot;Failed to import {imp}: {e}&quot;)
+303	  
+304	    def import_submodules(self, package_name, globals_dict):
+305	        &quot;&quot;&quot;Get the submodules from a package and import those into the globals&quot;&quot;&quot;
+306	        if package_name in sys.modules:
+307	            package = sys.modules[package_name]
+308	            if hasattr(package, &#x27;__path__&#x27;):
+309	                for loader, module_name, is_pkg in pkgutil.walk_packages(package.__path__, package.__name__ + &#x27;.&#x27;):
+310	                    if any(submodule.startswith(module_name) for submodule in self.imports):
+311	                        try:
+312	                            module = importlib.import_module(module_name)
+313	                            globals_dict[module_name] = module
+314	                        except ImportError as e:
+315	                            print(f&quot;Failed to import submodule {module_name}: {e}&quot;)
+316	                            traceback.print_exc()
+317	  
+318	    def safe_exec(self, code_string, globals_dict=None, locals_dict=None):
+319	        &quot;&quot;&quot;Execute &quot;&quot;&quot;
+320	        if globals_dict is None:
+321	            globals_dict = {}
+322	        if locals_dict is None:
+323	            locals_dict = {}
+324	            
+325	        # Import submodules for each module in globals_dict
+326	        for module_name in list(globals_dict.keys()):
+327	            try:
+328	                self.import_submodules(module_name, globals_dict)
+329	            except Exception as e:
+330	                print(f&quot;Failed to import submodules for {module_name}: {e}&quot;)
+331	            
+332	        try:
+333	            exec(sanitize_code(code_string), globals_dict, locals_dict)
+334	        except Exception as e:
+335	            print(&quot;An error occurred:&quot;)
+336	            traceback.print_exc()
+337	            raise e
+338	        
+339	    def keep_trying(self):
+340	        r = self.attempts &lt; self.CODING_ATTEMPTS
+341	        self.attempts += 1
+342	        return r
+343	      
+344	    def go(self, prompt:str, model=None, any=None, any2=None, hidden_prompt=None, unique_id=None, extra_pnginfo=None, **kwargs):
+345	        print(f&quot;\nRUN-{unique_id}&quot;, model, prompt, any, any2, &quot;\n&quot;)
+346	        self.model = model
+347	        &quot;&quot;&quot;Takes the prompt and inputs, Generates a function with an LLM for the Node&quot;&quot;&quot;
+348	        if prompt == &quot;&quot;: # if empty, reset
+349	            self.reset()
+350	            return (any, any2,)
+351	        result = None
+352	        registry = self.FUNCTION_REGISTRY
+353	        # Generate a unique function name
+354	        function_name = self.generate_function_name()
+355	
+356	        workflow = NodeAware(pnginfo=extra_pnginfo)
+357	        node = workflow.find_node(id=unique_id)
+358	        
+359	        # Generate, Compile and Run the Unique Generated Function: 3 Attempts
+360	        while self.keep_trying():
+361	
+362	            print(f&quot;Last Error: {self.last_error}&quot;)
+363	            fr = registry.get_function(prompt)
+364	            use_function = fr is not None and self.last_error is None
+365	            use_generation = self.script is None or self.last_prompt != prompt or self.last_error is not None
+366	            if use_generation and not use_function:
+367	                print(&quot;Generating Node function...&quot;)
+368	                # Generate the function code using OpenAI
+369	                r = self.get_llm_response(prompt, any=any, any2=any2, workflow=workflow, node=node, model=model, **kwargs)
+370	                
+371	                # Remember the script for future use
+372	                self.script = self.extract_imports(r)
+373	                print(f&quot;Stored script:\n{self.script}&quot;)
+374	            if use_function:
+375	                self.script = fr[&#x27;function&#x27;]
+376	                self.last_comment = fr[&#x27;comment&#x27;]
+377	                self.imports = fr[&#x27;imports&#x27;]
+378	            self.last_prompt = prompt
+379	
+380	            if self.script.strip() == &quot;&quot;:
+381	                raise ValueError(&quot;The LLM did not return a python function. Check credentials and connection settings first.&quot;)
+382	
+383	            # Modify the script to use the unique function name
+384	            modified_script = self.script.replace(&#x27;def generated_function&#x27;, f&#x27;def {function_name}&#x27;)
+385	
+386	            # Execute the stored script to define the unique function
+387	            try:
+388	                # Define a dictionary to store globals and locals, updating it with imported libs from script and built in functions
+389	                globals_dict = {&quot;__builtins__&quot;: __builtins__}
+390	                self._prepare_globals(globals_dict)
+391	                globals_dict.update({&quot;np&quot;: np})
+392	                locals_dict = {}
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/anynode/nodes/util_functions.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/anynode/nodes/util_functions.py</a><br>
+    <b>Line number: </b>45<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+1	&quot;&quot;&quot; 
+2	Save and Recall functions across Comfy with Persistent functions
+3	shouts to @risunobushi on discord for helping me crack this
+4	&quot;&quot;&quot;
+5	import os
+6	import hashlib
+7	import json
+8	import chromadb
+9	from chromadb.config import Settings
+10	from chromadb.utils import embedding_functions
+11	
+12	
+13	class FunctionRegistry:
+14	    def __init__(self, registry_dir=&quot;output/anynode&quot;, schema=&quot;default&quot;, version=&quot;1.0&quot;):
+15	        print(&#x27;PATH BASENAME&#x27;, os.path.basename)
+16	        self.registry_dir = os.path.abspath(os.path.join(os.getcwd(), registry_dir))
+17	        print(&#x27;REGISTRY DIR&#x27;, self.registry_dir, flush=True)
+18	        os.makedirs(self.registry_dir, exist_ok=True)
+19	        self.schema = schema
+20	        self.version = version
+21	        self.registry_file = os.path.join(self.registry_dir, f&quot;function_registry_{self.schema}.json&quot;)
+22	        self.registry = self.load_registry()
+23	        self.chroma_client = self.init_chromadb()
+24	
+25	    def init_chromadb(self):
+26	        folder = os.path.join(self.registry_dir, f&quot;chroma_db_{self.schema}&quot;)
+27	        os.makedirs(folder, exist_ok=True)
+28	        fe = os.path.exists(folder)
+29	        print(f&quot;ChromaDB Path: {folder}, exists: {fe}&quot;)
+30	        settings = Settings(persist_directory=folder)
+31	        client = chromadb.Client(settings)
+32	        return client
+33	
+34	    def load_registry(self):
+35	        if os.path.exists(self.registry_file):
+36	            with open(self.registry_file, &quot;r&quot;) as f:
+37	                return json.load(f)
+38	        return {}
+39	
+40	    def save_registry(self):
+41	        with open(self.registry_file, &quot;w&quot;) as f:
+42	            json.dump(self.registry, f, indent=4)
+43	
+44	    def hash_prompt(self, prompt):
+45	        return hashlib.md5(prompt.encode(&#x27;utf-8&#x27;)).hexdigest()
+46	
+47	    def add_function(self, prompt, function_code, imports, comment, input_types):
+48	        prompt_hash = self.hash_prompt(prompt)
+49	        self.registry[prompt_hash] = {
+50	            &quot;prompt&quot;: prompt,
+51	            &quot;imports&quot;: imports,
+52	            &quot;function&quot;: function_code,
+53	            &quot;comment&quot;: comment,
+54	            &quot;version&quot;: self.version
+55	        }
+56	        self.save_registry()
+57	        #self.add_function_to_chromadb(prompt_hash, prompt, function_code, imports, comment, input_types)
+58	
+59	    def get_function(self, prompt):
+60	        prompt_hash = self.hash_prompt(prompt)
+61	        function_data = self.registry.get(prompt_hash, None)
+62	        if function_data:
+63	            return function_data
+64	        return None
+65	
+66	    def query_chromadb(self, prompt, input_types, top_k=1):
+67	        collection = self.chroma_client.get_or_create_collection(name=&quot;function_registry&quot;)
+68	        filters = {&quot;input_types&quot;: input_types}
+69	        results = collection.query(query_texts=[prompt], top_k=top_k, filter_metadata=filters)
+70	        if results[&#x27;documents&#x27;]:
+71	            return results[&#x27;documents&#x27;][0][&#x27;content&#x27;]
+72	        return None
+73	
+74	    def add_function_to_chromadb(self, prompt_hash, prompt, function_code, imports, comment, input_types):
+75	        collection = self.chroma_client.get_or_create_collection(name=&quot;function_registry&quot;)
+76	        metadata = {
+77	            &quot;prompt&quot;: prompt,
+78	            &quot;function&quot;: function_code,
+79	            &quot;imports&quot;: &quot;\n&quot;.join(imports),
+80	            &quot;comment&quot;: comment,
+81	            &quot;input_types&quot;: &quot;\n&quot;.join(input_types),
+82	            &quot;version&quot;: self.version,
+83	        }
+84	        print(metadata)
+85	        collection.add(
+86	            documents=[prompt],
+87	            metadatas=[metadata],
+88	            ids=[prompt_hash]
+89	        )
+90	        #collection.add_documents([document])
+91	
+92	    def get_function_with_rag(self, prompt, input_types, top_k=1):
+93	        function_code = self.get_function(prompt)
+94	        if function_code is None:
+95	            function_code = self.query_chromadb(prompt, &quot;\n&quot;.join(input_types), top_k=top_k)
+96	        return function_code
+97	
+98	if __name__ == &quot;__main__&quot;:
+99	    # Example Usage
+100	    registry = FunctionRegistry(schema=&quot;default&quot;, version=&quot;1.0&quot;)
+101	
+102	    # Adding a function to the registry
+103	    prompt = &quot;Generate a function that multiplies the input by 5.&quot;
+104	    function_code = &quot;&quot;&quot;
+105	    def generated_function(input_data):
+106	        return input_data * 5
+107	    &quot;&quot;&quot;
+108	    imports = [&quot;numpy&quot;, &quot;math&quot;]
+109	    comment = &quot;This function multiplies the input by 5.&quot;
+110	    input_types = [&quot;int&quot;]
+111	    registry.add_function(prompt, function_code, imports, comment, input_types)
+112	
+113	    # Retrieving a function from the registry with top_k results
+114	    top_k = 3
+115	    retrieved_function = registry.get_function_with_rag(prompt, input_types, top_k=top_k)
+116	    print(&quot;Retrieved Function:\n&quot;, retrieved_function)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/anynode/nodes/util_oai_compatible.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/anynode/nodes/util_oai_compatible.py</a><br>
+    <b>Line number: </b>26<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+1	import os
+2	import requests
+3	
+4	class OpenAICompatible:
+5	    def __init__(self, api_key=None, endpoint=&quot;https://api.openai.com&quot;, model=&quot;gpt-4o&quot;):
+6	        self.api_key = api_key
+7	        self.set_api_server(endpoint)
+8	        self.model = model
+9	
+10	    def set_api_server(self, endpoint:str):
+11	        self.api_url = endpoint + &quot;/v1/chat/completions&quot;
+12	
+13	    def get_response(self, system:str, prompt:str, any=None, temperature:float=0.0, max_tokens:int=2048):
+14	        headers = {
+15	            &quot;Content-Type&quot;: &quot;application/json&quot;,
+16	        }
+17	        if self.api_key:
+18	            headers[&quot;Authorization&quot;] = f&quot;Bearer {self.api_key}&quot;
+19	        payload = {
+20	            &quot;model&quot;: self.model,
+21	            &quot;messages&quot;: [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: system},
+22	                         {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}],
+23	            &quot;temperature&quot;: temperature,
+24	            &quot;max_tokens&quot;: max_tokens
+25	        }
+26	        response = requests.post(self.api_url, headers=headers, json=payload)
+27	        if response.status_code == 200:
+28	            return response.json().get(&#x27;choices&#x27;, [{}])[0].get(&#x27;message&#x27;, {}).get(&#x27;content&#x27;, &#x27;&#x27;).strip()
+29	        else:
+30	            raise Exception(f&quot;API request failed with status code {response.status_code}: {response.text}&quot;)
+31	
+32	if __name__ == &quot;__main__&quot;:
+33	    # Example Usage:
+34	    #api_key = os.getenv(&quot;OPENAI_API_KEY&quot;)
+35	    openai_compatible = OpenAICompatible(endpoint=&quot;http://localhost:11434&quot;, api_key=&#x27;ollama&#x27;, model=&quot;mistral&quot;)
+36	    response = openai_compatible.get_response(&quot;You are an AI assistant.&quot;, &quot;Where is the eiffel tower?&quot;)
+37	    print(response)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
