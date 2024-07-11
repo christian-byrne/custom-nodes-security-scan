@@ -26,3 +26,4 @@ echo "$CUSTOM_NODES" | while read -r line; do
 done
 
 python3 ./score/bandit_scan_score.py $CUSTOM_NODES_DIR $HTML_DIR
+python3 ./prepend_front_matter.py

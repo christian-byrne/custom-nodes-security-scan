@@ -140,6 +140,8 @@ scores = list(custom_node_scores.values())
 z_scores = stats.zscore(scores)
 this_path = os.path.dirname(os.path.realpath(__file__))
 html_src_dir = sys.argv[2]
+
+
 all_html = "<body style='font-family: Arial, sans-serif;'><h1 style='text-align: center;'>Bandit Scan Results</h1><table style='width: 100%'><tr><th>Node Name</th><th>Risk Level</th><th>Z-Score</th><th>Full Details</th></tr>"
 for i in range(len(z_scores)):
     color = (
