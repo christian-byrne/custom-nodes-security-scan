@@ -9,7 +9,7 @@ fi
 
 mkdir -p $HTML_DIR
 if [ -d "$HTML_DIR" ]; then
-    rm -rf $HTML_DIR/*
+    rm -rf $HTML_DIR/*.html
 else
     mkdir -p $HTML_DIR
 fi

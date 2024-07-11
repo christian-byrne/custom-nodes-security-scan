@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Custom Node Security Scan Results</title>
+    <link rel="stylesheet" href="options.css" />
+    <script src="./lib/jquery-3.7.1.min.js"></script>
+    <script src="./lib/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="col-md-12 p-4 mb-4">
+        <h1 class="display-1 mb-5 text-center dd3">
+          Custom Node Security Scan Results
+        </h1>
+        <table class="table">
+          <thead>
+            <tr id="configTableHeaderRow">
+              <th scope="col">Custom Node Package Name</th>
+              <th scope="col">Severity</th>
+              <th scope="col">Risk Level</th>
+              <th scope="col">Z-Score</th>
+              <th scope="col">Full Report</th>
+            </tr>
+          </thead>
+          <tbody id="configTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <span class="text-muted text-center">
+          <a href="https://github.com.com/christian-byrne">github</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

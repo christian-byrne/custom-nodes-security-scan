@@ -1,0 +1,36 @@
+/* credit: https://codepen.io/kawsar/pen/jybZzM */
+.remove {
+  background: #f1f1f1;
+  td {
+    font-style: italic;
+  }
+}
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+}
+.input-group {
+  width: 100%;
+}
+
+.editable {
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-shadow: none;
+  box-shadow: none;
+}
+.addBtn {
+  cursor: pointer;
+}
+
+/* ------------------- */
+
+.btn-row-bottom {
+  flex-direction: row-reverse;
+}
+
+.dd3 {
+  font-family: Noto Sans, sans-serif !important;
+  font-weight: 100 !important;
+}

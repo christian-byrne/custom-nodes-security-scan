@@ -1,6 +1,7 @@
 import os
 import sys
 from scipy import stats
+from jinja2 import Environment, FileSystemLoader
 
 from bandit.core.issue import Issue
 from bandit.core import config as b_config
@@ -140,24 +141,45 @@ scores = list(custom_node_scores.values())
 z_scores = stats.zscore(scores)
 this_path = os.path.dirname(os.path.realpath(__file__))
 html_src_dir = sys.argv[2]
+this_parent = os.path.dirname(this_path)
 
+template_dir = os.path.join(this_parent, "html-templates")
 
-all_html = "<body style='font-family: Arial, sans-serif;'><h1 style='text-align: center;'>Bandit Scan Results</h1><table style='width: 100%'><tr><th>Node Name</th><th>Risk Level</th><th>Z-Score</th><th>Full Details</th></tr>"
-for i in range(len(z_scores)):
-    color = (
-        "red"
-        if z_scores[i] > 2
-        else (
-            "orange" if z_scores[i] > 1 else ("yellow" if z_scores[i] > 0 else "green")
-        )
-    )
-    node_name = list(custom_node_scores.keys())[i]
-    html_row = f"<tr><td style='text-align: center; font-weight: bold; font-size: 130%'>{node_name}</td><td style='color: {color}'>{scores[i]}</td><td>{z_scores[i]:.4f}</td><td><a href='{node_name}'>Details</a></td></tr>"
+results = []
+for i, node_name in enumerate(custom_node_scores):
+    severity = scores[i]
+    z_score = z_scores[i]
+    if z_score > 2:
+        color = "var(--red)"
+    elif z_score > 1:
+        color = "var(--orange)"
+    elif z_score > 0:
+        color = "var(--yellow)"
+    else:
+        color = "var(--green)"
+    full_report_url = f"{node_name}"
+    if not full_report_url.endswith(".html"):
+        full_report_url = f"{full_report_url}.html"
+    results.append({
+        "sort_key": severity,
+        "package_name": node_name,
+        "risk_level": f"<span style='color: {color};'>{severity:.2f}</span>",
+        "z_score": f"{z_score:.4f}",
+        "full_report_url": full_report_url
+    })
 
-    all_html += html_row
+# Sort by risk level high to low
+results = sorted(results, key=lambda x: float(x["sort_key"]), reverse=True)
 
-print(f"Saving to {os.path.join(html_src_dir, 'index.html')}")
-with open(os.path.join(html_src_dir, "index.html"), "w") as f:
-    f.write(all_html)
+env = Environment(loader=FileSystemLoader(template_dir))
+template = env.get_template('index.html')
+output_html = template.render(results=results)
+
+# Save rendered template to file
+output_file = os.path.join(html_src_dir, 'index.html')
+with open(output_file, 'w') as f:
+    f.write(output_html)
+
+print(f"Saved to {output_file}")
 
 os.system(f"xdg-open {os.path.join(html_src_dir, 'index.html')}")
