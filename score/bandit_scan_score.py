@@ -83,11 +83,11 @@ for test in b_mgr.results:
     test_categories[issue.test_id]["end_col_offset"].append(issue.end_col_offset)
 
     # Calculate the score
-    score = 10 if issue.severity == "HIGH" else 4 if issue.severity == "MEDIUM" else 1
-    if issue.confidence == "HIGH":
-        score *= 2
-    elif issue.confidence == "MEDIUM":
-        score *= 1.4
+    score = 8 if issue.severity == "HIGH" else 4 if issue.severity == "MEDIUM" else 1
+    if issue.confidence == "MEDIUM":
+        score *= .8
+    elif issue.confidence == "LOW":
+        score *= .6
 
     if node_name not in custom_node_scores:
         custom_node_scores[node_name] = score
@@ -149,7 +149,8 @@ for i in range(len(z_scores)):
             "orange" if z_scores[i] > 1 else ("yellow" if z_scores[i] > 0 else "green")
         )
     )
-    html_row = f"<tr><td style='text-align: center; font-weight: bold; font-size: 130%'>{list(custom_node_scores.keys())[i]}</td><td style='color: {color}'>{scores[i]}</td><td>{z_scores[i]:.4f}</td><td><a href='file://{html_src_dir}/node_{i}.html'>Details</a></td></tr>"
+    node_name = list(custom_node_scores.keys())[i]
+    html_row = f"<tr><td style='text-align: center; font-weight: bold; font-size: 130%'>{node_name}</td><td style='color: {color}'>{scores[i]}</td><td>{z_scores[i]:.4f}</td><td><a href='{node_name}'>Details</a></td></tr>"
 
     all_html += html_row
 

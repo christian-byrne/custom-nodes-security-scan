@@ -1,7 +1,11 @@
 #!/bin/bash
 
 CUSTOM_NODES_DIR=$1
-HTML_DIR=$(dirname $0)/node-scan-results
+HTML_DIR=$(dirname $0)/_posts
+
+if [[ $CUSTOM_NODES_DIR != *"/custom_nodes" ]]; then
+    CUSTOM_NODES_DIR="$CUSTOM_NODES_DIR/custom_nodes"
+fi
 
 mkdir -p $HTML_DIR
 if [ -d "$HTML_DIR" ]; then
