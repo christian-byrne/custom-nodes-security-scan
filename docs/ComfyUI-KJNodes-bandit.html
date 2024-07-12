@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">5755</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/ComfyUI-KJNodes/nodes/nodes.py" target="_blank">/ComfyUI-KJNodes/nodes/nodes.py</a><br>
+    <b>Line number: </b>1630<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+1614	        if model != &quot;sd3-turbo&quot;:
+1615	            data[&quot;negative_prompt&quot;] = n_prompt
+1616	
+1617	        headers={
+1618	                &quot;accept&quot;: &quot;image/*&quot;
+1619	            }
+1620	        
+1621	        if api_key != &quot;&quot;:
+1622	            headers[&quot;authorization&quot;] = api_key
+1623	        else:
+1624	            config_file_path = os.path.join(script_directory,&quot;config.json&quot;)
+1625	            with open(config_file_path, &#x27;r&#x27;) as file:
+1626	                config = json.load(file)
+1627	            api_key_from_config = config.get(&quot;sai_api_key&quot;)
+1628	            headers[&quot;authorization&quot;] = api_key_from_config            
+1629	        
+1630	        response = requests.post(
+1631	            f&quot;https://api.stability.ai/v2beta/stable-image/generate/sd3&quot;,
+1632	            headers=headers,
+1633	            files = files,
+1634	            data = data,
+1635	        )
+1636	
+1637	        if response.status_code == 200:
+1638	            # Convert the response content to a PIL Image
+1639	            image = Image.open(io.BytesIO(response.content))
+1640	            # Convert the PIL Image to a PyTorch tensor
+1641	            transform = transforms.ToTensor()
+1642	            tensor_image = transform(image)
+1643	            tensor_image = tensor_image.unsqueeze(0)
+1644	            tensor_image = tensor_image.permute(0, 2, 3, 1).cpu().float()
+1645	            return (tensor_image,)
+1646	        else:
+1647	            try:
+1648	                # Attempt to parse the response as JSON
+1649	                error_data = response.json()
+1650	                raise Exception(f&quot;Server error: {error_data}&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

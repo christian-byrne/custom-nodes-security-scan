@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">1028</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/anynode/nodes/any.py" target="_blank">/anynode/nodes/any.py</a><br>
+    <b>Line number: </b>333<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+317	  
+318	    def safe_exec(self, code_string, globals_dict=None, locals_dict=None):
+319	        &quot;&quot;&quot;Execute &quot;&quot;&quot;
+320	        if globals_dict is None:
+321	            globals_dict = {}
+322	        if locals_dict is None:
+323	            locals_dict = {}
+324	            
+325	        # Import submodules for each module in globals_dict
+326	        for module_name in list(globals_dict.keys()):
+327	            try:
+328	                self.import_submodules(module_name, globals_dict)
+329	            except Exception as e:
+330	                print(f&quot;Failed to import submodules for {module_name}: {e}&quot;)
+331	            
+332	        try:
+333	            exec(sanitize_code(code_string), globals_dict, locals_dict)
+334	        except Exception as e:
+335	            print(&quot;An error occurred:&quot;)
+336	            traceback.print_exc()
+337	            raise e
+338	        
+339	    def keep_trying(self):
+340	        r = self.attempts &lt; self.CODING_ATTEMPTS
+341	        self.attempts += 1
+342	        return r
+343	      
+344	    def go(self, prompt:str, model=None, any=None, any2=None, hidden_prompt=None, unique_id=None, extra_pnginfo=None, **kwargs):
+345	        print(f&quot;\nRUN-{unique_id}&quot;, model, prompt, any, any2, &quot;\n&quot;)
+346	        self.model = model
+347	        &quot;&quot;&quot;Takes the prompt and inputs, Generates a function with an LLM for the Node&quot;&quot;&quot;
+348	        if prompt == &quot;&quot;: # if empty, reset
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/anynode/nodes/util_functions.py" target="_blank">/anynode/nodes/util_functions.py</a><br>
+    <b>Line number: </b>45<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+29	        print(f&quot;ChromaDB Path: {folder}, exists: {fe}&quot;)
+30	        settings = Settings(persist_directory=folder)
+31	        client = chromadb.Client(settings)
+32	        return client
+33	
+34	    def load_registry(self):
+35	        if os.path.exists(self.registry_file):
+36	            with open(self.registry_file, &quot;r&quot;) as f:
+37	                return json.load(f)
+38	        return {}
+39	
+40	    def save_registry(self):
+41	        with open(self.registry_file, &quot;w&quot;) as f:
+42	            json.dump(self.registry, f, indent=4)
+43	
+44	    def hash_prompt(self, prompt):
+45	        return hashlib.md5(prompt.encode(&#x27;utf-8&#x27;)).hexdigest()
+46	
+47	    def add_function(self, prompt, function_code, imports, comment, input_types):
+48	        prompt_hash = self.hash_prompt(prompt)
+49	        self.registry[prompt_hash] = {
+50	            &quot;prompt&quot;: prompt,
+51	            &quot;imports&quot;: imports,
+52	            &quot;function&quot;: function_code,
+53	            &quot;comment&quot;: comment,
+54	            &quot;version&quot;: self.version
+55	        }
+56	        self.save_registry()
+57	        #self.add_function_to_chromadb(prompt_hash, prompt, function_code, imports, comment, input_types)
+58	
+59	    def get_function(self, prompt):
+60	        prompt_hash = self.hash_prompt(prompt)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/anynode/nodes/util_oai_compatible.py" target="_blank">/anynode/nodes/util_oai_compatible.py</a><br>
+    <b>Line number: </b>26<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+10	    def set_api_server(self, endpoint:str):
+11	        self.api_url = endpoint + &quot;/v1/chat/completions&quot;
+12	
+13	    def get_response(self, system:str, prompt:str, any=None, temperature:float=0.0, max_tokens:int=2048):
+14	        headers = {
+15	            &quot;Content-Type&quot;: &quot;application/json&quot;,
+16	        }
+17	        if self.api_key:
+18	            headers[&quot;Authorization&quot;] = f&quot;Bearer {self.api_key}&quot;
+19	        payload = {
+20	            &quot;model&quot;: self.model,
+21	            &quot;messages&quot;: [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: system},
+22	                         {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}],
+23	            &quot;temperature&quot;: temperature,
+24	            &quot;max_tokens&quot;: max_tokens
+25	        }
+26	        response = requests.post(self.api_url, headers=headers, json=payload)
+27	        if response.status_code == 200:
+28	            return response.json().get(&#x27;choices&#x27;, [{}])[0].get(&#x27;message&#x27;, {}).get(&#x27;content&#x27;, &#x27;&#x27;).strip()
+29	        else:
+30	            raise Exception(f&quot;API request failed with status code {response.status_code}: {response.text}&quot;)
+31	
+32	if __name__ == &quot;__main__&quot;:
+33	    # Example Usage:
+34	    #api_key = os.getenv(&quot;OPENAI_API_KEY&quot;)
+35	    openai_compatible = OpenAICompatible(endpoint=&quot;http://localhost:11434&quot;, api_key=&#x27;ollama&#x27;, model=&quot;mistral&quot;)
+36	    response = openai_compatible.get_response(&quot;You are an AI assistant.&quot;, &quot;Where is the eiffel tower?&quot;)
+37	    print(response)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

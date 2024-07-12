@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Custom Node Security Scan Results</title>
+    <script src="./lib/jquery-3.7.1.min.js"></script>
+    <script src="./lib/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .dd3 {
+        font-size: 5rem;
+        font-weight: 100;
+        font-family: "Noto Sans", sans-serif;
+      }
+      .subtitle-dd3 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        font-family: "Noto Sans", sans-serif;
+      }
+      main {
+        font-size: large;
+        min-height: 92vh;
+      }
+      table {
+        table-layout: fixed;
+      }
+      td {
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="col-md-12 p-4 mb-4 mt-5">
+        <h1 class="display-1 text-center dd3 my-4">
+          Custom Node Security Scan Results
+        </h1>
+        <p class="text-center text-muted mb-5 pb-5 subtitle-dd3">
+          Generated on {{ date }}
+        </p>
+        <table class="table mt-5 p-5">
+          <thead>
+            <tr>
+              <th scope="col" class="col-3">Custom Node Package Name</th>
+              <th scope="col" class="col-2">Risk Level</th>
+              <th scope="col" class="col-1">Z-Score</th>
+              <th scope="col">Failed Bandits Tests</th>
+              <th
+                scope="col"
+                title="Full Report (Issues and Associated Lines of Code) - Bandit"
+                data-placement="top"
+              >
+                Full Bandit Report
+              </th>
+              <th scope="col">Failed Yara Tests</th>
+              <th
+                scope="col"
+                title="Full Report (Issues and Associated Lines of Code) - Yara"
+                data-placement="top"
+              >
+                Full Yara Report
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for result in results %}
+            <tr>
+              <td
+                class="text-primary"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ result.github_url}}"
+                aria-label="Package Name"
+                aria-details="{{ result.package_name }}"
+              >
+                <a href="{{ result.github_url }}"
+                  ><span class="fa fa-github text-primary"></span
+                ></a>
+                &nbsp; &nbsp; &nbsp;
+                <a href="{{ result.github_url }}">
+                  {{ result.package_name }}
+                </a>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Risk Level (Sum of Issues Weighted by Severity and Multiplied by Confidence)"
+                aria-label="Risk Level"
+                aria-details="{{ result.risk_level }}"
+              >
+                {{ result.risk_level }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Z-Score (Standard Deviations from the Mean)"
+                aria-label="Z-Score"
+                aria-details="{{ result.z_score }}"
+              >
+                {{ result.z_score }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ result.failed_bandit_tests }}"
+                aria-label="Failed Bandit Tests"
+                aria-details="{{ result.failed_bandit_tests }}"
+                style="
+                  overflow-x: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+              >
+                {{ result.failed_bandit_tests }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report (Issues and Associated Lines of Code) - Bandit"
+                aria-label="Full Bandit Report"
+                class="text-center"
+              >
+                <a href="{{ result.bandit_report_url }}">View Report</a>
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ result.failed_yara_tests }}"
+                aria-label="Failed Yara Tests"
+                aria-details="{{ result.failed_yara_tests }}"
+                style="
+                  overflow-x: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+              >
+                {{ result.failed_yara_tests }}
+              </td>
+              <td
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Full Report (Issues and Associated Lines of Code) - Yara"
+                aria-label="Full Yara Report"
+                class="text-center"
+              >
+                <a href="{{ result.yara_report_url }}">View Report</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light p-4">
+      <div class="container text-center d-flex justify-content-space-between">
+        <div class="text-muted text-center col-lg-2 col-m-4">
+          <a href="https://github.com/christian-byrne/node-sec-scan"
+            >Source Code
+            <i class="fa fa-github text-secondary"></i>
+          </a>
+          <span class="text-muted"> - that generated these tests &nbsp; </span>
+        </div>
+        <div class="text-muted text-center col-lg-2 col-m-4">
+          <a href="https://virustotal.github.io/yara/"
+            >Yara
+            <img src="icons/yara.svg" alt="yara" class="w-25" />
+          </a>
+        </div>
+        <div class="text-muted text-center col-lg-2 col-m-4">
+          <a href="https://github.com/PyCQA/bandit"
+            >Bandit
+            <img src="icons/bandit.avif" alt="bandit" class="w-25" />
+          </a>
+        </div>
+        <div class="text-muted text-center col-lg-2 col-m-4">
+          <a href="https://snyk.io/"
+            >Snyk
+            <img src="icons/snyk.svg" alt="snyk" class="w-25" />
+          </a>
+        </div>
+        <div class="text-muted text-center col-lg-2 col-m-4">
+          <a href="https://pypi.org/project/pylint/"
+            >Pylint
+            <img src="icons/pylint.svg" alt="pylint" class="w-25" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

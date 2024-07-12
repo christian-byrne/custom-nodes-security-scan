@@ -1,0 +1,3 @@
+git+https://github.com/carbonblack/cbapi-python.git@1.3.6
+prompt-toolkit==1.0.15
+python-dateutil==2.6.1

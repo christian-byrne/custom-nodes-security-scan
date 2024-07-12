@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">3982</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/mikey_nodes/mikey_nodes.py" target="_blank">/mikey_nodes/mikey_nodes.py</a><br>
+    <b>Line number: </b>3783<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+3767	        if use_seed == &#x27;true&#x27; and len(self.operations) &gt; 0:
+3768	            offset = seed % len(self.operations)
+3769	            operation = self.operations[offset]
+3770	
+3771	        # Parsing the operation string
+3772	        ops = operation.split(&quot;, &quot;)
+3773	        output_texts = [op.split(&quot; to &quot;)[0] for op in ops]
+3774	
+3775	        # Generate the outputs
+3776	        outputs = []
+3777	
+3778	        for output_text in output_texts:
+3779	            # Split the string by &#x27;+&#x27; to identify individual text components
+3780	            components = output_text.split(&quot; + &quot;)
+3781	
+3782	            # Generate the final string for each output
+3783	            final_output = delimiter.join(eval(comp, {}, text_dict) for comp in components)
+3784	
+3785	            outputs.append(final_output)
+3786	
+3787	        return tuple(outputs)
+3788	
+3789	class TextCombinations3:
+3790	    texts = [&#x27;text1&#x27;, &#x27;text2&#x27;, &#x27;text3&#x27;, &#x27;text1 + text2&#x27;, &#x27;text1 + text3&#x27;, &#x27;text2 + text3&#x27;, &#x27;text1 + text2 + text3&#x27;]
+3791	    outputs = [&#x27;output1&#x27;,&#x27;output2&#x27;,&#x27;output3&#x27;]
+3792	
+3793	    @classmethod
+3794	    def generate_combinations(cls, texts, outputs):
+3795	        operations = []
+3796	        for output1, output2, output3 in product(texts, repeat=len(outputs)):
+3797	            operation = f&quot;{output1} to {outputs[0]}, {output2} to {outputs[1]}, {output3} to {outputs[2]}&quot;
+3798	            operations.append(operation)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/mikey_nodes/mikey_nodes.py" target="_blank">/mikey_nodes/mikey_nodes.py</a><br>
+    <b>Line number: </b>3841<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+3825	        if use_seed == &#x27;true&#x27; and len(self.operations) &gt; 0:
+3826	            offset = seed % len(self.operations)
+3827	            operation = self.operations[offset]
+3828	
+3829	        # Parsing the operation string
+3830	        ops = operation.split(&quot;, &quot;)
+3831	        output_texts = [op.split(&quot; to &quot;)[0] for op in ops]
+3832	
+3833	        # Generate the outputs
+3834	        outputs = []
+3835	
+3836	        for output_text in output_texts:
+3837	            # Split the string by &#x27;+&#x27; to identify individual text components
+3838	            components = output_text.split(&quot; + &quot;)
+3839	
+3840	            # Generate the final string for each output
+3841	            final_output = delimiter.join(eval(comp, {}, text_dict) for comp in components)
+3842	
+3843	            outputs.append(final_output)
+3844	
+3845	        return tuple(outputs)
+3846	
+3847	class Text2InputOr3rdOption:
+3848	    @classmethod
+3849	    def INPUT_TYPES(s):
+3850	        return {&#x27;required&#x27;: {&#x27;text_a&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text A&#x27;}),
+3851	                             &#x27;text_b&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text B&#x27;}),
+3852	                             &#x27;text_c&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: True, &#x27;default&#x27;: &#x27;Text C&#x27;}),
+3853	                             &#x27;use_text_c_for_both&#x27;: ([&#x27;true&#x27;,&#x27;false&#x27;], {&#x27;default&#x27;: &#x27;false&#x27;}),},
+3854	                &quot;hidden&quot;: {&quot;extra_pnginfo&quot;: &quot;EXTRA_PNGINFO&quot;, &quot;prompt&quot;: &quot;PROMPT&quot;}}
+3855	
+3856	    RETURN_TYPES = (&#x27;STRING&#x27;,&#x27;STRING&#x27;,)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/mikey_nodes/mikey_nodes.py" target="_blank">/mikey_nodes/mikey_nodes.py</a><br>
+    <b>Line number: </b>4675<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+4659	    # then returns the result as the output
+4660	    @classmethod
+4661	    def INPUT_TYPES(cls):
+4662	        return {&#x27;required&#x27;: {&#x27;a&#x27;: (&#x27;FLOAT&#x27;, {&#x27;default&#x27;: 0.0}),
+4663	                             &#x27;b&#x27;: (&#x27;FLOAT&#x27;, {&#x27;default&#x27;: 0.0}),
+4664	                             &#x27;formula&#x27;: (&#x27;STRING&#x27;, {&#x27;multiline&#x27;: False, &#x27;default&#x27;: &#x27;a + b&#x27;})}}
+4665	
+4666	    RETURN_TYPES = (&#x27;FLOAT&#x27;,)
+4667	    RETURN_NAMES = (&#x27;result_float&#x27;,&#x27;result_int&#x27;,&#x27;result_str&#x27;)
+4668	    FUNCTION = &#x27;process&#x27;
+4669	    CATEGORY = &#x27;Mikey/Math&#x27;
+4670	
+4671	    def process(self, a, b, formula):
+4672	        # eval formula
+4673	        formula = formula.replace(&#x27;a&#x27;, str(a))
+4674	        formula = formula.replace(&#x27;b&#x27;, str(b))
+4675	        result = eval(formula)
+4676	        return (result, int(result), str(result))
+4677	
+4678	class ImageOverlay:
+4679	    # overlay foreground image on top of background image
+4680	    # automatically fill or crop foreground image to match background image size
+4681	    # automatically resize foreground image to match background image size
+4682	    @classmethod
+4683	    def INPUT_TYPES(cls):
+4684	        return {&#x27;required&#x27;: {&#x27;background_image&#x27;: (&#x27;IMAGE&#x27;, {&#x27;default&#x27;: None}),
+4685	                             &#x27;foreground_image&#x27;: (&#x27;IMAGE&#x27;, {&#x27;default&#x27;: None}),
+4686	                             &#x27;opacity&#x27;: (&#x27;FLOAT&#x27;, {&#x27;default&#x27;: 1.0, &#x27;min&#x27;: 0.0, &#x27;max&#x27;: 1.0, &#x27;step&#x27;: 0.01})}}
+4687	
+4688	    RETURN_TYPES = (&#x27;IMAGE&#x27;,)
+4689	    RETURN_NAMES = (&#x27;result_img&#x27;,)
+4690	    FUNCTION = &#x27;overlay&#x27;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

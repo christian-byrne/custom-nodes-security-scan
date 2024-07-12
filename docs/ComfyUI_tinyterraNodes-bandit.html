@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">5247</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/__init__.py" target="_blank">/ComfyUI_tinyterraNodes/__init__.py</a><br>
+    <b>Line number: </b>5<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	from .ttNpy.tinyterraNodes import TTN_VERSIONS
+2	from .ttNpy import ttNserver # Do Not Remove
+3	import configparser
+4	import folder_paths
+5	import subprocess
+6	import shutil
+7	import os
+8	
+9	# ------- CONFIG -------- #
+10	cwd_path = os.path.dirname(os.path.realpath(__file__))
+11	js_path = os.path.join(cwd_path, &quot;js&quot;)
+12	comfy_path = folder_paths.base_path
+13	
+14	config_path = os.path.join(cwd_path, &quot;config.ini&quot;)
+15	
+16	optionValues = {
+17	        &quot;auto_update&quot;: (&#x27;true&#x27;, &#x27;false&#x27;),
+18	        &quot;enable_embed_autocomplete&quot;: (&#x27;true&#x27;, &#x27;false&#x27;),
+19	        &quot;enable_interface&quot;: (&#x27;true&#x27;, &#x27;false&#x27;),
+20	        &quot;enable_fullscreen&quot;: (&#x27;true&#x27;, &#x27;false&#x27;),
+21	        &quot;enable_dynamic_widgets&quot;: (&#x27;true&#x27;, &#x27;false&#x27;),
+22	        &quot;enable_dev_nodes&quot;: (&#x27;true&#x27;, &#x27;false&#x27;),
+23	    }
+24	
+25	def get_config():
+26	    &quot;&quot;&quot;Return a configparser.ConfigParser object.&quot;&quot;&quot;
+27	    config = configparser.ConfigParser()
+28	    config.read(config_path)
+29	    return config
+30	
+31	def update_config():
+32	    #section &gt; option &gt; value
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/__init__.py" target="_blank">/ComfyUI_tinyterraNodes/__init__.py</a><br>
+    <b>Line number: </b>115<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+99	        print(f&#x27;\033[92m[{section} Config]\033[91m {option} - \&#x27;{value}\&#x27; not in {optionValues[option]}, reverting to default.\033[0m&#x27;)
+100	        config_write(section, option, default)
+101	        return default
+102	    else:
+103	        return value
+104	
+105	# Create a config file if not exists
+106	if not os.path.isfile(config_path):
+107	    with open(config_path, &#x27;w&#x27;) as f:
+108	        pass
+109	
+110	update_config()
+111	
+112	# Autoupdate if True
+113	if config_value_validator(&quot;ttNodes&quot;, &quot;auto_update&quot;, &#x27;false&#x27;) == &#x27;true&#x27;:
+114	    try:
+115	        with subprocess.Popen([&quot;git&quot;, &quot;pull&quot;], cwd=cwd_path, stdout=subprocess.PIPE) as p:
+116	            p.wait()
+117	            result = p.communicate()[0].decode()
+118	            if result != &quot;Already up to date.\n&quot;:
+119	                print(&quot;\033[92m[t ttNodes Updated t]\033[0m&quot;)
+120	    except:
+121	        pass
+122	
+123	# --------- WEB ---------- #
+124	# Remove old web JS folder
+125	web_extension_path = os.path.join(comfy_path, &quot;web&quot;, &quot;extensions&quot;, &quot;tinyterraNodes&quot;)
+126	
+127	if os.path.exists(web_extension_path):
+128	    try:
+129	        shutil.rmtree(web_extension_path)
+130	    except:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/__init__.py" target="_blank">/ComfyUI_tinyterraNodes/__init__.py</a><br>
+    <b>Line number: </b>115<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+99	        print(f&#x27;\033[92m[{section} Config]\033[91m {option} - \&#x27;{value}\&#x27; not in {optionValues[option]}, reverting to default.\033[0m&#x27;)
+100	        config_write(section, option, default)
+101	        return default
+102	    else:
+103	        return value
+104	
+105	# Create a config file if not exists
+106	if not os.path.isfile(config_path):
+107	    with open(config_path, &#x27;w&#x27;) as f:
+108	        pass
+109	
+110	update_config()
+111	
+112	# Autoupdate if True
+113	if config_value_validator(&quot;ttNodes&quot;, &quot;auto_update&quot;, &#x27;false&#x27;) == &#x27;true&#x27;:
+114	    try:
+115	        with subprocess.Popen([&quot;git&quot;, &quot;pull&quot;], cwd=cwd_path, stdout=subprocess.PIPE) as p:
+116	            p.wait()
+117	            result = p.communicate()[0].decode()
+118	            if result != &quot;Already up to date.\n&quot;:
+119	                print(&quot;\033[92m[t ttNodes Updated t]\033[0m&quot;)
+120	    except:
+121	        pass
+122	
+123	# --------- WEB ---------- #
+124	# Remove old web JS folder
+125	web_extension_path = os.path.join(comfy_path, &quot;web&quot;, &quot;extensions&quot;, &quot;tinyterraNodes&quot;)
+126	
+127	if os.path.exists(web_extension_path):
+128	    try:
+129	        shutil.rmtree(web_extension_path)
+130	    except:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/__init__.py" target="_blank">/ComfyUI_tinyterraNodes/__init__.py</a><br>
+    <b>Line number: </b>120<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+104	
+105	# Create a config file if not exists
+106	if not os.path.isfile(config_path):
+107	    with open(config_path, &#x27;w&#x27;) as f:
+108	        pass
+109	
+110	update_config()
+111	
+112	# Autoupdate if True
+113	if config_value_validator(&quot;ttNodes&quot;, &quot;auto_update&quot;, &#x27;false&#x27;) == &#x27;true&#x27;:
+114	    try:
+115	        with subprocess.Popen([&quot;git&quot;, &quot;pull&quot;], cwd=cwd_path, stdout=subprocess.PIPE) as p:
+116	            p.wait()
+117	            result = p.communicate()[0].decode()
+118	            if result != &quot;Already up to date.\n&quot;:
+119	                print(&quot;\033[92m[t ttNodes Updated t]\033[0m&quot;)
+120	    except:
+121	        pass
+122	
+123	# --------- WEB ---------- #
+124	# Remove old web JS folder
+125	web_extension_path = os.path.join(comfy_path, &quot;web&quot;, &quot;extensions&quot;, &quot;tinyterraNodes&quot;)
+126	
+127	if os.path.exists(web_extension_path):
+128	    try:
+129	        shutil.rmtree(web_extension_path)
+130	    except:
+131	        print(&quot;\033[92m[ttNodes] \033[0;31mFailed to remove old web extension.\033[0m&quot;)
+132	
+133	js_files = {
+134	    &quot;interface&quot;: &quot;enable_interface&quot;,
+135	    &quot;fullscreen&quot;: &quot;enable_fullscreen&quot;,
+136	    &quot;embed_autocomplete&quot;: &quot;enable_embed_autocomplete&quot;,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/ttNpy/tinyterraNodes.py" target="_blank">/ComfyUI_tinyterraNodes/ttNpy/tinyterraNodes.py</a><br>
+    <b>Line number: </b>78<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+62	
+63	class ttNloader:
+64	    def __init__(self):
+65	        self.loraDict = {lora.split(&#x27;\\&#x27;)[-1]: lora for lora in folder_paths.get_filename_list(&quot;loras&quot;)}
+66	        self.loader_cache = {}
+67	
+68	    @staticmethod
+69	    def nsp_parse(text, seed=0, noodle_key=&#x27;__&#x27;, nspterminology=None, pantry_path=None, title=None, my_unique_id=None):
+70	        if &quot;__&quot; not in text:
+71	            return text
+72	        
+73	        if nspterminology is None:
+74	            # Fetch the NSP Pantry
+75	            if pantry_path is None:
+76	                pantry_path = os.path.join(ttNpaths.tinyterraNodes, &#x27;nsp_pantry.json&#x27;)
+77	            if not os.path.exists(pantry_path):
+78	                response = urlopen(&#x27;https://raw.githubusercontent.com/WASasquatch/noodle-soup-prompts/main/nsp_pantry.json&#x27;)
+79	                tmp_pantry = json.loads(response.read())
+80	                # Dump JSON locally
+81	                pantry_serialized = json.dumps(tmp_pantry, indent=4)
+82	                with open(pantry_path, &quot;w&quot;) as f:
+83	                    f.write(pantry_serialized)
+84	                del response, tmp_pantry
+85	
+86	            # Load local pantry
+87	            with open(pantry_path, &#x27;r&#x27;) as f:
+88	                nspterminology = json.load(f)
+89	
+90	        if seed &gt; 0 or seed &lt; 0:
+91	            random.seed(seed)
+92	
+93	        # Parse Text
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/ttNpy/tinyterraNodes.py" target="_blank">/ComfyUI_tinyterraNodes/ttNpy/tinyterraNodes.py</a><br>
+    <b>Line number: </b>548<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+532	        self.executor.reset()
+533	        self.executor = None
+534	        self.clear_caches()
+535	
+536	    def clear_caches(self):
+537	        self.latent_list = []
+538	        self.image_list = []
+539	        self.ui_list = []
+540	        self.num = 0
+541	
+542	    @staticmethod
+543	    def get_font(font_size):
+544	        font = None
+545	        if os.path.exists(ttNpaths.font_path):
+546	            try:
+547	                font = ImageFont.truetype(str(Path(ttNpaths.font_path)), font_size)
+548	            except:
+549	                pass
+550	            
+551	        if font is None:
+552	            font = ImageFont.load_default(font_size)
+553	        
+554	        return font
+555	    
+556	    @staticmethod
+557	    def rearrange_tensors(latent, num_cols, num_rows):
+558	        new_latent = []
+559	        for i in range(num_rows):
+560	            for j in range(num_cols):
+561	                index = j * num_rows + i
+562	                new_latent.append(latent[index])
+563	        return new_latent
+564	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/ttNpy/ttNlegacyNodes.py" target="_blank">/ComfyUI_tinyterraNodes/ttNpy/ttNlegacyNodes.py</a><br>
+    <b>Line number: </b>40<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+24	
+25	
+26	class ttNloader:
+27	    def __init__(self):
+28	        self.loraDict = {lora.split(&#x27;\\&#x27;)[-1]: lora for lora in folder_paths.get_filename_list(&quot;loras&quot;)}
+29	
+30	    @staticmethod
+31	    def nsp_parse(text, seed=0, noodle_key=&#x27;__&#x27;, nspterminology=None, pantry_path=None, title=None, my_unique_id=None):
+32	        if &quot;__&quot; not in text:
+33	            return text
+34	        
+35	        if nspterminology is None:
+36	            # Fetch the NSP Pantry
+37	            if pantry_path is None:
+38	                pantry_path = os.path.join(ttNpaths.tinyterraNodes, &#x27;nsp_pantry.json&#x27;)
+39	            if not os.path.exists(pantry_path):
+40	                response = urlopen(&#x27;https://raw.githubusercontent.com/WASasquatch/noodle-soup-prompts/main/nsp_pantry.json&#x27;)
+41	                tmp_pantry = json.loads(response.read())
+42	                # Dump JSON locally
+43	                pantry_serialized = json.dumps(tmp_pantry, indent=4)
+44	                with open(pantry_path, &quot;w&quot;) as f:
+45	                    f.write(pantry_serialized)
+46	                del response, tmp_pantry
+47	
+48	            # Load local pantry
+49	            with open(pantry_path, &#x27;r&#x27;) as f:
+50	                nspterminology = json.load(f)
+51	
+52	        if seed &gt; 0 or seed &lt; 0:
+53	            random.seed(seed)
+54	
+55	        # Parse Text
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/ttNpy/ttNserver.py" target="_blank">/ComfyUI_tinyterraNodes/ttNpy/ttNserver.py</a><br>
+    <b>Line number: </b>15<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+1	import os
+2	import sys
+3	
+4	from aiohttp import web
+5	
+6	import folder_paths
+7	from server import PromptServer
+8	
+9	routes = PromptServer.instance.routes
+10	
+11	@routes.get(&quot;/ttN/reboot&quot;)
+12	def restart(self):
+13	    try:
+14	        sys.stdout.close_log()
+15	    except Exception as e:
+16	        pass
+17	
+18	    print(f&quot;\nRestarting...\n\n&quot;)
+19	    if sys.platform.startswith(&#x27;win32&#x27;):
+20	        return os.execv(sys.executable, [&#x27;&quot;&#x27; + sys.executable + &#x27;&quot;&#x27;, &#x27;&quot;&#x27; + sys.argv[0] + &#x27;&quot;&#x27;] + sys.argv[1:])
+21	    else:
+22	        return os.execv(sys.executable, [sys.executable] + sys.argv)
+23	
+24	@routes.get(&quot;/ttN/models&quot;)
+25	def get_models(self):
+26	    ckpts = folder_paths.get_filename_list(&quot;checkpoints&quot;)
+27	    return web.json_response(list(map(lambda a: os.path.splitext(a)[0], ckpts)))
+28	
+29	@routes.get(&quot;/ttN/loras&quot;)
+30	def get_loras(self):
+31	    loras = folder_paths.get_filename_list(&quot;loras&quot;)
+32	    return web.json_response(loras)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/ttNpy/ttNserver.py" target="_blank">/ComfyUI_tinyterraNodes/ttNpy/ttNserver.py</a><br>
+    <b>Line number: </b>20<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+4	from aiohttp import web
+5	
+6	import folder_paths
+7	from server import PromptServer
+8	
+9	routes = PromptServer.instance.routes
+10	
+11	@routes.get(&quot;/ttN/reboot&quot;)
+12	def restart(self):
+13	    try:
+14	        sys.stdout.close_log()
+15	    except Exception as e:
+16	        pass
+17	
+18	    print(f&quot;\nRestarting...\n\n&quot;)
+19	    if sys.platform.startswith(&#x27;win32&#x27;):
+20	        return os.execv(sys.executable, [&#x27;&quot;&#x27; + sys.executable + &#x27;&quot;&#x27;, &#x27;&quot;&#x27; + sys.argv[0] + &#x27;&quot;&#x27;] + sys.argv[1:])
+21	    else:
+22	        return os.execv(sys.executable, [sys.executable] + sys.argv)
+23	
+24	@routes.get(&quot;/ttN/models&quot;)
+25	def get_models(self):
+26	    ckpts = folder_paths.get_filename_list(&quot;checkpoints&quot;)
+27	    return web.json_response(list(map(lambda a: os.path.splitext(a)[0], ckpts)))
+28	
+29	@routes.get(&quot;/ttN/loras&quot;)
+30	def get_loras(self):
+31	    loras = folder_paths.get_filename_list(&quot;loras&quot;)
+32	    return web.json_response(loras)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI_tinyterraNodes/ttNpy/ttNserver.py" target="_blank">/ComfyUI_tinyterraNodes/ttNpy/ttNserver.py</a><br>
+    <b>Line number: </b>22<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+6	import folder_paths
+7	from server import PromptServer
+8	
+9	routes = PromptServer.instance.routes
+10	
+11	@routes.get(&quot;/ttN/reboot&quot;)
+12	def restart(self):
+13	    try:
+14	        sys.stdout.close_log()
+15	    except Exception as e:
+16	        pass
+17	
+18	    print(f&quot;\nRestarting...\n\n&quot;)
+19	    if sys.platform.startswith(&#x27;win32&#x27;):
+20	        return os.execv(sys.executable, [&#x27;&quot;&#x27; + sys.executable + &#x27;&quot;&#x27;, &#x27;&quot;&#x27; + sys.argv[0] + &#x27;&quot;&#x27;] + sys.argv[1:])
+21	    else:
+22	        return os.execv(sys.executable, [sys.executable] + sys.argv)
+23	
+24	@routes.get(&quot;/ttN/models&quot;)
+25	def get_models(self):
+26	    ckpts = folder_paths.get_filename_list(&quot;checkpoints&quot;)
+27	    return web.json_response(list(map(lambda a: os.path.splitext(a)[0], ckpts)))
+28	
+29	@routes.get(&quot;/ttN/loras&quot;)
+30	def get_loras(self):
+31	    loras = folder_paths.get_filename_list(&quot;loras&quot;)
+32	    return web.json_response(loras)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

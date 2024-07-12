@@ -1,5 +1,17 @@
 .dir
+**/**/__pycache__/
 snyk-workflow.yaml
 pylint.yaml
 _site/
 .sass-cache/
+references.md
+
+node_modules/
+yara.log
+
+_todo.md
+_todo*.md
+
+**/**/results.log
+
+mass-clone.sh

@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">11141</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/ffmpy-0.3.2/build/lib/ffmpy.py" target="_blank">/comfyui-sound-lab/ffmpy-0.3.2/build/lib/ffmpy.py</a><br>
+    <b>Line number: </b>3<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import errno
+2	import shlex
+3	import subprocess
+4	
+5	__version__ = &quot;0.3.2&quot;
+6	
+7	
+8	class FFmpeg(object):
+9	    &quot;&quot;&quot;Wrapper for various `FFmpeg &lt;https://www.ffmpeg.org/&gt;`_ related applications (ffmpeg,
+10	    ffprobe).
+11	    &quot;&quot;&quot;
+12	
+13	    def __init__(
+14	        self, executable=&quot;ffmpeg&quot;, global_options=None, inputs=None, outputs=None
+15	    ):
+16	        &quot;&quot;&quot;Initialize FFmpeg command line wrapper.
+17	
+18	        Compiles FFmpeg command line from passed arguments (executable path, options, inputs and
+19	        outputs). ``inputs`` and ``outputs`` are dictionares containing inputs/outputs as keys and
+20	        their respective options as values. One dictionary value (set of options) must be either a
+21	        single space separated string, or a list or strings without spaces (i.e. each part of the
+22	        option is a separate item of the list, the result of calling ``split()`` on the options
+23	        string). If the value is a list, it cannot be mixed, i.e. cannot contain items with spaces.
+24	        An exception are complex FFmpeg command lines that contain quotes: the quoted part must be
+25	        one string, even if it contains spaces (see *Examples* for more info).
+26	        For more info about FFmpeg command line format see `here
+27	        &lt;https://ffmpeg.org/ffmpeg.html#Synopsis&gt;`_.
+28	
+29	        :param str executable: path to ffmpeg executable; by default the ``ffmpeg`` command will be
+30	            searched for in the ``PATH``, but can be overridden with an absolute path to ``ffmpeg``
+31	            executable
+32	        :param iterable global_options: global options passed to ``ffmpeg`` executable (e.g.
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/ffmpy-0.3.2/build/lib/ffmpy.py" target="_blank">/comfyui-sound-lab/ffmpy-0.3.2/build/lib/ffmpy.py</a><br>
+    <b>Line number: </b>95<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+79	
+80	        :param str input_data: input data for FFmpeg to deal with (audio, video etc.) as bytes (e.g.
+81	            the result of reading a file in binary mode)
+82	        :param stdout: redirect FFmpeg ``stdout`` there (default is `None` which means no
+83	            redirection)
+84	        :param stderr: redirect FFmpeg ``stderr`` there (default is `None` which means no
+85	            redirection)
+86	        :param env: custom environment for ffmpeg process
+87	        :param kwargs: any other keyword arguments to be forwarded to `subprocess.Popen
+88	            &lt;https://docs.python.org/3/library/subprocess.html#subprocess.Popen&gt;`_
+89	        :return: a 2-tuple containing ``stdout`` and ``stderr`` of the process
+90	        :rtype: tuple
+91	        :raise: `FFRuntimeError` in case FFmpeg command exits with a non-zero code;
+92	            `FFExecutableNotFoundError` in case the executable path passed was not valid
+93	        &quot;&quot;&quot;
+94	        try:
+95	            self.process = subprocess.Popen(
+96	                self._cmd,
+97	                stdin=subprocess.PIPE,
+98	                stdout=stdout,
+99	                stderr=stderr,
+100	                env=env,
+101	                **kwargs
+102	            )
+103	        except OSError as e:
+104	            if e.errno == errno.ENOENT:
+105	                raise FFExecutableNotFoundError(
+106	                    &quot;Executable &#x27;{0}&#x27; not found&quot;.format(self.executable)
+107	                )
+108	            else:
+109	                raise
+110	
+111	        out = self.process.communicate(input=input_data)
+112	        if self.process.returncode != 0:
+113	            raise FFRuntimeError(self.cmd, self.process.returncode, out[0], out[1])
+114	
+115	        return out
+116	
+117	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/ffmpy-0.3.2/ffmpy.py" target="_blank">/comfyui-sound-lab/ffmpy-0.3.2/ffmpy.py</a><br>
+    <b>Line number: </b>3<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import errno
+2	import shlex
+3	import subprocess
+4	
+5	__version__ = &quot;0.3.2&quot;
+6	
+7	
+8	class FFmpeg(object):
+9	    &quot;&quot;&quot;Wrapper for various `FFmpeg &lt;https://www.ffmpeg.org/&gt;`_ related applications (ffmpeg,
+10	    ffprobe).
+11	    &quot;&quot;&quot;
+12	
+13	    def __init__(
+14	        self, executable=&quot;ffmpeg&quot;, global_options=None, inputs=None, outputs=None
+15	    ):
+16	        &quot;&quot;&quot;Initialize FFmpeg command line wrapper.
+17	
+18	        Compiles FFmpeg command line from passed arguments (executable path, options, inputs and
+19	        outputs). ``inputs`` and ``outputs`` are dictionares containing inputs/outputs as keys and
+20	        their respective options as values. One dictionary value (set of options) must be either a
+21	        single space separated string, or a list or strings without spaces (i.e. each part of the
+22	        option is a separate item of the list, the result of calling ``split()`` on the options
+23	        string). If the value is a list, it cannot be mixed, i.e. cannot contain items with spaces.
+24	        An exception are complex FFmpeg command lines that contain quotes: the quoted part must be
+25	        one string, even if it contains spaces (see *Examples* for more info).
+26	        For more info about FFmpeg command line format see `here
+27	        &lt;https://ffmpeg.org/ffmpeg.html#Synopsis&gt;`_.
+28	
+29	        :param str executable: path to ffmpeg executable; by default the ``ffmpeg`` command will be
+30	            searched for in the ``PATH``, but can be overridden with an absolute path to ``ffmpeg``
+31	            executable
+32	        :param iterable global_options: global options passed to ``ffmpeg`` executable (e.g.
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/ffmpy-0.3.2/ffmpy.py" target="_blank">/comfyui-sound-lab/ffmpy-0.3.2/ffmpy.py</a><br>
+    <b>Line number: </b>95<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+79	
+80	        :param str input_data: input data for FFmpeg to deal with (audio, video etc.) as bytes (e.g.
+81	            the result of reading a file in binary mode)
+82	        :param stdout: redirect FFmpeg ``stdout`` there (default is `None` which means no
+83	            redirection)
+84	        :param stderr: redirect FFmpeg ``stderr`` there (default is `None` which means no
+85	            redirection)
+86	        :param env: custom environment for ffmpeg process
+87	        :param kwargs: any other keyword arguments to be forwarded to `subprocess.Popen
+88	            &lt;https://docs.python.org/3/library/subprocess.html#subprocess.Popen&gt;`_
+89	        :return: a 2-tuple containing ``stdout`` and ``stderr`` of the process
+90	        :rtype: tuple
+91	        :raise: `FFRuntimeError` in case FFmpeg command exits with a non-zero code;
+92	            `FFExecutableNotFoundError` in case the executable path passed was not valid
+93	        &quot;&quot;&quot;
+94	        try:
+95	            self.process = subprocess.Popen(
+96	                self._cmd,
+97	                stdin=subprocess.PIPE,
+98	                stdout=stdout,
+99	                stderr=stderr,
+100	                env=env,
+101	                **kwargs
+102	            )
+103	        except OSError as e:
+104	            if e.errno == errno.ENOENT:
+105	                raise FFExecutableNotFoundError(
+106	                    &quot;Executable &#x27;{0}&#x27; not found&quot;.format(self.executable)
+107	                )
+108	            else:
+109	                raise
+110	
+111	        out = self.process.communicate(input=input_data)
+112	        if self.process.returncode != 0:
+113	            raise FFRuntimeError(self.cmd, self.process.returncode, out[0], out[1])
+114	
+115	        return out
+116	
+117	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py" target="_blank">/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py</a><br>
+    <b>Line number: </b>8<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import importlib
+2	import numpy as np
+3	import io
+4	import os
+5	import posixpath
+6	import random
+7	import re
+8	import subprocess
+9	import time
+10	import torch
+11	import torchaudio
+12	import webdataset as wds
+13	
+14	from aeiou.core import is_silence
+15	from os import path
+16	from pedalboard.io import AudioFile
+17	from torchaudio import transforms as T
+18	from typing import Optional, Callable, List
+19	
+20	from .utils import Stereo, Mono, PhaseFlipper, PadCrop_Normalized_T
+21	
+22	AUDIO_KEYS = (&quot;flac&quot;, &quot;wav&quot;, &quot;mp3&quot;, &quot;m4a&quot;, &quot;ogg&quot;, &quot;opus&quot;)
+23	
+24	# fast_scandir implementation by Scott Hawley originally in https://github.com/zqevans/audio-diffusion/blob/main/dataset/dataset.py
+25	
+26	def fast_scandir(
+27	    dir:str,  # top-level directory at which to begin scanning
+28	    ext:list,  # list of allowed file extensions,
+29	    #max_size = 1 * 1000 * 1000 * 1000 # Only files &lt; 1 GB
+30	    ):
+31	    &quot;very fast `glob` alternative. from https://stackoverflow.com/a/59803793/4259243&quot;
+32	    subfolders, files = [], []
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py" target="_blank">/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py</a><br>
+    <b>Line number: </b>45<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+29	    #max_size = 1 * 1000 * 1000 * 1000 # Only files &lt; 1 GB
+30	    ):
+31	    &quot;very fast `glob` alternative. from https://stackoverflow.com/a/59803793/4259243&quot;
+32	    subfolders, files = [], []
+33	    ext = [&#x27;.&#x27;+x if x[0]!=&#x27;.&#x27; else x for x in ext]  # add starting period to extensions if needed
+34	    try: # hope to avoid &#x27;permission denied&#x27; by this try
+35	        for f in os.scandir(dir):
+36	            try: # &#x27;hope to avoid too many levels of symbolic links&#x27; error
+37	                if f.is_dir():
+38	                    subfolders.append(f.path)
+39	                elif f.is_file():
+40	                    file_ext = os.path.splitext(f.name)[1].lower()
+41	                    is_hidden = os.path.basename(f.path).startswith(&quot;.&quot;)
+42	
+43	                    if file_ext in ext and not is_hidden:
+44	                        files.append(f.path)
+45	            except:
+46	                pass 
+47	    except:
+48	        pass
+49	
+50	    for dir in list(subfolders):
+51	        sf, f = fast_scandir(dir, ext)
+52	        subfolders.extend(sf)
+53	        files.extend(f)
+54	    return subfolders, files
+55	
+56	def keyword_scandir(
+57	    dir: str,  # top-level directory at which to begin scanning
+58	    ext: list,  # list of allowed file extensions
+59	    keywords: list,  # list of keywords to search for in the file name
+60	):
+61	    &quot;very fast `glob` alternative. from https://stackoverflow.com/a/59803793/4259243&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py" target="_blank">/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py</a><br>
+    <b>Line number: </b>47<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+31	    &quot;very fast `glob` alternative. from https://stackoverflow.com/a/59803793/4259243&quot;
+32	    subfolders, files = [], []
+33	    ext = [&#x27;.&#x27;+x if x[0]!=&#x27;.&#x27; else x for x in ext]  # add starting period to extensions if needed
+34	    try: # hope to avoid &#x27;permission denied&#x27; by this try
+35	        for f in os.scandir(dir):
+36	            try: # &#x27;hope to avoid too many levels of symbolic links&#x27; error
+37	                if f.is_dir():
+38	                    subfolders.append(f.path)
+39	                elif f.is_file():
+40	                    file_ext = os.path.splitext(f.name)[1].lower()
+41	                    is_hidden = os.path.basename(f.path).startswith(&quot;.&quot;)
+42	
+43	                    if file_ext in ext and not is_hidden:
+44	                        files.append(f.path)
+45	            except:
+46	                pass 
+47	    except:
+48	        pass
+49	
+50	    for dir in list(subfolders):
+51	        sf, f = fast_scandir(dir, ext)
+52	        subfolders.extend(sf)
+53	        files.extend(f)
+54	    return subfolders, files
+55	
+56	def keyword_scandir(
+57	    dir: str,  # top-level directory at which to begin scanning
+58	    ext: list,  # list of allowed file extensions
+59	    keywords: list,  # list of keywords to search for in the file name
+60	):
+61	    &quot;very fast `glob` alternative. from https://stackoverflow.com/a/59803793/4259243&quot;
+62	    subfolders, files = [], []
+63	    # make keywords case insensitive
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py" target="_blank">/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py</a><br>
+    <b>Line number: </b>83<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+67	    banned_words = [&quot;paxheader&quot;, &quot;__macosx&quot;]
+68	    try:  # hope to avoid &#x27;permission denied&#x27; by this try
+69	        for f in os.scandir(dir):
+70	            try:  # &#x27;hope to avoid too many levels of symbolic links&#x27; error
+71	                if f.is_dir():
+72	                    subfolders.append(f.path)
+73	                elif f.is_file():
+74	                    is_hidden = f.name.split(&quot;/&quot;)[-1][0] == &#x27;.&#x27;
+75	                    has_ext = os.path.splitext(f.name)[1].lower() in ext
+76	                    name_lower = f.name.lower()
+77	                    has_keyword = any(
+78	                        [keyword in name_lower for keyword in keywords])
+79	                    has_banned = any(
+80	                        [banned_word in name_lower for banned_word in banned_words])
+81	                    if has_ext and has_keyword and not has_banned and not is_hidden and not os.path.basename(f.path).startswith(&quot;._&quot;):
+82	                        files.append(f.path)
+83	            except:
+84	                pass
+85	    except:
+86	        pass
+87	
+88	    for dir in list(subfolders):
+89	        sf, f = keyword_scandir(dir, ext, keywords)
+90	        subfolders.extend(sf)
+91	        files.extend(f)
+92	    return subfolders, files
+93	
+94	def get_audio_filenames(
+95	    paths: list,  # directories in which to search
+96	    keywords=None,
+97	    exts=[&#x27;.wav&#x27;, &#x27;.mp3&#x27;, &#x27;.flac&#x27;, &#x27;.ogg&#x27;, &#x27;.aif&#x27;, &#x27;.opus&#x27;]
+98	):
+99	    &quot;recursively get a list of audio filenames&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py" target="_blank">/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py</a><br>
+    <b>Line number: </b>85<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+69	        for f in os.scandir(dir):
+70	            try:  # &#x27;hope to avoid too many levels of symbolic links&#x27; error
+71	                if f.is_dir():
+72	                    subfolders.append(f.path)
+73	                elif f.is_file():
+74	                    is_hidden = f.name.split(&quot;/&quot;)[-1][0] == &#x27;.&#x27;
+75	                    has_ext = os.path.splitext(f.name)[1].lower() in ext
+76	                    name_lower = f.name.lower()
+77	                    has_keyword = any(
+78	                        [keyword in name_lower for keyword in keywords])
+79	                    has_banned = any(
+80	                        [banned_word in name_lower for banned_word in banned_words])
+81	                    if has_ext and has_keyword and not has_banned and not is_hidden and not os.path.basename(f.path).startswith(&quot;._&quot;):
+82	                        files.append(f.path)
+83	            except:
+84	                pass
+85	    except:
+86	        pass
+87	
+88	    for dir in list(subfolders):
+89	        sf, f = keyword_scandir(dir, ext, keywords)
+90	        subfolders.extend(sf)
+91	        files.extend(f)
+92	    return subfolders, files
+93	
+94	def get_audio_filenames(
+95	    paths: list,  # directories in which to search
+96	    keywords=None,
+97	    exts=[&#x27;.wav&#x27;, &#x27;.mp3&#x27;, &#x27;.flac&#x27;, &#x27;.ogg&#x27;, &#x27;.aif&#x27;, &#x27;.opus&#x27;]
+98	):
+99	    &quot;recursively get a list of audio filenames&quot;
+100	    filenames = []
+101	    if type(paths) is str:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py" target="_blank">/comfyui-sound-lab/nodes/stable_audio_tools/data/dataset.py</a><br>
+    <b>Line number: </b>286<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+270	    # Ensure dataset_path ends with a trailing slash
+271	    if dataset_path != &#x27;&#x27; and not dataset_path.endswith(&#x27;/&#x27;):
+272	        dataset_path += &#x27;/&#x27;
+273	    # Use posixpath to construct the S3 URL path
+274	    bucket_path = posixpath.join(s3_url_prefix or &#x27;&#x27;, dataset_path)
+275	    # Construct the `aws s3 ls` command
+276	    cmd = [&#x27;aws&#x27;, &#x27;s3&#x27;, &#x27;ls&#x27;, bucket_path]
+277	
+278	    if profile is not None:
+279	        cmd.extend([&#x27;--profile&#x27;, profile])
+280	
+281	    if recursive:
+282	        # Add the --recursive flag if requested
+283	        cmd.append(&#x27;--recursive&#x27;)
+284	    
+285	    # Run the `aws s3 ls` command and capture the output
+286	    run_ls = subprocess.run(cmd, capture_output=True, check=True)
+287	    # Split the output into lines and strip whitespace from each line
+288	    contents = run_ls.stdout.decode(&#x27;utf-8&#x27;).split(&#x27;\n&#x27;)
+289	    contents = [x.strip() for x in contents if x]
+290	    # Remove the timestamp from lines that begin with a timestamp
+291	    contents = [re.sub(r&#x27;^\S+\s+\S+\s+\d+\s+&#x27;, &#x27;&#x27;, x)
+292	                if re.match(r&#x27;^\S+\s+\S+\s+\d+\s+&#x27;, x) else x for x in contents]
+293	    # Construct a full S3 path for each file in the contents list
+294	    contents = [posixpath.join(s3_url_prefix or &#x27;&#x27;, x)
+295	                for x in contents if not x.endswith(&#x27;/&#x27;)]
+296	    # Apply the filter, if specified
+297	    if filter:
+298	        contents = [x for x in contents if filter in x]
+299	    # Remove redundant directory names in the S3 URL
+300	    if recursive:
+301	        # Get the main directory name from the S3 URL
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

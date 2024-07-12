@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">1782</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__build__.py" target="_blank">/rgthree-comfy/__build__.py</a><br>
+    <b>Line number: </b>3<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	#!/usr/bin/env python3
+2	
+3	import subprocess
+4	import os
+5	from shutil import rmtree, copytree, ignore_patterns
+6	from glob import glob
+7	import time
+8	import re
+9	
+10	from py.log import COLORS
+11	from py.config import RGTHREE_CONFIG
+12	
+13	start = time.time()
+14	
+15	THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+16	DIR_SRC_WEB = os.path.abspath(f&#x27;{THIS_DIR}/src_web/&#x27;)
+17	DIR_WEB = os.path.abspath(f&#x27;{THIS_DIR}/web/&#x27;)
+18	DIR_WEB_COMFYUI = os.path.abspath(f&#x27;{DIR_WEB}/comfyui/&#x27;)
+19	
+20	rmtree(DIR_WEB)
+21	
+22	
+23	def log_step(msg=None, status=None):
+24	  &quot;&quot;&quot; Logs a step keeping track of timing and initial msg. &quot;&quot;&quot;
+25	  global step_msg  # pylint: disable=W0601
+26	  global step_start  # pylint: disable=W0601
+27	  if msg:
+28	    step_msg = f&#x27;▻ [Starting] {msg}...&#x27;
+29	    step_start = time.time()
+30	    print(step_msg, end=&quot;\r&quot;)
+31	  elif status:
+32	    step_time = round(time.time() - step_start, 3)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__build__.py" target="_blank">/rgthree-comfy/__build__.py</a><br>
+    <b>Line number: </b>47<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+31	  elif status:
+32	    step_time = round(time.time() - step_start, 3)
+33	    if status == &#x27;Error&#x27;:
+34	      status_msg=f&#x27;{COLORS[&quot;RED&quot;]}⤫ {status}{COLORS[&quot;RESET&quot;]}&#x27;
+35	    else:
+36	      status_msg=f&#x27;{COLORS[&quot;BRIGHT_GREEN&quot;]}🗸 {status}{COLORS[&quot;RESET&quot;]}&#x27;
+37	    print(
+38	      f&#x27;{step_msg.ljust(50, &quot;.&quot;)} {COLORS[&quot;BRIGHT_GREEN&quot;]}🗸 {status}{COLORS[&quot;RESET&quot;]} ({step_time}s)&#x27;
+39	    )
+40	
+41	
+42	log_step(msg=&#x27;Copying web directory&#x27;)
+43	copytree(DIR_SRC_WEB, DIR_WEB, ignore=ignore_patterns(&quot;typings*&quot;, &quot;*.ts&quot;, &quot;*.scss&quot;))
+44	log_step(status=&quot;Done&quot;)
+45	
+46	log_step(msg=&#x27;TypeScript&#x27;)
+47	checked = subprocess.run([&quot;node&quot;, &quot;./node_modules/typescript/bin/tsc&quot;], check=True)
+48	log_step(status=&quot;Done&quot;)
+49	
+50	scsss = glob(os.path.join(DIR_SRC_WEB, &quot;**&quot;, &quot;*.scss&quot;), recursive=True)
+51	log_step(msg=f&#x27;SASS for {len(scsss)} files&#x27;)
+52	scsss = [i.replace(THIS_DIR, &#x27;.&#x27;) for i in scsss]
+53	cmds = [&quot;node&quot;, &quot;./node_modules/sass/sass&quot;]
+54	for scss in scsss:
+55	  out = scss.replace(&#x27;src_web&#x27;, &#x27;web&#x27;).replace(&#x27;.scss&#x27;, &#x27;.css&#x27;)
+56	  cmds.append(f&#x27;{scss}:{out}&#x27;)
+57	cmds.append(&#x27;--no-source-map&#x27;)
+58	checked = subprocess.run(cmds, check=True)
+59	log_step(status=&quot;Done&quot;)
+60	
+61	# Handle the common directories. Because ComfyUI loads under /extensions/rgthree-comfy we can&#x27;t
+62	# easily share sources outside of the `DIR_WEB_COMFYUI` _and_ allow typescript to resolve them in
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__build__.py" target="_blank">/rgthree-comfy/__build__.py</a><br>
+    <b>Line number: </b>47<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+31	  elif status:
+32	    step_time = round(time.time() - step_start, 3)
+33	    if status == &#x27;Error&#x27;:
+34	      status_msg=f&#x27;{COLORS[&quot;RED&quot;]}⤫ {status}{COLORS[&quot;RESET&quot;]}&#x27;
+35	    else:
+36	      status_msg=f&#x27;{COLORS[&quot;BRIGHT_GREEN&quot;]}🗸 {status}{COLORS[&quot;RESET&quot;]}&#x27;
+37	    print(
+38	      f&#x27;{step_msg.ljust(50, &quot;.&quot;)} {COLORS[&quot;BRIGHT_GREEN&quot;]}🗸 {status}{COLORS[&quot;RESET&quot;]} ({step_time}s)&#x27;
+39	    )
+40	
+41	
+42	log_step(msg=&#x27;Copying web directory&#x27;)
+43	copytree(DIR_SRC_WEB, DIR_WEB, ignore=ignore_patterns(&quot;typings*&quot;, &quot;*.ts&quot;, &quot;*.scss&quot;))
+44	log_step(status=&quot;Done&quot;)
+45	
+46	log_step(msg=&#x27;TypeScript&#x27;)
+47	checked = subprocess.run([&quot;node&quot;, &quot;./node_modules/typescript/bin/tsc&quot;], check=True)
+48	log_step(status=&quot;Done&quot;)
+49	
+50	scsss = glob(os.path.join(DIR_SRC_WEB, &quot;**&quot;, &quot;*.scss&quot;), recursive=True)
+51	log_step(msg=f&#x27;SASS for {len(scsss)} files&#x27;)
+52	scsss = [i.replace(THIS_DIR, &#x27;.&#x27;) for i in scsss]
+53	cmds = [&quot;node&quot;, &quot;./node_modules/sass/sass&quot;]
+54	for scss in scsss:
+55	  out = scss.replace(&#x27;src_web&#x27;, &#x27;web&#x27;).replace(&#x27;.scss&#x27;, &#x27;.css&#x27;)
+56	  cmds.append(f&#x27;{scss}:{out}&#x27;)
+57	cmds.append(&#x27;--no-source-map&#x27;)
+58	checked = subprocess.run(cmds, check=True)
+59	log_step(status=&quot;Done&quot;)
+60	
+61	# Handle the common directories. Because ComfyUI loads under /extensions/rgthree-comfy we can&#x27;t
+62	# easily share sources outside of the `DIR_WEB_COMFYUI` _and_ allow typescript to resolve them in
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__build__.py" target="_blank">/rgthree-comfy/__build__.py</a><br>
+    <b>Line number: </b>58<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+42	log_step(msg=&#x27;Copying web directory&#x27;)
+43	copytree(DIR_SRC_WEB, DIR_WEB, ignore=ignore_patterns(&quot;typings*&quot;, &quot;*.ts&quot;, &quot;*.scss&quot;))
+44	log_step(status=&quot;Done&quot;)
+45	
+46	log_step(msg=&#x27;TypeScript&#x27;)
+47	checked = subprocess.run([&quot;node&quot;, &quot;./node_modules/typescript/bin/tsc&quot;], check=True)
+48	log_step(status=&quot;Done&quot;)
+49	
+50	scsss = glob(os.path.join(DIR_SRC_WEB, &quot;**&quot;, &quot;*.scss&quot;), recursive=True)
+51	log_step(msg=f&#x27;SASS for {len(scsss)} files&#x27;)
+52	scsss = [i.replace(THIS_DIR, &#x27;.&#x27;) for i in scsss]
+53	cmds = [&quot;node&quot;, &quot;./node_modules/sass/sass&quot;]
+54	for scss in scsss:
+55	  out = scss.replace(&#x27;src_web&#x27;, &#x27;web&#x27;).replace(&#x27;.scss&#x27;, &#x27;.css&#x27;)
+56	  cmds.append(f&#x27;{scss}:{out}&#x27;)
+57	cmds.append(&#x27;--no-source-map&#x27;)
+58	checked = subprocess.run(cmds, check=True)
+59	log_step(status=&quot;Done&quot;)
+60	
+61	# Handle the common directories. Because ComfyUI loads under /extensions/rgthree-comfy we can&#x27;t
+62	# easily share sources outside of the `DIR_WEB_COMFYUI` _and_ allow typescript to resolve them in
+63	# src view, so we set the path in the tsconfig to map an import of &quot;rgthree/common&quot; to the
+64	# &quot;src_web/common&quot; directory, but then need to rewrite the comfyui JS files to load from
+65	# &quot;../../rgthree/common&quot; (which we map correctly in rgthree_server.py).
+66	log_step(msg=&#x27;Cleaning Imports&#x27;)
+67	print(&#x27;▻ [Starting] Cleaning Imports...&#x27;, end=&quot;\r&quot;)
+68	web_subfolders = [f.name for f in os.scandir(DIR_WEB) if f.is_dir()]
+69	for subfolder in web_subfolders:
+70	  js_files = glob(os.path.join(DIR_WEB, subfolder, &#x27;*.js&#x27;), recursive=True)
+71	  for file in js_files:
+72	    with open(file, &#x27;r&#x27;, encoding=&quot;utf-8&quot;) as f:
+73	      filedata = f.read()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__update_comfy__.py" target="_blank">/rgthree-comfy/__update_comfy__.py</a><br>
+    <b>Line number: </b>7<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	#!/usr/bin/env python3
+2	
+3	# A nicer output for git pulling custom nodes (and ComfyUI).
+4	# Quick shell version: ls | xargs -I % sh -c &#x27;echo; echo %; git -C % pull&#x27;
+5	
+6	import os
+7	from subprocess import Popen, PIPE, STDOUT
+8	
+9	
+10	def pull_path(path):
+11	  p = Popen([&quot;git&quot;, &quot;-C&quot;, path, &quot;pull&quot;], stdout=PIPE, stderr=STDOUT)
+12	  output, error = p.communicate()
+13	  return output.decode()
+14	
+15	THIS_DIR=os.path.dirname(os.path.abspath(__file__))
+16	
+17	def show_output(output):
+18	  if output.startswith(&#x27;Already up to date&#x27;):
+19	    print(f&#x27; \33[32m🗸 {output}\33[0m&#x27;, end =&#x27;&#x27;)
+20	  elif output.startswith(&#x27;error:&#x27;):
+21	    print(f&#x27; \33[31m🞫 Error.\33[0m \n {output}&#x27;)
+22	  else:
+23	    print(f&#x27; \33[33m🡅 Needs update.\33[0m \n {output}&#x27;, end=&#x27;&#x27;)
+24	
+25	
+26	os.chdir(THIS_DIR)
+27	os.chdir(&quot;../&quot;)
+28	
+29	# Get the list or custom nodes, so we can format the output a little more nicely.
+30	custom_extensions = []
+31	custom_extensions_name_max = 0
+32	for directory in os.listdir(os.getcwd()):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__update_comfy__.py" target="_blank">/rgthree-comfy/__update_comfy__.py</a><br>
+    <b>Line number: </b>11<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+1	#!/usr/bin/env python3
+2	
+3	# A nicer output for git pulling custom nodes (and ComfyUI).
+4	# Quick shell version: ls | xargs -I % sh -c &#x27;echo; echo %; git -C % pull&#x27;
+5	
+6	import os
+7	from subprocess import Popen, PIPE, STDOUT
+8	
+9	
+10	def pull_path(path):
+11	  p = Popen([&quot;git&quot;, &quot;-C&quot;, path, &quot;pull&quot;], stdout=PIPE, stderr=STDOUT)
+12	  output, error = p.communicate()
+13	  return output.decode()
+14	
+15	THIS_DIR=os.path.dirname(os.path.abspath(__file__))
+16	
+17	def show_output(output):
+18	  if output.startswith(&#x27;Already up to date&#x27;):
+19	    print(f&#x27; \33[32m🗸 {output}\33[0m&#x27;, end =&#x27;&#x27;)
+20	  elif output.startswith(&#x27;error:&#x27;):
+21	    print(f&#x27; \33[31m🞫 Error.\33[0m \n {output}&#x27;)
+22	  else:
+23	    print(f&#x27; \33[33m🡅 Needs update.\33[0m \n {output}&#x27;, end=&#x27;&#x27;)
+24	
+25	
+26	os.chdir(THIS_DIR)
+27	os.chdir(&quot;../&quot;)
+28	
+29	# Get the list or custom nodes, so we can format the output a little more nicely.
+30	custom_extensions = []
+31	custom_extensions_name_max = 0
+32	for directory in os.listdir(os.getcwd()):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/rgthree-comfy/__update_comfy__.py" target="_blank">/rgthree-comfy/__update_comfy__.py</a><br>
+    <b>Line number: </b>11<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+1	#!/usr/bin/env python3
+2	
+3	# A nicer output for git pulling custom nodes (and ComfyUI).
+4	# Quick shell version: ls | xargs -I % sh -c &#x27;echo; echo %; git -C % pull&#x27;
+5	
+6	import os
+7	from subprocess import Popen, PIPE, STDOUT
+8	
+9	
+10	def pull_path(path):
+11	  p = Popen([&quot;git&quot;, &quot;-C&quot;, path, &quot;pull&quot;], stdout=PIPE, stderr=STDOUT)
+12	  output, error = p.communicate()
+13	  return output.decode()
+14	
+15	THIS_DIR=os.path.dirname(os.path.abspath(__file__))
+16	
+17	def show_output(output):
+18	  if output.startswith(&#x27;Already up to date&#x27;):
+19	    print(f&#x27; \33[32m🗸 {output}\33[0m&#x27;, end =&#x27;&#x27;)
+20	  elif output.startswith(&#x27;error:&#x27;):
+21	    print(f&#x27; \33[31m🞫 Error.\33[0m \n {output}&#x27;)
+22	  else:
+23	    print(f&#x27; \33[33m🡅 Needs update.\33[0m \n {output}&#x27;, end=&#x27;&#x27;)
+24	
+25	
+26	os.chdir(THIS_DIR)
+27	os.chdir(&quot;../&quot;)
+28	
+29	# Get the list or custom nodes, so we can format the output a little more nicely.
+30	custom_extensions = []
+31	custom_extensions_name_max = 0
+32	for directory in os.listdir(os.getcwd()):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">16758</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/install.py" target="_blank">/ComfyUI-Frame-Interpolation/install.py</a><br>
+    <b>Line number: </b>46<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+30	    torch_lib_path = str(torch_lib_path.resolve())
+31	    if os.path.exists(torch_lib_path):
+32	        nvrtc = filter(lambda lib_file: &quot;nvrtc-builtins&quot; in lib_file, os.listdir(torch_lib_path))
+33	        nvrtc = list(nvrtc)
+34	        return torch_lib_path if len(nvrtc) &gt; 0 else None
+35	
+36	def install_cupy():
+37	    cuda_home = get_cuda_home_path()
+38	    try:
+39	        if cuda_home is not None:
+40	            os.environ[&quot;CUDA_HOME&quot;] = cuda_home
+41	            os.environ[&quot;CUDA_PATH&quot;] = cuda_home
+42	        import cupy
+43	        print(&quot;CuPy is already installed.&quot;)
+44	    except:
+45	        print(&quot;Uninstall cupy if existed...&quot;)
+46	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip uninstall -y cupy-wheel cupy-cuda102 cupy-cuda110 cupy-cuda111 cupy-cuda11x cupy-cuda12x&#x27;)
+47	        print(&quot;Installing cupy...&quot;)
+48	        cuda_ver = get_cuda_ver_from_dir(cuda_home)
+49	        cupy_package = f&quot;cupy-cuda{cuda_ver}&quot; if cuda_ver is not None else &quot;cupy-wheel&quot;
+50	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip install {cupy_package}&#x27;)
+51	
+52	with open(Path(__file__).parent / &quot;requirements-no-cupy.txt&quot;, &#x27;r&#x27;) as f:
+53	    for package in f.readlines():
+54	        package = package.strip()
+55	        print(f&quot;Installing {package}...&quot;)
+56	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip install {package}&#x27;)
+57	
+58	print(&quot;Checking cupy...&quot;)
+59	install_cupy()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/install.py" target="_blank">/ComfyUI-Frame-Interpolation/install.py</a><br>
+    <b>Line number: </b>50<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+34	        return torch_lib_path if len(nvrtc) &gt; 0 else None
+35	
+36	def install_cupy():
+37	    cuda_home = get_cuda_home_path()
+38	    try:
+39	        if cuda_home is not None:
+40	            os.environ[&quot;CUDA_HOME&quot;] = cuda_home
+41	            os.environ[&quot;CUDA_PATH&quot;] = cuda_home
+42	        import cupy
+43	        print(&quot;CuPy is already installed.&quot;)
+44	    except:
+45	        print(&quot;Uninstall cupy if existed...&quot;)
+46	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip uninstall -y cupy-wheel cupy-cuda102 cupy-cuda110 cupy-cuda111 cupy-cuda11x cupy-cuda12x&#x27;)
+47	        print(&quot;Installing cupy...&quot;)
+48	        cuda_ver = get_cuda_ver_from_dir(cuda_home)
+49	        cupy_package = f&quot;cupy-cuda{cuda_ver}&quot; if cuda_ver is not None else &quot;cupy-wheel&quot;
+50	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip install {cupy_package}&#x27;)
+51	
+52	with open(Path(__file__).parent / &quot;requirements-no-cupy.txt&quot;, &#x27;r&#x27;) as f:
+53	    for package in f.readlines():
+54	        package = package.strip()
+55	        print(f&quot;Installing {package}...&quot;)
+56	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip install {package}&#x27;)
+57	
+58	print(&quot;Checking cupy...&quot;)
+59	install_cupy()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/install.py" target="_blank">/ComfyUI-Frame-Interpolation/install.py</a><br>
+    <b>Line number: </b>56<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+40	            os.environ[&quot;CUDA_HOME&quot;] = cuda_home
+41	            os.environ[&quot;CUDA_PATH&quot;] = cuda_home
+42	        import cupy
+43	        print(&quot;CuPy is already installed.&quot;)
+44	    except:
+45	        print(&quot;Uninstall cupy if existed...&quot;)
+46	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip uninstall -y cupy-wheel cupy-cuda102 cupy-cuda110 cupy-cuda111 cupy-cuda11x cupy-cuda12x&#x27;)
+47	        print(&quot;Installing cupy...&quot;)
+48	        cuda_ver = get_cuda_ver_from_dir(cuda_home)
+49	        cupy_package = f&quot;cupy-cuda{cuda_ver}&quot; if cuda_ver is not None else &quot;cupy-wheel&quot;
+50	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip install {cupy_package}&#x27;)
+51	
+52	with open(Path(__file__).parent / &quot;requirements-no-cupy.txt&quot;, &#x27;r&#x27;) as f:
+53	    for package in f.readlines():
+54	        package = package.strip()
+55	        print(f&quot;Installing {package}...&quot;)
+56	        os.system(f&#x27;&quot;{sys.executable}&quot; {s_param} -m pip install {package}&#x27;)
+57	
+58	print(&quot;Checking cupy...&quot;)
+59	install_cupy()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/test.py" target="_blank">/ComfyUI-Frame-Interpolation/test.py</a><br>
+    <b>Line number: </b>37<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+21	vfi_node_class = gmfss_fortuna.GMFSS_Fortuna_VFI()
+22	for i, ckpt_name in enumerate(vfi_node_class.INPUT_TYPES()[&quot;required&quot;][&quot;ckpt_name&quot;][0][:2]):
+23	    result = vfi_node_class.vfi(ckpt_name, torch.cat([
+24	        frame_0,
+25	        frame_1,
+26	        frame_0,
+27	        frame_1
+28	    ], dim=0).cuda(), multipler=4, batch_size=2)[0]
+29	    print(result.shape)
+30	    print(f&quot;Generated {result.size(0)} frames&quot;)
+31	    frames = [PIL.Image.fromarray(np.clip((frame * 255).numpy(), 0, 255).astype(np.uint8)) for frame in result]
+32	    print(result[0].shape)
+33	    os.makedirs(f&quot;test_result/video{i}&quot;, exist_ok=True)
+34	    for j, frame in enumerate(frames):
+35	        frame.save(f&quot;test_result/video{i}/{j}.jpg&quot;)
+36	    frames[0].save(f&quot;test_result/video{i}.gif&quot;, save_all=True, append_images=frames[1:], optimize=True, duration=1/3, loop=0)
+37	    os.startfile(f&quot;test_result{os.path.sep}video{i}.gif&quot;)
+38	#torchvision.io.video.write_video(&quot;test.mp4&quot;, einops.rearrange(result, &quot;n c h w -&gt; n h w c&quot;).cpu(), fps=1)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1226<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+1210	            [
+1211	                ans,
+1212	                f(a, b),
+1213	            ]
+1214	        )
+1215	    return torch.tensor(ans).flip(dims=(1,))
+1216	
+1217	
+1218	####################### FLOWNET2 #######################
+1219	
+1220	
+1221	def flownet2(img_a, img_b, mode=&quot;shm&quot;, back=False):
+1222	    # package
+1223	    url = f&quot;http://localhost:8109/get-flow&quot;
+1224	    if mode == &quot;shm&quot;:
+1225	        t = time.time()
+1226	        fn_a = img_a.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_a.png&quot;))
+1227	        fn_b = img_b.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_b.png&quot;))
+1228	    elif mode == &quot;net&quot;:
+1229	        assert False, &quot;not impl&quot;
+1230	        q = u2d.img2uri(img.pil(&quot;RGB&quot;))
+1231	        q.decode()
+1232	    resp = requests.get(
+1233	        url,
+1234	        params={
+1235	            &quot;img_a&quot;: fn_a,
+1236	            &quot;img_b&quot;: fn_b,
+1237	            &quot;mode&quot;: mode,
+1238	            &quot;back&quot;: back,
+1239	            # &#x27;vis&#x27;: vis,
+1240	        },
+1241	    )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1227<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+1211	                ans,
+1212	                f(a, b),
+1213	            ]
+1214	        )
+1215	    return torch.tensor(ans).flip(dims=(1,))
+1216	
+1217	
+1218	####################### FLOWNET2 #######################
+1219	
+1220	
+1221	def flownet2(img_a, img_b, mode=&quot;shm&quot;, back=False):
+1222	    # package
+1223	    url = f&quot;http://localhost:8109/get-flow&quot;
+1224	    if mode == &quot;shm&quot;:
+1225	        t = time.time()
+1226	        fn_a = img_a.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_a.png&quot;))
+1227	        fn_b = img_b.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_b.png&quot;))
+1228	    elif mode == &quot;net&quot;:
+1229	        assert False, &quot;not impl&quot;
+1230	        q = u2d.img2uri(img.pil(&quot;RGB&quot;))
+1231	        q.decode()
+1232	    resp = requests.get(
+1233	        url,
+1234	        params={
+1235	            &quot;img_a&quot;: fn_a,
+1236	            &quot;img_b&quot;: fn_b,
+1237	            &quot;mode&quot;: mode,
+1238	            &quot;back&quot;: back,
+1239	            # &#x27;vis&#x27;: vis,
+1240	        },
+1241	    )
+1242	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1232<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+1216	
+1217	
+1218	####################### FLOWNET2 #######################
+1219	
+1220	
+1221	def flownet2(img_a, img_b, mode=&quot;shm&quot;, back=False):
+1222	    # package
+1223	    url = f&quot;http://localhost:8109/get-flow&quot;
+1224	    if mode == &quot;shm&quot;:
+1225	        t = time.time()
+1226	        fn_a = img_a.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_a.png&quot;))
+1227	        fn_b = img_b.save(mkfile(f&quot;/dev/shm/_flownet2/{t}/img_b.png&quot;))
+1228	    elif mode == &quot;net&quot;:
+1229	        assert False, &quot;not impl&quot;
+1230	        q = u2d.img2uri(img.pil(&quot;RGB&quot;))
+1231	        q.decode()
+1232	    resp = requests.get(
+1233	        url,
+1234	        params={
+1235	            &quot;img_a&quot;: fn_a,
+1236	            &quot;img_b&quot;: fn_b,
+1237	            &quot;mode&quot;: mode,
+1238	            &quot;back&quot;: back,
+1239	            # &#x27;vis&#x27;: vis,
+1240	        },
+1241	    )
+1242	
+1243	    # return
+1244	    ans = {&quot;response&quot;: resp}
+1245	    if resp.status_code == 200:
+1246	        j = resp.json()
+1247	        ans[&quot;time&quot;] = j[&quot;time&quot;]
+1248	        ans[&quot;output&quot;] = {
+1249	            &quot;flow&quot;: torch.tensor(load(j[&quot;fn_flow&quot;])),
+1250	        }
+1251	        # if vis:
+1252	        #     ans[&#x27;output&#x27;][&#x27;vis&#x27;] = I(j[&#x27;fn_vis&#x27;])
+1253	    if mode == &quot;shm&quot;:
+1254	        shutil.rmtree(f&quot;/dev/shm/_flownet2/{t}&quot;)
+1255	    return ans
+1256	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1254<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+1238	            &quot;back&quot;: back,
+1239	            # &#x27;vis&#x27;: vis,
+1240	        },
+1241	    )
+1242	
+1243	    # return
+1244	    ans = {&quot;response&quot;: resp}
+1245	    if resp.status_code == 200:
+1246	        j = resp.json()
+1247	        ans[&quot;time&quot;] = j[&quot;time&quot;]
+1248	        ans[&quot;output&quot;] = {
+1249	            &quot;flow&quot;: torch.tensor(load(j[&quot;fn_flow&quot;])),
+1250	        }
+1251	        # if vis:
+1252	        #     ans[&#x27;output&#x27;][&#x27;vis&#x27;] = I(j[&#x27;fn_vis&#x27;])
+1253	    if mode == &quot;shm&quot;:
+1254	        shutil.rmtree(f&quot;/dev/shm/_flownet2/{t}&quot;)
+1255	    return ans
+1256	
+1257	
+1258	####################### VISUALIZATION #######################
+1259	
+1260	
+1261	class Gridnet(nn.Module):
+1262	    def __init__(self, channels_0, channels_1, channels_2, total_dropout_p, depth):
+1263	        super().__init__()
+1264	        self.channels_0 = ch0 = channels_0
+1265	        self.channels_1 = ch1 = channels_1
+1266	        self.channels_2 = ch2 = channels_2
+1267	        self.total_dropout_p = p = total_dropout_p
+1268	        self.depth = depth
+1269	        self.encoders = nn.ModuleList(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with pickle module.<br>
+    <b>Test ID:</b> B403<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1741<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
+
+<div class="code">
+<pre>
+1725	        )
+1726	    else:
+1727	        return bn
+1728	
+1729	
+1730	def read(fn, mode=&quot;r&quot;):
+1731	    with open(fn, mode) as handle:
+1732	        return handle.read()
+1733	
+1734	
+1735	def write(text, fn, mode=&quot;w&quot;):
+1736	    mkfile(fn, parents=True, exist_ok=True)
+1737	    with open(fn, mode) as handle:
+1738	        return handle.write(text)
+1739	
+1740	
+1741	import pickle
+1742	
+1743	
+1744	def dump(obj, fn, mode=&quot;wb&quot;):
+1745	    mkfile(fn, parents=True, exist_ok=True)
+1746	    with open(fn, mode) as handle:
+1747	        return pickle.dump(obj, handle)
+1748	
+1749	
+1750	def load(fn, mode=&quot;rb&quot;):
+1751	    with open(fn, mode) as handle:
+1752	        return pickle.load(handle)
+1753	
+1754	
+1755	import json
+1756	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1752<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+1736	    mkfile(fn, parents=True, exist_ok=True)
+1737	    with open(fn, mode) as handle:
+1738	        return handle.write(text)
+1739	
+1740	
+1741	import pickle
+1742	
+1743	
+1744	def dump(obj, fn, mode=&quot;wb&quot;):
+1745	    mkfile(fn, parents=True, exist_ok=True)
+1746	    with open(fn, mode) as handle:
+1747	        return pickle.dump(obj, handle)
+1748	
+1749	
+1750	def load(fn, mode=&quot;rb&quot;):
+1751	    with open(fn, mode) as handle:
+1752	        return pickle.load(handle)
+1753	
+1754	
+1755	import json
+1756	
+1757	
+1758	def jwrite(x, fn, mode=&quot;w&quot;, indent=&quot;\t&quot;, sort_keys=False):
+1759	    mkfile(fn, parents=True, exist_ok=True)
+1760	    with open(fn, mode) as handle:
+1761	        return json.dump(x, handle, indent=indent, sort_keys=sort_keys)
+1762	
+1763	
+1764	def jread(fn, mode=&quot;r&quot;):
+1765	    with open(fn, mode) as handle:
+1766	        return json.load(handle)
+1767	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1781<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+1765	    with open(fn, mode) as handle:
+1766	        return json.load(handle)
+1767	
+1768	
+1769	try:
+1770	    import yaml
+1771	
+1772	    def ywrite(x, fn, mode=&quot;w&quot;, default_flow_style=False):
+1773	        mkfile(fn, parents=True, exist_ok=True)
+1774	        with open(fn, mode) as handle:
+1775	            return yaml.dump(x, handle, default_flow_style=default_flow_style)
+1776	
+1777	    def yread(fn, mode=&quot;r&quot;):
+1778	        with open(fn, mode) as handle:
+1779	            return yaml.safe_load(handle)
+1780	
+1781	except:
+1782	    pass
+1783	
+1784	try:
+1785	    import pyunpack
+1786	except:
+1787	    pass
+1788	
+1789	try:
+1790	    import mysql
+1791	    import mysql.connector
+1792	except:
+1793	    pass
+1794	
+1795	
+1796	################ MISC ################
+1797	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1786<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+1770	    import yaml
+1771	
+1772	    def ywrite(x, fn, mode=&quot;w&quot;, default_flow_style=False):
+1773	        mkfile(fn, parents=True, exist_ok=True)
+1774	        with open(fn, mode) as handle:
+1775	            return yaml.dump(x, handle, default_flow_style=default_flow_style)
+1776	
+1777	    def yread(fn, mode=&quot;r&quot;):
+1778	        with open(fn, mode) as handle:
+1779	            return yaml.safe_load(handle)
+1780	
+1781	except:
+1782	    pass
+1783	
+1784	try:
+1785	    import pyunpack
+1786	except:
+1787	    pass
+1788	
+1789	try:
+1790	    import mysql
+1791	    import mysql.connector
+1792	except:
+1793	    pass
+1794	
+1795	
+1796	################ MISC ################
+1797	
+1798	hakase = &quot;./env/__hakase__.jpg&quot;
+1799	if not os.path.isfile(hakase):
+1800	    hakase = &quot;./__env__/__hakase__.jpg&quot;
+1801	
+1802	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1792<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+1776	
+1777	    def yread(fn, mode=&quot;r&quot;):
+1778	        with open(fn, mode) as handle:
+1779	            return yaml.safe_load(handle)
+1780	
+1781	except:
+1782	    pass
+1783	
+1784	try:
+1785	    import pyunpack
+1786	except:
+1787	    pass
+1788	
+1789	try:
+1790	    import mysql
+1791	    import mysql.connector
+1792	except:
+1793	    pass
+1794	
+1795	
+1796	################ MISC ################
+1797	
+1798	hakase = &quot;./env/__hakase__.jpg&quot;
+1799	if not os.path.isfile(hakase):
+1800	    hakase = &quot;./__env__/__hakase__.jpg&quot;
+1801	
+1802	
+1803	def mem(units=&quot;m&quot;):
+1804	    return (
+1805	        psProcess(os.getpid()).memory_info().rss
+1806	        / {
+1807	            &quot;b&quot;: 1,
+1808	            &quot;k&quot;: 1e3,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/eisai/eisai_arch.py</a><br>
+    <b>Line number: </b>1867<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+1851	        # set up empty entry
+1852	        empty = (&quot;&quot;, Table._spec(self.orientation, transpose=False))
+1853	
+1854	        # calculate table size
+1855	        t = copy.deepcopy(self.t)
+1856	        totalrows = len(t)
+1857	        totalcols = [len(r) for r in t]
+1858	        assert min(totalcols) == max(totalcols)
+1859	        totalcols = totalcols[0]
+1860	
+1861	        # string-ify
+1862	        for i in range(totalrows):
+1863	            for j in range(totalcols):
+1864	                x, s = t[i][j]
+1865	                sp = s[11]
+1866	                if sp:
+1867	                    x = eval(f&#x27;f&quot;{{{x}{sp}}}&quot;&#x27;)
+1868	                Table._put((str(x), s), t, (i, j), empty)
+1869	
+1870	        # expand delimiters
+1871	        _repl = (
+1872	            lambda s: s[:2] + (1, 0, 0, 0, 0) + s[7:10] + (1,) + s[11:]
+1873	            if s[2]
+1874	            else s[:2] + (0, 0, 0, 0, 0) + s[7:10] + (1,) + s[11:]
+1875	        )
+1876	        for i, row in enumerate(t):
+1877	            for j, (x, s_own) in enumerate(row):
+1878	                # expand delim_up(^)
+1879	                if s_own[3]:
+1880	                    u, v = i, j
+1881	                    while 0 &lt;= u:
+1882	                        _, s = t[u][v]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-medium">
+    <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
+    <b>Test ID:</b> B506<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_models/ops/__init__.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_models/ops/__init__.py</a><br>
+    <b>Line number: </b>11<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
+
+<div class="code">
+<pre>
+1	import torch.multiprocessing as mp
+2	
+3	if mp.current_process().name == &quot;MainProcess&quot;:
+4	    import yaml
+5	    import os
+6	    from pathlib import Path
+7	
+8	    config_path = Path(Path(__file__).parent.parent.parent.resolve(), &quot;config.yaml&quot;)
+9	
+10	    if os.path.exists(config_path):
+11	        config = yaml.load(open(config_path, &quot;r&quot;), Loader=yaml.FullLoader)
+12	        ops_backend = config[&quot;ops_backend&quot;]
+13	    else:
+14	        ops_backend = &quot;taichi&quot;
+15	
+16	    assert ops_backend in [&quot;taichi&quot;, &quot;cupy&quot;]
+17	
+18	    if ops_backend == &quot;taichi&quot;:
+19	        from .taichi_ops import softsplat, ModuleSoftsplat, FunctionSoftsplat, softsplat_func, costvol_func, sepconv_func, init, batch_edt, FunctionAdaCoF, ModuleCorrelation, FunctionCorrelation, _FunctionCorrelation
+20	    else:
+21	        from .cupy_ops import softsplat, ModuleSoftsplat, FunctionSoftsplat, softsplat_func, costvol_func, sepconv_func, init, batch_edt, FunctionAdaCoF, ModuleCorrelation, FunctionCorrelation, _FunctionCorrelation
+22	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-medium">
+    <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
+    <b>Test ID:</b> B506<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/ComfyUI-Frame-Interpolation/vfi_utils.py" target="_blank">/ComfyUI-Frame-Interpolation/vfi_utils.py</a><br>
+    <b>Line number: </b>22<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
+
+<div class="code">
+<pre>
+6	import typing
+7	import traceback
+8	import einops
+9	import gc
+10	import torchvision.transforms.functional as transform
+11	from comfy.model_management import soft_empty_cache, get_torch_device
+12	import numpy as np
+13	
+14	BASE_MODEL_DOWNLOAD_URLS = [
+15	    &quot;https://github.com/styler00dollar/VSGAN-tensorrt-docker/releases/download/models/&quot;,
+16	    &quot;https://github.com/Fannovel16/ComfyUI-Frame-Interpolation/releases/download/models/&quot;,
+17	    &quot;https://github.com/dajes/frame-interpolation-pytorch/releases/download/v1.0.0/&quot;
+18	]
+19	
+20	config_path = os.path.join(os.path.dirname(__file__), &quot;./config.yaml&quot;)
+21	if os.path.exists(config_path):
+22	    config = yaml.load(open(config_path, &quot;r&quot;), Loader=yaml.FullLoader)
+23	else:
+24	    raise Exception(&quot;config.yaml file is neccessary, plz recreate the config file by downloading it from https://github.com/Fannovel16/ComfyUI-Frame-Interpolation&quot;)
+25	DEVICE = get_torch_device()
+26	
+27	class InterpolationStateList():
+28	
+29	    def __init__(self, frame_indices: typing.List[int], is_skip_list: bool):
+30	        self.frame_indices = frame_indices
+31	        self.is_skip_list = is_skip_list
+32	        
+33	    def is_frame_skipped(self, frame_index):
+34	        is_frame_in_list = frame_index in self.frame_indices
+35	        return self.is_skip_list and is_frame_in_list or not self.is_skip_list and not is_frame_in_list
+36	    
+37	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

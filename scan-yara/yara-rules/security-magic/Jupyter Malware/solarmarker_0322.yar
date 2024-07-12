@@ -1,0 +1,23 @@
+/*
+ This Yara ruleset is under the GNU-GPLv2 license (http://www.gnu.org/licenses/gpl-2.0.html) and open to any user or organization, as long as you use it under this license.
+  
+*/
+rule solarmarker_March2022
+{
+
+  meta:
+      author = "Lucas Acha (http://www.lukeacha.com)"
+      description = "observed strings with malicious DLL loaded by Soalrmarker Malware during March 2022 campaign"
+      reference = "http://security5magics.blogspot.com/2020/12/tracking-jupyter-malware.html" 
+  strings:
+      $mz = "MZ"
+      $off1 = { 59 d1 8c ?? 00 00 }
+      $hex2 = { 6c 58 11 07 6c 58 }
+      $hex3 = { 6c 5a 58 11 5c }
+      $hex4 = { 6c 59 11 ed 6c ?? }
+      $hex5 = { 6c 58 fe 0c 2? 01 6c }
+      $hex6 = { 6c 58 11 07 11 08 }
+      $hex7 = { 6c 5a 58 11 0? 6c }
+  condition:
+     ($off1 in (0x17d0..0x1a20) and 2 of ($hex*) and $mz at 0)
+}

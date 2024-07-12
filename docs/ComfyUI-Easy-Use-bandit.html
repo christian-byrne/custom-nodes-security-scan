@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">32960</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/api.py" target="_blank">/ComfyUI-Easy-Use/py/api.py</a><br>
+    <b>Line number: </b>47<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+31	        return web.Response(status=500)
+32	        pass
+33	
+34	@PromptServer.instance.routes.post(&quot;/easyuse/translate&quot;)
+35	async def translate(request):
+36	    post = await request.post()
+37	    text = post.get(&quot;text&quot;)
+38	    if has_chinese(text):
+39	        return web.json_response({&quot;text&quot;: zh_to_en([text])[0]})
+40	    else:
+41	        return web.json_response({&quot;text&quot;: text})
+42	
+43	@PromptServer.instance.routes.get(&quot;/easyuse/reboot&quot;)
+44	def reboot(request):
+45	    try:
+46	        sys.stdout.close_log()
+47	    except Exception as e:
+48	        pass
+49	
+50	    return os.execv(sys.executable, [sys.executable] + sys.argv)
+51	
+52	# parse csv
+53	@PromptServer.instance.routes.post(&quot;/easyuse/upload/csv&quot;)
+54	async def parse_csv(request):
+55	    post = await request.post()
+56	    csv = post.get(&quot;csv&quot;)
+57	    if csv and csv.file:
+58	        file = csv.file
+59	        text = &#x27;&#x27;
+60	        for line in file.readlines():
+61	            line = str(line.strip())
+62	            line = line.replace(&quot;&#x27;&quot;, &quot;&quot;).replace(&quot;b&quot;,&#x27;&#x27;)
+63	            text += line + &#x27;; \n&#x27;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/api.py" target="_blank">/ComfyUI-Easy-Use/py/api.py</a><br>
+    <b>Line number: </b>50<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+34	@PromptServer.instance.routes.post(&quot;/easyuse/translate&quot;)
+35	async def translate(request):
+36	    post = await request.post()
+37	    text = post.get(&quot;text&quot;)
+38	    if has_chinese(text):
+39	        return web.json_response({&quot;text&quot;: zh_to_en([text])[0]})
+40	    else:
+41	        return web.json_response({&quot;text&quot;: text})
+42	
+43	@PromptServer.instance.routes.get(&quot;/easyuse/reboot&quot;)
+44	def reboot(request):
+45	    try:
+46	        sys.stdout.close_log()
+47	    except Exception as e:
+48	        pass
+49	
+50	    return os.execv(sys.executable, [sys.executable] + sys.argv)
+51	
+52	# parse csv
+53	@PromptServer.instance.routes.post(&quot;/easyuse/upload/csv&quot;)
+54	async def parse_csv(request):
+55	    post = await request.post()
+56	    csv = post.get(&quot;csv&quot;)
+57	    if csv and csv.file:
+58	        file = csv.file
+59	        text = &#x27;&#x27;
+60	        for line in file.readlines():
+61	            line = str(line.strip())
+62	            line = line.replace(&quot;&#x27;&quot;, &quot;&quot;).replace(&quot;b&quot;,&#x27;&#x27;)
+63	            text += line + &#x27;; \n&#x27;
+64	        return web.json_response(text)
+65	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/easyNodes.py" target="_blank">/ComfyUI-Easy-Use/py/easyNodes.py</a><br>
+    <b>Line number: </b>8<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+1	import sys, os, re, json, time
+2	import torch
+3	import folder_paths
+4	import numpy as np
+5	import comfy.utils, comfy.sample, comfy.samplers, comfy.controlnet, comfy.model_base, comfy.model_management
+6	try:
+7	    import comfy.sampler_helpers, comfy.supported_models
+8	except:
+9	    pass
+10	from comfy.sd import CLIP, VAE
+11	from comfy.model_patcher import ModelPatcher
+12	from comfy_extras.chainner_models import model_loading
+13	from comfy_extras.nodes_mask import LatentCompositeMasked, GrowMask
+14	from comfy_extras.nodes_compositing import JoinImageWithAlpha
+15	from comfy.clip_vision import load as load_clip_vision
+16	from urllib.request import urlopen
+17	from PIL import Image
+18	
+19	from server import PromptServer
+20	from nodes import MAX_RESOLUTION, LatentFromBatch, RepeatLatentBatch, NODE_CLASS_MAPPINGS as ALL_NODE_CLASS_MAPPINGS, ConditioningSetMask, ConditioningConcat, CLIPTextEncode, VAEEncodeForInpaint, InpaintModelConditioning
+21	from .config import MAX_SEED_NUM, BASE_RESOLUTIONS, RESOURCES_DIR, INPAINT_DIR, FOOOCUS_STYLES_DIR, FOOOCUS_INPAINT_HEAD, FOOOCUS_INPAINT_PATCH, BRUSHNET_MODELS, POWERPAINT_MODELS, IPADAPTER_DIR, IPADAPTER_MODELS, DYNAMICRAFTER_DIR, DYNAMICRAFTER_MODELS, IC_LIGHT_MODELS
+22	from .layer_diffuse import LayerDiffuse, LayerMethod
+23	from .xyplot import XYplot_ModelMergeBlocks, XYplot_CFG, XYplot_Lora, XYplot_Checkpoint, XYplot_Denoise, XYplot_Steps, XYplot_PromptSR, XYplot_Positive_Cond, XYplot_Negative_Cond, XYplot_Positive_Cond_List, XYplot_Negative_Cond_List, XYplot_SeedsBatch, XYplot_Control_Net, XYplot_Sampler_Scheduler
+24	
+25	from .libs.log import log_node_info, log_node_error, log_node_warn
+26	from .libs.adv_encode import advanced_encode
+27	from .libs.wildcards import process_with_loras, get_wildcard_list, process
+28	from .libs.utils import find_wildcards_seed, is_linked_styles_selector, easySave, get_local_filepath, AlwaysEqualProxy, get_sd_version
+29	from .libs.loader import easyLoader
+30	from .libs.sampler import easySampler, alignYourStepsScheduler, gitsScheduler
+31	from .libs.xyplot import easyXYPlot
+32	from .libs.controlnet import easyControlnet
+33	from .libs.conditioning import prompt_to_cond, set_cond
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/easyNodes.py" target="_blank">/ComfyUI-Easy-Use/py/easyNodes.py</a><br>
+    <b>Line number: </b>396<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+380	
+381	        return (prompt,)
+382	
+383	
+384	# 肖像大师
+385	# Created by AI Wiz Art (Stefano Flore)
+386	# Version: 2.2
+387	# https://stefanoflore.it
+388	# https://ai-wiz.art
+389	class portraitMaster:
+390	
+391	    @classmethod
+392	    def INPUT_TYPES(s):
+393	        max_float_value = 1.95
+394	        prompt_path = os.path.join(RESOURCES_DIR, &#x27;portrait_prompt.json&#x27;)
+395	        if not os.path.exists(prompt_path):
+396	            response = urlopen(&#x27;https://raw.githubusercontent.com/yolain/ComfyUI-Easy-Use/main/resources/portrait_prompt.json&#x27;)
+397	            temp_prompt = json.loads(response.read())
+398	            prompt_serialized = json.dumps(temp_prompt, indent=4)
+399	            with open(prompt_path, &quot;w&quot;) as f:
+400	                f.write(prompt_serialized)
+401	            del response, temp_prompt
+402	        # Load local
+403	        with open(prompt_path, &#x27;r&#x27;) as f:
+404	            list = json.load(f)
+405	        keys = [
+406	            [&#x27;shot&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;shot_list&quot;}], [&#x27;shot_weight&#x27;, &#x27;FLOAT&#x27;],
+407	            [&#x27;gender&#x27;, &#x27;COMBO&#x27;, {&quot;default&quot;: &quot;Woman&quot;, &quot;key&quot;: &quot;gender_list&quot;}], [&#x27;age&#x27;, &#x27;INT&#x27;, {&quot;default&quot;: 30, &quot;min&quot;: 18, &quot;max&quot;: 90, &quot;step&quot;: 1, &quot;display&quot;: &quot;slider&quot;}],
+408	            [&#x27;nationality_1&#x27;, &#x27;COMBO&#x27;, {&quot;default&quot;: &quot;Chinese&quot;, &quot;key&quot;: &quot;nationality_list&quot;}], [&#x27;nationality_2&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;nationality_list&quot;}], [&#x27;nationality_mix&#x27;, &#x27;FLOAT&#x27;],
+409	            [&#x27;body_type&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;body_type_list&quot;}], [&#x27;body_type_weight&#x27;, &#x27;FLOAT&#x27;], [&#x27;model_pose&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;model_pose_list&quot;}], [&#x27;eyes_color&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;eyes_color_list&quot;}],
+410	            [&#x27;facial_expression&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;face_expression_list&quot;}], [&#x27;facial_expression_weight&#x27;, &#x27;FLOAT&#x27;], [&#x27;face_shape&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;face_shape_list&quot;}], [&#x27;face_shape_weight&#x27;, &#x27;FLOAT&#x27;], [&#x27;facial_asymmetry&#x27;, &#x27;FLOAT&#x27;],
+411	            [&#x27;hair_style&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;hair_style_list&quot;}], [&#x27;hair_color&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;hair_color_list&quot;}], [&#x27;disheveled&#x27;, &#x27;FLOAT&#x27;], [&#x27;beard&#x27;, &#x27;COMBO&#x27;, {&quot;key&quot;: &quot;beard_list&quot;}],
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/ic_light/__init__.py" target="_blank">/ComfyUI-Easy-Use/py/ic_light/__init__.py</a><br>
+    <b>Line number: </b>147<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+131	                image = np.tile(gradient, (1, image_width))
+132	                input_bg = np.stack((image,) * 3, axis=-1).astype(np.uint8)
+133	                return np2tensor(input_bg)
+134	            case &#x27;Bottom Light&#x27;:
+135	                gradient = np.linspace(32, 224, image_height)[:, None]
+136	                image = np.tile(gradient, (1, image_width))
+137	                input_bg = np.stack((image,) * 3, axis=-1).astype(np.uint8)
+138	                return np2tensor(input_bg)
+139	            case _:
+140	                image = pil2tensor(Image.new(&#x27;RGB&#x27;, (1, 1), (0, 0, 0)))
+141	                return image
+142	
+143	
+144	    def apply(self, ic_model_path, model: ModelPatcher, c_concat: dict, ic_model=None) -&gt; Tuple[ModelPatcher]:
+145	        try:
+146	            ModelPatcher.calculate_weight = calculate_weight_adjust_channel(ModelPatcher.calculate_weight)
+147	        except:
+148	            pass
+149	
+150	        device = comfy.model_management.get_torch_device()
+151	        dtype = comfy.model_management.unet_dtype()
+152	        work_model = model.clone()
+153	
+154	        # Apply scale factor.
+155	        base_model: BaseModel = work_model.model
+156	        scale_factor = base_model.model_config.latent_format.scale_factor
+157	
+158	        # [B, 4, H, W]
+159	        concat_conds: torch.Tensor = c_concat[&quot;samples&quot;] * scale_factor
+160	        # [1, 4 * B, H, W]
+161	        concat_conds = torch.cat([c[None, ...] for c in concat_conds], dim=1)
+162	
+163	        def unet_dummy_apply(unet_apply: Callable, params: UnetParams):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/kolors/chatglm/modeling_chatglm.py" target="_blank">/ComfyUI-Easy-Use/py/kolors/chatglm/modeling_chatglm.py</a><br>
+    <b>Line number: </b>1019<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+1003	
+1004	    def process_response(self, output, history):
+1005	        content = &quot;&quot;
+1006	        history = deepcopy(history)
+1007	        for response in output.split(&quot;&lt;|assistant|&gt;&quot;):
+1008	            metadata, content = response.split(&quot;\n&quot;, maxsplit=1)
+1009	            if not metadata.strip():
+1010	                content = content.strip()
+1011	                history.append({&quot;role&quot;: &quot;assistant&quot;, &quot;metadata&quot;: metadata, &quot;content&quot;: content})
+1012	                content = content.replace(&quot;[[训练时间]]&quot;, &quot;2023年&quot;)
+1013	            else:
+1014	                history.append({&quot;role&quot;: &quot;assistant&quot;, &quot;metadata&quot;: metadata, &quot;content&quot;: content})
+1015	                if history[0][&quot;role&quot;] == &quot;system&quot; and &quot;tools&quot; in history[0]:
+1016	                    content = &quot;\n&quot;.join(content.split(&quot;\n&quot;)[1:-1])
+1017	                    def tool_call(**kwargs):
+1018	                        return kwargs
+1019	                    parameters = eval(content)
+1020	                    content = {&quot;name&quot;: metadata.strip(), &quot;parameters&quot;: parameters}
+1021	                else:
+1022	                    content = {&quot;name&quot;: metadata.strip(), &quot;content&quot;: content}
+1023	        return content, history
+1024	
+1025	    @torch.inference_mode()
+1026	    def chat(self, tokenizer, query: str, history: List[Tuple[str, str]] = None, role: str = &quot;user&quot;,
+1027	             max_length: int = 8192, num_beams=1, do_sample=True, top_p=0.8, temperature=0.8, logits_processor=None,
+1028	             **kwargs):
+1029	        if history is None:
+1030	            history = []
+1031	        if logits_processor is None:
+1032	            logits_processor = LogitsProcessorList()
+1033	        logits_processor.append(InvalidScoreLogitsProcessor())
+1034	        gen_kwargs = {&quot;max_length&quot;: max_length, &quot;num_beams&quot;: num_beams, &quot;do_sample&quot;: do_sample, &quot;top_p&quot;: top_p,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/kolors/loader.py" target="_blank">/ComfyUI-Easy-Use/py/kolors/loader.py</a><br>
+    <b>Line number: </b>106<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+90	            raise ValueError(&quot;model_path is required&quot;)
+91	        self.device = device
+92	        if textmodel_json_config is None:
+93	            textmodel_json_config = os.path.join(
+94	                os.path.dirname(os.path.realpath(__file__)),
+95	                &quot;chatglm&quot;,
+96	                &quot;config_chatglm.json&quot;
+97	            )
+98	        with open(textmodel_json_config, &#x27;r&#x27;) as file:
+99	            config = json.load(file)
+100	        textmodel_json_config = ChatGLMConfig(**config)
+101	        is_accelerate_available = False
+102	        try:
+103	            from accelerate import init_empty_weights
+104	            from accelerate.utils import set_module_tensor_to_device
+105	            is_accelerate_available = True
+106	        except:
+107	            pass
+108	
+109	        from contextlib import nullcontext
+110	        with (init_empty_weights() if is_accelerate_available else nullcontext()):
+111	            self.text_encoder = ChatGLMModel(textmodel_json_config)
+112	            if &#x27;4bit&#x27; in model_path:
+113	                self.text_encoder.quantize(4)
+114	            elif &#x27;8bit&#x27; in model_path:
+115	                self.text_encoder.quantize(8)
+116	
+117	        sd = load_torch_file(model_path)
+118	        if is_accelerate_available:
+119	            for key in sd:
+120	                set_module_tensor_to_device(self.text_encoder, key, device=offload_device, value=sd[key])
+121	        else:
+122	            self.text_encoder.load_state_dict()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/layer_diffuse/__init__.py" target="_blank">/ComfyUI-Easy-Use/py/layer_diffuse/__init__.py</a><br>
+    <b>Line number: </b>63<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+47	                n[1][&quot;model_conds&quot;][&quot;c_concat&quot;] = CONDRegular(c_concat)
+48	                new_cond.append(n)
+49	            return new_cond
+50	
+51	        return (write_c_concat(cond), write_c_concat(uncond))
+52	
+53	    def apply_layer_diffusion(self, model: ModelPatcher, method, weight, samples, blend_samples, positive, negative, image=None, additional_cond=(None, None, None)):
+54	        control_img: Optional[torch.TensorType] = None
+55	        sd_version = get_sd_version(model)
+56	        model_url = LAYER_DIFFUSION[method.value][sd_version][&quot;model_url&quot;]
+57	
+58	        if image is not None:
+59	            image = image.movedim(-1, 1)
+60	
+61	        try:
+62	            ModelPatcher.calculate_weight = calculate_weight_adjust_channel(ModelPatcher.calculate_weight)
+63	        except:
+64	            pass
+65	
+66	        if method in [LayerMethod.FG_ONLY_CONV, LayerMethod.FG_ONLY_ATTN] and sd_version == &#x27;sd1&#x27;:
+67	            self.frames = 1
+68	        elif method in [LayerMethod.BG_TO_BLEND, LayerMethod.FG_TO_BLEND, LayerMethod.BG_BLEND_TO_FG, LayerMethod.FG_BLEND_TO_BG] and sd_version == &#x27;sd1&#x27;:
+69	            self.frames = 2
+70	            batch_size, _, height, width = samples[&#x27;samples&#x27;].shape
+71	            if batch_size % 2 != 0:
+72	                raise Exception(f&quot;The batch size should be a multiple of 2. 批次大小需为2的倍数&quot;)
+73	            control_img = image
+74	        elif method == LayerMethod.EVERYTHING and sd_version == &#x27;sd1&#x27;:
+75	            batch_size, _, height, width = samples[&#x27;samples&#x27;].shape
+76	            self.frames = 3
+77	            if batch_size % 3 != 0:
+78	                raise Exception(f&quot;The batch size should be a multiple of 3. 批次大小需为3的倍数&quot;)
+79	        if model_url is None:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-medium">
+    <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
+    <b>Test ID:</b> B506<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/stability.py" target="_blank">/ComfyUI-Easy-Use/py/libs/stability.py</a><br>
+    <b>Line number: </b>37<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
+
+<div class="code">
+<pre>
+21	        self.user_info = {}
+22	        self.getAPIKeys()
+23	
+24	    def getErrors(self, code):
+25	        errors = {
+26	            400: &quot;Bad Request&quot;,
+27	            403: &quot;ApiKey Forbidden&quot;,
+28	            413: &quot;Your request was larger than 10MiB.&quot;,
+29	            429: &quot;You have made more than 150 requests in 10 seconds.&quot;,
+30	            500: &quot;Internal Server Error&quot;,
+31	        }
+32	        return errors.get(code, &quot;Unknown Error&quot;)
+33	
+34	    def getAPIKeys(self):
+35	        if os.path.isfile(config_path):
+36	            with open(config_path, &#x27;r&#x27;) as f:
+37	                data = yaml.load(f, Loader=yaml.FullLoader)
+38	                if not data:
+39	                    data = {&#x27;STABILITY_API_KEY&#x27;: default_key, &#x27;STABILITY_API_DEFAULT&#x27;:0}
+40	                    with open(config_path, &#x27;w&#x27;) as f:
+41	                        yaml.dump(data, f)
+42	                if &#x27;STABILITY_API_KEY&#x27; not in data:
+43	                    data[&#x27;STABILITY_API_KEY&#x27;] = default_key
+44	                    data[&#x27;STABILITY_API_DEFAULT&#x27;] = 0
+45	                    with open(config_path, &#x27;w&#x27;) as f:
+46	                        yaml.dump(data, f)
+47	                api_keys = data[&#x27;STABILITY_API_KEY&#x27;]
+48	                self.api_current = data[&#x27;STABILITY_API_DEFAULT&#x27;]
+49	                self.api_keys = api_keys
+50	                return api_keys
+51	        else:
+52	            # create a yaml file
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-medium">
+    <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
+    <b>Test ID:</b> B506<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/stability.py" target="_blank">/ComfyUI-Easy-Use/py/libs/stability.py</a><br>
+    <b>Line number: </b>64<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
+
+<div class="code">
+<pre>
+48	                self.api_current = data[&#x27;STABILITY_API_DEFAULT&#x27;]
+49	                self.api_keys = api_keys
+50	                return api_keys
+51	        else:
+52	            # create a yaml file
+53	            with open(config_path, &#x27;w&#x27;) as f:
+54	                data = {&#x27;STABILITY_API_KEY&#x27;: default_key, &#x27;STABILITY_API_DEFAULT&#x27;:0}
+55	                yaml.dump(data, f)
+56	                return data[&#x27;STABILITY_API_KEY&#x27;]
+57	        pass
+58	
+59	    def setAPIKeys(self, api_keys):
+60	        if len(api_keys) &gt; 0:
+61	            self.api_keys = api_keys
+62	            # load and save the yaml file
+63	            with open(config_path, &#x27;r&#x27;) as f:
+64	                data = yaml.load(f, Loader=yaml.FullLoader)
+65	                data[&#x27;STABILITY_API_KEY&#x27;] = api_keys
+66	                with open(config_path, &#x27;w&#x27;) as f:
+67	                    yaml.dump(data, f)
+68	        return True
+69	
+70	    def setAPIDefault(self, current):
+71	        if current is not None:
+72	            self.api_current = current
+73	            # load and save the yaml file
+74	            with open(config_path, &#x27;r&#x27;) as f:
+75	                data = yaml.load(f, Loader=yaml.FullLoader)
+76	                data[&#x27;STABILITY_API_DEFAULT&#x27;] = current
+77	                with open(config_path, &#x27;w&#x27;) as f:
+78	                    yaml.dump(data, f)
+79	        return True
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-medium">
+    <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
+    <b>Test ID:</b> B506<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/stability.py" target="_blank">/ComfyUI-Easy-Use/py/libs/stability.py</a><br>
+    <b>Line number: </b>75<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
+
+<div class="code">
+<pre>
+59	    def setAPIKeys(self, api_keys):
+60	        if len(api_keys) &gt; 0:
+61	            self.api_keys = api_keys
+62	            # load and save the yaml file
+63	            with open(config_path, &#x27;r&#x27;) as f:
+64	                data = yaml.load(f, Loader=yaml.FullLoader)
+65	                data[&#x27;STABILITY_API_KEY&#x27;] = api_keys
+66	                with open(config_path, &#x27;w&#x27;) as f:
+67	                    yaml.dump(data, f)
+68	        return True
+69	
+70	    def setAPIDefault(self, current):
+71	        if current is not None:
+72	            self.api_current = current
+73	            # load and save the yaml file
+74	            with open(config_path, &#x27;r&#x27;) as f:
+75	                data = yaml.load(f, Loader=yaml.FullLoader)
+76	                data[&#x27;STABILITY_API_DEFAULT&#x27;] = current
+77	                with open(config_path, &#x27;w&#x27;) as f:
+78	                    yaml.dump(data, f)
+79	        return True
+80	
+81	    def generate_sd3_image(self, prompt, negative_prompt, aspect_ratio,  model, seed, mode=&#x27;text-to-image&#x27;, image=None, strength=1, output_format=&#x27;png&#x27;, node_name=&#x27;easy stableDiffusion3API&#x27;):
+82	        url = f&quot;{self.api_url}/v2beta/stable-image/generate/sd3&quot;
+83	        api_key = self.api_keys[self.api_current][&#x27;key&#x27;]
+84	        files = None
+85	        data = {
+86	            &quot;prompt&quot;: prompt,
+87	            &quot;mode&quot;: mode,
+88	            &quot;model&quot;: model,
+89	            &quot;seed&quot;: seed,
+90	            &quot;output_format&quot;: output_format,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/stability.py" target="_blank">/ComfyUI-Easy-Use/py/libs/stability.py</a><br>
+    <b>Line number: </b>104<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+88	            &quot;model&quot;: model,
+89	            &quot;seed&quot;: seed,
+90	            &quot;output_format&quot;: output_format,
+91	        }
+92	        if model == &#x27;sd3&#x27;:
+93	            data[&#x27;negative_prompt&#x27;] = negative_prompt
+94	
+95	        if mode == &#x27;text-to-image&#x27;:
+96	            files = {&quot;none&quot;: &#x27;&#x27;}
+97	            data[&#x27;aspect_ratio&#x27;] = aspect_ratio
+98	        elif mode == &#x27;image-to-image&#x27;:
+99	            pil_image = tensor2pil(image)
+100	            image_byte = pil2byte(pil_image)
+101	            files = {&quot;image&quot;: (&quot;output.png&quot;, image_byte, &#x27;image/png&#x27;)}
+102	            data[&#x27;strength&#x27;] = strength
+103	
+104	        response = requests.post(url,
+105	            headers={&quot;authorization&quot;: f&quot;{api_key}&quot;, &quot;accept&quot;: &quot;application/json&quot;},
+106	            files=files,
+107	            data=data,
+108	        )
+109	        if response.status_code == 200:
+110	            PromptServer.instance.send_sync(&#x27;stable-diffusion-api-generate-succeed&#x27;,{&quot;model&quot;:model})
+111	            json_data = response.json()
+112	            image_base64 = json_data[&#x27;image&#x27;]
+113	            image_data = image2base64(image_base64)
+114	            output_t = pil2tensor(image_data)
+115	            return output_t
+116	        else:
+117	            if &#x27;application/json&#x27; in response.headers[&#x27;Content-Type&#x27;]:
+118	                error_info = response.json()
+119	                log_node_error(node_name,  error_info.get(&#x27;name&#x27;, &#x27;No name provided&#x27;))
+120	                log_node_error(node_name, error_info.get(&#x27;errors&#x27;, [&#x27;No details provided&#x27;]))
+121	            error_status_text = self.getErrors(response.status_code)
+122	            PromptServer.instance.send_sync(&#x27;easyuse-toast&#x27;,{&quot;type&quot;: &quot;error&quot;, &quot;content&quot;: error_status_text})
+123	            raise Exception(f&quot;Failed to generate image: {error_status_text}&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/stability.py" target="_blank">/ComfyUI-Easy-Use/py/libs/stability.py</a><br>
+    <b>Line number: </b>133<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+117	            if &#x27;application/json&#x27; in response.headers[&#x27;Content-Type&#x27;]:
+118	                error_info = response.json()
+119	                log_node_error(node_name,  error_info.get(&#x27;name&#x27;, &#x27;No name provided&#x27;))
+120	                log_node_error(node_name, error_info.get(&#x27;errors&#x27;, [&#x27;No details provided&#x27;]))
+121	            error_status_text = self.getErrors(response.status_code)
+122	            PromptServer.instance.send_sync(&#x27;easyuse-toast&#x27;,{&quot;type&quot;: &quot;error&quot;, &quot;content&quot;: error_status_text})
+123	            raise Exception(f&quot;Failed to generate image: {error_status_text}&quot;)
+124	
+125	    # get user account
+126	    async def getUserAccount(self, cache=True):
+127	        url = f&quot;{self.api_url}/v1/user/account&quot;
+128	        api_key = self.api_keys[self.api_current][&#x27;key&#x27;]
+129	        name = self.api_keys[self.api_current][&#x27;name&#x27;]
+130	        if cache and name in self.user_info:
+131	            return self.user_info[name]
+132	        else:
+133	            response = requests.get(url, headers={&quot;Authorization&quot;: f&quot;Bearer {api_key}&quot;})
+134	            if response.status_code == 200:
+135	                user_info = response.json()
+136	                self.user_info[name] = user_info
+137	                return user_info
+138	            else:
+139	                PromptServer.instance.send_sync(&#x27;easyuse-toast&#x27;,{&#x27;type&#x27;: &#x27;error&#x27;, &#x27;content&#x27;: self.getErrors(response.status_code)})
+140	                return None
+141	
+142	    # get user balance
+143	    async def getUserBalance(self):
+144	        url = f&quot;{self.api_url}/v1/user/balance&quot;
+145	        api_key = self.api_keys[self.api_current][&#x27;key&#x27;]
+146	        response = requests.get(url, headers={
+147	            &quot;Authorization&quot;: f&quot;Bearer {api_key}&quot;
+148	        })
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/stability.py" target="_blank">/ComfyUI-Easy-Use/py/libs/stability.py</a><br>
+    <b>Line number: </b>146<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+130	        if cache and name in self.user_info:
+131	            return self.user_info[name]
+132	        else:
+133	            response = requests.get(url, headers={&quot;Authorization&quot;: f&quot;Bearer {api_key}&quot;})
+134	            if response.status_code == 200:
+135	                user_info = response.json()
+136	                self.user_info[name] = user_info
+137	                return user_info
+138	            else:
+139	                PromptServer.instance.send_sync(&#x27;easyuse-toast&#x27;,{&#x27;type&#x27;: &#x27;error&#x27;, &#x27;content&#x27;: self.getErrors(response.status_code)})
+140	                return None
+141	
+142	    # get user balance
+143	    async def getUserBalance(self):
+144	        url = f&quot;{self.api_url}/v1/user/balance&quot;
+145	        api_key = self.api_keys[self.api_current][&#x27;key&#x27;]
+146	        response = requests.get(url, headers={
+147	            &quot;Authorization&quot;: f&quot;Bearer {api_key}&quot;
+148	        })
+149	        if response.status_code == 200:
+150	            return response.json()
+151	        else:
+152	            PromptServer.instance.send_sync(&#x27;easyuse-toast&#x27;, {&#x27;type&#x27;: &#x27;error&#x27;, &#x27;content&#x27;: self.getErrors(response.status_code)})
+153	            return None
+154	
+155	stableAPI = StabilityAPI()
+156	
+157	
+158	@PromptServer.instance.routes.get(&quot;/easyuse/stability/api_keys&quot;)
+159	async def get_stability_api_keys(request):
+160	    stableAPI.getAPIKeys()
+161	    return web.json_response({&quot;keys&quot;: stableAPI.api_keys, &quot;current&quot;: stableAPI.api_current})
+162	
+163	@PromptServer.instance.routes.post(&quot;/easyuse/stability/set_api_keys&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/utils.py" target="_blank">/ComfyUI-Easy-Use/py/libs/utils.py</a><br>
+    <b>Line number: </b>52<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+36	def install_package(package, v=None, compare=True, compare_version=None):
+37	    run_install = True
+38	    if is_package_installed(package):
+39	        try:
+40	            installed_version = importlib.metadata.version(package)
+41	            if v is not None:
+42	                if compare_version is None:
+43	                    compare_version = v
+44	                if not compare or version.parse(installed_version) &gt;= version.parse(compare_version):
+45	                    run_install = False
+46	            else:
+47	                run_install = False
+48	        except:
+49	            run_install = False
+50	
+51	    if run_install:
+52	        import subprocess
+53	        package_command = package + &#x27;==&#x27; + v if v is not None else package
+54	        PromptServer.instance.send_sync(&quot;easyuse-toast&quot;, {&#x27;content&#x27;: f&quot;Installing {package_command}...&quot;, &#x27;duration&#x27;: 5000})
+55	        result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, package_command], capture_output=True, text=True)
+56	        if result.returncode == 0:
+57	            PromptServer.instance.send_sync(&quot;easyuse-toast&quot;, {&#x27;content&#x27;: f&quot;{package} installed successfully&quot;, &#x27;type&#x27;: &#x27;success&#x27;, &#x27;duration&#x27;: 5000})
+58	            print(f&quot;Package {package} installed successfully&quot;)
+59	            return True
+60	        else:
+61	            PromptServer.instance.send_sync(&quot;easyuse-toast&quot;, {&#x27;content&#x27;: f&quot;{package} installed failed&quot;, &#x27;type&#x27;: &#x27;error&#x27;, &#x27;duration&#x27;: 5000})
+62	            print(f&quot;Package {package} installed failed&quot;)
+63	            return False
+64	    else:
+65	        return False
+66	
+67	def compare_revision(num):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/utils.py" target="_blank">/ComfyUI-Easy-Use/py/libs/utils.py</a><br>
+    <b>Line number: </b>55<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+39	        try:
+40	            installed_version = importlib.metadata.version(package)
+41	            if v is not None:
+42	                if compare_version is None:
+43	                    compare_version = v
+44	                if not compare or version.parse(installed_version) &gt;= version.parse(compare_version):
+45	                    run_install = False
+46	            else:
+47	                run_install = False
+48	        except:
+49	            run_install = False
+50	
+51	    if run_install:
+52	        import subprocess
+53	        package_command = package + &#x27;==&#x27; + v if v is not None else package
+54	        PromptServer.instance.send_sync(&quot;easyuse-toast&quot;, {&#x27;content&#x27;: f&quot;Installing {package_command}...&quot;, &#x27;duration&#x27;: 5000})
+55	        result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, package_command], capture_output=True, text=True)
+56	        if result.returncode == 0:
+57	            PromptServer.instance.send_sync(&quot;easyuse-toast&quot;, {&#x27;content&#x27;: f&quot;{package} installed successfully&quot;, &#x27;type&#x27;: &#x27;success&#x27;, &#x27;duration&#x27;: 5000})
+58	            print(f&quot;Package {package} installed successfully&quot;)
+59	            return True
+60	        else:
+61	            PromptServer.instance.send_sync(&quot;easyuse-toast&quot;, {&#x27;content&#x27;: f&quot;{package} installed failed&quot;, &#x27;type&#x27;: &#x27;error&#x27;, &#x27;duration&#x27;: 5000})
+62	            print(f&quot;Package {package} installed failed&quot;)
+63	            return False
+64	    else:
+65	        return False
+66	
+67	def compare_revision(num):
+68	    global comfy_ui_revision
+69	    if not comfy_ui_revision:
+70	        comfy_ui_revision = get_comfyui_revision()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-medium">
+    <b>yaml_load: </b> Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().<br>
+    <b>Test ID:</b> B506<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/ComfyUI-Easy-Use/py/libs/wildcards.py" target="_blank">/ComfyUI-Easy-Use/py/libs/wildcards.py</a><br>
+    <b>Line number: </b>47<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b506_yaml_load.html</a><br>
+
+<div class="code">
+<pre>
+31	            if file.endswith(&#x27;.txt&#x27;):
+32	                file_path = os.path.join(root, file)
+33	                rel_path = os.path.relpath(file_path, wildcard_path)
+34	                key = os.path.splitext(rel_path)[0].replace(&#x27;\\&#x27;, &#x27;/&#x27;).lower()
+35	
+36	                try:
+37	                    with open(file_path, &#x27;r&#x27;, encoding=&quot;ISO-8859-1&quot;) as f:
+38	                        lines = f.read().splitlines()
+39	                        easy_wildcard_dict[key] = lines
+40	                except UnicodeDecodeError:
+41	                    with open(file_path, &#x27;r&#x27;, encoding=&quot;UTF-8&quot;, errors=&quot;ignore&quot;) as f:
+42	                        lines = f.read().splitlines()
+43	                        easy_wildcard_dict[key] = lines
+44	            elif file.endswith(&#x27;.yaml&#x27;):
+45	                file_path = os.path.join(root, file)
+46	                with open(file_path, &#x27;r&#x27;) as f:
+47	                    yaml_data = yaml.load(f, Loader=yaml.FullLoader)
+48	
+49	                    for k, v in yaml_data.items():
+50	                        read_wildcard(k, v)
+51	            elif file.endswith(&#x27;.json&#x27;):
+52	                file_path = os.path.join(root, file)
+53	                try:
+54	                    with open(file_path, &#x27;r&#x27;) as f:
+55	                        json_data = json.load(f)
+56	                        for key, value in json_data.items():
+57	                            key = wildcard_normalize(key)
+58	                            easy_wildcard_dict[key] = value
+59	                except ValueError:
+60	                    print(&#x27;json files load error&#x27;)
+61	    return easy_wildcard_dict
+62	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

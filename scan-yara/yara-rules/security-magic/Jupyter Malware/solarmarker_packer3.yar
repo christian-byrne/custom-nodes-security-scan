@@ -1,0 +1,20 @@
+/*
+ This Yara ruleset is under the GNU-GPLv2 license (http://www.gnu.org/licenses/gpl-2.0.html) and open to any user or organization, as long as you use it under this license.
+*/
+rule Solarmarker_Packer_Strings
+{
+   meta:
+        author = "Lucas Acha (http://www.lukeacha.com)"
+        description = "Observed ASCII and Wide strings of obfuscated solarmarker dll"
+        reference = "http://security5magics.blogspot.com/2020/12/tracking-jupyter-malware.html" 
+  strings:
+      $mz = "MZ"
+      $wstring1 = "zkabsr" wide
+      $astring1 = "keyPath" ascii
+      $astring2 = "hSection" ascii
+      $astring3 = "valueName" ascii
+      $astring4 = "StaticArrayInitTypeSize" ascii
+      $astring5 = "KeyValuePair" ascii
+  condition:
+     $mz at 0 and $wstring1 and 1 of ($astring*)
+}

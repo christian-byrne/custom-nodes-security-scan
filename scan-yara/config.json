@@ -1,0 +1,9 @@
+{
+  "MAX_TESTS": 1400,
+  "RULES_RELPATH": "scan-yara/yara-rules",
+  "EXCLUDE_TESTS": ["wirenet_dropper.yar", "ConventionEngine.yar", "suri.rules"],
+  "CUSTOM_NODES_DIR": "/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes",
+  "EXCLUDE_IN_NODE_DIRS": [".git", ".idea", "custom_wildcards"],
+  "EXCLUDE_NODES": [".git", "__pycache__", "custom_wildcards"],
+  "REPORTS_DIR": "docs"
+}

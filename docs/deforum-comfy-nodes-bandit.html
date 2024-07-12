@@ -1,0 +1,1244 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">5618</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/mapping.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/mapping.py</a><br>
+    <b>Line number: </b>27<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+11	NODE CLASS IMPORTS
+12	&quot;&quot;&quot;
+13	from .nodes.deforum_audiosync_nodes import *
+14	from .nodes.deforum_cache_nodes import *
+15	from .nodes.deforum_cnet_nodes import *
+16	from .nodes.deforum_cond_nodes import *
+17	from .nodes.deforum_data_nodes import *
+18	from .nodes.deforum_framewarp_node import *
+19	from .nodes.deforum_hybrid_nodes import *
+20	from .nodes.deforum_interpolation_nodes import *
+21	from .nodes.deforum_image_nodes import *
+22	from .nodes.deforum_iteration_nodes import *
+23	from .nodes.deforum_legacy_nodes import *
+24	from .nodes.deforum_logic_nodes import *
+25	try:
+26	    from .nodes.deforum_noise_nodes import AddCustomNoiseNode
+27	except:
+28	    pass
+29	try:
+30	    from .nodes.deforum_advnoise_node import AddAdvancedNoiseNode
+31	except:
+32	    pass
+33	from .nodes.deforum_prompt_nodes import *
+34	from .nodes.redirect_console_node import DeforumRedirectConsole
+35	from .nodes.deforum_sampler_nodes import *
+36	from .nodes.deforum_schedule_visualizer import *
+37	from .nodes.deforum_video_nodes import *
+38	
+39	from . import exec_hijack
+40	
+41	# Create an empty dictionary for class mappings
+42	NODE_CLASS_MAPPINGS = {}
+43	NODE_DISPLAY_NAME_MAPPINGS = {}
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/mapping.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/mapping.py</a><br>
+    <b>Line number: </b>31<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+15	from .nodes.deforum_cnet_nodes import *
+16	from .nodes.deforum_cond_nodes import *
+17	from .nodes.deforum_data_nodes import *
+18	from .nodes.deforum_framewarp_node import *
+19	from .nodes.deforum_hybrid_nodes import *
+20	from .nodes.deforum_interpolation_nodes import *
+21	from .nodes.deforum_image_nodes import *
+22	from .nodes.deforum_iteration_nodes import *
+23	from .nodes.deforum_legacy_nodes import *
+24	from .nodes.deforum_logic_nodes import *
+25	try:
+26	    from .nodes.deforum_noise_nodes import AddCustomNoiseNode
+27	except:
+28	    pass
+29	try:
+30	    from .nodes.deforum_advnoise_node import AddAdvancedNoiseNode
+31	except:
+32	    pass
+33	from .nodes.deforum_prompt_nodes import *
+34	from .nodes.redirect_console_node import DeforumRedirectConsole
+35	from .nodes.deforum_sampler_nodes import *
+36	from .nodes.deforum_schedule_visualizer import *
+37	from .nodes.deforum_video_nodes import *
+38	
+39	from . import exec_hijack
+40	
+41	# Create an empty dictionary for class mappings
+42	NODE_CLASS_MAPPINGS = {}
+43	NODE_DISPLAY_NAME_MAPPINGS = {}
+44	
+45	# Iterate through all classes defined in your code
+46	# Import the deforum_nodes.deforum_node module
+47	deforum_node_module = importlib.import_module(&#x27;deforum-comfy-nodes.deforum_nodes.mapping&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_audiosync_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_audiosync_nodes.py</a><br>
+    <b>Line number: </b>312<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+296	            &quot;sin&quot;: math.sin, &quot;cos&quot;: math.cos, &quot;tan&quot;: math.tan,
+297	            &quot;asin&quot;: math.asin, &quot;acos&quot;: math.acos, &quot;atan&quot;: math.atan,
+298	            &quot;sinh&quot;: math.sinh, &quot;cosh&quot;: math.cosh, &quot;tanh&quot;: math.tanh,
+299	            &quot;asinh&quot;: math.asinh, &quot;acosh&quot;: math.acosh, &quot;atanh&quot;: math.atanh,
+300	            &quot;sqrt&quot;: math.sqrt, &quot;exp&quot;: math.exp, &quot;log&quot;: math.log,
+301	            &quot;abs&quot;: math.fabs, &quot;pow&quot;: math.pow, &quot;floor&quot;: math.floor, &quot;ceil&quot;: math.ceil,
+302	            &quot;round&quot;: round, &quot;min&quot;: min, &quot;max&quot;: max, &quot;pi&quot;: math.pi, &quot;e&quot;: math.e,
+303	            &quot;factorial&quot;: math.factorial,
+304	            &quot;xor&quot;: lambda a, b: a ^ b,  # Python&#x27;s `^` operator for XOR
+305	            &quot;t&quot;: t, &quot;x&quot;: x, &quot;max_f&quot;: max_f, &quot;y&quot;: y, &quot;z&quot;: z,
+306	            # Boolean operations via lambda functions
+307	            &quot;and&quot;: lambda a, b: a and b,
+308	            &quot;or&quot;: lambda a, b: a or b,
+309	            &quot;not&quot;: lambda a: not a,
+310	        }
+311	        try:
+312	            return eval(expr, {&quot;__builtins__&quot;: {}}, allowed_locals)
+313	        except NameError as e:
+314	            raise ValueError(f&quot;Invalid expression: {e}&quot;)
+315	        except Exception as e:
+316	            raise ValueError(f&quot;Error evaluating expression: {repr(e)}&quot;)
+317	
+318	    def convert(self, type_name, amplitude, max_frames=500, math=&quot;x/100&quot;, filter_window=0, deforum_frame_data={}, y=None, z=None):
+319	        max_f = int(max_frames)
+320	
+321	        # Apply smoothing filter to the amplitude data if needed
+322	        amplitude_smoothed = np.convolve(amplitude, np.ones(filter_window) / filter_window, mode=&#x27;same&#x27;) if filter_window &gt; 0 else amplitude
+323	        y_smoothed = np.convolve(y, np.ones(filter_window) / filter_window, mode=&#x27;same&#x27;) if y is not None and filter_window &gt; 0 else y
+324	        z_smoothed = np.convolve(z, np.ones(filter_window) / filter_window, mode=&#x27;same&#x27;) if z is not None and filter_window &gt; 0 else z
+325	
+326	        frame_index = 0
+327	        modified_amplitude_list = []
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_interpolation_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_interpolation_nodes.py</a><br>
+    <b>Line number: </b>251<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+235	            np_image = cv2.normalize(np_image, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX)
+236	            np_image = np_image.astype(np.uint8)
+237	        else:
+238	            np_image = None
+239	        args = deforum_frame_data[&quot;args&quot;]
+240	        anim_args = deforum_frame_data[&quot;anim_args&quot;]
+241	        predict_depths = (
+242	                                 anim_args.animation_mode == &#x27;3D&#x27; and anim_args.use_depth_warping) or anim_args.save_depth_maps
+243	        predict_depths = predict_depths or (
+244	                anim_args.hybrid_composite and anim_args.hybrid_comp_mask_type in [&#x27;Depth&#x27;, &#x27;Video Depth&#x27;])
+245	
+246	        if &quot;depth_model&quot; not in gs.deforum_models or gs.deforum_depth_algo != anim_args.depth_algorithm:
+247	            self.vram_state = &quot;high&quot;
+248	            if &quot;depth_model&quot; in gs.deforum_models:
+249	                try:
+250	                    gs.deforum_models[&quot;depth_model&quot;].to(&quot;cpu&quot;)
+251	                except:
+252	                    pass
+253	                del gs.deforum_models[&quot;depth_model&quot;]
+254	
+255	            deforum_depth_algo = anim_args.depth_algorithm
+256	            if predict_depths:
+257	                keep_in_vram = True if self.vram_state == &#x27;high&#x27; else False
+258	                # device = (&#x27;cpu&#x27; if cmd_opts.lowvram or cmd_opts.medvram else self.root.device)
+259	                # TODO Set device in root in webui
+260	                device = &#x27;cuda&#x27;
+261	                gs.deforum_models[&quot;depth_model&quot;] = DepthModel(&quot;models/other&quot;, device,
+262	                                              keep_in_vram=keep_in_vram,
+263	                                              depth_algorithm=anim_args.depth_algorithm, Width=args.width,
+264	                                              Height=args.height,
+265	                                              midas_weight=anim_args.midas_weight)
+266	
+267	                # depth-based hybrid composite mask requires saved depth maps
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py</a><br>
+    <b>Line number: </b>109<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+93	    #         success, frame = self.cap.read()
+94	    #         self.current_frame = 0
+95	    #         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+96	    #         frame = np.array(frame).astype(np.float32)
+97	    #         frame = pil2tensor(frame)  # Convert to torch tensor
+98	    #
+99	    #     return (frame,self.current_frame,self.cap.get(cv2.CAP_PROP_POS_FRAMES),)
+100	    def load_video_frame(self, video, reset, iterative, start_frame, return_frames):
+101	        video_path = folder_paths.get_annotated_filepath(video)
+102	        max_frames = 0
+103	        frames = []
+104	
+105	        # Initialize or reset video capture
+106	        if self.cap is None or self.cap.get(cv2.CAP_PROP_POS_FRAMES) &gt;= self.cap.get(cv2.CAP_PROP_FRAME_COUNT) or self.video_path != video_path or reset:
+107	            try:
+108	                self.cap.release()
+109	            except:
+110	                pass
+111	            self.cap = cv2.VideoCapture(video_path)
+112	            self.current_frame = -1
+113	            self.video_path = video_path
+114	
+115	        if not iterative:
+116	            self.cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+117	            self.current_frame = start_frame - 1
+118	
+119	        max_frames = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
+120	
+121	        for _ in range(return_frames):
+122	            success, frame = self.cap.read()
+123	
+124	            if not success:
+125	                self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py</a><br>
+    <b>Line number: </b>159<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+143	
+144	        return (frame, self.current_frame, max_frames)
+145	
+146	    @classmethod
+147	    def IS_CHANGED(cls, text, autorefresh):
+148	        # Force re-evaluation of the node
+149	        if autorefresh == &quot;Yes&quot;:
+150	            return float(&quot;NaN&quot;)
+151	
+152	    @classmethod
+153	    def VALIDATE_INPUTS(cls, video):
+154	        if not folder_paths.exists_annotated_filepath(video):
+155	            return &quot;Invalid video file: {}&quot;.format(video)
+156	        return True
+157	
+158	temp_dir = tempfile.mkdtemp()
+159	hash_object = hashlib.md5(temp_dir.encode())
+160	hex_dig = hash_object.hexdigest()
+161	endpoint = f&quot;/tmp/{hex_dig}/{{filename}}&quot;
+162	
+163	
+164	@server.PromptServer.instance.routes.get(endpoint)
+165	async def serve_temp_file(request):
+166	    filename = request.match_info[&#x27;filename&#x27;]
+167	
+168	    if &#x27;..&#x27; in filename or filename.startswith(&#x27;/&#x27;):
+169	        return web.Response(status=400, text=&quot;Invalid file path.&quot;)
+170	
+171	    file_path = os.path.join(temp_dir, filename)
+172	
+173	    if os.path.isfile(file_path):
+174	        return web.FileResponse(file_path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py</a><br>
+    <b>Line number: </b>161<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+145	
+146	    @classmethod
+147	    def IS_CHANGED(cls, text, autorefresh):
+148	        # Force re-evaluation of the node
+149	        if autorefresh == &quot;Yes&quot;:
+150	            return float(&quot;NaN&quot;)
+151	
+152	    @classmethod
+153	    def VALIDATE_INPUTS(cls, video):
+154	        if not folder_paths.exists_annotated_filepath(video):
+155	            return &quot;Invalid video file: {}&quot;.format(video)
+156	        return True
+157	
+158	temp_dir = tempfile.mkdtemp()
+159	hash_object = hashlib.md5(temp_dir.encode())
+160	hex_dig = hash_object.hexdigest()
+161	endpoint = f&quot;/tmp/{hex_dig}/{{filename}}&quot;
+162	
+163	
+164	@server.PromptServer.instance.routes.get(endpoint)
+165	async def serve_temp_file(request):
+166	    filename = request.match_info[&#x27;filename&#x27;]
+167	
+168	    if &#x27;..&#x27; in filename or filename.startswith(&#x27;/&#x27;):
+169	        return web.Response(status=400, text=&quot;Invalid file path.&quot;)
+170	
+171	    file_path = os.path.join(temp_dir, filename)
+172	
+173	    if os.path.isfile(file_path):
+174	        return web.FileResponse(file_path)
+175	    else:
+176	        return web.Response(status=404, text=&quot;File not found.&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py</a><br>
+    <b>Line number: </b>334<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+318	            if deforum_frame_data.get(&quot;reset&quot;, None):
+319	                if image.shape[0] &gt; 1:
+320	                    for img in image:
+321	                        self.add_image(img)
+322	                else:
+323	                    self.add_image(image[0])
+324	        if enable_preview and image is not None:
+325	            # if audio is not None:
+326	            # Delete the previous temporary audio file if it exists
+327	            if self.audio_path and os.path.exists(os.path.join(self.temp_dir, self.audio_path)):
+328	                os.remove(os.path.join(self.temp_dir, self.audio_path))
+329	
+330	            self.audio_path = self.encode_audio_base64(audio, len(self.images), fps, 0)
+331	
+332	            ui_ret = {&quot;counter&quot;:(len(self.images),),
+333	                      &quot;should_dump&quot;:(clear_cache,),
+334	                      &quot;frames&quot;:([f&quot;/tmp/{self.hex_dig}/{os.path.basename(frame_path)}&quot; for frame_path in self.images] if restore else [f&quot;/tmp/{self.hex_dig}/{os.path.basename(frame_path)}&quot; for frame_path in new_images]),
+335	                      &quot;fps&quot;:(fps,),
+336	                      &quot;audio&quot;:(f&quot;/tmp/{self.hex_dig}/{self.audio_path}&quot;,)}
+337	            if waveform_image is not None:
+338	                ui_ret[&quot;waveform&quot;] = (tensor_to_webp_base64(waveform_image),)
+339	        else:
+340	            if anim_args is not None:
+341	                max_frames = anim_args.max_frames
+342	            else:
+343	                max_frames = len(self.images) + 5
+344	            if dump_by == &quot;max_frames&quot;:
+345	                dump = len(self.images) &gt;= max_frames
+346	            else:
+347	                dump = len(self.images) &gt;= dump_every
+348	            if deforum_frame_data.get(&quot;reset&quot;, None):
+349	                dump = True
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py</a><br>
+    <b>Line number: </b>334<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+318	            if deforum_frame_data.get(&quot;reset&quot;, None):
+319	                if image.shape[0] &gt; 1:
+320	                    for img in image:
+321	                        self.add_image(img)
+322	                else:
+323	                    self.add_image(image[0])
+324	        if enable_preview and image is not None:
+325	            # if audio is not None:
+326	            # Delete the previous temporary audio file if it exists
+327	            if self.audio_path and os.path.exists(os.path.join(self.temp_dir, self.audio_path)):
+328	                os.remove(os.path.join(self.temp_dir, self.audio_path))
+329	
+330	            self.audio_path = self.encode_audio_base64(audio, len(self.images), fps, 0)
+331	
+332	            ui_ret = {&quot;counter&quot;:(len(self.images),),
+333	                      &quot;should_dump&quot;:(clear_cache,),
+334	                      &quot;frames&quot;:([f&quot;/tmp/{self.hex_dig}/{os.path.basename(frame_path)}&quot; for frame_path in self.images] if restore else [f&quot;/tmp/{self.hex_dig}/{os.path.basename(frame_path)}&quot; for frame_path in new_images]),
+335	                      &quot;fps&quot;:(fps,),
+336	                      &quot;audio&quot;:(f&quot;/tmp/{self.hex_dig}/{self.audio_path}&quot;,)}
+337	            if waveform_image is not None:
+338	                ui_ret[&quot;waveform&quot;] = (tensor_to_webp_base64(waveform_image),)
+339	        else:
+340	            if anim_args is not None:
+341	                max_frames = anim_args.max_frames
+342	            else:
+343	                max_frames = len(self.images) + 5
+344	            if dump_by == &quot;max_frames&quot;:
+345	                dump = len(self.images) &gt;= max_frames
+346	            else:
+347	                dump = len(self.images) &gt;= dump_every
+348	            if deforum_frame_data.get(&quot;reset&quot;, None):
+349	                dump = True
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/deforum_video_nodes.py</a><br>
+    <b>Line number: </b>336<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+320	                    for img in image:
+321	                        self.add_image(img)
+322	                else:
+323	                    self.add_image(image[0])
+324	        if enable_preview and image is not None:
+325	            # if audio is not None:
+326	            # Delete the previous temporary audio file if it exists
+327	            if self.audio_path and os.path.exists(os.path.join(self.temp_dir, self.audio_path)):
+328	                os.remove(os.path.join(self.temp_dir, self.audio_path))
+329	
+330	            self.audio_path = self.encode_audio_base64(audio, len(self.images), fps, 0)
+331	
+332	            ui_ret = {&quot;counter&quot;:(len(self.images),),
+333	                      &quot;should_dump&quot;:(clear_cache,),
+334	                      &quot;frames&quot;:([f&quot;/tmp/{self.hex_dig}/{os.path.basename(frame_path)}&quot; for frame_path in self.images] if restore else [f&quot;/tmp/{self.hex_dig}/{os.path.basename(frame_path)}&quot; for frame_path in new_images]),
+335	                      &quot;fps&quot;:(fps,),
+336	                      &quot;audio&quot;:(f&quot;/tmp/{self.hex_dig}/{self.audio_path}&quot;,)}
+337	            if waveform_image is not None:
+338	                ui_ret[&quot;waveform&quot;] = (tensor_to_webp_base64(waveform_image),)
+339	        else:
+340	            if anim_args is not None:
+341	                max_frames = anim_args.max_frames
+342	            else:
+343	                max_frames = len(self.images) + 5
+344	            if dump_by == &quot;max_frames&quot;:
+345	                dump = len(self.images) &gt;= max_frames
+346	            else:
+347	                dump = len(self.images) &gt;= dump_every
+348	            if deforum_frame_data.get(&quot;reset&quot;, None):
+349	                dump = True
+350	                dump_now = True
+351	                clear_cache = True
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/deforum_nodes/nodes/redirect_console_node.py" target="_blank">/deforum-comfy-nodes/deforum_nodes/nodes/redirect_console_node.py</a><br>
+    <b>Line number: </b>58<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+42	
+43	    FUNCTION = &quot;fn&quot;
+44	    display_name = &quot;Redirect Console&quot;
+45	    CATEGORY = &quot;deforum/utils&quot;
+46	
+47	    def fn(self, redirect_console):
+48	        global console_redirected
+49	
+50	        if redirect_console:
+51	            if not console_redirected:
+52	                try:
+53	                    import server
+54	                    server_instance = server.PromptServer.instance
+55	                    sys.stdout = StreamToWebSocket(sys.stdout, server_instance, &#x27;stdout&#x27;)
+56	                    sys.stderr = StreamToWebSocket(sys.stderr, server_instance, &#x27;stderr&#x27;)
+57	                    console_redirected = True
+58	                except:
+59	                    pass
+60	            else:
+61	                sys.stdout = stdout_backup
+62	                sys.stderr = stderr_backup
+63	        else:
+64	            if console_redirected:
+65	                sys.stdout = stdout_backup
+66	                sys.stderr = stderr_backup
+67	                console_redirected = False
+68	        return (console_redirected,)
+69	
+70	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>4<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import os
+2	import shutil
+3	import sys
+4	import subprocess
+5	import threading
+6	import locale
+7	import traceback
+8	import re
+9	import os
+10	import subprocess
+11	import sys
+12	import platform
+13	
+14	if sys.argv[0] == &#x27;install.py&#x27;:
+15	    sys.path.append(&#x27;.&#x27;)   # for portable version
+16	
+17	
+18	comfy_path = os.path.abspath(os.path.join(os.path.dirname(__file__), &#x27;..&#x27;, &#x27;..&#x27;))
+19	
+20	
+21	sys.path.append(comfy_path)
+22	
+23	
+24	# ---
+25	def handle_stream(stream, is_stdout):
+26	    stream.reconfigure(encoding=locale.getpreferredencoding(), errors=&#x27;replace&#x27;)
+27	
+28	    for msg in stream:
+29	        if is_stdout:
+30	            print(msg, end=&quot;&quot;, file=sys.stdout)
+31	        else: 
+32	            print(msg, end=&quot;&quot;, file=sys.stderr)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>10<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import os
+2	import shutil
+3	import sys
+4	import subprocess
+5	import threading
+6	import locale
+7	import traceback
+8	import re
+9	import os
+10	import subprocess
+11	import sys
+12	import platform
+13	
+14	if sys.argv[0] == &#x27;install.py&#x27;:
+15	    sys.path.append(&#x27;.&#x27;)   # for portable version
+16	
+17	
+18	comfy_path = os.path.abspath(os.path.join(os.path.dirname(__file__), &#x27;..&#x27;, &#x27;..&#x27;))
+19	
+20	
+21	sys.path.append(comfy_path)
+22	
+23	
+24	# ---
+25	def handle_stream(stream, is_stdout):
+26	    stream.reconfigure(encoding=locale.getpreferredencoding(), errors=&#x27;replace&#x27;)
+27	
+28	    for msg in stream:
+29	        if is_stdout:
+30	            print(msg, end=&quot;&quot;, file=sys.stdout)
+31	        else: 
+32	            print(msg, end=&quot;&quot;, file=sys.stderr)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>37<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+21	sys.path.append(comfy_path)
+22	
+23	
+24	# ---
+25	def handle_stream(stream, is_stdout):
+26	    stream.reconfigure(encoding=locale.getpreferredencoding(), errors=&#x27;replace&#x27;)
+27	
+28	    for msg in stream:
+29	        if is_stdout:
+30	            print(msg, end=&quot;&quot;, file=sys.stdout)
+31	        else: 
+32	            print(msg, end=&quot;&quot;, file=sys.stderr)
+33	            
+34	
+35	def process_wrap(cmd_str, cwd=None, handler=None):
+36	    print(f&quot;[Deforum] EXECUTE: {cmd_str} in &#x27;{cwd}&#x27;&quot;)
+37	    process = subprocess.Popen(cmd_str, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
+38	
+39	    if handler is None:
+40	        handler = handle_stream
+41	
+42	    stdout_thread = threading.Thread(target=handler, args=(process.stdout, True))
+43	    stderr_thread = threading.Thread(target=handler, args=(process.stderr, False))
+44	
+45	    stdout_thread.start()
+46	    stderr_thread.start()
+47	
+48	    stdout_thread.join()
+49	    stderr_thread.join()
+50	
+51	    return process.wait()
+52	# ---
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>63<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+47	
+48	    stdout_thread.join()
+49	    stderr_thread.join()
+50	
+51	    return process.wait()
+52	# ---
+53	
+54	
+55	pip_list = None
+56	
+57	
+58	def get_installed_packages():
+59	    global pip_list
+60	
+61	    if pip_list is None:
+62	        try:
+63	            result = subprocess.check_output([sys.executable, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;list&#x27;], universal_newlines=True)
+64	            pip_list = set([line.split()[0].lower() for line in result.split(&#x27;\n&#x27;) if line.strip()])
+65	        except subprocess.CalledProcessError as e:
+66	            print(f&quot;[ComfyUI-Manager] Failed to retrieve the information of installed pip packages.&quot;)
+67	            return set()
+68	    
+69	    return pip_list
+70	    
+71	
+72	def is_installed(name):
+73	    name = name.strip()
+74	    pattern = r&#x27;([^&lt;&gt;!=]+)([&lt;&gt;!=]=?)&#x27;
+75	    match = re.search(pattern, name)
+76	    
+77	    if match:
+78	        name = match.group(1)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>125<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+109	    # Get the parent directory
+110	    parent_directory = os.path.dirname(path)
+111	
+112	    # If the parent directory is the same as the current directory, we&#x27;ve reached the root and stop the search
+113	    if parent_directory == path:
+114	        return None
+115	
+116	    # Recursively call the function with the parent directory
+117	    return find_path(name, parent_directory)
+118	
+119	
+120	def run_git_command(command: str, working_dir: str) -&gt; None:
+121	    &quot;&quot;&quot;
+122	    Runs a git command in the specified working directory and handles basic errors.
+123	    &quot;&quot;&quot;
+124	    try:
+125	        subprocess.run(command, shell=True, check=True, cwd=working_dir)
+126	        print(f&quot;Successfully executed: {command} in {working_dir}&quot;)
+127	    except subprocess.CalledProcessError as e:
+128	        print(f&quot;Error executing {command} in {working_dir}: {e}&quot;)
+129	
+130	
+131	def clone_or_pull_repo(repo_url: str, repo_dir: str) -&gt; None:
+132	    &quot;&quot;&quot;
+133	    Clones a new repository or updates it if it already exists.
+134	    &quot;&quot;&quot;
+135	    if not os.path.exists(repo_dir):
+136	        os.makedirs(repo_dir, exist_ok=True)
+137	        run_git_command(f&quot;git clone {repo_url} .&quot;, repo_dir)
+138	    else:
+139	        run_git_command(&quot;git pull&quot;, repo_dir)
+140	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>170<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+154	        &quot;https://github.com/Fannovel16/ComfyUI-Frame-Interpolation.git&quot;,
+155	        &quot;https://github.com/Fannovel16/ComfyUI-Video-Matting.git&quot;,
+156	        &quot;https://github.com/crystian/ComfyUI-Crystools.git&quot;
+157	        # Add more repositories as needed
+158	    ]
+159	    comfyui_path = find_path(&quot;ComfyUI&quot;)
+160	    custom_nodes_path = os.path.join(comfyui_path, &#x27;custom_nodes&#x27;)
+161	
+162	
+163	
+164	    for repo_url in repositories:
+165	        repo_name = repo_url.split(&#x27;/&#x27;)[-1].replace(&#x27;.git&#x27;, &#x27;&#x27;)
+166	        repo_dir = os.path.join(custom_nodes_path, repo_name)
+167	        clone_or_pull_repo(repo_url, repo_dir)
+168	
+169	
+170	import subprocess
+171	
+172	
+173	def install_packages():
+174	    # Install packages from requirements.txt
+175	    # subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;requirements.txt&quot;], check=True)
+176	
+177	    # Force reinstall the deforum-studio package from Git
+178	    subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--force-reinstall&quot;, &quot;git+https://github.com/XmYx/deforum-studio.git&quot;],
+179	                   check=True)
+180	
+181	
+182	def get_cuda_version():
+183	    try:
+184	        cuda_version = subprocess.check_output([&quot;nvcc&quot;, &quot;--version&quot;]).decode(&quot;utf-8&quot;)
+185	        for line in cuda_version.split(&#x27;\n&#x27;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>178<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+162	
+163	
+164	    for repo_url in repositories:
+165	        repo_name = repo_url.split(&#x27;/&#x27;)[-1].replace(&#x27;.git&#x27;, &#x27;&#x27;)
+166	        repo_dir = os.path.join(custom_nodes_path, repo_name)
+167	        clone_or_pull_repo(repo_url, repo_dir)
+168	
+169	
+170	import subprocess
+171	
+172	
+173	def install_packages():
+174	    # Install packages from requirements.txt
+175	    # subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;requirements.txt&quot;], check=True)
+176	
+177	    # Force reinstall the deforum-studio package from Git
+178	    subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--force-reinstall&quot;, &quot;git+https://github.com/XmYx/deforum-studio.git&quot;],
+179	                   check=True)
+180	
+181	
+182	def get_cuda_version():
+183	    try:
+184	        cuda_version = subprocess.check_output([&quot;nvcc&quot;, &quot;--version&quot;]).decode(&quot;utf-8&quot;)
+185	        for line in cuda_version.split(&#x27;\n&#x27;):
+186	            if &quot;release&quot; in line:
+187	                return line.split(&#x27;release&#x27;)[1].split(&#x27;,&#x27;)[0].strip().replace(&#x27;.&#x27;, &#x27;&#x27;)
+188	    except Exception as e:
+189	        print(f&quot;Error getting CUDA version: {e}&quot;)
+190	        return None
+191	
+192	def get_torch_version():
+193	    try:
+194	        import torch
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>178<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+162	
+163	
+164	    for repo_url in repositories:
+165	        repo_name = repo_url.split(&#x27;/&#x27;)[-1].replace(&#x27;.git&#x27;, &#x27;&#x27;)
+166	        repo_dir = os.path.join(custom_nodes_path, repo_name)
+167	        clone_or_pull_repo(repo_url, repo_dir)
+168	
+169	
+170	import subprocess
+171	
+172	
+173	def install_packages():
+174	    # Install packages from requirements.txt
+175	    # subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;requirements.txt&quot;], check=True)
+176	
+177	    # Force reinstall the deforum-studio package from Git
+178	    subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--force-reinstall&quot;, &quot;git+https://github.com/XmYx/deforum-studio.git&quot;],
+179	                   check=True)
+180	
+181	
+182	def get_cuda_version():
+183	    try:
+184	        cuda_version = subprocess.check_output([&quot;nvcc&quot;, &quot;--version&quot;]).decode(&quot;utf-8&quot;)
+185	        for line in cuda_version.split(&#x27;\n&#x27;):
+186	            if &quot;release&quot; in line:
+187	                return line.split(&#x27;release&#x27;)[1].split(&#x27;,&#x27;)[0].strip().replace(&#x27;.&#x27;, &#x27;&#x27;)
+188	    except Exception as e:
+189	        print(f&quot;Error getting CUDA version: {e}&quot;)
+190	        return None
+191	
+192	def get_torch_version():
+193	    try:
+194	        import torch
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>184<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+168	
+169	
+170	import subprocess
+171	
+172	
+173	def install_packages():
+174	    # Install packages from requirements.txt
+175	    # subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;requirements.txt&quot;], check=True)
+176	
+177	    # Force reinstall the deforum-studio package from Git
+178	    subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--force-reinstall&quot;, &quot;git+https://github.com/XmYx/deforum-studio.git&quot;],
+179	                   check=True)
+180	
+181	
+182	def get_cuda_version():
+183	    try:
+184	        cuda_version = subprocess.check_output([&quot;nvcc&quot;, &quot;--version&quot;]).decode(&quot;utf-8&quot;)
+185	        for line in cuda_version.split(&#x27;\n&#x27;):
+186	            if &quot;release&quot; in line:
+187	                return line.split(&#x27;release&#x27;)[1].split(&#x27;,&#x27;)[0].strip().replace(&#x27;.&#x27;, &#x27;&#x27;)
+188	    except Exception as e:
+189	        print(f&quot;Error getting CUDA version: {e}&quot;)
+190	        return None
+191	
+192	def get_torch_version():
+193	    try:
+194	        import torch
+195	        return torch.__version__.split(&#x27;+&#x27;)[0]  # Removes the +cuXXX if exists
+196	    except ImportError:
+197	        print(&quot;PyTorch is not installed. Please install PyTorch before proceeding.&quot;)
+198	        sys.exit(1)
+199	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>184<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+168	
+169	
+170	import subprocess
+171	
+172	
+173	def install_packages():
+174	    # Install packages from requirements.txt
+175	    # subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;requirements.txt&quot;], check=True)
+176	
+177	    # Force reinstall the deforum-studio package from Git
+178	    subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--force-reinstall&quot;, &quot;git+https://github.com/XmYx/deforum-studio.git&quot;],
+179	                   check=True)
+180	
+181	
+182	def get_cuda_version():
+183	    try:
+184	        cuda_version = subprocess.check_output([&quot;nvcc&quot;, &quot;--version&quot;]).decode(&quot;utf-8&quot;)
+185	        for line in cuda_version.split(&#x27;\n&#x27;):
+186	            if &quot;release&quot; in line:
+187	                return line.split(&#x27;release&#x27;)[1].split(&#x27;,&#x27;)[0].strip().replace(&#x27;.&#x27;, &#x27;&#x27;)
+188	    except Exception as e:
+189	        print(f&quot;Error getting CUDA version: {e}&quot;)
+190	        return None
+191	
+192	def get_torch_version():
+193	    try:
+194	        import torch
+195	        return torch.__version__.split(&#x27;+&#x27;)[0]  # Removes the +cuXXX if exists
+196	    except ImportError:
+197	        print(&quot;PyTorch is not installed. Please install PyTorch before proceeding.&quot;)
+198	        sys.exit(1)
+199	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/deforum-comfy-nodes/install.py" target="_blank">/deforum-comfy-nodes/install.py</a><br>
+    <b>Line number: </b>217<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+201	    # cuda_version: e.g., &quot;110&quot;, &quot;102&quot;
+202	    # py_version: e.g., &quot;38&quot;, &quot;37&quot;
+203	    # os_name: either &quot;linux&quot; or &quot;win&quot;
+204	    os_map = {&quot;Linux&quot;: &quot;manylinux2014_x86_64&quot;, &quot;Windows&quot;: &quot;win_amd64&quot;}
+205	    torch_version = get_torch_version().replace(&#x27;.&#x27;, &#x27;&#x27;)
+206	    cuda_str = f&quot;cu{cuda_version}&quot; if cuda_version else &quot;cpu&quot;
+207	    filename = f&quot;stable_fast-1.0.4+torch{torch_version}{cuda_str}-cp{py_version}-cp{py_version}-{os_map[os_name]}.whl&quot;
+208	    return filename
+209	
+210	def install_stable_fast():
+211	    cuda_version = get_cuda_version()
+212	    python_version = f&quot;{sys.version_info.major}{sys.version_info.minor}&quot;
+213	    os_name = platform.system()
+214	    wheel_name = construct_wheel_name(cuda_version, python_version, os_name)
+215	    url = f&quot;https://github.com/chengzeyi/stable-fast/releases/download/v1.0.4/{wheel_name}&quot;
+216	    print(f&quot;Attempting to install: {wheel_name}&quot;)
+217	    subprocess.run([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, url])
+218	
+219	
+220	
+221	if __name__ == &quot;__main__&quot;:
+222	    print(&quot;Installing packages...&quot;)
+223	    # try:
+224	    #     install_packages()
+225	    #     print(&quot;Installation complete.&quot;)
+226	    # except Exception as e:
+227	    #     print(&quot;[warning] deforum backend package install failed, if you encounter any issues, please activate your venv and run:\npip install git+https://github.com/XmYxdeforum-studio.git\nIf you are using ComfyUI portable, you have to locate your python executable and add that&#x27;s path before the pip install command.&quot;)
+228	    #     pass
+229	    try:
+230	        install_stable_fast()
+231	        print(&quot;Installed Stable Fast 1.0.4&quot;)
+232	    except:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
