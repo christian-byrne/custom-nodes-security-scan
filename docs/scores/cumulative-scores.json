@@ -1,0 +1,358 @@
+{
+    "stability-ComfyUI-nodes": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "rgthree-comfy": {
+        "raw": 402.08,
+        "z_score": -0.1660849183881724
+    },
+    "masquerade-nodes-comfyui": {
+        "raw": 2.44,
+        "z_score": -0.2440759361332761
+    },
+    "ComfyUI-DepthAnythingV2": {
+        "raw": 0.16,
+        "z_score": -0.2445208853887531
+    },
+    "ComfyUi_PromptStylers": {
+        "raw": 649.4,
+        "z_score": -0.11781963335984927
+    },
+    "ComfyUI_ADV_CLIP_emb": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "mikey_nodes": {
+        "raw": 113.04,
+        "z_score": -0.2224919941789961
+    },
+    "facerestore_cf": {
+        "raw": 182.8,
+        "z_score": -0.20887810818685706
+    },
+    "ComfyUI-Iterative-Mixer": {
+        "raw": 385.0,
+        "z_score": -0.1694181347406055
+    },
+    "nui-suite": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "comfyui-PromptAttention": {
+        "raw": 523.9599999999999,
+        "z_score": -0.14229964853837448
+    },
+    "sdxl_prompt_styler": {
+        "raw": 64.0,
+        "z_score": -0.23206230623539656
+    },
+    "ComfyUI-WD14-Tagger": {
+        "raw": 200.35999999999999,
+        "z_score": -0.20545121830695512
+    },
+    "ComfyUI-BlenderAI-node": {
+        "raw": 17424.208000000002,
+        "z_score": 3.1558375290831195
+    },
+    "cg-use-everywhere": {
+        "raw": 184.2,
+        "z_score": -0.20860489373173957
+    },
+    "ComfyUI-Griptape": {
+        "raw": 7.199999999999999,
+        "z_score": -0.2431470069858767
+    },
+    "comfyui-profiler": {
+        "raw": 0.32,
+        "z_score": -0.24448966087959687
+    },
+    "comfyui-prompt-control": {
+        "raw": 0.256,
+        "z_score": -0.24450215068325934
+    },
+    "efficiency-nodes-comfyui": {
+        "raw": 865.6800000000001,
+        "z_score": -0.07561190310784487
+    },
+    "ComfyUI-LivePortraitKJ": {
+        "raw": 53.36,
+        "z_score": -0.23413873609428934
+    },
+    "comfyui-Image-reward": {
+        "raw": 283.76,
+        "z_score": -0.18917544290924304
+    },
+    "ComfyUI-Frame-Interpolation": {
+        "raw": 282.728,
+        "z_score": -0.18937684099330104
+    },
+    "ComfyUI_FizzNodes": {
+        "raw": 155.44,
+        "z_score": -0.2142174992525813
+    },
+    "AIGODLIKE-ComfyUI-Translation": {
+        "raw": 5130.48,
+        "z_score": 0.7566773884528555
+    },
+    "ComfyUI_VLM_nodes": {
+        "raw": 110.28,
+        "z_score": -0.22303061696194196
+    },
+    "pose-generator-comfyui-node": {
+        "raw": 1681.68,
+        "z_score": 0.08363309358919405
+    },
+    "was-node-suite-comfyui": {
+        "raw": 1238.56,
+        "z_score": -0.002843184519129365
+    },
+    "ComfyUI_tinyterraNodes": {
+        "raw": 87.696,
+        "z_score": -0.2274379564293512
+    },
+    "comfyui-prompt-reader-node": {
+        "raw": 737.2,
+        "z_score": -0.10068518396033943
+    },
+    "ComfyUI-DataSet": {
+        "raw": 40.04,
+        "z_score": -0.2367381764815498
+    },
+    "ComfyUI-OpenPose-Editor": {
+        "raw": 303.16,
+        "z_score": -0.1853894711740438
+    },
+    "ComfyUI-PNG-Metadata": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI_Comfyroll_CustomNodes": {
+        "raw": 721.96,
+        "z_score": -0.10365931845747531
+    },
+    "ComfyUI-AnimateDiff-Evolved": {
+        "raw": 1002.68,
+        "z_score": -0.04887591714277831
+    },
+    "ComfyUI-Easy-Use": {
+        "raw": 1486.568,
+        "z_score": 0.04555636589856577
+    },
+    "ComfyUI-dimension-node-modusCell": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "eden_comfy_pipelines": {
+        "raw": 175.16000000000003,
+        "z_score": -0.21036907849906952
+    },
+    "ComfyUI_IPAdapter_plus": {
+        "raw": 40.52,
+        "z_score": -0.23664450295408096
+    },
+    "comfyui_segment_anything": {
+        "raw": 492.84,
+        "z_score": -0.14837281556927137
+    },
+    "LoRA-Merger-ComfyUI": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI-VideoHelperSuite": {
+        "raw": 1.5999999999999999,
+        "z_score": -0.2442398648063466
+    },
+    "deforum-comfy-nodes": {
+        "raw": 75.07999999999997,
+        "z_score": -0.22990000897632404
+    },
+    "anynode": {
+        "raw": 14.8,
+        "z_score": -0.24166384280095332
+    },
+    "ComfyUI-Flowty-TripoSR": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI-Path-Helper": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI_MaraScott_Nodes": {
+        "raw": 43.28,
+        "z_score": -0.2361058801711351
+    },
+    "ComfyUI_essentials": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "comfyui-mixlab-nodes": {
+        "raw": 4162.768,
+        "z_score": 0.5678253121738299
+    },
+    "ComfyUI-Documents": {
+        "raw": 0.64,
+        "z_score": -0.24442721186128427
+    },
+    "ComfyUI-KepOpenAI": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "Derfuu_ComfyUI_ModdedNodes": {
+        "raw": 40.04,
+        "z_score": -0.2367381764815498
+    },
+    "comfyui-reactor-node": {
+        "raw": 933.12,
+        "z_score": -0.06245077249847196
+    },
+    "comfyui-node-beautify": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI-Prompt-MZ": {
+        "raw": 220.92000000000002,
+        "z_score": -0.20143886888037282
+    },
+    "ComfyUI-Impact-Pack": {
+        "raw": 5.5600000000000005,
+        "z_score": -0.2434670582047286
+    },
+    "ComfyUI-KJNodes": {
+        "raw": 46.0,
+        "z_score": -0.2355750635154783
+    },
+    "comfyui-sound-lab": {
+        "raw": 1.5999999999999999,
+        "z_score": -0.2442398648063466
+    },
+    "comfy-image-saver": {
+        "raw": 40.08,
+        "z_score": -0.23673037035426076
+    },
+    "mindsdb": {
+        "raw": 44720.216,
+        "z_score": 8.48274035237031
+    },
+    "comfyui-inpaint-nodes": {
+        "raw": 280.56,
+        "z_score": -0.18979993309236867
+    },
+    "ComfyUI-layerdiffuse": {
+        "raw": 64.0,
+        "z_score": -0.23206230623539656
+    },
+    "comfyui-ultralytics-yolo": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI-Manager": {
+        "raw": 1275.576,
+        "z_score": 0.004380605674176524
+    },
+    "comfyui-tooling-nodes": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "comfyui-lama-remover": {
+        "raw": 40.12,
+        "z_score": -0.2367225642269717
+    },
+    "Comfyui-ChatTTS": {
+        "raw": 111.92,
+        "z_score": -0.22271056574309003
+    },
+    "KepPromptLang": {
+        "raw": 1250.64,
+        "z_score": -0.00048573407783003293
+    },
+    "bilbox-comfyui": {
+        "raw": 145.48,
+        "z_score": -0.21616122494755988
+    },
+    "comfyui-yanc": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyUI-Inspire-Pack": {
+        "raw": 3.16,
+        "z_score": -0.2439354258420728
+    },
+    "ComfyUI_Custom_Nodes_AlekPet": {
+        "raw": 4046.0879999999997,
+        "z_score": 0.5450548388716111
+    },
+    "SeargeSDXL": {
+        "raw": 756.4,
+        "z_score": -0.09693824286158559
+    },
+    "comfyui-dynamicprompts": {
+        "raw": 400.8,
+        "z_score": -0.16633471446142264
+    },
+    "ComfyUI-Custom-Scripts": {
+        "raw": 97.84,
+        "z_score": -0.2254583225488429
+    },
+    "LoadLoraWithTags": {
+        "raw": 1.7999999999999998,
+        "z_score": -0.24420083416990124
+    },
+    "NodeGPT": {
+        "raw": 78.84,
+        "z_score": -0.2291662330111514
+    },
+    "comfyui_controlnet_aux": {
+        "raw": 4648.280000000001,
+        "z_score": 0.6625745239831105
+    },
+    "ComfyUI_UltimateSDUpscale": {
+        "raw": 64.16,
+        "z_score": -0.23203108172624026
+    },
+    "ComfyUI-Advanced-ControlNet": {
+        "raw": 0.8,
+        "z_score": -0.244395987352128
+    },
+    "ComfyUI_Cutoff": {
+        "raw": 0.256,
+        "z_score": -0.24450215068325934
+    },
+    "ComfyUI-ELLA": {
+        "raw": 40.04,
+        "z_score": -0.2367381764815498
+    },
+    "ComfyUI-Fans": {
+        "raw": 64.0,
+        "z_score": -0.23206230623539656
+    },
+    "ComfyUI-Image-Selector": {
+        "raw": 0.32,
+        "z_score": -0.24448966087959687
+    },
+    "cg-image-picker": {
+        "raw": 64.0,
+        "z_score": -0.23206230623539656
+    },
+    "ComfyUI_LayerStyle": {
+        "raw": 6036.679999999999,
+        "z_score": 0.9335252021867484
+    },
+    "comfy_mtb": {
+        "raw": 6223.44,
+        "z_score": 0.9699720104994188
+    },
+    "SD-Advanced-Noise": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    },
+    "ComfyI2I": {
+        "raw": 498.36,
+        "z_score": -0.14729557000337962
+    },
+    "ComfyUI-MimicMotion": {
+        "raw": 0.0,
+        "z_score": -0.2445521098979094
+    }
+}

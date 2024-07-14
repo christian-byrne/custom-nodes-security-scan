@@ -11,12 +11,11 @@ if [[ -z $SCAN_START_DIR ]]; then
     echo "Usage: $0 <SCAN_START_DIR>"
     exit 1
 fi
-if [[ $SCAN_START_DIR != *"/custom_nodes" ]]; then
-    SCAN_START_DIR="$SCAN_START_DIR/custom_nodes"
-fi
+
+sed -i "s|\\\$TARGET_DIR|$SCAN_START_DIR|g" ./config.json
 
 REPORTS_OUTPUT_DIR=$(dirname $0)/docs
-TEMPLATES_DIR=$(dirname $0)/report-formatters/html-templates
+TEMPLATES_DIR=$(dirname $0)/report-templates
 
 if [[ ! -d $REPORTS_OUTPUT_DIR ]]; then
     mkdir -p $REPORTS_OUTPUT_DIR
@@ -24,9 +23,17 @@ fi
 
 # --------------------------------------------------
 
-python3 ./scan-yara/main.py
-bash ./scan-bandit/bandit-scan.sh $SCAN_START_DIR $REPORTS_OUTPUT_DIR
+cd src
+python3 ./main.py
+
+# cd scan-blacklists
 # npm run scan-dependency-check
 # node ./scan-blacklists/index.js
-python3 ./scoring/calculate_scores.py $SCAN_START_DIR $REPORTS_OUTPUT_DIR $TEMPLATES_DIR
+
+cd ..
 python3 ./scripts/remove_path_roots_in_html.py $SCAN_START_DIR $REPORTS_OUTPUT_DIR
+
+escaped_target_dir=$(printf '%s\n' "$SCAN_START_DIR" | sed 's:[\/&]:\\&:g')
+sed -i "s|$escaped_target_dir|\\\$TARGET_DIR|g" ./config.json
+
+echo "Scan completed. Reports are available in $REPORTS_OUTPUT_DIR"

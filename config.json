@@ -1,0 +1,23 @@
+{
+  "max_tests_yara": 4000,
+  "log_level": "INFO",
+  "exclude_tests_yara": [
+    "wirenet_dropper.yar",
+    "ConventionEngine.yar",
+    "suri.rules",
+    "Old_Internal_PEiD.yar",
+    "Old_Internal_PEiD.yara",
+    "peid.yar",
+    "peid.yara",
+    "userdb_exeinfope.yar",
+    "userdb_exeinfope.yara"
+  ],
+  "exclude_tests_bandit": ["B101", "B112", "B311"],
+  "target_dir": "$TARGET_DIR",
+  "exclude_packages": [".git", "__pycache__", "custom_wildcards"],
+  "exclude_in_packages": [".git", ".idea", "custom_wildcards"],
+  "reports_dirname": "docs",
+  "report_templates_dir_relpath": "report-templates",
+  "yara_report_template_filename": "yara-results-template.html",
+  "yara_rules_relpath" : "src/scan/yara/yara-rules"
+}

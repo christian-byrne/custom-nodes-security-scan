@@ -1,0 +1,534 @@
+:toc:
+:toclevels: 2
+
+= Winnti Group -- Indicators of Compromise
+
+== PortReuse backdoor, ShadowPad and Winnti Indicators of Compromise
+
+These are the IoCs from
+https://www.welivesecurity.com/wp-content/uploads/2019/10/ESET_Winnti.pdf[
+"Connecting the dots: exposing the arsenal and methods of the Winnti Group"]
+white paper.
+
+A blog post summarizing ESET's research is also available on
+http://www.welivesecurity.com[WeLiveSecurity] at
+https://www.welivesecurity.com/2019/10/14/connecting-dots-exposing-arsenal-methods-winnti/.
+
+=== Samples
+==== PortReuse .NET injector
+|=====
+|SHA-1                                     |ESET Detection name
+|`395e87c5bd00f78bf4c63880c6982a7941a2ecd0`|MSIL/Injector.UNL
+|=====
+
+==== PortReuse VBS injector
+|=====
+|SHA-1                                     |ESET Detection name
+|`08b825c87171500e694798527e17a849160b0a72`|MSIL/Injector.UNL
+|=====
+
+==== PortReuse InnerLoader
+|=====
+|SHA-1                                     |ESET Detection name
+|`97709d62531d12a6994bce5787d519db52435a62`|Win64/Injector.BT
+|`252640016FAEFF97FA22EB2B736973ED16D73FBE`|Win64/Injector.BT
+|`F5BA05240B1609D4131D5DCA7F5E6E90B5748004`|Win64/Injector.BS
+|=====
+
+==== PortReuse NetAgent
+|=====
+|SHA-1                                     |ESET Detection name
+|`E14A6A8447CE1D45494E613D6327430D9025A2E5`|Win64/Winnti.CG
+|`74A68DAD4BC87EACCA93106832F8B4AEE82843A2`|Win64/Winnti.CG
+|`5AB3461B17EE3806ABBB06B8966F6B0011F3D8F2`|Win64/Winnti.CG
+|=====
+
+==== PortReuse SK3
+|=====
+|SHA-1                                     |ESET Detection name
+|`A1AED6FD6990A74590864F9D2A6E714A715FCE3E`|Win64/Winnti.CF
+|`E0F276ED16027ED2953A7B0E5274D3F563A75A9D`|Win64/Winnti.CF
+|`14C32D0C0346EF4A2B1993FDA9AAB670806B9284`|Win64/Winnti.CF
+|=====
+
+==== PortReuse merged NetAgent & SK3
+|=====
+|SHA-1                                     |ESET Detection name
+|`52A8C38890360D0B32993A44C9E94E660F3FA8F4`|Win64/Winnti.BU
+|`20CA6EAE9D6CF2275F9BFD24A0E07F75BEE119BA`|Win64/Winnti.BU
+|`DBE3EECE00C255A3FDF924B82621394377B0E865`|Win64/Winnti.BU
+|=====
+
+==== PortReuse UserFunction
+|=====
+|SHA-1                                     |ESET Detection name
+|`A08922372042B4C3C0FAA120E9DD626823CDB3C7`|Win64/Winnti.CI
+|`93F623C91F579D33788F84A9A83478CD2E9646AA`|Win64/Winnti.CI
+|=====
+
+==== PortReuse ProcTran
+|=====
+|SHA-1                                     |ESET Detection name
+|`44DDBF7AA256A4B0E25DE585E95EA520BF2C4891`|Win64/Winnti.CH
+|`75B7A4B7E01CECC9AFBDAB01C49E9D7FCCACFDC0`|Win64/Winnti.CH
+|=====
+
+==== VMProtected ShadowPad
+|=====
+|SHA-1                                     |ESET Detection name
+|`82072CB53416C89BFEE95B239F9A90677A0848DF`|Win64/Winnti.BR.gen
+|`634344FAFD6E16F171B0857962149659639FDF41`|Win64/Winnti.BR.gen
+|`ED0C9354D34D6E9F09B7038D391E846CDD9E0EAE`|Win64/Agent.NM
+|`E6D43344A354EB17E0E0E76AD391FBCAF9C34119`|Win64/Winnti.BW
+|`22B82AE0819DA2FD887BE55A8508FFB46D02CA99`|Win64/Winnti.BV
+|`F14694BDDE921B31030300CC9BDC5574BA3D9F74`|Win64/Winnti.BR.gen
+|`971BB08196BBA400B07CF213345F55CE0A6EEDC8`|Win64/Packed.VMProtect.FH
+|`438178A5816D3EF6AC02D4DB929A48FA558E514C`|Win64/Packed.VMProtect.FH
+|`4DC5FADECE500CCD8CC49CFCF8A1B59BAEE3382A`|Win64/Packed.VMProtect.FH
+|`C44D06F79E5E42B08BE17A8A7DBAF61400F1DE28`|Win64/Winnti.BR
+|`672BB391B92681ADCFCFB4F2F728EDF32F2FB8FE`|Win64/Winnti.BR
+|=====
+
+==== VMProtected PortReuse
+|=====
+|SHA-1                                     |ESET Detection name
+|`9E8883A6DE72D338E2C0C1A0E291D013A0CE9058`|Win64/Winnti.BQ
+|`B09ADDDE1523C223C4F8FBF0E541C627E4A04400`|Win64/Winnti.BQ
+|`BD1F1494B8D18DAF07DE7D47549A7E27FF3FFD05`|Win64/Packed.VMProtect.HX
+|`757FF5EC3DC53ABBB62391B14883EF460F6FD404`|Win64/Packed.VMProtect.HX
+|`BDBADB2E3EEDD72DD6F8D9235699A139CAB69AAE`|Win64/Packed.VMProtect.HX
+|`4D090E6B749D4D3D8E413F44EB2DE6925C78CD82`|Win64/Packed.VMProtect.HX
+|`B4446480813D3BFC8DE4049A32A72CC0EB0D8094`|Win64/Packed.VMProtect.FH
+|=====
+
+==== Winnti droppers
+|=====
+|SHA-1                                     |ESET Detection name
+|`95A41FDDDC8CAF097902B484F8440BDDAD0C5B32`|Win32/Winnti.AH
+|`D9A54F79CA15C7E363DBE62B4D1C5C8D103103A2`|Win32/Winnti.AH
+|`DAF1CD345F44CB2BF1CFA8D68EECAF1961CBD51F`|Win32/Winnti.AH
+|`3DF753F56BB53F72D3DF735A898D7221C3B5272E`|Win64/TrojanDropper.Agent.CJ
+|`6C10C9D46531FBC5F0C2372A116AB31C730ED4B7`|Win64/TrojanDropper.Agent.CJ
+|`D74F1C8257409AD964DB22087A559609C2D0D978`|Win64/TrojanDropper.Agent.AM
+|`E6677E5E2D68BC544B210E69D9C8DF6A2752C20A`|Win64/TrojanDropper.Agent.CJ
+|`EC0E4A6E2E630267C13B449ED4CF3F04598E40DF`|Win64/TrojanDropper.Agent.CJ
+|`F61403E7730D17B967DA3143BC7CB33EEBE826C0`|Win64/TrojanDropper.Agent.CJ
+|`FD9DED44C47585541B89FFD25907A9A2ED41A995`|Win64/TrojanDropper.Agent.AM
+|`E0B1005DA5B35E31F09FC82A694F188A92CCA85D`|Win64/TrojanDropper.Agent.AM
+|`CD36CAF7F7CD9F161743348D2EA69A9E0254C3B5`|Win64/TrojanDropper.Agent.AM
+|`2C35E28FBA5D05F10430C4D70E4938426F38E228`|Win64/TrojanDropper.Agent.AM
+|`1AE6FBAD7AF15FB7E60DBBFEA964F0E49372AE53`|Win64/TrojanDropper.Agent.CJ
+|`1EC1B5A902869ED5D51012826A34FFA9225853CB`|Win32/Winnti.AK
+|=====
+
+==== Winnti
+|=====
+|SHA-1                                     |ESET Detection name
+|`B08D72576B93687DFC61ABFA740DD39490D6A262`|Win64/Agent.HE
+|`DE197A5DC5B38E4B72BC37C14CF38E577DDEB8B5`|Win64/Winnti.BE
+|`4EA2ED895111A70B9A59DF37343440E4A3A97A47`|Win64/Winnti.BE
+|`C452BDF6FF99243A12789FF4B99AC71A5DA5F696`|Win64/Agent.HE
+|`24AA07A0B3665BF97A1545B0F2749CD509F1B4CA`|Win64/Agent.HE
+|`E26B59789029D23BD9232FA6B1C90EC9379B9066`|Win64/Agent.HE
+|`C262D297EAEC622E3FB8E1FC2A0017E28168879A`|Win64/Agent.HH
+|`645720EC88C993B28D982C0AD89A5ACA79CE7E16`|Win64/Winnti.BE
+|`B6819C870DF88A973EB48B572AD1CFEAEB6A655A`|Win64/Winnti.BE
+|`8DF84B01B08EE983C66BECC59C0F361D246A96ED`|Win64/Winnti.BE
+|`723B27ABA08CBB3A9CA42F7E8350451D00829E5A`|Win64/Winnti.BK
+|`55155C3A7B993584A07ACDBF92F2200804C00E02`|Win64/Winnti.BM
+|`5105F3020B5E680FA66D664C7F8C811F072933CF`|Win64/Winnti.BM
+|`D62A0BD08C5B435D1B8A0505E8018D58A9667B2C`|Win64/Winnti.BM
+|`7B0AAE2AA17BD5712DD682F35C7A8E3E1CDCC57C`|Win64/Winnti.BM
+|=====
+
+==== AceHash
+|=====
+|SHA-1                                     |ESET Detection name
+|`47A262BAE22BB77850A1E3E38F8E529189D291F6`|Win64/Winnti.BY
+|`35C026F8C35BFCEECD23EACE19F09D3DF2FD72DA`|Win32/Spy.Agent.ORQ
+|`43FF18CEB3814F1DAE940AD977C59A96BB016E76`|Win32/Spy.Agent.ORQ
+|`D24BBB898A4A301870CAB85F836090B0FC968163`|Win64/Spy.Agent.F
+|=====
+
+==== XMRig
+|=====
+|SHA-1                                     |ESET Detection name
+|`70B21E3AC69F0220784228375BA6BEF37FE0C488`|Win32/CoinMiner.DV
+|`9BFB1C92489DA812DBE53B2A8E2CC2724CF74B4E`|Win64/CoinMiner.DN
+|`EE5FEB8E9428A04C454966F6E19E202CCB33545F`|Win64/CoinMiner.DN
+|=====
+
+=== Network
+==== IP addresses
+* 154.223.131.237
+* 117.16.142.9
+* 103.19.3.109
+* 110.45.146.253
+* 117.16.142.69
+* 122.10.117.206
+* 207.148.125.56
+* 118.193.236.206
+* 167.88.176.205
+* 103.224.83.95
+* 103.19.3.21
+
+==== Domains
+* xp101.dyn-dns.com
+* svn-dns.ahnlabinc.com
+* dns1-1.7release.com
+* ssl.dyn-dns.com
+
+==== PortReuse HTTP response
+`Server: Microsoft-IIS/ 10.0 Microsoft-HTTPAPI/2.0`
+
+=== MITRE ATT&CK matrix
+|=====
+|ID   |Name
+|T1195|Supply Chain Compromise
+|T1038|DLL Search Order Hijacking
+|T1179|Hooking
+|T1116|Code Signing
+|T1140|Deobfuscate/Decode Files or Information
+|T1158|Hidden Files and Directories
+|T1027|Obfuscated Files or Information
+|T1055|Process Injection
+|T1045|Software Packing
+|T1089|Disabling Security Tools
+|T1057|Process Discovery
+|T1043|Commonly Used Port
+|T1024|Custom Cryptographic Protocol
+|T1001|Data Obfuscation
+|T1104|Multi-Stage Channels
+|T1071|Standard Application Layer Protocol
+|T1032|Standard Cryptographic Protocol
+|T1041|Exfiltration Over Command and Control Channel
+|T1496|Resource Hijacking
+|T1492|Stored Data Manipulation
+|=====
+
+== Asian gaming industry supply-chain attacks Indicators of Compromise
+
+These are the IoCs from
+https://www.welivesecurity.com/2019/03/11/gaming-industry-scope-attackers-asia/[
+"Gaming industry still in the scope of attackers in Asia" article]
+on http://www.welivesecurity.com[WeLiveSecurity].
+
+=== Samples
+
+==== Compromised file samples (Win32/HackedApp.Winnti.A and B)
+
+[options="header"]
+|======
+| SHA-1                                      | Compile time (UTC)       | RC4 key      | Payload SHA-1
+| `7cf41b1acfb05064518a2ad9e4c16fde9185cd4b` | Tue Nov 13 10:12:58 2018 | `1729131071` | `8272c1f4`
+| `7f73def251fcc34cbd6f5ac61822913479124a2a` | Wed Nov 14 03:50:18 2018 | `19317120`   | `44260a1d`
+| `dac0bd8972f23c9b5f7f8f06c5d629eac7926269` | Tue Nov 27 03:05:16 2018 | `1729131071` | `8272c1f4`
+| `4830dcbcff55dac56e10362c73c70b444ddd569d` | Tue Nov 27 03:05:16 2018 | `1729131071` | `8272c1f4`
+|======
+
+==== Payload Samples (Win32/Winnti.AG)
+
+[options="header"]
+|======
+| SHA-1                                      | C&C server URL
+| `a045939f53c5ad2c0f7368b082aa7b0bd7b116da` | `\https://bugcheck.xigncodeservice.com/Common/Lib/Common_bsod.php`
+| `a260dcf193e747cee49ae83568eea6c04bf93cb3` | `\https://bugcheck.xigncodeservice.com/Common/Lib/Common_Include.php`
+| `dde82093decde6371eb852a5e9a1aa4acf3b56ba` | `\https://bugcheck.xigncodeservice.com/Common/Lib/common.php`
+| `8272c1f41f7c223316c0d78bd3bd5744e25c2e9f` | `\https://nw.infestexe.com/version/last.php`
+| `44260a1dfd92922a621124640015160e621f32d5` | `\https://dump.gxxservice.com/common/up/up_base.php`
+|======
+
+==== Second stage samples (Win64/Winnti.BN)
+
+[options="header"]
+|======
+| SHA-1                                      | Compile Time (UTC)  | C&C server URL prefix
+| `4256fa6f6a39add6a1fa10ef1497a74088f12be0` | 2018-07-25 10:13:41 | None
+| `bb4ab0d8d05a3404f1f53f152ebd79f4ba4d4d81` | 2018-10-10 09:57:31 | `\http://checkin.travelsanignacio.com`
+|======
+
+=== Network
+
+[options="header"]
+|======
+| Domain                         | Reason
+| `api.goallbandungtravel.com`   | Second stage payload location
+| `checkin.travelsanignacio.com` | Second stage update server
+| `bugcheck.xigncodeservice.com` | First stage C&C server
+| `nw.infestexe.com`             | First stage C&C server
+| `dump.gxxservice.com`          | First stage C&C server
+|======
+
+== skip-2.0 MSSQL backdoor Indicators of Compromise
+
+These are the IoCs from
+https://www.welivesecurity.com/2019/10/21/winnti-group-skip2-0-microsoft-sql-server-backdoor/[
+"Winnti group's skip-2.0: a MSSQL backdoor" blogpost]
+on http://www.welivesecurity.com[WeLiveSecurity]
+
+=== Samples
+==== VMProtected launcher
+
+|=====
+|SHA1                                      |ESET Detection name
+|`18E4FEB988CB95D71D81E1964AA6280E22361B9F`|Win64/Packed.VMProtect.HX
+|`4AF89296A15C1EA9068A279E05CC4A41B967C956`|Win64/Packed.VMProtect.HX
+|=====
+
+==== Inner-Loader
+
+|=====
+|SHA1                                      |ESET Detection name
+|`A2571946AB181657EB825CDE07188E8BCD689575`|Win64/Injector.BS
+|=====
+
+==== skip-2.0
+
+|=====
+|SHA1                                      |ESET Detection name
+|`60B9428D00BE5CE562FF3D888441220290A6DAC7`|Win32/Agent.SOK
+|=====
+
+==== Targeted sqllang.dll
+
+|=====
+|SHA1
+|`4396D3C904CD340984D474065959E8DD11915444`
+|`BE352631E6A6A9D0B7BBA9B82D910FA5AB40C64E`
+|`D4ADBC3F77ADE63B836FC4D9E5915A3479F09BD4`
+|`0BBD3321F93F3DCDD2A332D1F0326142B3F4961A`
+|`FAE6B48F1D6EDDEC79E62844C444FE3955411EE3`
+|`A25B25FFA17E63C6884E28E96B487F58DF4502E7`
+|=====
+
+=== YARA rule
+
+link:skip20_sqllang_hook.yar[`skip20_sqllang_hook.yar`]::
+    YARA rule to check if a sqllang.dll can be hooked by skip-2.0
+
+== Winnti Group targeting universities in Hong Kong Indicators of Compromise
+
+These are the IoCs from
+ https://www.welivesecurity.com/2020/01/31/winnti-group-targeting-universities-hong-kong/[
+"Winnti Group targeting universities in Hong Kong" blogpost]
+on http://www.welivesecurity.com[WeLiveSecurity]
+
+=== Detection names
+* Win32/Shadowpad.C trojan
+* Win64/Winnti.CA trojan
+
+=== Service display name
+----
+clr_optimization_v4.0.30229_32
+----
+
+=== File names
+----
+%ALLUSERSPROFILE%\DRM\CLR\hpqhvsei.dll
+%ALLUSERSPROFILE%\DRM\CLR\CLR.exe
+C:\windows\temp\hpqhvsei.dll
+C:\windows\temp\hpqhvind.exe
+%ALLUSERSPROFILE%\DRM\CLR\hpqhvsei.dll
+%SYSTEM32%\oci.dll
+%APPDATA%\PAGM\OEY\XWWEYG\WAOUE
+----
+
+=== C&C servers
+----
+b[org_name].dnslookup[.]services:443
+w[org_name].livehost[.]live:443
+w[org_name].dnslookup[.]services:443
+----
+
+=== Samples
+==== ShadowPad
+Similar sample to avoid disclosing the targeted universities.
+|=====
+|SHA1                                      |ESET Detection name
+|`693f0bd265e7a68b5b98f411ecf1cd3fed3c84af`|Win32/Shadowpad.C
+|=====
+
+=== MITRE ATT&CK matrix
+|=====
+|ID   |Name
+|T1050|New Service
+|T1073|DLL Side-Loading
+|T1055|Process Injection
+|T1140|Deobfuscate/Decode
+|T1027|Obfuscated Files or Information
+|T1143|Hidden Window
+|T1010|Application Window Discovery
+|T1083|File and Directory Discovery
+|T1071|Standard Application Layer Protocol
+|T1043|Commonly Used Port
+|T1065|Uncommonly Used Port
+|T1095|Standard Non-Application Layer Protocol
+|T1024|Custom Cryptographic Protocol
+|T1056|Input Capture
+|T1113|Screen Capture
+|T1022|Data Encrypted
+|=====
+
+== No "Game over" for the Winnti Group Indicators of Compromise
+
+These are the IoCs from
+ https://www.welivesecurity.com/2020/05/21/no-game-over-winnti-group/[
+"Winnti Group targeting universities in Hong Kong" blogpost]
+on http://www.welivesecurity.com[WeLiveSecurity]
+
+=== Detection names
+* Win64/PipeMon.A
+* Win64/PipeMon.B
+* Win64/PipeMon.C
+* Win64/PipeMon.D
+* Win64/PipeMon.E
+
+=== File names
+----
+Filenames
+100.exe
+103.exe
+Slack.exe
+setup.exe
+%SYSTEM32%\spool\prtprocs\x64\DEment.dll
+%SYSTEM32%\spool\prtprocs\x64\EntAppsvc.dll
+%SYSTEM32%\spool\prtprocs\x64\Interactive.dll
+%SYSTEM32%\spool\prtprocs\x64\banner.bmp
+%SYSTEM32%\spool\prtprocs\x64\certificate.cert
+%SYSTEM32%\spool\prtprocs\x64\banner.bmp
+%SYSTEM32%\spool\prtprocs\x64\License.hwp
+%SYSTEM32%\spool\prtprocs\x64\D8JNCKS0DJE
+%SYSTEM32%\spool\prtprocs\x64\B0SDFUWEkNCj.log
+%SYSTEM32%\spool\prtprocs\x64\K9ds0fhNCisdjf
+%SYSTEM32%\spool\prtprocs\x64\JSONDIU7c9djE
+%SYSTEM32%\spool\prtprocs\x64\NTFSSSE.log
+AceHash64.exe
+mz64x.exe
+----
+
+=== Named pipes
+----
+\\.\pipe\ScreenPipeRead%CNC_DEFINED%
+\\.\pipe\ScreenPipeWrite%CNC_DEFINED%
+\\.\pipe\RoutePipeWriite%B64_TIMESTAMP%
+\\.\pipe\MainPipeWrite%B64_TIMESTAMP%
+\\.\pipe\MainPipeRead%B64_TIMESTAMP%
+\\.\pipe\MainHeatPipeRead%B64_TIMESTAMP%
+\\.\pipe\InCmdPipeWrite%B64_TIMESTAMP%
+\\.\pipe\InCmdPipeRead%B64_TIMESTAMP%
+\\.\pipe\FilePipeRead%B64_TIMESTAMP%
+\\.\pipe\FilePipeWrite%B64_TIMESTAMP%
+\\.\pipe\ComHeatPipeRead%B64_TIMESTAMP%
+\\.\pipe\CMDPipeRead
+\\.\pipe\CMDPipeWrite
+----
+
+=== Registry
+----
+HKLM\SYSTEM\ControlSet001\Control\Print\Environments\Windows x64\Print Processors\PrintFiiterPipelineSvc\Driver = “DEment.dll”
+HKLM\SYSTEM\CurrentControlSet\Control\Print\Environments\Windows x64\Print Processors\lltdsvc1\Driver = “EntAppsvc.dll”
+HKLM\SOFTWARE\Microsoft\Print\Components\DC20FD7E-4B1B-4B88-8172-61F0BED7D9E8
+HKLM\SOFTWARE\Microsoft\Print\Components\A66F35-4164-45FF-9CB4-69ACAA10E52D
+----
+
+=== Samples
+==== First stage
+----
+4B90E2E2D1DEA7889DC15059E11E11353FA621A6
+C7A9DCD4F9B2F26F50E8DD7F96352AEC7C4123FE
+3508EB2857E279E0165DE5AD7BBF811422959158
+729D526E75462AA8D33A1493B5A77CB28DD654BC
+5663AF9295F171FDD41A6D819094A5196920AA4B
+----
+
+==== PipeMon
+----
+23789B2C9F831E385B22942DBC22F085D62B48C7
+53C5AE2655808365F1030E1E06982A7A6141E47F
+E422CC1D7B2958A59F44EE6D1B4E10B524893E9D
+5BB96743FEB1C3375A6E2660B8397C68BEF4AAC2
+78F4ACD69DC8F9477CAB9C732C91A92374ADCACD
+B56D8F826FA8E073E6AD1B99B433EAF7501F129E
+534CD47EB38FEE7093D24BAC66C2CF8DF24C7D03
+----
+
+==== PipeMon encrypted binaries
+----
+168101B9B3B512583B3CE6531CFCE6E5FB581409
+C887B35EA883F8622F7C48EC9D0427AFE833BF46
+44D0A2A43ECC8619DE8DB99C1465DB4E3C8FF995
+E17972F1A3C667EEBB155A228278AA3B5F89F560
+C03BE8BB8D03BE24A6C5CF2ED14EDFCEFA8E8429
+2B0481C61F367A99987B7EC0ADE4B6995425151C
+----
+
+==== Additional tools
+===== WinEggDrop
+----
+AF9C220D177B0B54A790C6CC135824E7C829B681
+----
+
+===== Mimikatz
+----
+4A240EDEF042AE3CE47E8E42C2395DB43190909D
+----
+
+===== Netcat
+----
+751A9CBFFEC28B22105CDCAF073A371DE255F176
+----
+
+===== HTran
+----
+48230228B69D764F71A7BF8C08C85436B503109E
+----
+
+===== AceHash
+----
+D24BBB898A4A301870CAB85F836090B0FC968163
+----
+
+=== Code-signing certificate SHA-1 thumbprints
+----
+745EAC99E03232763F98FB6099F575DFC7BDFAA3
+2830DE648BF0A521320036B96CE0D82BEF05994C
+----
+
+=== C&C domains
+----
+n8.ahnlabinc[.]com
+owa.ahnlabinc[.]com
+ssl2.ahnlabinc[.]com
+www2.dyn.tracker[.]com
+ssl2.dyn-tracker[.]com
+client.gnisoft[.]com
+nmn.nhndesk[.]com
+ssl.lcrest[.]com
+----
+
+=== C&C IP addresses
+----
+154.223.215[.]116
+203.86.239[.]113
+----
+
+=== MITRE ATT&CK matrix
+
+|=====
+|ID   |Name
+|T1013|Port Monitor
+|T1134|Access Token Manipulation
+|T1088|Bypass User Account Control
+|T1502|Parent PID Spoofing
+|T1116|Code Signing
+|T1027|Obfuscate Files or Information
+|T1112|Modify Registry
+|T1055|Process Injection
+|T1057|Process Discovery
+|T1063|Security Software discovery
+|T1113|Screen Capture
+|T1043|Commonly Used Ports
+|T1095|Custom Command and Control Protocol
+|T1032|Standard Cryptographic Protocol
+|T1008|Fallback Channels
+|=====

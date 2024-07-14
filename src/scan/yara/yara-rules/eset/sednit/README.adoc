@@ -1,0 +1,78 @@
+
+:toc:
+:toclevels: 2
+
+= Sednit Indicators of Compromise
+
+Find the whole Sednit whitepaper http://www.welivesecurity.com/wp-content/uploads/2016/10/eset-sednit-full.pdf[here].
+
+== Part 1: Approaching the Target
+
+For a description of Sednit, please see the
+http://www.welivesecurity.com/2016/10/20/new-eset-research-paper-puts-sednit-under-the-microscope/[article about Sednit part1]
+on http://www.welivesecurity.com[WeLiveSecurity].
+
+=== IoCs
+
+link:part1.adoc[Part 1: Approaching the Target]
+
+== Part 2: Observing the Comings and Goings
+
+For a description of Sednit, please see the
+http://www.welivesecurity.com/2016/10/25/lifting-lid-sednit-closer-look-software-uses/[article about Sednit part2]
+on http://www.welivesecurity.com[WeLiveSecurity].
+
+=== IoCs
+
+link:part2.adoc[Part 2: Observing the Comings and Goings]
+
+== Part 3: A Mysterious Downloader
+
+For a description of Sednit, please see the
+http://www.welivesecurity.com/2016/10/25/lifting-lid-sednit-closer-look-software-uses/[article about Sednit part3]
+on http://www.welivesecurity.com[WeLiveSecurity].
+
+=== IoCs
+
+link:part3.adoc[Part 3: A Mysterious Downloader]
+
+== Blog: Sednit adds two zero-day exploits using ‘Trump’s attack on Syria’ as a decoy
+
+For a description of this attack, please see the http://www.welivesecurity.com/2017/05/09/sednit-adds-two-zero-day-exploits-using-trumps-attack-syria-decoy/[Sednit adds two zero-day exploits using ‘Trump’s attack on Syria’ as a decoy] on http://www.welivesecurity.com[WeLiveSecurity]
+
+=== IoCs
+
+link:2017-05-09_Trump_Attack_on_Syria_IoCs.adoc[Sednit adds two zero-day exploits using ‘Trump’s attack on Syria’ as a decoy]
+link:2017-05-09_Trump_Attack_on_Syria_IoCs.json[MISP event]
+
+== LoJax: First UEFI rootkit found in the wild, courtesy of the Sednit group
+
+The white paper about LoJax UEFI rootkit is available link:https://www.welivesecurity.com/wp-content/uploads/2018/09/ESET-LoJax.pdf[here]
+
+A high level summary is also available as a blog post on link:https://www.welivesecurity.com/2018/09/27/lojax-first-uefi-rootkit-found-wild-courtesy-sednit-group/[WeLiveSecurity]
+
+=== IoCs
+
+link:lojax.adoc[LoJax: First UEFI rootkit found in the wild, courtesy of the Sednit group]
+
+== Blog: What’s going on with Zebrocy?
+
+For a description of this attack, please see the
+https://www.welivesecurity.com/2018/11/20/sednit-whats-going-zebrocy/[What’s going on with Zebrocy?]
+on http://www.welivesecurity.com[WeLiveSecurity]
+
+=== IoCs
+
+link:2018-11-20_Zebrocy.adoc[What’s going on with Zebrocy?]
+link:2018-11-20_Zebrocy.json[MISP event]
+
+== Blog: A journey to Zebrocy land
+
+For a description of this attack, please see the
+https://www.welivesecurity.com/2019/05/22/journey-zebrocy-land/[A journey to Zebrocy land]
+on http://www.welivesecurity.com[WeLiveSecurity]
+
+=== IoCs
+
+link:2019-05-23_Zebrocy.adoc[A journey to Zebrocy land]
+link:2019-05-23_Zebrocy.json[MISP event]

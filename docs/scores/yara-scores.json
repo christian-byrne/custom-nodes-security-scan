@@ -1,0 +1,920 @@
+{
+    "stability-ComfyUI-nodes": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "rgthree-comfy": {
+        "num_issues": 10,
+        "num_matched_patterns": 10,
+        "num_match_instances": 24,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "masquerade-nodes-comfyui": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-DepthAnythingV2": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUi_PromptStylers": {
+        "num_issues": 16,
+        "num_matched_patterns": 16,
+        "num_match_instances": 235,
+        "num_failed_tests": 5,
+        "failed_tests": [
+            "findcrypt",
+            "ft_zip",
+            "packer",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "ComfyUI_ADV_CLIP_emb": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "mikey_nodes": {
+        "num_issues": 3,
+        "num_matched_patterns": 1,
+        "num_match_instances": 1,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "userdb_panda",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "facerestore_cf": {
+        "num_issues": 4,
+        "num_matched_patterns": 4,
+        "num_match_instances": 4,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "dangerous-sites",
+            "suspicious_sites"
+        ]
+    },
+    "ComfyUI-Iterative-Mixer": {
+        "num_issues": 9,
+        "num_matched_patterns": 12,
+        "num_match_instances": 25,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "svg_onload_onerror",
+            "findcrypt"
+        ]
+    },
+    "nui-suite": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyui-PromptAttention": {
+        "num_issues": 13,
+        "num_matched_patterns": 13,
+        "num_match_instances": 95,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "powershell_obfuscation",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "sdxl_prompt_styler": {
+        "num_issues": 2,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI-WD14-Tagger": {
+        "num_issues": 5,
+        "num_matched_patterns": 5,
+        "num_match_instances": 5,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "Cerberus",
+            "crypto_signatures",
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-BlenderAI-node": {
+        "num_issues": 468,
+        "num_matched_patterns": 282,
+        "num_match_instances": 1693,
+        "num_failed_tests": 23,
+        "failed_tests": [
+            "warp",
+            "malware-families",
+            "index",
+            "dbgdetect",
+            "Cerberus",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "powershell_obfuscation",
+            "ft_ole_cf",
+            "findcrypt",
+            "ft_java_class",
+            "ft_macho",
+            "userdb_jclausing",
+            "ft_exe",
+            "userdb_panda",
+            "packer_compiler_signatures",
+            "anti_debugging",
+            "compiler",
+            "Detect_InjectCode_Unprotect",
+            "crypto_signatures",
+            "html_wasm",
+            "dangerous-sites",
+            "suspicious_sites"
+        ]
+    },
+    "cg-use-everywhere": {
+        "num_issues": 5,
+        "num_matched_patterns": 3,
+        "num_match_instances": 5,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "findcrypt",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI-Griptape": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyui-profiler": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyui-prompt-control": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "efficiency-nodes-comfyui": {
+        "num_issues": 22,
+        "num_matched_patterns": 20,
+        "num_match_instances": 34,
+        "num_failed_tests": 7,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler",
+            "ft_zip",
+            "userdb_jclausing",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-LivePortraitKJ": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 1,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "userdb_jclausing"
+        ]
+    },
+    "comfyui-Image-reward": {
+        "num_issues": 7,
+        "num_matched_patterns": 7,
+        "num_match_instances": 19,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "ComfyUI-Frame-Interpolation": {
+        "num_issues": 6,
+        "num_matched_patterns": 4,
+        "num_match_instances": 174,
+        "num_failed_tests": 6,
+        "failed_tests": [
+            "ft_zip",
+            "packer",
+            "findcrypt",
+            "powershell_obfuscation",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI_FizzNodes": {
+        "num_issues": 4,
+        "num_matched_patterns": 2,
+        "num_match_instances": 28,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler",
+            "powershell_obfuscation"
+        ]
+    },
+    "AIGODLIKE-ComfyUI-Translation": {
+        "num_issues": 160,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI_VLM_nodes": {
+        "num_issues": 3,
+        "num_matched_patterns": 1,
+        "num_match_instances": 13,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "powershell_obfuscation",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "pose-generator-comfyui-node": {
+        "num_issues": 42,
+        "num_matched_patterns": 42,
+        "num_match_instances": 42,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "was-node-suite-comfyui": {
+        "num_issues": 31,
+        "num_matched_patterns": 29,
+        "num_match_instances": 44,
+        "num_failed_tests": 5,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler",
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "ComfyUI_tinyterraNodes": {
+        "num_issues": 2,
+        "num_matched_patterns": 2,
+        "num_match_instances": 12,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "findcrypt",
+            "powershell_obfuscation"
+        ]
+    },
+    "comfyui-prompt-reader-node": {
+        "num_issues": 17,
+        "num_matched_patterns": 17,
+        "num_match_instances": 1343,
+        "num_failed_tests": 6,
+        "failed_tests": [
+            "userdb_jclausing",
+            "ft_zip",
+            "packer",
+            "misc_compressed_exe",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "ComfyUI-DataSet": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 1,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-OpenPose-Editor": {
+        "num_issues": 7,
+        "num_matched_patterns": 9,
+        "num_match_instances": 179,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "svg_onload_onerror",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "ComfyUI-PNG-Metadata": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI_Comfyroll_CustomNodes": {
+        "num_issues": 18,
+        "num_matched_patterns": 18,
+        "num_match_instances": 49,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "findcrypt",
+            "userdb_jclausing"
+        ]
+    },
+    "ComfyUI-AnimateDiff-Evolved": {
+        "num_issues": 25,
+        "num_matched_patterns": 25,
+        "num_match_instances": 47,
+        "num_failed_tests": 9,
+        "failed_tests": [
+            "ft_zip",
+            "crypto_signatures",
+            "findcrypt",
+            "UserDB",
+            "userdb_panda",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "dangerous-sites",
+            "suspicious_sites"
+        ]
+    },
+    "ComfyUI-Easy-Use": {
+        "num_issues": 35,
+        "num_matched_patterns": 41,
+        "num_match_instances": 348,
+        "num_failed_tests": 8,
+        "failed_tests": [
+            "index",
+            "dbgdetect",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "findcrypt",
+            "powershell_obfuscation",
+            "crypto_signatures",
+            "svg_onload_onerror"
+        ]
+    },
+    "ComfyUI-dimension-node-modusCell": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "eden_comfy_pipelines": {
+        "num_issues": 4,
+        "num_matched_patterns": 4,
+        "num_match_instances": 9,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "Spyeye",
+            "Cerberus",
+            "findcrypt"
+        ]
+    },
+    "ComfyUI_IPAdapter_plus": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 13,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "powershell_obfuscation"
+        ]
+    },
+    "comfyui_segment_anything": {
+        "num_issues": 12,
+        "num_matched_patterns": 12,
+        "num_match_instances": 60,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "LoRA-Merger-ComfyUI": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-VideoHelperSuite": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "deforum-comfy-nodes": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 2,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "anynode": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Flowty-TripoSR": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Path-Helper": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI_MaraScott_Nodes": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 3,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "ComfyUI_essentials": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyui-mixlab-nodes": {
+        "num_issues": 90,
+        "num_matched_patterns": 146,
+        "num_match_instances": 1730,
+        "num_failed_tests": 11,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "powershell_obfuscation",
+            "svg_onload_onerror",
+            "anti_av",
+            "crypto_signatures",
+            "html_wasm",
+            "warp",
+            "malware-families",
+            "userdb_jclausing"
+        ]
+    },
+    "ComfyUI-Documents": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-KepOpenAI": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "Derfuu_ComfyUI_ModdedNodes": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 1,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "userdb_jclausing"
+        ]
+    },
+    "comfyui-reactor-node": {
+        "num_issues": 22,
+        "num_matched_patterns": 22,
+        "num_match_instances": 62,
+        "num_failed_tests": 7,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "dangerous-sites",
+            "suspicious_sites",
+            "ft_zip",
+            "packer"
+        ]
+    },
+    "comfyui-node-beautify": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Prompt-MZ": {
+        "num_issues": 5,
+        "num_matched_patterns": 5,
+        "num_match_instances": 74,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "findcrypt",
+            "powershell_obfuscation"
+        ]
+    },
+    "ComfyUI-Impact-Pack": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-KJNodes": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 105,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "powershell_obfuscation"
+        ]
+    },
+    "comfyui-sound-lab": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfy-image-saver": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 2,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "mindsdb": {
+        "num_issues": 1093,
+        "num_matched_patterns": 1099,
+        "num_match_instances": 5128,
+        "num_failed_tests": 12,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "ft_pdf",
+            "packer_compiler_signatures",
+            "compiler",
+            "Spyeye",
+            "ft_zip",
+            "packer",
+            "dangerous-sites",
+            "suspicious_sites",
+            "userdb_jclausing"
+        ]
+    },
+    "comfyui-inpaint-nodes": {
+        "num_issues": 7,
+        "num_matched_patterns": 7,
+        "num_match_instances": 14,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-layerdiffuse": {
+        "num_issues": 2,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "comfyui-ultralytics-yolo": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Manager": {
+        "num_issues": 32,
+        "num_matched_patterns": 29,
+        "num_match_instances": 70,
+        "num_failed_tests": 9,
+        "failed_tests": [
+            "powershell_obfuscation",
+            "svg_onload_onerror",
+            "findcrypt",
+            "packer_compiler_signatures",
+            "compiler",
+            "dangerous-sites",
+            "suspicious_sites",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "comfyui-tooling-nodes": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyui-lama-remover": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 3,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "Comfyui-ChatTTS": {
+        "num_issues": 2,
+        "num_matched_patterns": 2,
+        "num_match_instances": 68,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "powershell_obfuscation"
+        ]
+    },
+    "KepPromptLang": {
+        "num_issues": 31,
+        "num_matched_patterns": 31,
+        "num_match_instances": 41,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "bilbox-comfyui": {
+        "num_issues": 4,
+        "num_matched_patterns": 2,
+        "num_match_instances": 5,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "findcrypt",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "comfyui-yanc": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Inspire-Pack": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI_Custom_Nodes_AlekPet": {
+        "num_issues": 96,
+        "num_matched_patterns": 114,
+        "num_match_instances": 1376,
+        "num_failed_tests": 8,
+        "failed_tests": [
+            "crypto_signatures",
+            "svg_onload_onerror",
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "packer_compiler_signatures",
+            "compiler",
+            "powershell_obfuscation"
+        ]
+    },
+    "SeargeSDXL": {
+        "num_issues": 18,
+        "num_matched_patterns": 20,
+        "num_match_instances": 137,
+        "num_failed_tests": 4,
+        "failed_tests": [
+            "findcrypt",
+            "powershell_obfuscation",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing"
+        ]
+    },
+    "comfyui-dynamicprompts": {
+        "num_issues": 10,
+        "num_matched_patterns": 10,
+        "num_match_instances": 20,
+        "num_failed_tests": 5,
+        "failed_tests": [
+            "Cerberus",
+            "ft_zip",
+            "packer",
+            "packers",
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-Custom-Scripts": {
+        "num_issues": 2,
+        "num_matched_patterns": 4,
+        "num_match_instances": 42,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "findcrypt",
+            "svg_onload_onerror"
+        ]
+    },
+    "LoadLoraWithTags": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "NodeGPT": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 8,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "comfyui_controlnet_aux": {
+        "num_issues": 105,
+        "num_matched_patterns": 99,
+        "num_match_instances": 2147,
+        "num_failed_tests": 13,
+        "failed_tests": [
+            "findcrypt",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "userdb_jclausing",
+            "powershell_obfuscation",
+            "packer",
+            "packer_compiler_signatures",
+            "compiler",
+            "ft_gzip",
+            "ft_zip",
+            "crypto_signatures",
+            "UserDB",
+            "userdb_panda"
+        ]
+    },
+    "ComfyUI_UltimateSDUpscale": {
+        "num_issues": 2,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI-Advanced-ControlNet": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI_Cutoff": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-ELLA": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 1,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "userdb_panda"
+        ]
+    },
+    "ComfyUI-Fans": {
+        "num_issues": 2,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI-Image-Selector": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "cg-image-picker": {
+        "num_issues": 2,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "ComfyUI_LayerStyle": {
+        "num_issues": 143,
+        "num_matched_patterns": 163,
+        "num_match_instances": 1579,
+        "num_failed_tests": 10,
+        "failed_tests": [
+            "dangerous-sites",
+            "suspicious_sites",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "findcrypt",
+            "crypto_signatures",
+            "svg_onload_onerror",
+            "anti_av",
+            "warp",
+            "malware-families"
+        ]
+    },
+    "comfy_mtb": {
+        "num_issues": 149,
+        "num_matched_patterns": 165,
+        "num_match_instances": 1998,
+        "num_failed_tests": 10,
+        "failed_tests": [
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "dangerous-sites",
+            "suspicious_sites",
+            "ft_zip",
+            "findcrypt",
+            "powershell_obfuscation",
+            "svg_onload_onerror",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "SD-Advanced-Noise": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyI2I": {
+        "num_issues": 12,
+        "num_matched_patterns": 14,
+        "num_match_instances": 43,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-MimicMotion": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    }
+}

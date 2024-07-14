@@ -1,0 +1,26 @@
+name: "Attachment: WSF File With Certificate Content (QakBot)"
+description: |
+  Detection of WSF script files containing fake certificate content as employed for QakBot delivery.
+type: "rule"
+severity: "high"
+authors:
+  - twitter: "delivr_to"
+references:
+  - https://delivr.to/payloads?id=6f7644eb-f31c-4240-8009-48a8db6fb417
+source: |
+  type.inbound 
+  and any(attachments, 
+      any(beta.binexplode(.),
+          .extension == "wsf" and
+          any(.flavors.yara, . == "x509_pem_file")
+      )
+  )
+  // unsolicited
+  and (
+    not profile.by_sender_email().solicited
+    or sender.email.domain.domain == "delivrto.me"
+  )
+
+tags:
+  - "Suspicious Attachment"
+  - "QakBot"

@@ -1,0 +1,34 @@
+name: "Attachment: HTML file with eval function and long byte string (Unsolicited)"
+description: |
+  HTML attachment using the eval() JavaScript function with a long string containing byte characters.
+type: "rule"
+severity: "low"
+authors:
+  - twitter: "delivr_to"
+references:
+  - https://delivr.to/payloads?id=2e5e3a7b-457d-4bd9-8cbe-77d3f403b74c
+  - https://twitter.com/doc_guard/status/1654257353649258502
+source: |
+  type.inbound
+  and any(attachments,
+    (
+      regex.imatch(.file_extension, '^[sdx]{0,1}ht[ml]{0,2}$') or
+      .file_extension in~ $file_extensions_common_archives or
+      .file_type == "html"
+    )
+    and any(file.explode(.),
+      any(.flavors.yara, . == "javascript_file") and 
+      any(.scan.strings.strings, 
+        regex.icontains(., "eval") and 
+        length(.) > 500 and 
+        regex.icontains(., '(.*\\x\w\w.*){20}')
+      )
+    )
+  )
+  and (
+    not profile.by_sender_email().solicited
+    or sender.email.domain.domain == "delivrto.me"
+  )
+tags:
+  - "Suspicious Attachment"
+  - "HTML Smuggling"

@@ -1,0 +1,1 @@
+https://yara.readthedocs.io/en/latest/yarapython.html

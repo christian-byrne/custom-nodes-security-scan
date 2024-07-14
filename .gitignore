@@ -5,6 +5,7 @@ pylint.yaml
 _site/
 .sass-cache/
 references.md
+.env
 
 node_modules/
 yara.log
@@ -15,3 +16,6 @@ _todo*.md
 **/**/results.log
 
 mass-clone.sh
+
+wiki/*.md
+replace.sh

@@ -1,0 +1,29 @@
+name: "Link: Zipped OneNote File"
+description: |
+  Link to a hosted or auto-downloading zip file that contains a OneNote file.
+type: "rule"
+severity: "medium"
+authors:
+  - twitter: "delivr_to"
+references:
+  - https://delivr.to/payloads?id=f9452a06-ba9c-41a5-9be1-19a8c1ec2d92
+source: |
+  type.inbound 
+  and any(body.links, 
+      // link to a hosted file / html smuggle
+      any(beta.linkanalysis(.).files_downloaded,
+          any(beta.binexplode(.), 
+              // top level file type is a zip
+              .depth == 0 and any(.flavors.yara, . == "zip_file") and 
+              // zip contains a OneNote file
+              any(.scan.zip.attempted_files, strings.ilike(., "*one", "*onepkg"))
+          )
+      )
+  )
+  and (
+    not profile.by_sender_email().solicited
+    or sender.email.domain.domain == "delivrto.me"
+  )
+
+tags:
+  - "Suspicious Link"

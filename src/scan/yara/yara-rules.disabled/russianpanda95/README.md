@@ -1,0 +1,47 @@
+### Yara Rules for: 
+
+- **Aurora Stealer**
+- **Bandit Stealer**
+- **Ducktail**
+- **Meduza Stealer**
+- **MetaStealer**
+- **Nitrogen**
+- **PSWSTEALER**
+- **RaccoonStealerv2**
+- **SolarMarker**
+- **Vidar Stealer**
+- **WhiteSnake Stealer**
+- **SwaetRAT**
+- **DanaBot**
+- **FakeBat**
+- **Ande Loader**
+- **WorkersDevBackdoor**
+- **Pure Logs Stealer**
+- **PikaBot**
+- **JinxLoader**
+- **GaryStealer**
+- **Illyrian Stealer**
+- **PureCrypter**
+- **Prysmax Stealer**
+- **Base64 Obfuscation**
+- **SmartApeSG**
+- **PowerShell Special Character Obfuscation**
+- **Atomic Stealer**
+- **Neptune Loader**
+- **FenixBotnet**
+- **XRed Backdoor**
+- **virusloader**
+- **SentinelStealer**
+- **ZharkBot**
+- **NarniaRAT**
+- **AsukaStealer**
+- **CleanUpLoader**
+- **D3F@ck Loader**
+- **RustyDropper**
+- **MpxDropper**
+- **Zloader**
+- **GlorySprout**
+- **GoBitLoader**
+- **Koi Stealer**
+- **Koi Loader**
+

@@ -1,0 +1,25 @@
+name: "Attachment: Extended HTML File Format (Unsolicited)"
+description: |
+  HTML attachment using an extended HTML (XHTML) file format (.xht, .xhtm, .xhtml).
+type: "rule"
+severity: "low"
+authors:
+  - twitter: "delivr_to"
+references:
+  - https://delivr.to/payloads?id=44381a80-9269-4974-9d16-a62318ec39f3
+  - https://twitter.com/Cryptolaemus1/status/1643674713317691393
+source: |
+  type.inbound and 
+
+  any(attachments, 
+      .file_extension in~ ("xht", "xhtm", "xhtml")
+  ) 
+  
+  and (
+    not profile.by_sender_email().solicited
+    or sender.email.domain.domain == "delivrto.me"
+  )
+tags:
+  - "Suspicious Attachment"
+  - "HTML Smuggling"
+  - "QakBot"

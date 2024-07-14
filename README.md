@@ -90,15 +90,56 @@
 > |   B703   | django_mark_safe                            |
 
 
-
-
-
-#### `1366 Yara Tests`
+#### `30 Blacklisted Python Imports`
 
 > <details>
 >
 > <summary>&nbsp; Test Details </summary>
 >
+> | Package Name | Test ID |
+> |---------|-----------|
+> | telnetlib   | B401 |
+> | ftplib   | B402 |
+> | httpoxy   | B412 |
+> | pycrypto   | B413 |
+> | pyghmi   | B415 |
+> | paramiko   | B601 |
+> | subprocess   | B602 |
+> | pip   | B816 |
+> | tarfile   | B817 |
+> | zipfile   | B818 |
+> | importlib   | B819 |
+> | imp   | B820 |
+> | pkgutil   | B821 |
+> | runpy   | B822 |
+> | ctpyes   | B823 |
+> | os.system   | B824 |
+> | pty   | B825 |
+> | requests.urlib   | B826 |
+> | http.server   | B827 |
+> | pickle   | B403 |
+> | subprocess   | B404 |
+> | xml.etree   | B405 |
+> | xml.sax   | B406 |
+> | xml.expat   | B407 |
+> | xml.minidom   | B408 |
+> | xml.pulldom   | B409 |
+> | lxml   | B410 |
+> | xmlrpclib   | B411 |
+>
+
+
+
+
+
+
+#### `3294 Yara Tests`
+
+> <details>
+>
+> <summary>&nbsp; Test Details </summary>
+>
+> 
 > | Source | Test Name |
 > |---------|-----------|
 > | telekom-security | teabot.yar |
@@ -1468,7 +1509,7 @@
 > | unprotect | Detect_DisableAV_Unprotect.yar |
 > | unprotect | compiler.yar |
 
-#### `808256 Blacklist (2022+) Checks`
+#### `808256 Blacklisted (2022+) IPs`
 
 >
 > <details><summary>&nbsp; Click to expand</summary>
@@ -1479,4 +1520,50 @@
 > </details>
 >
 
-This is a static analysis. Much better would be dynamic analsysis while running.
+&nbsp;
+
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## Usage
+
+To run scan:
+
+```bash
+./scan.sh $COMFY_MAIN_DIR/custom_nodes
+```
+
+
+To add blacklisted python calls, edit:
+
+```bash
+custom-nodes-security-scan/src/scan/bandit/blacklists/calls.py
+```
+
+To add blacklisted python imports, edit:
+
+```bash
+custom-nodes-security-scan/src/scan/bandit/blacklists/imports.py
+```
+
+To add more blacklisted websites/domains/IPs, edit:
+
+```bash
+custom-node-security-scan/src/scan/yara/yara-rules/aa-comfy-nodes-rules/dangerous-sites.yar
+```
+
+To add custom tests for python code, create tests similar to those in this dir
+
+```bash
+custom-nodes-security-scan/src/scan/bandit/plugins
+```
+
+To add more yara rules, create `.yara` file in:
+
+```bash
+custom-node-security-scan/src/scan/yara/yara-rules/aa-comfy-nodes-rules
+```
