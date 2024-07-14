@@ -45,11 +45,11 @@ def yara_scan():
 
 # @report_time_taken
 def bandit_scan():
-    BanditScan().load_target_files().run_tests()
+    BanditScan().load_packages().run_tests()
     ScoreCalc()()
     HomePage()()
 
 
 if __name__ == "__main__":
-    yara_scan()
+    # yara_scan()
     bandit_scan()

@@ -52,7 +52,7 @@ class PackageRecordBuilder:
     def with_z_score(self, z_score):
         self.record["risk_level_color"] = self.get_severity_css_color(z_score)
         # Don't show negative z-scores as they don't make sense to most people possibly
-        z_score = max(0, z_score)
+        # z_score = max(0, z_score)
         self.record["z_score"] = f"{z_score:.2f}"
         self.record["risk_level"] = f"{z_score:.2f}"
         return self

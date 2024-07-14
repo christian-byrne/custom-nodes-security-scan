@@ -1,4 +1,41 @@
-"""Python version of Bandit scanner."""
+"""Python version of Bandit scanner.
+
+plugin_name_pattern = "*.py"
+
+RANKING = ["UNDEFINED", "LOW", "MEDIUM", "HIGH"]
+RANKING_VALUES = {"UNDEFINED": 1, "LOW": 3, "MEDIUM": 5, "HIGH": 10}
+CRITERIA = [("SEVERITY", "UNDEFINED"), ("CONFIDENCE", "UNDEFINED")]
+
+# add each ranking to globals, to allow direct access in module name space
+for rank in RANKING:
+    globals()[rank] = rank
+
+CONFIDENCE_DEFAULT = "UNDEFINED"
+
+# A list of values Python considers to be False.
+# These can be useful in tests to check if a value is True or False.
+# We don't handle the case of user-defined classes being false.
+# These are only useful when we have a constant in code. If we
+# have a variable we cannot determine if False.
+# See https://docs.python.org/3/library/stdtypes.html#truth-value-testing
+FALSE_VALUES = [None, False, "False", 0, 0.0, 0j, "", (), [], {}]
+
+# override with "log_format" option in config file
+log_format_string = "[%(module)s]\t%(levelname)s\t%(message)s"
+
+# Directories to exclude by default
+EXCLUDE = (
+    ".svn",
+    "CVS",
+    ".bzr",
+    ".hg",
+    ".git",
+    "__pycache__",
+    ".tox",
+    ".eggs",
+    "*.egg",
+)
+"""
 
 import json
 from pathlib import Path
@@ -7,6 +44,7 @@ from bandit.core.issue import Issue
 from bandit.core import config as bandit_config
 from bandit.core import manager as bandit_manager
 from bandit.core import test_set as bandit_test_set
+from bandit.formatters.html import report
 
 from utils.config import Config
 from utils.peformance_logging import report_time_taken
@@ -31,25 +69,49 @@ class BanditScan:
         ]
         self.bandit_config = bandit_config.BanditConfig()
         self.test_set = bandit_test_set.BanditTestSet(self.bandit_config)
-        self.bandit_mgr = bandit_manager.BanditManager(
-            self.bandit_config, self.test_set
-        )
+        self.load_packages()
 
     @report_time_taken
-    def load_target_files(self):
-        logger.info(f"Recursively discovering files in {self.config['target_dir']}")
-        self.bandit_mgr.discover_files([self.config["target_dir"]], recursive=True)
-        logger.info(f"Discovered {len(self.bandit_mgr.files_list)} python files")
+    def load_packages(self):
+        self.package_paths = []
+        target_dir = Path(self.config["target_dir"])
+        for path in target_dir.iterdir():
+            is_excluded = any(
+                [path.match(exclude) for exclude in self.config["exclude_packages"]]
+            )
+            if path.is_dir() and not is_excluded:
+                self.package_paths.append(path)
+
         return self
 
     @report_time_taken
     def run_tests(self):
-        logger.info(
-            f"Running bandit tests on all python files in {self.config['target_dir']}"
-        )
-        self.bandit_mgr.run_tests()
-        for issue in self.bandit_mgr.results:
-            self._add_issue(issue)
+        for package in self.package_paths:
+            logger.info(
+                f"Running bandit tests on all python files in {package} and subdirectories"
+            )
+            bandit_mgr = bandit_manager.BanditManager(self.bandit_config, self.test_set)
+            bandit_mgr.discover_files([str(package)], recursive=True)
+            bandit_mgr.run_tests()
+            filepath = (
+                self.config.get_proj_root()
+                / self.config["reports_dirname"]
+                / f"{package.name}-bandit.html"
+            )
+            logger.debug(f"Writing bandit report for {package.name} to {filepath}")
+            filobj = open(filepath, "w")
+            report(
+                bandit_mgr,
+                filobj,
+                "UNDEFINED",
+                "UNDEFINED",
+                lines=self.config["max_snippet_lines"],
+            )
+            filobj.close()
+
+            for issue in bandit_mgr.results:
+                self._add_issue(issue)
+
         return self
 
     def _get_package_name(self, fname: str):
