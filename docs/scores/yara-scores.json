@@ -896,5 +896,240 @@
         "num_match_instances": 0,
         "num_failed_tests": 0,
         "failed_tests": []
+    },
+    "ComfyUI_HF_Inference": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyUI-nsfw-detection": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "BizyAir": {
+        "num_issues": 2,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "Hakkun-ComfyUI-nodes": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 15,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "powershell_obfuscation"
+        ]
+    },
+    "comfyui_bmab": {
+        "num_issues": 2,
+        "num_matched_patterns": 2,
+        "num_match_instances": 8,
+        "num_failed_tests": 2,
+        "failed_tests": [
+            "findcrypt",
+            "Spyeye"
+        ]
+    },
+    "ComfyUI-Catcat": {
+        "num_issues": 1,
+        "num_matched_patterns": 1,
+        "num_match_instances": 4,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "userdb_jclausing"
+        ]
+    },
+    "ComfyUI-RunRunRun": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Helper-Nodes": {
+        "num_issues": 2,
+        "num_matched_patterns": 2,
+        "num_match_instances": 3,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "ComfyUI_StoryCreator": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-extensions": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfy-ui-on-complete-email-me": {
+        "num_issues": 3,
+        "num_matched_patterns": 3,
+        "num_match_instances": 15,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "ComfyUI-Notifications": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Fast-Style-Transfer": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "EmbeddingsCurveEditor_ComfyUI": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-JakeUpgrade": {
+        "num_issues": 3,
+        "num_matched_patterns": 1,
+        "num_match_instances": 9,
+        "num_failed_tests": 3,
+        "failed_tests": [
+            "findcrypt",
+            "packer_compiler_signatures",
+            "compiler"
+        ]
+    },
+    "SD3-Scaling": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-ToSVG": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-NuA-FlashFace": {
+        "num_issues": 4,
+        "num_matched_patterns": 4,
+        "num_match_instances": 16,
+        "num_failed_tests": 1,
+        "failed_tests": [
+            "findcrypt"
+        ]
+    },
+    "comfyui_lumaAPI": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Photopea": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUi-Ollama-YN": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-DeepFuze": {
+        "num_issues": 41,
+        "num_matched_patterns": 47,
+        "num_match_instances": 129,
+        "num_failed_tests": 11,
+        "failed_tests": [
+            "ft_rtf",
+            "Detect_Sandbox_Unprotect",
+            "anti_sandboxing",
+            "findcrypt",
+            "powershell_obfuscation",
+            "Spyeye",
+            "packer_compiler_signatures",
+            "compiler",
+            "userdb_jclausing",
+            "dangerous-sites",
+            "suspicious_sites"
+        ]
+    },
+    "ComfyUI-Loopchain": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUIInvisibleWatermark": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Video-Matting": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-Embeddings-Tools": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "ComfyUI-FrameSkipping": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfyui_wildcards": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
+    },
+    "comfy_meh": {
+        "num_issues": 0,
+        "num_matched_patterns": 0,
+        "num_match_instances": 0,
+        "num_failed_tests": 0,
+        "failed_tests": []
     }
 }

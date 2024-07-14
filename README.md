@@ -1545,4 +1545,6 @@ pip install -r requirements.txt
 | Add custom tests for python code | Write `.py` tests and add to [scan/bandit/plugins](https://github.com/christian-byrne/custom-nodes-security-scan/tree/master/src/scan/bandit/plugins) |
 | Add custom yara rules | write `.yara` tests and add to [scan/yara/yara-rules/aa-comfy-nodes-rules](https://github.com/christian-byrne/custom-nodes-security-scan/tree/master/src/scan/yara/yara-rules/aa-comfy-nodes-rules) |
 
-Then PR any changes made 😊
+&nbsp; 
+
+Then PR any changes.

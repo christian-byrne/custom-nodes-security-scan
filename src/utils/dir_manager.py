@@ -26,7 +26,7 @@ class DirManager:
             root_dir = Path(root_dir)
         if not root_dir.exists():
             raise FileNotFoundError(f"Directory {root_dir} does not exist.")
-        logger.info(f"DirManager initialized with {root_dir}")
+        logger.debug(f"DirManager initialized with {root_dir}")
 
         self.root_dir = root_dir
         self.match_phrases = match_phrases

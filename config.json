@@ -13,7 +13,7 @@
     "userdb_exeinfope.yara"
   ],
   "exclude_tests_bandit": ["B101", "B112", "B311"],
-  "target_dir": "/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes",
+  "target_dir": "$TARGET_DIR",
   "exclude_packages": [".git", "__pycache__", "custom_wildcards"],
   "exclude_in_packages": [".git", ".idea", "custom_wildcards"],
   "reports_dirname": "docs",
