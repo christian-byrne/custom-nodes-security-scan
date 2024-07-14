@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">1648</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/DeepTranslatorNode/deep_translator_node.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/DeepTranslatorNode/deep_translator_node.py</a><br>
+    <b>Line number: </b>148<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+144	# Support languages - detectlanguage
+145	try:
+146	    if not os.path.exists(detect_languages_list):
+147	        log(&quot;File detect_languages_list.json file not found! Get List from site!&quot;)
+148	        DETECT_LANGS_SUPPORT = requests.get(
+149	            &quot;https://ws.detectlanguage.com/0.2/languages&quot;
+150	        ).json()
+151	        with open(detect_languages_list, &quot;w&quot;) as f:
+152	            json.dump(DETECT_LANGS_SUPPORT, f)
+153	            log(&quot;Loading detect languages list support from site complete and save!&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>hardcoded_password_funcarg: </b> Possible hardcoded password: 'secret_key'<br>
+    <b>Test ID:</b> B106<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/259.html" target="_blank">CWE-259</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/DeepTranslatorNode/deep_translator_node.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/DeepTranslatorNode/deep_translator_node.py</a><br>
+    <b>Line number: </b>209<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b106_hardcoded_password_funcarg.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b106_hardcoded_password_funcarg.html</a><br>
+
+<div class="code">
+<pre>
+205	                appid=&quot;appid&quot;, appkey=&quot;appkey&quot;
+206	            ).get_supported_languages(as_dict=True)
+207	
+208	        if service == &quot;PapagoTranslator&quot;:
+209	            langs_support = PapagoTranslator(
+210	                client_id=&quot;client_id&quot;, secret_key=&quot;secret_key&quot;
+211	            ).get_supported_languages(as_dict=True)
+212	
+213	        if service in (
+214	            &quot;DeeplTranslator&quot;,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/GoogleTranslateNode/google_translate_node.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/GoogleTranslateNode/google_translate_node.py</a><br>
+    <b>Line number: </b>42<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+38	        url = f&quot;https://translation.googleapis.com/language/translate/v2?key={google_translation_key}&quot;
+39	
+40	        data = {&quot;q&quot;: text, &quot;target&quot;: dest}
+41	
+42	        resp = requests.post(url, data=data)
+43	        resp_data = json.loads(resp.text)
+44	
+45	        if &quot;translations&quot; in resp_data.get(&quot;data&quot;, {}):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/IDENode/ide_node.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/IDENode/ide_node.py</a><br>
+    <b>Line number: </b>119<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+115	            pycode_ += pycode
+116	
+117	            my_namespace = types.SimpleNamespace()
+118	            try:
+119	                exec(pycode_, my_namespace.__dict__)
+120	            except Exception as e:
+121	                my_namespace.result = f&quot;Error in python code: {e}&quot;
+122	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/__init__.py</a><br>
+    <b>Line number: </b>6<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+2	# Author: AlekPet
+3	# Version: 2024.06.27
+4	import os
+5	import importlib.util
+6	import subprocess
+7	import sys
+8	import shutil
+9	import __main__
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI_Custom_Nodes_AlekPet/__init__.py</a><br>
+    <b>Line number: </b>52<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+48	            print(info, end=&quot;&quot;)
+49	
+50	
+51	def module_install(commands, cwd=&quot;.&quot;):
+52	    result = subprocess.Popen(
+53	        commands,
+54	        cwd=cwd,
+55	        stdout=subprocess.PIPE,
+56	        stderr=subprocess.PIPE,
+57	        text=True,
+58	        bufsize=1,
+59	    )
+60	    out = threading.Thread(target=information, args=(result.stdout,))
+61	    err = threading.Thread(target=information, args=(result.stderr,))
+62	    out.start()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

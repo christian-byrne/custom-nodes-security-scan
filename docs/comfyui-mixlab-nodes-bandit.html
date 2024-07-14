@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">8981</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py</a><br>
+    <b>Line number: </b>3<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	#
+2	import os
+3	import subprocess
+4	import importlib.util
+5	import sys,json
+6	import urllib
+7	import hashlib
+8	import datetime
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py</a><br>
+    <b>Line number: </b>62<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+58	        print(f&quot;Installing {package}...&quot;)
+59	        # 清华源 -i https://pypi.tuna.tsinghua.edu.cn/simple
+60	        command = f&#x27;&quot;{python}&quot; -m pip install {package}&#x27;
+61	  
+62	        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, env=os.environ)
+63	
+64	        if result.returncode != 0:
+65	            print(f&quot;Couldn&#x27;t install\nCommand: {command}\nError code: {result.returncode}&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py</a><br>
+    <b>Line number: </b>128<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+124	    return base64_str
+125	
+126	def calculate_md5(string):
+127	    encoded_string = string.encode()
+128	    md5_hash = hashlib.md5(encoded_string).hexdigest()
+129	    return md5_hash
+130	
+131	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py</a><br>
+    <b>Line number: </b>516<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+512	            raise RuntimeError(f&quot;Ports {http_port + 1} to {http_port + 10} are all in use.&quot;)
+513	
+514	        if address == &#x27;&#x27;:
+515	            address = &#x27;127.0.0.1&#x27;
+516	        if address==&#x27;0.0.0.0&#x27;:
+517	            address = &#x27;127.0.0.1&#x27;
+518	            
+519	        if verbose:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py</a><br>
+    <b>Line number: </b>837<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+833	@routes.post(&#x27;/mixlab/re_start&#x27;)
+834	def re_start(request):
+835	    try:
+836	        sys.stdout.close_log()
+837	    except Exception as e:
+838	        pass
+839	    return os.execv(sys.executable, [sys.executable] + sys.argv)
+840	
+841	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/__init__.py</a><br>
+    <b>Line number: </b>839<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+835	    try:
+836	        sys.stdout.close_log()
+837	    except Exception as e:
+838	        pass
+839	    return os.execv(sys.executable, [sys.executable] + sys.argv)
+840	
+841	
+842	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>20<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+16	    return spec is not None
+17	
+18	
+19	def get_unique_hash(string):
+20	    hash_object = hashlib.sha1(string.encode())
+21	    unique_hash = hash_object.hexdigest()
+22	    return unique_hash
+23	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>26<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+22	    return unique_hash
+23	
+24	def generate_random_string(length):
+25	    letters = string.ascii_letters + string.digits
+26	    return &#x27;&#x27;.join(random.choice(letters) for _ in range(length))
+27	
+28	class AnyType(str):
+29	  &quot;&quot;&quot;A special class that is always equal in not equal comparisons. Credit to pythongosssss&quot;&quot;&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>65<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+61	def ZhipuAI_client(key):
+62	
+63	    try:
+64	        if is_installed(&#x27;zhipuai&#x27;)==False:
+65	            import subprocess
+66	
+67	            # 安装
+68	            print(&#x27;#pip install zhipuai&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>70<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+66	
+67	            # 安装
+68	            print(&#x27;#pip install zhipuai&#x27;)
+69	
+70	            result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;zhipuai&#x27;], capture_output=True, text=True)
+71	
+72	            #检查命令执行结果
+73	            if result.returncode == 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>122<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+118	
+119	def llama_cpp_client(file_name):
+120	    try:
+121	        if is_installed(&#x27;llama_cpp&#x27;)==False:
+122	            import subprocess
+123	
+124	            # 安装
+125	            print(&#x27;#pip install llama-cpp-python&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>127<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+123	
+124	            # 安装
+125	            print(&#x27;#pip install llama-cpp-python&#x27;)
+126	 
+127	            result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, 
+128	                                     &#x27;install&#x27;, 
+129	                                     &#x27;llama-cpp-python&#x27;,
+130	                                     &#x27;--extra-index-url&#x27;,
+131	                                     &#x27;https://abetlen.github.io/llama-cpp-python/whl/cu121&#x27;
+132	                                     ], capture_output=True, text=True)
+133	
+134	            #检查命令执行结果
+135	            if result.returncode == 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ChatGPT.py</a><br>
+    <b>Line number: </b>139<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+135	            if result.returncode == 0:
+136	                print(&quot;#install success&quot;)
+137	                from llama_cpp import Llama
+138	
+139	                subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, 
+140	                                     &#x27;install&#x27;, 
+141	                                     &#x27;llama-cpp-python[server]&#x27;
+142	                                     ], capture_output=True, text=True)
+143	
+144	            else:
+145	                print(&quot;#install error&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ClipInterrogator.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ClipInterrogator.py</a><br>
+    <b>Line number: </b>30<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+26	
+27	
+28	try:
+29	    if is_installed(&#x27;clip_interrogator&#x27;)==False:
+30	        import subprocess
+31	
+32	        # 安装
+33	        print(&#x27;#pip install clip-interrogator==0.6.0&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ClipInterrogator.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ClipInterrogator.py</a><br>
+    <b>Line number: </b>35<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+31	
+32	        # 安装
+33	        print(&#x27;#pip install clip-interrogator==0.6.0&#x27;)
+34	
+35	        result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;clip-interrogator==0.6.0&#x27;], capture_output=True, text=True)
+36	
+37	        #检查命令执行结果
+38	        if result.returncode == 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py</a><br>
+    <b>Line number: </b>145<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+141	    draw.rectangle([(x, y), (x+w, y+h)], outline=color,width=width)
+142	
+143	def generate_random_string(length):
+144	    letters = string.ascii_letters + string.digits
+145	    return &#x27;&#x27;.join(random.choice(letters) for _ in range(length))
+146	
+147	def padding_rectangle(grid, padding):
+148	    x, y, w, h = grid
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py</a><br>
+    <b>Line number: </b>612<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+608	    pixels = image.load()
+609	    for i in range(width):
+610	        for j in range(height):
+611	            # 随机生成噪声值
+612	            noise_r = random.randint(-noise_level, noise_level)
+613	            noise_g = random.randint(-noise_level, noise_level)
+614	            noise_b = random.randint(-noise_level, noise_level)
+615	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py</a><br>
+    <b>Line number: </b>613<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+609	    for i in range(width):
+610	        for j in range(height):
+611	            # 随机生成噪声值
+612	            noise_r = random.randint(-noise_level, noise_level)
+613	            noise_g = random.randint(-noise_level, noise_level)
+614	            noise_b = random.randint(-noise_level, noise_level)
+615	
+616	            # 像素值加上噪声值，并限制在0-255的范围内
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/ImageNode.py</a><br>
+    <b>Line number: </b>614<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+610	        for j in range(height):
+611	            # 随机生成噪声值
+612	            noise_r = random.randint(-noise_level, noise_level)
+613	            noise_g = random.randint(-noise_level, noise_level)
+614	            noise_b = random.randint(-noise_level, noise_level)
+615	
+616	            # 像素值加上噪声值，并限制在0-255的范围内
+617	            r = max(0, min(pixels[i, j][0] + noise_r, 255))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Lama.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Lama.py</a><br>
+    <b>Line number: </b>21<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+17	        return False
+18	    return spec is not None
+19	
+20	if is_installed(&#x27;simple_lama_inpainting&#x27;)==False:
+21	    import subprocess
+22	    from packaging import version
+23	    
+24	    if version.parse(torch.__version__)&gt;=version.parse(&#x27;2.1&#x27;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Lama.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Lama.py</a><br>
+    <b>Line number: </b>28<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+24	    if version.parse(torch.__version__)&gt;=version.parse(&#x27;2.1&#x27;):
+25	        # 安装
+26	        print(&#x27;#pip install simple_lama_inpainting&#x27;)
+27	
+28	        result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;simple_lama_inpainting&#x27;], capture_output=True, text=True)
+29	
+30	        #检查命令执行结果
+31	        if result.returncode == 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Mask.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Mask.py</a><br>
+    <b>Line number: </b>77<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+73	class PreviewMask_(SaveImage):
+74	    def __init__(self):
+75	        self.output_dir = folder_paths.get_temp_directory()
+76	        self.type = &quot;temp&quot;
+77	        self.prefix_append =&#x27;&#x27;.join(random.choice(&quot;abcdehijklmnopqrstupvxyzfg&quot;) for x in range(5))
+78	        self.compress_level = 4
+79	
+80	    @classmethod
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/RembgNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/RembgNode.py</a><br>
+    <b>Line number: </b>511<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+507	
+508	
+509	try:
+510	    if is_installed(&#x27;rembg&#x27;)==False:
+511	        import subprocess
+512	
+513	        # 安装
+514	        print(&#x27;#pip install rembg[gpu]&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/RembgNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/RembgNode.py</a><br>
+    <b>Line number: </b>516<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+512	
+513	        # 安装
+514	        print(&#x27;#pip install rembg[gpu]&#x27;)
+515	
+516	        result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;rembg[gpu]&#x27;], capture_output=True, text=True)
+517	
+518	        #检查命令执行结果
+519	        if result.returncode == 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py</a><br>
+    <b>Line number: </b>50<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+46	
+47	
+48	try:
+49	    if is_installed(&#x27;sentencepiece&#x27;)==False:
+50	        import subprocess
+51	
+52	        # 安装
+53	        print(&#x27;#pip install sentencepiece&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py</a><br>
+    <b>Line number: </b>55<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+51	
+52	        # 安装
+53	        print(&#x27;#pip install sentencepiece&#x27;)
+54	
+55	        result = subprocess.run([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;install&#x27;, &#x27;sentencepiece&#x27;], capture_output=True, text=True)
+56	
+57	        #检查命令执行结果
+58	        if result.returncode == 0 and is_installed(&#x27;sentencepiece&#x27;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py</a><br>
+    <b>Line number: </b>94<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+90	
+91	def text_generate(text_pipe,input,seed=None):
+92	    
+93	    if seed==None:
+94	        seed = random.randint(100, 1000000)
+95	    
+96	    set_seed(seed)
+97	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/TextGenerateNode.py</a><br>
+    <b>Line number: </b>99<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+95	    
+96	    set_seed(seed)
+97	
+98	    for count in range(6):    
+99	        sequences = text_pipe(input, max_length=random.randint(60, 90), num_return_sequences=8)
+100	        list = []
+101	        for sequence in sequences:
+102	            line = sequence[&#x27;generated_text&#x27;].strip()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Utils.py</a><br>
+    <b>Line number: </b>246<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+242	            result = int(n)
+243	            # print(result)
+244	        
+245	        if random_number==&#x27;enable&#x27; and result&gt;0:
+246	            result= random.randint(1, max_num)
+247	        return {&quot;ui&quot;: {&quot;text&quot;: [text],&quot;num&quot;:[result]}, &quot;result&quot;: (result,)}
+248	    
+249	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py</a><br>
+    <b>Line number: </b>4<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import os
+2	import hashlib
+3	import json
+4	import subprocess
+5	import shutil
+6	import re
+7	import time,math
+8	import numpy as np
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py</a><br>
+    <b>Line number: </b>146<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+142	def generate_folder_name(directory,video_path):
+143	    # Get the directory and filename from the video path
+144	    _, filename = os.path.split(video_path)
+145	    # Generate a random string of lowercase letters and digits
+146	    random_string = &#x27;&#x27;.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+147	    # Create the folder name by combining the random string and the filename
+148	    folder_name = random_string + &#x27;_&#x27; + filename
+149	    # Create the full folder path by joining the directory and the folder name
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py</a><br>
+    <b>Line number: </b>240<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+236	        &#x27;-shortest&#x27;,
+237	        output_path
+238	    ]
+239	    
+240	    subprocess.run(command, check=True)
+241	    return output_path
+242	
+243	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-32">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py</a><br>
+    <b>Line number: </b>651<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+647	        with open(metadata_path, &quot;w&quot;) as f:
+648	            f.write(&quot;;FFMETADATA1\n&quot;)
+649	            f.write(metadata)
+650	        args = args[:1] + [&quot;-i&quot;, metadata_path] + args[1:] + [file_path]
+651	        with subprocess.Popen(args, stdin=subprocess.PIPE, env=env) as proc:
+652	            for frame in frames:
+653	                proc.stdin.write(frame.tobytes())
+654	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-33">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/Video.py</a><br>
+    <b>Line number: </b>772<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+768	                print(f&quot;Using fallback file for extremely long metadata: {len(metadata_args[1])}/{max_arg_length}&quot;)
+769	                self.save_with_tempfile(args, metadata_args[1], file_path, frames, env)
+770	            else:
+771	                try:
+772	                    with subprocess.Popen(args + metadata_args + [file_path],
+773	                                          stdin=subprocess.PIPE, env=env) as proc:
+774	                        for frame in frames:
+775	                            proc.stdin.write(frame.tobytes())
+776	                except FileNotFoundError as e:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-34">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/edit_mask.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/edit_mask.py</a><br>
+    <b>Line number: </b>24<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+20	    # 将 NumPy 数组转换为字节数据
+21	    byte_data = np_array.tobytes()
+22	    
+23	    # 计算哈希值
+24	    hash_value = hashlib.md5(byte_data).hexdigest()
+25	    
+26	    return hash_value
+27	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-35">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/nerf_renderer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/nerf_renderer.py</a><br>
+    <b>Line number: </b>32<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+28	
+29	    cfg: Config
+30	
+31	    def configure(self) -&gt; None:
+32	        assert self.cfg.feature_reduction in [&quot;concat&quot;, &quot;mean&quot;]
+33	        self.chunk_size = 0
+34	
+35	    def set_chunk_size(self, chunk_size: int):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-36">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/nerf_renderer.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/nerf_renderer.py</a><br>
+    <b>Line number: </b>36<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+32	        assert self.cfg.feature_reduction in [&quot;concat&quot;, &quot;mean&quot;]
+33	        self.chunk_size = 0
+34	
+35	    def set_chunk_size(self, chunk_size: int):
+36	        assert (
+37	            chunk_size &gt;= 0
+38	        ), &quot;chunk_size must be a non-negative integer (0 for no chunking).&quot;
+39	        self.chunk_size = chunk_size
+40	
+41	    def query_triplane(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-37">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/tokenizers/triplane.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/tokenizers/triplane.py</a><br>
+    <b>Line number: </b>37<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+33	        )
+34	
+35	    def detokenize(self, tokens: torch.Tensor) -&gt; torch.Tensor:
+36	        batch_size, Ct, Nt = tokens.shape
+37	        assert Nt == self.cfg.plane_size**2 * 3
+38	        assert Ct == self.cfg.num_channels
+39	        return rearrange(
+40	            tokens,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-38">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/tokenizers/triplane.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/tokenizers/triplane.py</a><br>
+    <b>Line number: </b>38<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+34	
+35	    def detokenize(self, tokens: torch.Tensor) -&gt; torch.Tensor:
+36	        batch_size, Ct, Nt = tokens.shape
+37	        assert Nt == self.cfg.plane_size**2 * 3
+38	        assert Ct == self.cfg.num_channels
+39	        return rearrange(
+40	            tokens,
+41	            &quot;B Ct (Np Hp Wp) -&gt; B Np Ct Hp Wp&quot;,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-39">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/transformer/attention.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/transformer/attention.py</a><br>
+    <b>Line number: </b>429<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+425	
+426	        Returns:
+427	            `torch.Tensor`: The normalized encoder hidden states.
+428	        &quot;&quot;&quot;
+429	        assert (
+430	            self.norm_cross is not None
+431	        ), &quot;self.norm_cross must be defined to call self.norm_encoder_hidden_states&quot;
+432	
+433	        if isinstance(self.norm_cross, nn.LayerNorm):
+434	            encoder_hidden_states = self.norm_cross(encoder_hidden_states)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-40">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/transformer/attention.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/transformer/attention.py</a><br>
+    <b>Line number: </b>445<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+441	            encoder_hidden_states = encoder_hidden_states.transpose(1, 2)
+442	            encoder_hidden_states = self.norm_cross(encoder_hidden_states)
+443	            encoder_hidden_states = encoder_hidden_states.transpose(1, 2)
+444	        else:
+445	            assert False
+446	
+447	        return encoder_hidden_states
+448	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-41">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/transformer/basic_transformer_block.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/models/transformer/basic_transformer_block.py</a><br>
+    <b>Line number: </b>94<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+90	    ):
+91	        super().__init__()
+92	        self.only_cross_attention = only_cross_attention
+93	
+94	        assert norm_type == &quot;layer_norm&quot;
+95	
+96	        # Define 3 blocks. Each block has its own normalization layer.
+97	        # 1. Self-Attn
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-42">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>162<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+158	    for arg in list(args) + list(kwargs.values()):
+159	        if isinstance(arg, torch.Tensor):
+160	            B = arg.shape[0]
+161	            break
+162	    assert (
+163	        B is not None
+164	    ), &quot;No tensor found in args or kwargs, cannot determine batch size.&quot;
+165	    out = defaultdict(list)
+166	    out_type = None
+167	    # max(1, B) to support B == 0
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-43">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>230<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+226	        inp_scale = (0, 1)
+227	    if tgt_scale is None:
+228	        tgt_scale = (0, 1)
+229	    if isinstance(tgt_scale, torch.FloatTensor):
+230	        assert dat.shape[-1] == tgt_scale.shape[-1]
+231	    dat = (dat - inp_scale[0]) / (inp_scale[1] - inp_scale[0])
+232	    dat = dat * (tgt_scale[1] - tgt_scale[0]) + tgt_scale[0]
+233	    return dat
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-44">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>282<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+278	        fx, fy = focal, focal
+279	        cx, cy = W / 2, H / 2
+280	    else:
+281	        fx, fy = focal
+282	        assert principal is not None
+283	        cx, cy = principal
+284	
+285	    i, j = torch.meshgrid(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-45">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>306<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+302	    keepdim=False,
+303	    normalize=False,
+304	) -&gt; Tuple[torch.FloatTensor, torch.FloatTensor]:
+305	    # Rotate ray directions from camera coordinate to the world coordinate
+306	    assert directions.shape[-1] == 3
+307	
+308	    if directions.ndim == 2:  # (N_rays, 3)
+309	        if c2w.ndim == 2:  # (4, 4)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-46">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>311<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+307	
+308	    if directions.ndim == 2:  # (N_rays, 3)
+309	        if c2w.ndim == 2:  # (4, 4)
+310	            c2w = c2w[None, :, :]
+311	        assert c2w.ndim == 3  # (N_rays, 4, 4) or (1, 4, 4)
+312	        rays_d = (directions[:, None, :] * c2w[:, :3, :3]).sum(-1)  # (N_rays, 3)
+313	        rays_o = c2w[:, :3, 3].expand(rays_d.shape)
+314	    elif directions.ndim == 3:  # (H, W, 3)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-47">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>315<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+311	        assert c2w.ndim == 3  # (N_rays, 4, 4) or (1, 4, 4)
+312	        rays_d = (directions[:, None, :] * c2w[:, :3, :3]).sum(-1)  # (N_rays, 3)
+313	        rays_o = c2w[:, :3, 3].expand(rays_d.shape)
+314	    elif directions.ndim == 3:  # (H, W, 3)
+315	        assert c2w.ndim in [2, 3]
+316	        if c2w.ndim == 2:  # (4, 4)
+317	            rays_d = (directions[:, :, None, :] * c2w[None, None, :3, :3]).sum(
+318	                -1
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-48">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>327<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+323	                -1
+324	            )  # (B, H, W, 3)
+325	            rays_o = c2w[:, None, None, :3, 3].expand(rays_d.shape)
+326	    elif directions.ndim == 4:  # (B, H, W, 3)
+327	        assert c2w.ndim == 3  # (B, 4, 4)
+328	        rays_d = (directions[:, :, :, None, :] * c2w[:, None, None, :3, :3]).sum(
+329	            -1
+330	        )  # (B, H, W, 3)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-49">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-mixlab-nodes/nodes/tsr/utils.py</a><br>
+    <b>Line number: </b>422<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+418	    image: PIL.Image.Image,
+419	    ratio: float,
+420	) -&gt; PIL.Image.Image:
+421	    image = np.array(image)
+422	    assert image.shape[-1] == 4
+423	    alpha = np.where(image[..., 3] &gt; 0)
+424	    y1, y2, x1, x2 = (
+425	        alpha[0].min(),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

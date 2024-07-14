@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">1299</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>168<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+164	        pixel = images.movedim(-1, 1)  # [B, H, W, C] =&gt; [B, C, H, W]
+165	
+166	        # Decoder requires dimension to be 64-aligned.
+167	        B, C, H, W = pixel.shape
+168	        assert H % 64 == 0, f&quot;Height({H}) is not multiple of 64.&quot;
+169	        assert W % 64 == 0, f&quot;Height({W}) is not multiple of 64.&quot;
+170	
+171	        decoded = []
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>169<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+165	
+166	        # Decoder requires dimension to be 64-aligned.
+167	        B, C, H, W = pixel.shape
+168	        assert H % 64 == 0, f&quot;Height({H}) is not multiple of 64.&quot;
+169	        assert W % 64 == 0, f&quot;Height({W}) is not multiple of 64.&quot;
+170	
+171	        decoded = []
+172	        for start_idx in range(0, samples[&quot;samples&quot;].shape[0], sub_batch_size):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>417<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+413	        config: str,
+414	        weight: float,
+415	    ):
+416	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+417	        assert get_model_sd_version(model) == ld_model.sd_version
+418	        if ld_model.attn_sharing:
+419	            return ld_model.apply_layered_diffusion_attn_sharing(model)
+420	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>463<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+459	        bg_cond: Optional[List[List[torch.TensorType]]] = None,
+460	        blended_cond: Optional[List[List[torch.TensorType]]] = None,
+461	    ):
+462	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+463	        assert get_model_sd_version(model) == ld_model.sd_version
+464	        assert ld_model.attn_sharing
+465	        work_model = ld_model.apply_layered_diffusion_attn_sharing(model)[0]
+466	        work_model.model_options.setdefault(&quot;transformer_options&quot;, {})
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>464<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+460	        blended_cond: Optional[List[List[torch.TensorType]]] = None,
+461	    ):
+462	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+463	        assert get_model_sd_version(model) == ld_model.sd_version
+464	        assert ld_model.attn_sharing
+465	        work_model = ld_model.apply_layered_diffusion_attn_sharing(model)[0]
+466	        work_model.model_options.setdefault(&quot;transformer_options&quot;, {})
+467	        work_model.model_options[&quot;transformer_options&quot;][&quot;cond_overwrite&quot;] = [
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>528<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+524	        config: str,
+525	        weight: float,
+526	    ):
+527	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+528	        assert get_model_sd_version(model) == ld_model.sd_version
+529	        c_concat = model.model.latent_format.process_in(latent[&quot;samples&quot;])
+530	        return ld_model.apply_layered_diffusion(
+531	            model, weight
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>586<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+582	        cond: Optional[List[List[torch.TensorType]]] = None,
+583	        blended_cond: Optional[List[List[torch.TensorType]]] = None,
+584	    ):
+585	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+586	        assert get_model_sd_version(model) == ld_model.sd_version
+587	        assert ld_model.attn_sharing
+588	        work_model = ld_model.apply_layered_diffusion_attn_sharing(
+589	            model, control_img=image.movedim(-1, 1)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>587<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+583	        blended_cond: Optional[List[List[torch.TensorType]]] = None,
+584	    ):
+585	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+586	        assert get_model_sd_version(model) == ld_model.sd_version
+587	        assert ld_model.attn_sharing
+588	        work_model = ld_model.apply_layered_diffusion_attn_sharing(
+589	            model, control_img=image.movedim(-1, 1)
+590	        )[0]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/layered_diffusion.py</a><br>
+    <b>Line number: </b>654<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+650	        config: str,
+651	        weight: float,
+652	    ):
+653	        ld_model = [m for m in self.MODELS if m.config_string == config][0]
+654	        assert get_model_sd_version(model) == ld_model.sd_version
+655	        c_concat = model.model.latent_format.process_in(
+656	            torch.cat([latent[&quot;samples&quot;], blended_latent[&quot;samples&quot;]], dim=1)
+657	        )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/lib_layerdiffusion/models.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/lib_layerdiffusion/models.py</a><br>
+    <b>Line number: </b>16<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+12	
+13	diffusers_version = importlib.metadata.version(&#x27;diffusers&#x27;)
+14	
+15	def check_diffusers_version(min_version=&quot;0.25.0&quot;):
+16	    assert parse(diffusers_version) &gt;= parse(
+17	        min_version
+18	    ), f&quot;diffusers&gt;={min_version} requirement not satisfied. Please install correct diffusers version.&quot;
+19	
+20	check_diffusers_version()
+21	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/lib_layerdiffusion/models.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/lib_layerdiffusion/models.py</a><br>
+    <b>Line number: </b>319<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+315	    def decode_pixel(
+316	        self, pixel: torch.TensorType, latent: torch.TensorType
+317	    ) -&gt; torch.TensorType:
+318	        # pixel.shape = [B, C=3, H, W]
+319	        assert pixel.shape[1] == 3
+320	        pixel_device = pixel.device
+321	        pixel_dtype = pixel.dtype
+322	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/lib_layerdiffusion/models.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-layerdiffuse/lib_layerdiffusion/models.py</a><br>
+    <b>Line number: </b>328<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+324	        latent = latent.to(device=self.load_device, dtype=self.dtype)
+325	        # y.shape = [B, C=4, H, W]
+326	        y = self.estimate_augmented(pixel, latent)
+327	        y = y.clip(0, 1)
+328	        assert y.shape[1] == 4
+329	        # Restore image to original device of input image.
+330	        return y.to(pixel_device, dtype=pixel_dtype)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

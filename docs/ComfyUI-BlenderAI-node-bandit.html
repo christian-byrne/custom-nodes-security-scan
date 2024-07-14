@@ -1,0 +1,2371 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">22541</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/SDN-1.1/lupa/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/SDN-1.1/lupa/__init__.py</a><br>
+    <b>Line number: </b>25<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+21	        sys.setdlopenflags(old_flags)
+22	
+23	try:
+24	    _try_import_with_global_library_symbols()
+25	except:
+26	    pass
+27	
+28	del _try_import_with_global_library_symbols
+29	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>155<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+151	    def __exit__(self, type, value, traceback):
+152	        self.close()
+153	
+154	    def find_blocks_from_code(self, code):
+155	        assert type(code) == bytes
+156	        if code not in self.code_index:
+157	            return []
+158	        return self.code_index[code]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>163<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+159	
+160	    def find_block_from_offset(self, offset):
+161	        # same as looking looping over all blocks,
+162	        # then checking `block.addr_old == offset`.
+163	        assert type(offset) is int
+164	        return self.block_from_offset.get(offset)
+165	
+166	    def close(self):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>364<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+360	    def dna_type_name(self):
+361	        return self.dna_type.dna_type_id.decode(&#x27;ascii&#x27;)
+362	
+363	    def refine_type_from_index(self, sdna_index_next):
+364	        assert type(sdna_index_next) is int
+365	        sdna_index_curr = self.sdna_index
+366	        self.file.ensure_subtype_smaller(sdna_index_curr, sdna_index_next)
+367	        self.sdna_index = sdna_index_next
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>370<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+366	        self.file.ensure_subtype_smaller(sdna_index_curr, sdna_index_next)
+367	        self.sdna_index = sdna_index_next
+368	
+369	    def refine_type(self, dna_type_id):
+370	        assert type(dna_type_id) is bytes
+371	        self.refine_type_from_index(self.file.sdna_index_from_id[dna_type_id])
+372	
+373	    def get_file_offset(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>382<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+378	    ):
+379	        &quot;&quot;&quot;
+380	        Return (offset, length)
+381	        &quot;&quot;&quot;
+382	        assert type(path) is bytes
+383	
+384	        ofs = self.file_offset
+385	        if base_index != 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>386<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+382	        assert type(path) is bytes
+383	
+384	        ofs = self.file_offset
+385	        if base_index != 0:
+386	            assert base_index &lt; self.count
+387	            ofs += (self.size // self.count) * base_index
+388	        self.file.handle.seek(ofs, os.SEEK_SET)
+389	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>411<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+407	    ):
+408	
+409	        ofs = self.file_offset
+410	        if base_index != 0:
+411	            assert base_index &lt; self.count
+412	            ofs += (self.size // self.count) * base_index
+413	        self.file.handle.seek(ofs, os.SEEK_SET)
+414	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>445<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+441	        array_size = self.size // dna_size
+442	
+443	        ofs = self.file_offset
+444	        if base_index != 0:
+445	            assert base_index &lt; array_size
+446	            ofs += dna_size * base_index
+447	        self.file.handle.seek(ofs, os.SEEK_SET)
+448	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>548<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+544	        # default
+545	        if type(result) is not int:
+546	            return result
+547	
+548	        assert self.file.structs[sdna_index_refine].field_from_path(
+549	            self.file.header, self.file.handle, path).dna_name.is_pointer
+550	        if result != 0:
+551	            # possible (but unlikely)
+552	            # that this fails and returns None
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>629<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+625	            self.pointer_size = 8
+626	        elif pointer_size_id == b&#x27;_&#x27;:
+627	            self.pointer_size = 4
+628	        else:
+629	            assert 0
+630	        endian_id = values[2]
+631	        if endian_id == b&#x27;v&#x27;:
+632	            self.is_little_endian = True
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>640<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+636	            self.is_little_endian = False
+637	            self.endian_index = 1
+638	            self.endian_str = b&#x27;&gt;&#x27;
+639	        else:
+640	            assert 0
+641	
+642	        version_id = values[3]
+643	        self.version = int(version_id)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>769<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+765	            name = path[0]
+766	            if len(path) &gt;= 2 and type(path[1]) is not bytes:
+767	                name_tail = path[2:]
+768	                index = path[1]
+769	                assert type(index) is int
+770	            else:
+771	                name_tail = path[1:]
+772	                index = 0
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>778<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+774	            name = path
+775	            name_tail = None
+776	            index = 0
+777	
+778	        assert type(name) is bytes
+779	
+780	        field = self.field_from_name.get(name)
+781	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>789<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+785	                if field.dna_name.is_pointer:
+786	                    index_offset = header.pointer_size * index
+787	                else:
+788	                    index_offset = field.dna_type.size * index
+789	                assert index_offset &lt; field.dna_size
+790	                handle.seek(index_offset, os.SEEK_CUR)
+791	            if not name_tail:  # None or ()
+792	                return field
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>827<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+823	            raise NotImplementedError(&quot;%r exists, but can&#x27;t resolve field %r&quot; %
+824	                                      (path, dna_name.name_only), dna_name, dna_type)
+825	
+826	    def field_set(self, header, handle, path, value):
+827	        assert type(path) == bytes
+828	
+829	        field = self.field_from_path(header, handle, path)
+830	        if field is None:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>911<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+907	            raise NotImplementedError(&quot;Reading %r type is not implemented&quot; % dna_type_id)
+908	
+909	    @staticmethod
+910	    def write_string(handle, astring, fieldlen):
+911	        assert isinstance(astring, str)
+912	        if len(astring) &gt;= fieldlen:
+913	            stringw = astring[0:fieldlen]
+914	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/blendjson/blendfile.py</a><br>
+    <b>Line number: </b>920<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+916	        handle.write(stringw.encode(&#x27;utf-8&#x27;))
+917	
+918	    @staticmethod
+919	    def write_bytes(handle, astring, fieldlen):
+920	        assert isinstance(astring, (bytes, bytearray))
+921	        if len(astring) &gt;= fieldlen:
+922	            stringw = astring[0:fieldlen]
+923	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_core.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_core.py</a><br>
+    <b>Line number: </b>503<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+499	                    except:
+500	                        break
+501	                self.sock.settimeout(sock_timeout)
+502	                self.sock.shutdown(socket.SHUT_RDWR)
+503	            except:
+504	                pass
+505	
+506	            self.shutdown()
+507	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_handshake.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_handshake.py</a><br>
+    <b>Line number: </b>183<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+179	    if isinstance(result, str):
+180	        result = result.encode(&#x27;utf-8&#x27;)
+181	
+182	    value = (key + &quot;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&quot;).encode(&#x27;utf-8&#x27;)
+183	    hashed = base64encode(hashlib.sha1(value).digest()).strip().lower()
+184	    success = hmac.compare_digest(hashed, result)
+185	
+186	    if success:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_wsdump.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_wsdump.py</a><br>
+    <b>Line number: </b>184<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+180	                data = str(data, &quot;utf-8&quot;)
+181	            if isinstance(data, bytes) and len(data) &gt; 2 and data[:2] == b&#x27;\037\213&#x27;:  # gzip magick
+182	                try:
+183	                    data = &quot;[gzip] &quot; + str(gzip.decompress(data), &quot;utf-8&quot;)
+184	                except:
+185	                    pass
+186	            elif isinstance(data, bytes):
+187	                try:
+188	                    data = &quot;[zlib] &quot; + str(zlib.decompress(data, -zlib.MAX_WBITS), &quot;utf-8&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_wsdump.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/External/websocket/_wsdump.py</a><br>
+    <b>Line number: </b>189<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+185	                    pass
+186	            elif isinstance(data, bytes):
+187	                try:
+188	                    data = &quot;[zlib] &quot; + str(zlib.decompress(data, -zlib.MAX_WBITS), &quot;utf-8&quot;)
+189	                except:
+190	                    pass
+191	
+192	            if isinstance(data, bytes):
+193	                data = repr(data)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with pickle module.<br>
+    <b>Test ID:</b> B403<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/trie.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/trie.py</a><br>
+    <b>Line number: </b>4<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
+
+<div class="code">
+<pre>
+1	# Refeence: https://github.com/DominikDoom/a1111-sd-webui-tagcomplete
+2	from __future__ import annotations
+3	import time
+4	import pickle
+5	from pathlib import Path
+6	from threading import Thread
+7	from functools import lru_cache
+8	DEBUG = True
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/trie.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/trie.py</a><br>
+    <b>Line number: </b>92<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+88	        key = word[1]
+89	        if self.search(key):
+90	            return
+91	        # [freq, key, type, content, wtype]
+92	        assert isinstance(word, tuple), str(word)
+93	        node: dict = self.root
+94	        for char in key:
+95	            if char not in node:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/trie.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/trie.py</a><br>
+    <b>Line number: </b>194<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+190	    def from_cache(self):
+191	        if not self.CACHE_PATH.exists():
+192	            return
+193	        # ts = time.time()
+194	        data: dict = pickle.load(open(self.CACHE_PATH.as_posix(), &quot;rb+&quot;))
+195	        if data.get(&quot;version&quot;) != CACHE_VERSION:
+196	            self.CACHE_PATH.unlink()
+197	            return
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with pickle module.<br>
+    <b>Test ID:</b> B403<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_collection.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_collection.py</a><br>
+    <b>Line number: </b>5<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
+
+<div class="code">
+<pre>
+1	# Refeence: https://github.com/DominikDoom/a1111-sd-webui-tagcomplete
+2	from __future__ import annotations
+3	import bpy
+4	import time
+5	import pickle
+6	import csv
+7	import traceback
+8	from pathlib import Path
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_collection.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_collection.py</a><br>
+    <b>Line number: </b>34<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+30	        self.word_map: dict[str, tuple] = {}
+31	
+32	    def read_tags(self):
+33	        if self.CACHE_PATH.exists():
+34	            cache = pickle.loads(self.CACHE_PATH.read_bytes())
+35	            if isinstance(cache, list):
+36	                self.read_raw_tags()
+37	            elif cache.get(&quot;VERSION&quot;, (0, 0)) &lt; CACHE_VERSION:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with pickle module.<br>
+    <b>Test ID:</b> B403<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_re.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_re.py</a><br>
+    <b>Line number: </b>2<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
+
+<div class="code">
+<pre>
+1	from __future__ import annotations
+2	import pickle
+3	import json
+4	import time
+5	from pathlib import Path
+6	from functools import lru_cache
+7	import difflib
+8	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_re.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_re.py</a><br>
+    <b>Line number: </b>192<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+188	        ...
+189	    if with_lzma:
+190	        import lzma
+191	        with lzma.open(data_path.as_posix(), &quot;rb&quot;) as f:
+192	            trie = pickle.load(f)
+193	    else:
+194	        with open(data_path.as_posix(), &quot;rb&quot;) as f:
+195	            trie = pickle.load(f)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_re.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/MultiLineText/words_re.py</a><br>
+    <b>Line number: </b>195<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+191	        with lzma.open(data_path.as_posix(), &quot;rb&quot;) as f:
+192	            trie = pickle.load(f)
+193	    else:
+194	        with open(data_path.as_posix(), &quot;rb&quot;) as f:
+195	            trie = pickle.load(f)
+196	    return trie
+197	
+198	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/blueprints.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/blueprints.py</a><br>
+    <b>Line number: </b>73<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+69	            return node
+70	
+71	
+72	def get_fixed_seed():
+73	    return int(random.randrange(4294967294))
+74	
+75	
+76	def is_bool_list(some_list: list):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/blueprints.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/blueprints.py</a><br>
+    <b>Line number: </b>1112<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+1108	        data = {&quot;overwrite&quot;: &quot;true&quot;, &quot;subfolder&quot;: &quot;SDN&quot;}
+1109	        img_type = f&quot;image/{img_path.suffix.replace(&#x27;.&#x27;, &#x27;&#x27;)}&quot;
+1110	        files = {&#x27;image&#x27;: (img_path.name, img_path.read_bytes(), img_type)}
+1111	        timeout = Timeout(connect=5, read=5)
+1112	        url = url.replace(&quot;0.0.0.0&quot;, &quot;127.0.0.1&quot;)
+1113	        response = requests.post(url, data=data, files=files, timeout=timeout)
+1114	        # 检查响应
+1115	        if response.status_code == 200:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-32">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/blueprints.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/blueprints.py</a><br>
+    <b>Line number: </b>1131<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1127	    url_values = urllib.parse.urlencode(data)
+1128	    from .manager import TaskManager
+1129	    url = f&quot;{TaskManager.server.get_url()}/view?{url_values}&quot;
+1130	    # logger.debug(f&#x27;requesting {url} for image data&#x27;)
+1131	    with urllib.request.urlopen(url) as response:
+1132	        img_data = response.read()
+1133	        if not save_path:
+1134	            suffix = suffix if suffix.startswith(&quot;.&quot;) else f&quot;.{suffix}&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-33">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py</a><br>
+    <b>Line number: </b>38<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+34	    elif path.is_dir():
+35	        # 移除 .git
+36	        if path.name == &quot;.git&quot;:
+37	            if platform.system() == &quot;darwin&quot;:
+38	                from subprocess import call
+39	                call([&#x27;rm&#x27;, &#x27;-rf&#x27;, path.as_posix()])
+40	            elif platform.system() == &quot;Windows&quot;:
+41	                os.system(f&#x27;rd/s/q &quot;{path.as_posix()}&quot;&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-34">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py</a><br>
+    <b>Line number: </b>39<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+35	        # 移除 .git
+36	        if path.name == &quot;.git&quot;:
+37	            if platform.system() == &quot;darwin&quot;:
+38	                from subprocess import call
+39	                call([&#x27;rm&#x27;, &#x27;-rf&#x27;, path.as_posix()])
+40	            elif platform.system() == &quot;Windows&quot;:
+41	                os.system(f&#x27;rd/s/q &quot;{path.as_posix()}&quot;&#x27;)
+42	            return
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-35">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py</a><br>
+    <b>Line number: </b>39<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+35	        # 移除 .git
+36	        if path.name == &quot;.git&quot;:
+37	            if platform.system() == &quot;darwin&quot;:
+38	                from subprocess import call
+39	                call([&#x27;rm&#x27;, &#x27;-rf&#x27;, path.as_posix()])
+40	            elif platform.system() == &quot;Windows&quot;:
+41	                os.system(f&#x27;rd/s/q &quot;{path.as_posix()}&quot;&#x27;)
+42	            return
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-36">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/custom_nodes/Cup-ClipBoard/__init__.py</a><br>
+    <b>Line number: </b>41<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+37	            if platform.system() == &quot;darwin&quot;:
+38	                from subprocess import call
+39	                call([&#x27;rm&#x27;, &#x27;-rf&#x27;, path.as_posix()])
+40	            elif platform.system() == &quot;Windows&quot;:
+41	                os.system(f&#x27;rd/s/q &quot;{path.as_posix()}&quot;&#x27;)
+42	            return
+43	        for child in path.iterdir():
+44	            rmtree(child)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-37">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>19<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+15	from urllib import request
+16	from urllib.parse import urlparse
+17	from urllib.error import URLError
+18	from threading import Thread
+19	from subprocess import Popen, PIPE, STDOUT
+20	from pathlib import Path
+21	from queue import Queue
+22	from ..utils import rmtree as rt, logger, _T, PkgInstaller, update_screen
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-38">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>38<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+34	    return TaskManager.server.get_port()
+35	
+36	
+37	def get_url():
+38	    return TaskManager.server.get_url().replace(&quot;0.0.0.0&quot;, &quot;localhost&quot;)
+39	
+40	
+41	WITH_PROXY = False
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-39">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>693<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+689	            args = [&quot;/bin/bash&quot;, &quot;-c&quot;, args]  # shell=True will use /bin/sh which can&#x27;t source
+690	        # mac
+691	        if system() == &quot;Darwin&quot;:
+692	            os.environ[&quot;PYTORCH_ENABLE_MPS_FALLBACK&quot;] = &quot;1&quot;
+693	        p = Popen(args, stdout=PIPE, stderr=STDOUT, cwd=Path(model_path).resolve().as_posix())
+694	        self.child = p
+695	        self.pid = p.pid
+696	        self.exited_status[self.pid] = False
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-40">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>757<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+753	                if &quot;python&quot; not in process.name():
+754	                    return
+755	                process.kill()
+756	                # os.system(f&#x27;taskkill /F /IM {process.name()}&#x27;)
+757	                os.system(f&#x27;taskkill /pid {pid} -t -f&#x27;)
+758	            except psutil.NoSuchProcess:
+759	                return
+760	        elif sys.platform == &quot;darwin&quot;:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-41">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>765<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+761	            try:
+762	                process = psutil.Process(pid)
+763	                if &quot;python&quot; in process.name().lower():
+764	                    # process.kill()
+765	                    os.system(f&quot;kill -9 {pid}&quot;)
+766	            except psutil.NoSuchProcess:
+767	                return
+768	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-42">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>802<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+798	                    command.append(&quot;-i&quot;)
+799	                    command.append(fast_url)
+800	                    command.append(&quot;--trusted-host&quot;)
+801	                    command.append(site.netloc)
+802	                proc = Popen(command, cwd=model_path)
+803	                proc.wait()
+804	
+805	        logger.warning(_T(&quot;ControlNet Init Finished.&quot;))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-43">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>1012<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1008	    @staticmethod
+1009	    def clear_cache():
+1010	        req = request.Request(f&quot;{TaskManager.server.get_url()}/cup/clear_cache&quot;, method=&quot;POST&quot;)
+1011	        try:
+1012	            request.urlopen(req)
+1013	        except URLError:
+1014	            ...
+1015	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-44">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>1031<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1027	        from http.client import RemoteDisconnected
+1028	        import traceback
+1029	        req = request.Request(f&quot;{TaskManager.server.get_url()}/interrupt&quot;, method=&quot;POST&quot;)
+1030	        try:
+1031	            request.urlopen(req)
+1032	        except URLError:
+1033	            ...
+1034	        except RemoteDisconnected:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-45">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>1073<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1069	        if not TaskManager.is_launched():
+1070	            return {&quot;queue_pending&quot;: [], &quot;queue_running&quot;: []}
+1071	        try:
+1072	            req = request.Request(f&quot;{TaskManager.server.get_url()}/queue&quot;)
+1073	            res = request.urlopen(req)
+1074	            res = json.loads(res.read().decode())
+1075	        except BaseException:
+1076	            res = {&quot;queue_pending&quot;: [], &quot;queue_running&quot;: []}
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-46">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/manager.py</a><br>
+    <b>Line number: </b>1108<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1104	                History.put_history(task.get(&quot;workflow&quot;))
+1105	                # logger.debug(f&#x27;post to {TaskManager.server.get_url()}/{api}:&#x27;)
+1106	                # logger.debug(data.decode())
+1107	                try:
+1108	                    request.urlopen(req)
+1109	                except request.HTTPError as e:
+1110	                    print(_T(&quot;Invalid Node Connection&quot;))
+1111	                    TaskManager.put_error_msg(_T(&quot;Invalid Node Connection&quot;))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-47">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>135<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+131	
+132	def calc_hash_type(stype):
+133	    from .blueprints import is_bool_list, is_all_str_list
+134	    if is_bool_list(stype):
+135	        hash_type = md5(&quot;{True, False}&quot;.encode()).hexdigest()
+136	    elif not is_all_str_list(stype):
+137	        hash_type = md5(&quot;,&quot;.join([str(i) for i in stype]).encode()).hexdigest()
+138	    else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-48">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>137<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+133	    from .blueprints import is_bool_list, is_all_str_list
+134	    if is_bool_list(stype):
+135	        hash_type = md5(&quot;{True, False}&quot;.encode()).hexdigest()
+136	    elif not is_all_str_list(stype):
+137	        hash_type = md5(&quot;,&quot;.join([str(i) for i in stype]).encode()).hexdigest()
+138	    else:
+139	        try:
+140	            hash_type = md5(&quot;,&quot;.join(stype).encode()).hexdigest()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-49">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>140<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+136	    elif not is_all_str_list(stype):
+137	        hash_type = md5(&quot;,&quot;.join([str(i) for i in stype]).encode()).hexdigest()
+138	    else:
+139	        try:
+140	            hash_type = md5(&quot;,&quot;.join(stype).encode()).hexdigest()
+141	        except TypeError as e:
+142	            winfo = str(stype)
+143	            if len(winfo) &gt; 100:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-50">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>1792<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1788	            def draw(self, context, layout, node: NodeBase, text):
+1789	                if not node.is_registered_node_type():
+1790	                    return
+1791	                node.draw_socket(self, context, layout, node, text)
+1792	            rand_color = (rand()**0.5, rand()**0.5, rand()**0.5, 1)
+1793	            color = bpy.props.FloatVectorProperty(size=4, default=rand_color)
+1794	            fields = {
+1795	                &quot;draw&quot;: draw,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-51">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>1792<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1788	            def draw(self, context, layout, node: NodeBase, text):
+1789	                if not node.is_registered_node_type():
+1790	                    return
+1791	                node.draw_socket(self, context, layout, node, text)
+1792	            rand_color = (rand()**0.5, rand()**0.5, rand()**0.5, 1)
+1793	            color = bpy.props.FloatVectorProperty(size=4, default=rand_color)
+1794	            fields = {
+1795	                &quot;draw&quot;: draw,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-52">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>1792<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1788	            def draw(self, context, layout, node: NodeBase, text):
+1789	                if not node.is_registered_node_type():
+1790	                    return
+1791	                node.draw_socket(self, context, layout, node, text)
+1792	            rand_color = (rand()**0.5, rand()**0.5, rand()**0.5, 1)
+1793	            color = bpy.props.FloatVectorProperty(size=4, default=rand_color)
+1794	            fields = {
+1795	                &quot;draw&quot;: draw,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-53">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>1937<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1933	            if skip:
+1934	                logger.warning(&quot;Skip Reg Node: %s&quot;, nname)
+1935	                continue
+1936	            NodeDesc = type(nname, (NodeBase,), fields)
+1937	            NodeDesc.dcolor = (rand() / 2, rand() / 2, rand() / 2)
+1938	            node_clss.append(NodeDesc)
+1939	        return node_clss
+1940	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-54">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>1937<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1933	            if skip:
+1934	                logger.warning(&quot;Skip Reg Node: %s&quot;, nname)
+1935	                continue
+1936	            NodeDesc = type(nname, (NodeBase,), fields)
+1937	            NodeDesc.dcolor = (rand() / 2, rand() / 2, rand() / 2)
+1938	            node_clss.append(NodeDesc)
+1939	        return node_clss
+1940	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-55">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/nodes.py</a><br>
+    <b>Line number: </b>1937<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1933	            if skip:
+1934	                logger.warning(&quot;Skip Reg Node: %s&quot;, nname)
+1935	                continue
+1936	            NodeDesc = type(nname, (NodeBase,), fields)
+1937	            NodeDesc.dcolor = (rand() / 2, rand() / 2, rand() / 2)
+1938	            node_clss.append(NodeDesc)
+1939	        return node_clss
+1940	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-56">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/test.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/test.py</a><br>
+    <b>Line number: </b>1<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+1	import subprocess
+2	
+3	c = &quot;&quot;&quot;
+4	import sys
+5	import time
+6	for i in range(5):
+7	    sys.stdout.write(&#x27;Processing&#x27;)
+8	    sys.stdout.flush()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-57">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with pickle module.<br>
+    <b>Test ID:</b> B403<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py</a><br>
+    <b>Line number: </b>7<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b403-import-pickle</a><br>
+
+<div class="code">
+<pre>
+3	import bpy
+4	import typing
+5	import time
+6	import sys
+7	import pickle
+8	import traceback
+9	import inspect
+10	import types
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-58">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py</a><br>
+    <b>Line number: </b>148<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+144	        def _get_id_pool(self) -&gt; set:
+145	            if &quot;ID_POOL&quot; not in self.tree:
+146	                self.tree[&quot;ID_POOL&quot;] = pickle.dumps(set())
+147	            try:
+148	                return pickle.loads(self.tree[&quot;ID_POOL&quot;])
+149	            except pickle.UnpicklingError:
+150	                self.tree[&quot;ID_POOL&quot;] = pickle.dumps(set())
+151	            return pickle.loads(self.tree[&quot;ID_POOL&quot;])
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-59">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py</a><br>
+    <b>Line number: </b>151<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+147	            try:
+148	                return pickle.loads(self.tree[&quot;ID_POOL&quot;])
+149	            except pickle.UnpicklingError:
+150	                self.tree[&quot;ID_POOL&quot;] = pickle.dumps(set())
+151	            return pickle.loads(self.tree[&quot;ID_POOL&quot;])
+152	
+153	        def _set_id_pool(self, value):
+154	            if not isinstance(value, set):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-60">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py</a><br>
+    <b>Line number: </b>994<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+990	        registered_menu = registered_menus.pop(class_name, None)
+991	        if registered_menu and getattr(registered_menu, &quot;is_registered&quot;):
+992	            try:
+993	                bpy.utils.unregister_class(registered_menu)
+994	            except Exception:
+995	                pass
+996	        menu_type = type(class_name, (bpy.types.Menu,), __data__)
+997	        menu_types.append(menu_type)
+998	        registered_menus[class_name] = menu_type
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-61">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/SDNode/tree.py</a><br>
+    <b>Line number: </b>1030<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+1026	        menus = []
+1027	        for item in nodes[&quot;items&quot;]:
+1028	            items.append(CFNodeItem(item))
+1029	        menus.extend(load_node(nodes.get(&quot;menus&quot;, {}), root=cat, proot=f&quot;{proot}/{ocat}&quot;))
+1030	        hash_root = md5(proot.encode()).hexdigest()[:5]
+1031	        if not root:
+1032	            cat_id = cat
+1033	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-62">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>274<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+270	            for piece in config:
+271	                # --listen 127.0.0.1 --port 8188
+272	                if ip := re.match(r&quot;--listen\s+([0-9.]+)&quot;, piece):
+273	                    ip = ip.group(1)
+274	                    ip = {&quot;0.0.0.0&quot;: &quot;127.0.0.1&quot;}.get(ip, ip)
+275	                    self.ip = ip
+276	                if port := re.match(r&quot;.*?--port\s+([0-9]+)&quot;, piece):
+277	                    self.port = int(port.group(1))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-63">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>451<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+447	    def get_cuda_list():
+448	        &quot;&quot;&quot;
+449	        借助nvidia-smi获取CUDA版本列表
+450	        &quot;&quot;&quot;
+451	        import subprocess
+452	        try:
+453	            res = subprocess.check_output(&quot;nvidia-smi -L&quot;, shell=True).decode(&quot;utf-8&quot;)
+454	            # GPU 0: NVIDIA GeForce GTX 1060 5GB (UUID: xxxx)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-64">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>453<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+449	        借助nvidia-smi获取CUDA版本列表
+450	        &quot;&quot;&quot;
+451	        import subprocess
+452	        try:
+453	            res = subprocess.check_output(&quot;nvidia-smi -L&quot;, shell=True).decode(&quot;utf-8&quot;)
+454	            # GPU 0: NVIDIA GeForce GTX 1060 5GB (UUID: xxxx)
+455	            items = [(&quot;default&quot;, &quot;Auto&quot;, &quot;&quot;, 0,)]
+456	            for line in res.split(&quot;\n&quot;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-65">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>453<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+449	        借助nvidia-smi获取CUDA版本列表
+450	        &quot;&quot;&quot;
+451	        import subprocess
+452	        try:
+453	            res = subprocess.check_output(&quot;nvidia-smi -L&quot;, shell=True).decode(&quot;utf-8&quot;)
+454	            # GPU 0: NVIDIA GeForce GTX 1060 5GB (UUID: xxxx)
+455	            items = [(&quot;default&quot;, &quot;Auto&quot;, &quot;&quot;, 0,)]
+456	            for line in res.split(&quot;\n&quot;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-66">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>493<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+489	
+490	    def update_open_dir1(self, context):
+491	        if self.open_dir1:
+492	            self.open_dir1 = False
+493	            os.startfile(Path(self.model_path) / &quot;models/checkpoints&quot;)
+494	
+495	    open_dir1: bpy.props.BoolProperty(default=False, name=&quot;Open CKPT Folder&quot;, update=update_open_dir1)
+496	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-67">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>500<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+496	
+497	    def update_open_dir2(self, context):
+498	        if self.open_dir2:
+499	            self.open_dir2 = False
+500	            os.startfile(Path(self.model_path) / &quot;models/loras&quot;)
+501	    open_dir2: bpy.props.BoolProperty(default=False, name=&quot;Open LoRA Folder&quot;, update=update_open_dir2)
+502	
+503	    def update_open_dir3(self, context):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-68">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>506<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+502	
+503	    def update_open_dir3(self, context):
+504	        if self.open_dir3:
+505	            self.open_dir3 = False
+506	            os.startfile(self.model_path)
+507	
+508	    open_dir3: bpy.props.BoolProperty(default=False, name=&quot;Open ComfyUI Folder&quot;, update=update_open_dir3)
+509	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-69">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/preference.py</a><br>
+    <b>Line number: </b>513<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+509	
+510	    def update_open_dir4(self, context):
+511	        if self.open_dir4:
+512	            self.open_dir4 = False
+513	            os.startfile(Path(self.model_path) / &quot;SDNodeTemp&quot;)
+514	
+515	    open_dir4: bpy.props.BoolProperty(default=False,
+516	                                      name=&quot;Open Cache Folder&quot;,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-70">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/prop.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/prop.py</a><br>
+    <b>Line number: </b>95<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+91	
+92	    def update_open_presets_dir(self, context):
+93	        if self.open_presets_dir:
+94	            self.open_presets_dir = False
+95	            os.startfile(str(PRESETS_DIR))
+96	
+97	    open_presets_dir: bpy.props.BoolProperty(default=False, name=&quot;Open NodeGroup Presets Folder&quot;, update=update_open_presets_dir)
+98	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-71">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_no_shell: </b> Starting a process without a shell.<br>
+    <b>Test ID:</b> B606<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/prop.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/prop.py</a><br>
+    <b>Line number: </b>129<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b606_start_process_with_no_shell.html</a><br>
+
+<div class="code">
+<pre>
+125	
+126	    def update_open_groups_dir(self, context):
+127	        if self.open_groups_dir:
+128	            self.open_groups_dir = False
+129	            os.startfile(str(GROUPS_DIR))
+130	
+131	    open_groups_dir: bpy.props.BoolProperty(default=False, name=&quot;Open NodeTree Presets Folder&quot;, update=update_open_groups_dir)
+132	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-72">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>131<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+127	    def new():
+128	        import bpy.utils.previews
+129	        import random
+130	        prev = bpy.utils.previews.new()
+131	        while (i := random.randint(0, 999999999)) in PrevMgr.__PREV__:
+132	            continue
+133	        PrevMgr.__PREV__[i] = prev
+134	        return prev
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-73">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>570<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+566	    @staticmethod
+567	    def get_nas_mapping():
+568	        if platform.system() != &quot;Windows&quot;:
+569	            return {}
+570	        import subprocess
+571	        result = subprocess.run(&quot;net use&quot;, capture_output=True, text=True, encoding=&quot;gbk&quot;, check=True)
+572	        if result.returncode != 0 or result.stdout is None:
+573	            return {}
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-74">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>571<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+567	    def get_nas_mapping():
+568	        if platform.system() != &quot;Windows&quot;:
+569	            return {}
+570	        import subprocess
+571	        result = subprocess.run(&quot;net use&quot;, capture_output=True, text=True, encoding=&quot;gbk&quot;, check=True)
+572	        if result.returncode != 0 or result.stdout is None:
+573	            return {}
+574	        nas_mapping = {}
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-75">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>571<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+567	    def get_nas_mapping():
+568	        if platform.system() != &quot;Windows&quot;:
+569	            return {}
+570	        import subprocess
+571	        result = subprocess.run(&quot;net use&quot;, capture_output=True, text=True, encoding=&quot;gbk&quot;, check=True)
+572	        if result.returncode != 0 or result.stdout is None:
+573	            return {}
+574	        nas_mapping = {}
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-76">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>1597<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+1593	            # &quot;Hires upscaler&quot;: &quot;ESRGAN_4x&quot;,
+1594	            # &quot;Downcast alphas_cumprod&quot;: &quot;True&quot;,
+1595	            &quot;Version&quot;: &quot;1.8.0-RC&quot;
+1596	        }
+1597	        assert self._parse(in_t0) == out_t0, &quot;Test 0 failed&quot;
+1598	        in_t1 = &quot;&quot;&quot;
+1599	masterpiece,ultra high quality,highest quality,super fine,1girl,solo,(black background:1.3),(silhouette:1.1),sparkle,looking at viewer,upper body,simple background,glowing,(dim lighting:1.2),crystal clear,colorful clothes,
+1600	Negative prompt: Easy Negative,bad handv4,ng_deepnegative_v1_75t,(worst quality:2),(low quality:2),(normal quality:2),lowres,((monochrome)),((grayscale)),bad anatomy,DeepNegative,skin spots,acnes,skin blemishes,(fat:1.2),facing away,looking away,tilted head,lowres,bad anatomy,bad hands,missing fingers,extra digit,fewer digits,bad feet,poorly drawn hands,poorly drawn face,mutation,deformed,extra fingers,extra limbs,extra arms,extra legs,malformed limbs,fused fingers,too many fingers,long neck,cross-eyed,mutated hands,polar lowres,bad body,bad proportions,gross proportions,missing arms,missing legs,extra digit,extra arms,extra leg,extra foot,teethcroppe,signature,watermark,username,blurry,cropped,jpeg artifacts,text,Lower body exposure,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-77">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>1619<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+1615	            &quot;TI hashes&quot;: &quot;\&quot;ng_deepnegative_v1_75t: 54e7e4826d53\&quot;&quot;,
+1616	            # &quot;Pad conds&quot;: &quot;True&quot;,
+1617	            &quot;Version&quot;: &quot;v1.9.4&quot;
+1618	        }
+1619	        assert self._parse(in_t1) == out_t1, &quot;Test 1 failed&quot;
+1620	
+1621	        in_t2 = &quot;&quot;&quot;
+1622	(official art:1.2),(colorful:1.1),(masterpiece:1.2),best quality,masterpiece,highres,original,extremely detailed wallpaper,1girl,solo,very long hair,(loli:1.3),vibrant color palette,dazzling hues,kaleidoscopic patterns,enchanting young maiden,radiant beauty,chromatic harmony,iridescent hair,sparkling eyes,lush landscapes,vivid blossoms,mesmerizing sunsets,brilliant rainbows,prismatic reflections,whimsical attire,captivating accessories,stunning chromatic display,artful composition,picturesque backdrop,breathtaking scenery,visual symphony,spellbinding chromatic enchantment,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-78">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>1650<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+1646	            &quot;ControlNet 0&quot;: &#x27;Module: tile_resample, Model: control_v11f1e_sd15_tile_fp16 [3b860298], Weight: 0.5, Resize Mode: Crop and Resize, Processor Res: 512, Threshold A: 1.0, Threshold B: 0.5, Guidance Start: 0.0, Guidance End: 1.0, Pixel Perfect: True, Control Mode: Balanced&#x27;,
+1647	            # &quot;Pad conds&quot;: &quot;True&quot;,
+1648	            &quot;Version&quot;: &quot;v1.9.4&quot;,
+1649	        }
+1650	        assert self._parse(in_t2) == out_t2, &quot;Test 2 failed&quot;
+1651	        in_t3 = &quot;&quot;&quot;
+1652	masterpiece, best quality, girl,woman,female, short hair, light smile, closed_eyes, cat_ears, overskirt,white dress,frills, pale blue Clothes,tiara
+1653	Negative prompt: easynegative, ng_deepnegative_v1_75t, By bad artist -neg, verybadimagenegative_v1.3
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-79">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>1670<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+1666	            &quot;Model hash&quot;: &quot;19dbfda152&quot;,
+1667	            &quot;Model&quot;: &quot;二次元_mixProV45Colorbox_v45&quot;,
+1668	            &quot;Clip skip&quot;: &quot;2&quot;,
+1669	        }
+1670	        assert self._parse(in_t3) == out_t3, &quot;Test 3 failed&quot;
+1671	        in_t4 = &quot;&quot;&quot;
+1672	masterpiece, best quality, 1girl, solo, voxel art,
+1673	gazebo, white girl,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-80">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/ComfyUI-BlenderAI-node/utils.py</a><br>
+    <b>Line number: </b>1707<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+1703	            &quot;Size&quot;: &quot;640x960&quot;,
+1704	            &quot;Model hash&quot;: &quot;149fe7d36c&quot;,
+1705	            &quot;Model&quot;: &quot;二次元_meinaalter_v1&quot;,
+1706	        }
+1707	        assert self._parse(in_t4) == out_t4, &quot;Test 4 failed&quot;
+1708	
+1709	    def base_workflow(self):
+1710	        wk = {
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

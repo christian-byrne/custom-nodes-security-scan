@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">2482</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py</a><br>
+    <b>Line number: </b>135<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+131	
+132	    def forward(self, x, style, noise_mode=&quot;random&quot;, gain=1):
+133	        x = self.conv(x, style)
+134	
+135	        assert noise_mode in [&quot;random&quot;, &quot;const&quot;, &quot;none&quot;]
+136	
+137	        if self.use_noise:
+138	            if noise_mode == &quot;random&quot;:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py</a><br>
+    <b>Line number: </b>325<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+321	
+322	        # Apply truncation.
+323	        if truncation_psi != 1:
+324	            with torch.autograd.profiler.record_function(&quot;truncate&quot;):
+325	                assert self.w_avg_beta is not None
+326	                if self.num_ws is None or truncation_cutoff is None:
+327	                    x = self.w_avg.lerp(x, truncation_psi)
+328	                else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py</a><br>
+    <b>Line number: </b>647<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+643	        if min(self.input_resolution) &lt;= self.window_size:
+644	            # if window size is larger than input resolution, we don&#x27;t partition windows
+645	            self.shift_size = 0
+646	            self.window_size = min(self.input_resolution)
+647	        assert (
+648	            0 &lt;= self.shift_size &lt; self.window_size
+649	        ), &quot;shift_size must in 0-window_size&quot;
+650	
+651	        if self.shift_size &gt; 0:
+652	            down_ratio = 1
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/MAT.py</a><br>
+    <b>Line number: </b>1466<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+1462	        demodulate=True,
+1463	    ):
+1464	        super().__init__()
+1465	        resolution_log2 = int(np.log2(img_resolution))
+1466	        assert img_resolution == 2**resolution_log2 and img_resolution &gt;= 4
+1467	
+1468	        self.num_layers = resolution_log2 * 2 - 3 * 2
+1469	        self.img_resolution = img_resolution
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>112<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+108	
+109	
+110	def _bias_act_ref(x, b=None, dim=1, act=&quot;linear&quot;, alpha=None, gain=None, clamp=None):
+111	    &quot;&quot;&quot;Slow reference implementation of `bias_act()` using standard TensorFlow ops.&quot;&quot;&quot;
+112	    assert isinstance(x, torch.Tensor)
+113	    assert clamp is None or clamp &gt;= 0
+114	    spec = activation_funcs[act]
+115	    alpha = float(alpha if alpha is not None else spec.def_alpha)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>113<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+109	
+110	def _bias_act_ref(x, b=None, dim=1, act=&quot;linear&quot;, alpha=None, gain=None, clamp=None):
+111	    &quot;&quot;&quot;Slow reference implementation of `bias_act()` using standard TensorFlow ops.&quot;&quot;&quot;
+112	    assert isinstance(x, torch.Tensor)
+113	    assert clamp is None or clamp &gt;= 0
+114	    spec = activation_funcs[act]
+115	    alpha = float(alpha if alpha is not None else spec.def_alpha)
+116	    gain = float(gain if gain is not None else spec.def_gain)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>121<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+117	    clamp = float(clamp if clamp is not None else -1)
+118	
+119	    # Add bias.
+120	    if b is not None:
+121	        assert isinstance(b, torch.Tensor) and b.ndim == 1
+122	        assert 0 &lt;= dim &lt; x.ndim
+123	        assert b.shape[0] == x.shape[dim]
+124	        x = x + b.reshape([-1 if i == dim else 1 for i in range(x.ndim)]).to(x.device)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>122<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+118	
+119	    # Add bias.
+120	    if b is not None:
+121	        assert isinstance(b, torch.Tensor) and b.ndim == 1
+122	        assert 0 &lt;= dim &lt; x.ndim
+123	        assert b.shape[0] == x.shape[dim]
+124	        x = x + b.reshape([-1 if i == dim else 1 for i in range(x.ndim)]).to(x.device)
+125	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>123<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+119	    # Add bias.
+120	    if b is not None:
+121	        assert isinstance(b, torch.Tensor) and b.ndim == 1
+122	        assert 0 &lt;= dim &lt; x.ndim
+123	        assert b.shape[0] == x.shape[dim]
+124	        x = x + b.reshape([-1 if i == dim else 1 for i in range(x.ndim)]).to(x.device)
+125	
+126	    # Evaluate activation function.
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>170<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+166	        impl:   Name of the implementation to use. Can be `&quot;ref&quot;` or `&quot;cuda&quot;` (default).
+167	    Returns:
+168	        Tensor of the same shape and datatype as `x`.
+169	    &quot;&quot;&quot;
+170	    assert isinstance(x, torch.Tensor)
+171	    assert impl in [&quot;ref&quot;, &quot;cuda&quot;]
+172	    return _bias_act_ref(
+173	        x=x, b=b, dim=dim, act=act, alpha=alpha, gain=gain, clamp=clamp
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>171<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+167	    Returns:
+168	        Tensor of the same shape and datatype as `x`.
+169	    &quot;&quot;&quot;
+170	    assert isinstance(x, torch.Tensor)
+171	    assert impl in [&quot;ref&quot;, &quot;cuda&quot;]
+172	    return _bias_act_ref(
+173	        x=x, b=b, dim=dim, act=act, alpha=alpha, gain=gain, clamp=clamp
+174	    )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>207<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+203	    # Validate.
+204	    if f is None:
+205	        f = 1
+206	    f = torch.as_tensor(f, dtype=torch.float32)
+207	    assert f.ndim in [0, 1, 2]
+208	    assert f.numel() &gt; 0
+209	    if f.ndim == 0:
+210	        f = f[np.newaxis]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>208<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+204	    if f is None:
+205	        f = 1
+206	    f = torch.as_tensor(f, dtype=torch.float32)
+207	    assert f.ndim in [0, 1, 2]
+208	    assert f.numel() &gt; 0
+209	    if f.ndim == 0:
+210	        f = f[np.newaxis]
+211	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>217<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+213	    if separable is None:
+214	        separable = f.ndim == 1 and f.numel() &gt;= 8
+215	    if f.ndim == 1 and not separable:
+216	        f = f.ger(f)
+217	    assert f.ndim == (1 if separable else 2)
+218	
+219	    # Apply normalize, flip, gain, and device.
+220	    if normalize:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>233<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+229	def _get_filter_size(f):
+230	    if f is None:
+231	        return 1, 1
+232	
+233	    assert isinstance(f, torch.Tensor) and f.ndim in [1, 2]
+234	    fw = f.shape[-1]
+235	    fh = f.shape[0]
+236	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>239<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+235	    fh = f.shape[0]
+236	
+237	    fw = int(fw)
+238	    fh = int(fh)
+239	    assert fw &gt;= 1 and fh &gt;= 1
+240	    return fw, fh
+241	
+242	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>251<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+247	
+248	def _parse_scaling(scaling):
+249	    if isinstance(scaling, int):
+250	        scaling = [scaling, scaling]
+251	    assert isinstance(scaling, (list, tuple))
+252	    assert all(isinstance(x, int) for x in scaling)
+253	    sx, sy = scaling
+254	    assert sx &gt;= 1 and sy &gt;= 1
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>252<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+248	def _parse_scaling(scaling):
+249	    if isinstance(scaling, int):
+250	        scaling = [scaling, scaling]
+251	    assert isinstance(scaling, (list, tuple))
+252	    assert all(isinstance(x, int) for x in scaling)
+253	    sx, sy = scaling
+254	    assert sx &gt;= 1 and sy &gt;= 1
+255	    return sx, sy
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>254<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+250	        scaling = [scaling, scaling]
+251	    assert isinstance(scaling, (list, tuple))
+252	    assert all(isinstance(x, int) for x in scaling)
+253	    sx, sy = scaling
+254	    assert sx &gt;= 1 and sy &gt;= 1
+255	    return sx, sy
+256	
+257	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>261<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+257	
+258	def _parse_padding(padding):
+259	    if isinstance(padding, int):
+260	        padding = [padding, padding]
+261	    assert isinstance(padding, (list, tuple))
+262	    assert all(isinstance(x, int) for x in padding)
+263	    if len(padding) == 2:
+264	        padx, pady = padding
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>262<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+258	def _parse_padding(padding):
+259	    if isinstance(padding, int):
+260	        padding = [padding, padding]
+261	    assert isinstance(padding, (list, tuple))
+262	    assert all(isinstance(x, int) for x in padding)
+263	    if len(padding) == 2:
+264	        padx, pady = padding
+265	        padding = [padx, padx, pady, pady]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>285<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+281	
+282	def _upfirdn2d_ref(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1):
+283	    &quot;&quot;&quot;Slow reference implementation of `upfirdn2d()` using standard PyTorch ops.&quot;&quot;&quot;
+284	    # Validate arguments.
+285	    assert isinstance(x, torch.Tensor) and x.ndim == 4
+286	    if f is None:
+287	        f = torch.ones([1, 1], dtype=torch.float32, device=x.device)
+288	    assert isinstance(f, torch.Tensor) and f.ndim in [1, 2]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>288<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+284	    # Validate arguments.
+285	    assert isinstance(x, torch.Tensor) and x.ndim == 4
+286	    if f is None:
+287	        f = torch.ones([1, 1], dtype=torch.float32, device=x.device)
+288	    assert isinstance(f, torch.Tensor) and f.ndim in [1, 2]
+289	    assert f.dtype == torch.float32 and not f.requires_grad
+290	    batch_size, num_channels, in_height, in_width = x.shape
+291	    # upx, upy = _parse_scaling(up)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>289<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+285	    assert isinstance(x, torch.Tensor) and x.ndim == 4
+286	    if f is None:
+287	        f = torch.ones([1, 1], dtype=torch.float32, device=x.device)
+288	    assert isinstance(f, torch.Tensor) and f.ndim in [1, 2]
+289	    assert f.dtype == torch.float32 and not f.requires_grad
+290	    batch_size, num_channels, in_height, in_width = x.shape
+291	    # upx, upy = _parse_scaling(up)
+292	    # downx, downy = _parse_scaling(down)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>522<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+518	    Returns:
+519	        Tensor of the shape `[batch_size, num_channels, out_height, out_width]`.
+520	    &quot;&quot;&quot;
+521	    # Validate arguments.
+522	    assert isinstance(x, torch.Tensor) and (x.ndim == 4)
+523	    assert isinstance(w, torch.Tensor) and (w.ndim == 4) and (w.dtype == x.dtype)
+524	    assert f is None or (
+525	        isinstance(f, torch.Tensor) and f.ndim in [1, 2] and f.dtype == torch.float32
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>523<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+519	        Tensor of the shape `[batch_size, num_channels, out_height, out_width]`.
+520	    &quot;&quot;&quot;
+521	    # Validate arguments.
+522	    assert isinstance(x, torch.Tensor) and (x.ndim == 4)
+523	    assert isinstance(w, torch.Tensor) and (w.ndim == 4) and (w.dtype == x.dtype)
+524	    assert f is None or (
+525	        isinstance(f, torch.Tensor) and f.ndim in [1, 2] and f.dtype == torch.float32
+526	    )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>524<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+520	    &quot;&quot;&quot;
+521	    # Validate arguments.
+522	    assert isinstance(x, torch.Tensor) and (x.ndim == 4)
+523	    assert isinstance(w, torch.Tensor) and (w.ndim == 4) and (w.dtype == x.dtype)
+524	    assert f is None or (
+525	        isinstance(f, torch.Tensor) and f.ndim in [1, 2] and f.dtype == torch.float32
+526	    )
+527	    assert isinstance(up, int) and (up &gt;= 1)
+528	    assert isinstance(down, int) and (down &gt;= 1)
+529	    # assert isinstance(groups, int) and (groups &gt;= 1), f&quot;!!!!!! groups: {groups} isinstance(groups, int)  {isinstance(groups, int)} {type(groups)}&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>527<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+523	    assert isinstance(w, torch.Tensor) and (w.ndim == 4) and (w.dtype == x.dtype)
+524	    assert f is None or (
+525	        isinstance(f, torch.Tensor) and f.ndim in [1, 2] and f.dtype == torch.float32
+526	    )
+527	    assert isinstance(up, int) and (up &gt;= 1)
+528	    assert isinstance(down, int) and (down &gt;= 1)
+529	    # assert isinstance(groups, int) and (groups &gt;= 1), f&quot;!!!!!! groups: {groups} isinstance(groups, int)  {isinstance(groups, int)} {type(groups)}&quot;
+530	    out_channels, in_channels_per_group, kh, kw = _get_weight_shape(w)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/mat/arch/utils.py</a><br>
+    <b>Line number: </b>528<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+524	    assert f is None or (
+525	        isinstance(f, torch.Tensor) and f.ndim in [1, 2] and f.dtype == torch.float32
+526	    )
+527	    assert isinstance(up, int) and (up &gt;= 1)
+528	    assert isinstance(down, int) and (down &gt;= 1)
+529	    # assert isinstance(groups, int) and (groups &gt;= 1), f&quot;!!!!!! groups: {groups} isinstance(groups, int)  {isinstance(groups, int)} {type(groups)}&quot;
+530	    out_channels, in_channels_per_group, kh, kw = _get_weight_shape(w)
+531	    fw, fh = _get_filter_size(f)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/nodes.py</a><br>
+    <b>Line number: </b>185<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+181	
+182	    def _input_block_patch(self, h: Tensor, transformer_options: dict):
+183	        if transformer_options[&quot;block&quot;][1] == 0:
+184	            if self._inpaint_block is None or self._inpaint_block.shape != h.shape:
+185	                assert self._inpaint_head_feature is not None
+186	                batch = h.shape[0] // self._inpaint_head_feature.shape[0]
+187	                self._inpaint_block = self._inpaint_head_feature.to(h).repeat(batch, 1, 1, 1)
+188	            h = h + self._inpaint_block
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/nodes.py</a><br>
+    <b>Line number: </b>240<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+236	
+237	    def fill(self, image: Tensor, mask: Tensor, fill: str, falloff: int):
+238	        image = image.detach().clone()
+239	        alpha = mask_unsqueeze(mask_floor(mask))
+240	        assert alpha.shape[0] == image.shape[0], &quot;Image and mask batch size does not match&quot;
+241	
+242	        falloff = make_odd(falloff)
+243	        if falloff &gt; 0:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-inpaint-nodes/nodes.py</a><br>
+    <b>Line number: </b>438<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+434	    CATEGORY = &quot;inpaint&quot;
+435	    FUNCTION = &quot;convert&quot;
+436	
+437	    def convert(self, mask: Tensor, offset: float, threshold: float):
+438	        assert 0.0 &lt;= offset &lt; threshold &lt;= 1.0, &quot;Threshold must be higher than offset&quot;
+439	        mask = (mask - offset) * (1 / (threshold - offset))
+440	        mask = mask.clamp(0, 1)
+441	        return (mask,)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

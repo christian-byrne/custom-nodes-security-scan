@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">542</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py</a><br>
+    <b>Line number: </b>150<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+146	        # For single mask, expand it to match size of image batch size.
+147	        if mask.shape[0] == 1:
+148	            mask = mask.repeat(out.shape[0], 1, 1)
+149	
+150	        assert mask.ndim == 3, f&quot;Mask should have shape [B, H, W]. {mask.shape}&quot;
+151	        assert out.ndim == 4, f&quot;Image should have shsape [B, C, H, W]. {out.shape}&quot;
+152	        assert out.shape[-2:] == mask.shape[-2:], f&quot;{out.shape[-2:]} != {mask.shape[-2:]}&quot;
+153	        assert out.shape[0] == mask.shape[0], f&quot;{out.shape[0]} != {mask.shape[0]}&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py</a><br>
+    <b>Line number: </b>151<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+147	        if mask.shape[0] == 1:
+148	            mask = mask.repeat(out.shape[0], 1, 1)
+149	
+150	        assert mask.ndim == 3, f&quot;Mask should have shape [B, H, W]. {mask.shape}&quot;
+151	        assert out.ndim == 4, f&quot;Image should have shsape [B, C, H, W]. {out.shape}&quot;
+152	        assert out.shape[-2:] == mask.shape[-2:], f&quot;{out.shape[-2:]} != {mask.shape[-2:]}&quot;
+153	        assert out.shape[0] == mask.shape[0], f&quot;{out.shape[0]} != {mask.shape[0]}&quot;
+154	        # Apply each mask in the batch to its corresponding image&#x27;s alpha channel
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py</a><br>
+    <b>Line number: </b>152<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+148	            mask = mask.repeat(out.shape[0], 1, 1)
+149	
+150	        assert mask.ndim == 3, f&quot;Mask should have shape [B, H, W]. {mask.shape}&quot;
+151	        assert out.ndim == 4, f&quot;Image should have shsape [B, C, H, W]. {out.shape}&quot;
+152	        assert out.shape[-2:] == mask.shape[-2:], f&quot;{out.shape[-2:]} != {mask.shape[-2:]}&quot;
+153	        assert out.shape[0] == mask.shape[0], f&quot;{out.shape[0]} != {mask.shape[0]}&quot;
+154	        # Apply each mask in the batch to its corresponding image&#x27;s alpha channel
+155	        for i in range(out.shape[0]):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/nodes.py</a><br>
+    <b>Line number: </b>153<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+149	
+150	        assert mask.ndim == 3, f&quot;Mask should have shape [B, H, W]. {mask.shape}&quot;
+151	        assert out.ndim == 4, f&quot;Image should have shsape [B, C, H, W]. {out.shape}&quot;
+152	        assert out.shape[-2:] == mask.shape[-2:], f&quot;{out.shape[-2:]} != {mask.shape[-2:]}&quot;
+153	        assert out.shape[0] == mask.shape[0], f&quot;{out.shape[0]} != {mask.shape[0]}&quot;
+154	        # Apply each mask in the batch to its corresponding image&#x27;s alpha channel
+155	        for i in range(out.shape[0]):
+156	            out[i, 3, :, :] = mask[i]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/region.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/region.py</a><br>
+    <b>Line number: </b>58<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+54	        current = self
+55	        while current is not None:
+56	            result.append(current)
+57	            current = current.previous
+58	        assert len(result) &gt; 1, &quot;At least 2 regions are required.&quot;
+59	
+60	        result = list(reversed(result))
+61	        if result[0].mask is None:  # BackgroundRegion
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/region.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/region.py</a><br>
+    <b>Line number: </b>143<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+139	        num_conds = len(region_list)
+140	
+141	        mask = torch.stack([r.mask for r in region_list], dim=0)
+142	        mask_sum = mask.sum(dim=0, keepdim=True)
+143	        assert mask_sum.sum() &gt; 0, &quot;There are areas that are zero in all masks.&quot;
+144	        self.mask = mask / mask_sum
+145	
+146	        self.conds = [r.conditioning[0][0] for r in region_list]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/region.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/region.py</a><br>
+    <b>Line number: </b>150<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+146	        self.conds = [r.conditioning[0][0] for r in region_list]
+147	        num_tokens = [cond.shape[1] for cond in self.conds]
+148	
+149	        def attn2_patch(q: Tensor, k: Tensor, v: Tensor, extra_options: dict):
+150	            assert k.mean() == v.mean(), &quot;k and v must be the same.&quot;
+151	            device, dtype = q.device, q.dtype
+152	
+153	            if self.conds[0].device != device:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py</a><br>
+    <b>Line number: </b>37<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+33	        self.init(image, min_tile_size, padding, blending)
+34	        return (self,)
+35	
+36	    def init(self, image: Tensor, min_tile_size: int, padding: int, blending: int):
+37	        assert all([x % 8 == 0 for x in image.shape[-3:-1]]), &quot;Image size must be divisible by 8&quot;
+38	        assert min_tile_size % 8 == 0, &quot;Tile size must be divisible by 8&quot;
+39	        assert blending &lt; padding, &quot;Blending must be smaller than padding&quot;
+40	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py</a><br>
+    <b>Line number: </b>38<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+34	        return (self,)
+35	
+36	    def init(self, image: Tensor, min_tile_size: int, padding: int, blending: int):
+37	        assert all([x % 8 == 0 for x in image.shape[-3:-1]]), &quot;Image size must be divisible by 8&quot;
+38	        assert min_tile_size % 8 == 0, &quot;Tile size must be divisible by 8&quot;
+39	        assert blending &lt; padding, &quot;Blending must be smaller than padding&quot;
+40	
+41	        self.image_size = np.array(image.shape[-3:-1])
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py</a><br>
+    <b>Line number: </b>39<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+35	
+36	    def init(self, image: Tensor, min_tile_size: int, padding: int, blending: int):
+37	        assert all([x % 8 == 0 for x in image.shape[-3:-1]]), &quot;Image size must be divisible by 8&quot;
+38	        assert min_tile_size % 8 == 0, &quot;Tile size must be divisible by 8&quot;
+39	        assert blending &lt; padding, &quot;Blending must be smaller than padding&quot;
+40	
+41	        self.image_size = np.array(image.shape[-3:-1])
+42	        self.padding = padding
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-tooling-nodes/tile.py</a><br>
+    <b>Line number: </b>171<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+167	    RETURN_TYPES = (&quot;IMAGE&quot;,)
+168	    FUNCTION = &quot;merge&quot;
+169	
+170	    def merge(self, image: Tensor, layout: TileLayout, index: int, tile: Tensor):
+171	        assert index &lt; layout.total_count, f&quot;Index {index} out of range&quot;
+172	        if index == 0:
+173	            image = image.clone()
+174	        layout.merge(image, index, tile)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

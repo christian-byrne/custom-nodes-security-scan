@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">220</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell: Seems safe, but may be changed in the future, consider rewriting without shell<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>30<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>30<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+26	    print(&quot;BilboX:&quot;,type)
+27	    json_obj = {&quot;server_op&quot;: type}
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell: Seems safe, but may be changed in the future, consider rewriting without shell<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>32<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>32<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+28	 
+29	    if(type == &quot;shutdown&quot;):
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell: Seems safe, but may be changed in the future, consider rewriting without shell<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>34<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>34<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+30	        os.system(&quot;shutdown /s&quot;) # Shutdown
+31	    if(type == &quot;reboot&quot;):
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell: Seems safe, but may be changed in the future, consider rewriting without shell<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>36<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>start_process_with_partial_path: </b> Starting a process with a partial executable path<br>
+    <b>Test ID:</b> B607<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/bilbox-comfyui/__init__.py</a><br>
+    <b>Line number: </b>36<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html</a><br>
+
+<div class="code">
+<pre>
+32	        os.system(&quot;shutdown /r&quot;) # Restart
+33	    if(type == &quot;logout&quot;):
+34	        os.system(&quot;shutdown /l&quot;) # logout
+35	    if(type == &quot;lock&quot;):
+36	        os.system(&quot;rundll32.exe user32.dll,LockWorkStation&quot;) # logout
+37	    return web.json_response(json_obj, content_type=&#x27;application/json&#x27;)
+38	
+39	WEB_DIRECTORY = &quot;./web&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

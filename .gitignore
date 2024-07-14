@@ -19,3 +19,5 @@ mass-clone.sh
 
 wiki/*.md
 replace.sh
+
+src/scan/bandit/quick-scan.sh

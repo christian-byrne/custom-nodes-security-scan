@@ -1,0 +1,1382 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">11910</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>43<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+39	import random
+40	import re
+41	import requests
+42	import socket
+43	import subprocess
+44	import sys
+45	import datetime
+46	import time
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Consider possible security implications associated with the subprocess module.<br>
+    <b>Test ID:</b> B404<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>335<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess</a><br>
+
+<div class="code">
+<pre>
+331	
+332	# Freeze PIP modules
+333	def packages(versions=False):
+334	    import sys
+335	    import subprocess
+336	    return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
+337	
+338	def install_package(package, uninstall_first: Union[List[str], str] = None):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>336<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+332	# Freeze PIP modules
+333	def packages(versions=False):
+334	    import sys
+335	    import subprocess
+336	    return [( r.decode().split(&#x27;==&#x27;)[0] if not versions else r.decode() ) for r in subprocess.check_output([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;freeze&#x27;]).split()]
+337	
+338	def install_package(package, uninstall_first: Union[List[str], str] = None):
+339	    if os.getenv(&quot;WAS_BLOCK_AUTO_INSTALL&quot;, &#x27;False&#x27;).lower() in (&#x27;true&#x27;, &#x27;1&#x27;, &#x27;t&#x27;):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>349<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+345	        if isinstance(uninstall_first, str):
+346	            uninstall_first = [uninstall_first]
+347	
+348	        cstr(f&quot;Uninstalling {&#x27;, &#x27;.join(uninstall_first)}..&quot;)
+349	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;uninstall&#x27;, *uninstall_first])
+350	        cstr(&quot;Installing package...&quot;).msg.print()
+351	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, package])
+352	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>351<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+347	
+348	        cstr(f&quot;Uninstalling {&#x27;, &#x27;.join(uninstall_first)}..&quot;)
+349	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;uninstall&#x27;, *uninstall_first])
+350	        cstr(&quot;Installing package...&quot;).msg.print()
+351	        subprocess.check_call([sys.executable, &#x27;-s&#x27;, &#x27;-m&#x27;, &#x27;pip&#x27;, &#x27;-q&#x27;, &#x27;install&#x27;, package])
+352	
+353	# Tensor to PIL
+354	def tensor2pil(image):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>454<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+450	        filename = url.split(&#x27;/&#x27;)[-1]
+451	    if not path:
+452	        path = &#x27;.&#x27;
+453	    save_path = os.path.join(path, filename)
+454	    response = requests.get(url, stream=True)
+455	    if response.status_code == requests.codes.ok:
+456	        file_size = int(response.headers.get(&#x27;Content-Length&#x27;, 0))
+457	        with open(save_path, &#x27;wb&#x27;) as file:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>478<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+474	        # Fetch the NSP Pantry
+475	        if pantry_path is None:
+476	            pantry_path = DEFAULT_NSP_PANTRY_PATH
+477	        if not os.path.exists(pantry_path):
+478	            response = urlopen(&#x27;https://raw.githubusercontent.com/WASasquatch/noodle-soup-prompts/main/nsp_pantry.json&#x27;)
+479	            tmp_pantry = json.loads(response.read())
+480	            # Dump JSON locally
+481	            pantry_serialized = json.dumps(tmp_pantry, indent=4)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>503<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+499	        tcount = new_text.count(tkey)
+500	        # Apply random results for each noodle counted
+501	        for _ in range(tcount):
+502	            new_text = new_text.replace(
+503	                tkey, random.choice(nspterminology[term]), 1)
+504	            seed += 1
+505	            random.seed(seed)
+506	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>521<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+517	                    lines = file.readlines()
+518	                    if lines:
+519	                        random_line = None
+520	                        while not random_line:
+521	                            line = random.choice(lines).strip()
+522	                            if not line.startswith(&#x27;#&#x27;) and not line.startswith(&#x27;//&#x27;):
+523	                                random_line = line
+524	                        text = text.replace(key, random_line)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>556<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+552	            lines = file.readlines()
+553	            if lines:
+554	                random_line = None
+555	                while not random_line:
+556	                    line = random.choice(lines).strip()
+557	                    if not line.startswith(&#x27;#&#x27;) and not line.startswith(&#x27;//&#x27;):
+558	                        random_line = line
+559	                text = text.replace(key, random_line)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>595<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+591	    random.seed(seed)
+592	
+593	    def replace_match(match):
+594	        options = match.group(1).split(&#x27;|&#x27;)
+595	        return random.choice(options)
+596	
+597	    parse_prompt = re.sub(r&#x27;\&lt;(.*?)\&gt;&#x27;, replace_match, prompt)
+598	    while re.search(r&#x27;\&lt;(.*?)\&gt;&#x27;, parse_prompt):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1768<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1764	
+1765	        particles = Image.new(&#x27;RGBA&#x27;, (width, height), (0, 0, 0, 0))
+1766	        draw = ImageDraw.Draw(particles)
+1767	        for i in range(5000):
+1768	            x = random.randint(0, width)
+1769	            y = random.randint(0, height)
+1770	            r = random.randint(0, 255)
+1771	            g = random.randint(0, 255)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1769<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1765	        particles = Image.new(&#x27;RGBA&#x27;, (width, height), (0, 0, 0, 0))
+1766	        draw = ImageDraw.Draw(particles)
+1767	        for i in range(5000):
+1768	            x = random.randint(0, width)
+1769	            y = random.randint(0, height)
+1770	            r = random.randint(0, 255)
+1771	            g = random.randint(0, 255)
+1772	            b = random.randint(0, 255)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1770<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1766	        draw = ImageDraw.Draw(particles)
+1767	        for i in range(5000):
+1768	            x = random.randint(0, width)
+1769	            y = random.randint(0, height)
+1770	            r = random.randint(0, 255)
+1771	            g = random.randint(0, 255)
+1772	            b = random.randint(0, 255)
+1773	            draw.point((x, y), fill=(r, g, b, 255))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1771<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1767	        for i in range(5000):
+1768	            x = random.randint(0, width)
+1769	            y = random.randint(0, height)
+1770	            r = random.randint(0, 255)
+1771	            g = random.randint(0, 255)
+1772	            b = random.randint(0, 255)
+1773	            draw.point((x, y), fill=(r, g, b, 255))
+1774	        particles = particles.filter(ImageFilter.GaussianBlur(radius=1))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1772<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1768	            x = random.randint(0, width)
+1769	            y = random.randint(0, height)
+1770	            r = random.randint(0, 255)
+1771	            g = random.randint(0, 255)
+1772	            b = random.randint(0, 255)
+1773	            draw.point((x, y), fill=(r, g, b, 255))
+1774	        particles = particles.filter(ImageFilter.GaussianBlur(radius=1))
+1775	        particles.putalpha(128)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1780<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1776	
+1777	        particles2 = Image.new(&#x27;RGBA&#x27;, (width, height), (0, 0, 0, 0))
+1778	        draw = ImageDraw.Draw(particles2)
+1779	        for i in range(5000):
+1780	            x = random.randint(0, width)
+1781	            y = random.randint(0, height)
+1782	            r = random.randint(0, 255)
+1783	            g = random.randint(0, 255)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1781<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1777	        particles2 = Image.new(&#x27;RGBA&#x27;, (width, height), (0, 0, 0, 0))
+1778	        draw = ImageDraw.Draw(particles2)
+1779	        for i in range(5000):
+1780	            x = random.randint(0, width)
+1781	            y = random.randint(0, height)
+1782	            r = random.randint(0, 255)
+1783	            g = random.randint(0, 255)
+1784	            b = random.randint(0, 255)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1782<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1778	        draw = ImageDraw.Draw(particles2)
+1779	        for i in range(5000):
+1780	            x = random.randint(0, width)
+1781	            y = random.randint(0, height)
+1782	            r = random.randint(0, 255)
+1783	            g = random.randint(0, 255)
+1784	            b = random.randint(0, 255)
+1785	            draw.point((x, y), fill=(r, g, b, 255))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1783<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1779	        for i in range(5000):
+1780	            x = random.randint(0, width)
+1781	            y = random.randint(0, height)
+1782	            r = random.randint(0, 255)
+1783	            g = random.randint(0, 255)
+1784	            b = random.randint(0, 255)
+1785	            draw.point((x, y), fill=(r, g, b, 255))
+1786	        particles2 = particles2.filter(ImageFilter.GaussianBlur(radius=1))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>1784<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+1780	            x = random.randint(0, width)
+1781	            y = random.randint(0, height)
+1782	            r = random.randint(0, 255)
+1783	            g = random.randint(0, 255)
+1784	            b = random.randint(0, 255)
+1785	            draw.point((x, y), fill=(r, g, b, 255))
+1786	        particles2 = particles2.filter(ImageFilter.GaussianBlur(radius=1))
+1787	        particles2.putalpha(128)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>4559<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+4555	
+4556	        for _ in range(black_mix):
+4557	            for x in range(width):
+4558	                for y in range(height):
+4559	                    if random.randint(0,1) == 1:
+4560	                        black_noise.putpixel((x, y), (0, 0, 0, 255))
+4561	
+4562	        randomized_image = Image.alpha_composite(randomized_image, black_noise)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>5153<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+5149	            if image == None:
+5150	                cstr(f&quot;No valid image was found for the next ID. Did you remove images from the source directory?&quot;).error.print()
+5151	                return (None, None)
+5152	        else:
+5153	            newindex = int(random.random() * len(fl.image_paths))
+5154	            image, filename = fl.get_image_by_id(newindex)
+5155	            if image == None:
+5156	                cstr(f&quot;No valid image was found for the next ID. Did you remove images from the source directory?&quot;).error.print()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>6110<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+6106	        num_pixels = int(density * img_gray.size[0] * img_gray.size[1])
+6107	
+6108	        noise_pixels = []
+6109	        for i in range(num_pixels):
+6110	            x = random.randint(0, img_gray.size[0]-1)
+6111	            y = random.randint(0, img_gray.size[1]-1)
+6112	            noise_pixels.append((x, y))
+6113	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>6111<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+6107	
+6108	        noise_pixels = []
+6109	        for i in range(num_pixels):
+6110	            x = random.randint(0, img_gray.size[0]-1)
+6111	            y = random.randint(0, img_gray.size[1]-1)
+6112	            noise_pixels.append((x, y))
+6113	
+6114	        for x, y in noise_pixels:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>6115<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+6111	            y = random.randint(0, img_gray.size[1]-1)
+6112	            noise_pixels.append((x, y))
+6113	
+6114	        for x, y in noise_pixels:
+6115	            value = random.randint(0, 255)
+6116	            img_gray.putpixel((x, y), value)
+6117	
+6118	        img_noise = img_gray.convert(&#x27;RGB&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>7420<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+7416	        return (image, mask, filename)
+7417	
+7418	    def download_image(self, url):
+7419	        try:
+7420	            response = requests.get(url)
+7421	            response.raise_for_status()
+7422	            img = Image.open(BytesIO(response.content))
+7423	            return img
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>10052<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+10048	
+10049	    def text_random_line(self, text, seed):
+10050	        lines = text.split(&quot;\n&quot;)
+10051	        random.seed(seed)
+10052	        choice = random.choice(lines)
+10053	        return (choice, )
+10054	
+10055	    @classmethod
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>10250<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+10246	        for term in dictionary.keys():
+10247	            tkey = f&#x27;{replacement_key}{term}{replacement_key}&#x27;
+10248	            tcount = new_text.count(tkey)
+10249	            for _ in range(tcount):
+10250	                new_text = new_text.replace(tkey, random.choice(dictionary[term]), 1)
+10251	                if seed &gt; 0 or seed &lt; 0:
+10252	                    seed = seed + 1
+10253	                    random.seed(seed)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>10929<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+10925	        return (self.search_lexica_art(search_seed), )
+10926	
+10927	    def search_lexica_art(self, query=None):
+10928	        if not query:
+10929	            query = random.choice([&quot;portrait&quot;,&quot;landscape&quot;,&quot;anime&quot;,&quot;superhero&quot;,&quot;animal&quot;,&quot;nature&quot;,&quot;scenery&quot;])
+10930	        url = f&quot;https://lexica.art/api/v1/search?q={query}&quot;
+10931	        try:
+10932	            response = requests.get(url)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>10932<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+10928	        if not query:
+10929	            query = random.choice([&quot;portrait&quot;,&quot;landscape&quot;,&quot;anime&quot;,&quot;superhero&quot;,&quot;animal&quot;,&quot;nature&quot;,&quot;scenery&quot;])
+10930	        url = f&quot;https://lexica.art/api/v1/search?q={query}&quot;
+10931	        try:
+10932	            response = requests.get(url)
+10933	            data = response.json()
+10934	            images = data.get(&quot;images&quot;, [])
+10935	            if not images:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>10937<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+10933	            data = response.json()
+10934	            images = data.get(&quot;images&quot;, [])
+10935	            if not images:
+10936	                return &quot;404 not found error&quot;
+10937	            random_image = random.choice(images)
+10938	            prompt = random_image.get(&quot;prompt&quot;)
+10939	        except Exception:
+10940	            cstr(&quot;Unable to establish connection to Lexica API.&quot;).error.print()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-32">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>11370<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+11366	
+11367	        sam_file = os.path.join(sam_dir, model_filename)
+11368	        if not os.path.exists(sam_file):
+11369	            cstr(&quot;Selected SAM model not found. Downloading...&quot;).msg.print()
+11370	            r = requests.get(model_url, allow_redirects=True)
+11371	            open(sam_file, &#x27;wb&#x27;).write(r.content)
+11372	
+11373	        from segment_anything import build_sam_vit_h, build_sam_vit_l, build_sam_vit_b
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-33">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>11931<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+11927	
+11928	        # Return random number
+11929	        if number_type:
+11930	            if number_type == &#x27;integer&#x27;:
+11931	                number = random.randint(minimum, maximum)
+11932	            elif number_type == &#x27;float&#x27;:
+11933	                number = random.uniform(minimum, maximum)
+11934	            elif number_type == &#x27;bool&#x27;:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-34">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>11933<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+11929	        if number_type:
+11930	            if number_type == &#x27;integer&#x27;:
+11931	                number = random.randint(minimum, maximum)
+11932	            elif number_type == &#x27;float&#x27;:
+11933	                number = random.uniform(minimum, maximum)
+11934	            elif number_type == &#x27;bool&#x27;:
+11935	                number = random.random()
+11936	            else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-35">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>11935<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+11931	                number = random.randint(minimum, maximum)
+11932	            elif number_type == &#x27;float&#x27;:
+11933	                number = random.uniform(minimum, maximum)
+11934	            elif number_type == &#x27;bool&#x27;:
+11935	                number = random.random()
+11936	            else:
+11937	                return
+11938	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-36">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>12000<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+11996	            },
+11997	            &quot;id&quot;: 1
+11998	        }
+11999	
+12000	        response = requests.post(url, headers=headers, data=json.dumps(payload))
+12001	        if response.status_code == 200:
+12002	            data = response.json()
+12003	            if &quot;result&quot; in data:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-37">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>13629<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+13625	    @classmethod
+13626	    def INPUT_TYPES(cls):
+13627	        return {
+13628	            &quot;required&quot;: {
+13629	                &quot;latent_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13630	                &quot;image_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13631	                &quot;conditioning_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13632	            },
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-38">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>13630<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+13626	    def INPUT_TYPES(cls):
+13627	        return {
+13628	            &quot;required&quot;: {
+13629	                &quot;latent_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13630	                &quot;image_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13631	                &quot;conditioning_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13632	            },
+13633	            &quot;optional&quot;: {
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-39">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>13631<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+13627	        return {
+13628	            &quot;required&quot;: {
+13629	                &quot;latent_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13630	                &quot;image_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13631	                &quot;conditioning_suffix&quot;: (&quot;STRING&quot;, {&quot;default&quot;: str(random.randint(999999, 99999999))+&quot;_cache&quot;, &quot;multiline&quot;:False}),
+13632	            },
+13633	            &quot;optional&quot;: {
+13634	                &quot;output_path&quot;: (&quot;STRING&quot;, {&quot;default&quot;: os.path.join(WAS_SUITE_ROOT, &#x27;cache&#x27;), &quot;multiline&quot;: False}),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-40">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/WAS_Node_Suite.py</a><br>
+    <b>Line number: </b>14256<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+14252	        &#x27;\033[93m&quot;The biggest risk is not taking any risk. In a world that is changing quickly, the only strategy that is guaranteed to fail is not taking risks.&quot;\033[0m\033[3m - Mark Zuckerberg&#x27;,
+14253	        &#x27;\033[93m&quot;The journey of a thousand miles begins with one step.&quot;\033[0m\033[3m - Lao Tzu&#x27;,
+14254	        &#x27;\033[93m&quot;Every strike brings me closer to the next home run.&quot;\033[0m\033[3m - Babe Ruth&#x27;,
+14255	    ]
+14256	    print(f&#x27;\n\t\033[3m{random.choice(art_quotes)}\033[0m\n&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-41">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_med.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_med.py</a><br>
+    <b>Line number: </b>359<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+355	        outputs = self_attention_outputs[1:-1]
+356	        present_key_value = self_attention_outputs[-1]
+357	
+358	        if mode==&#x27;multimodal&#x27;:
+359	            assert encoder_hidden_states is not None, &quot;encoder_hidden_states must be given for cross-attention layers&quot;
+360	
+361	            cross_attention_outputs = self.crossattention(
+362	                attention_output,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-42">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
+    <b>Line number: </b>54<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+50	
+51	        
+52	    def forward(self, image, caption, mode):
+53	        
+54	        assert mode in [&#x27;image&#x27;, &#x27;text&#x27;, &#x27;multimodal&#x27;], &quot;mode parameter must be image, text, or multimodal&quot;
+55	        text = self.tokenizer(caption, return_tensors=&quot;pt&quot;).to(image.device) 
+56	        
+57	        if mode==&#x27;image&#x27;:    
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-43">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
+    <b>Line number: </b>182<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+178	def blip_decoder(pretrained=&#x27;&#x27;,**kwargs):
+179	    model = BLIP_Decoder(**kwargs)
+180	    if pretrained:
+181	        model,msg = load_checkpoint(model,pretrained)
+182	        assert(len(msg.missing_keys)==0)
+183	    return model    
+184	    
+185	def blip_feature_extractor(pretrained=&#x27;&#x27;,**kwargs):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-44">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
+    <b>Line number: </b>189<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+185	def blip_feature_extractor(pretrained=&#x27;&#x27;,**kwargs):
+186	    model = BLIP_Base(**kwargs)
+187	    if pretrained:
+188	        model,msg = load_checkpoint(model,pretrained)
+189	        assert(len(msg.missing_keys)==0)
+190	    return model        
+191	
+192	def init_tokenizer():
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-45">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/was-node-suite-comfyui/modules/BLIP/blip_module.py</a><br>
+    <b>Line number: </b>202<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+198	
+199	
+200	def create_vit(vit, image_size, use_grad_checkpointing=False, ckpt_layer=0, drop_path_rate=0):
+201	        
+202	    assert vit in [&#x27;base&#x27;, &#x27;large&#x27;], &quot;vit parameter must be base or large&quot;
+203	    if vit==&#x27;base&#x27;:
+204	        vision_width = 768
+205	        visual_encoder = VisionTransformer(img_size=image_size, patch_size=16, embed_dim=vision_width, depth=12, 
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

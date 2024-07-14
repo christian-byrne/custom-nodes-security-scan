@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">4504</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/format/a1111.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/format/a1111.py</a><br>
+    <b>Line number: </b>111<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+107	                single_line_prompt += &quot; --seed_resize_from_w &quot; + seed_resize_from_w
+108	                single_line_prompt += &quot; --seed_resize_from_h &quot; + seed_resize_from_h
+109	            try:
+110	                (tag, is_str) = A1111.PROMPT_MAPPING.get(key)
+111	            except:
+112	                pass
+113	            else:
+114	                if is_str:
+115	                    single_line_prompt += &quot; --&quot; + tag + &quot; &quot; + add_quotes(str(value))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Using minidom to parse untrusted XML data is known to be vulnerable to XML attacks. Replace minidom with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.<br>
+    <b>Test ID:</b> B408<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
+    <b>Line number: </b>7<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b408-import-xml-minidom" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b408-import-xml-minidom</a><br>
+
+<div class="code">
+<pre>
+3	__copyright__ = &quot;Copyright 2023&quot;
+4	__email__ = &quot;receyuki@gmail.com&quot;
+5	
+6	import json
+7	from xml.dom import minidom
+8	
+9	import piexif
+10	import piexif.helper
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Using xml.dom.minidom.parseString to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.dom.minidom.parseString with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib() is called<br>
+    <b>Test ID:</b> B318<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
+    <b>Line number: </b>126<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b313-b320-xml-bad-minidom" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b313-b320-xml-bad-minidom</a><br>
+
+<div class="code">
+<pre>
+122	                            print(&quot;Fooocus format error&quot;)
+123	                    # drawthings format
+124	                    elif &quot;XML:com.adobe.xmp&quot; in self._info:
+125	                        try:
+126	                            data = minidom.parseString(
+127	                                self._info.get(&quot;XML:com.adobe.xmp&quot;)
+128	                            )
+129	                            data_json = json.loads(
+130	                                data.getElementsByTagName(&quot;exif:UserComment&quot;)[0]
+131	                                .childNodes[1]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py" target="_blank">/home/c_byrne/tools/sd/sd-interfaces/ComfyUI/custom_nodes/comfyui-prompt-reader-node/stable_diffusion_prompt_reader/sd_prompt_reader/image_data_reader.py</a><br>
+    <b>Line number: </b>162<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+158	                            )
+159	                        except TypeError:
+160	                            print(&quot;empty jpeg&quot;)
+161	                            self._status = BaseFormat.Status.FORMAT_ERROR
+162	                        except Exception:
+163	                            pass
+164	                        else:
+165	                            try:
+166	                                # swarm format
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

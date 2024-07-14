@@ -51,7 +51,16 @@
           <thead>
             <tr>
               <th scope="col" class="col-3">Custom Node Package Name</th>
-              <th scope="col" class="col-2 text-center">Risk Level</th>
+              <th
+                scope="col"
+                class="col-2 text-center"
+                title="Each Score is the Sum of Issues Weighted by Severity and Multiplied by Confidence. The Risk Level is the Z-Score of the Score."
+                data-placement="top"
+                aria-label="Risk Level"
+                aria-details="Risk Level"
+              >
+                Risk Level
+              </th>
               <th scope="col" class="text-center">Failed Bandits Tests</th>
               <th
                 scope="col"
@@ -100,22 +109,8 @@
                 class="text-center risk-level-text"
                 style="color: {{ result.risk_level_color }}"
               >
-                <!-- <span
-                  class="badge badge-pill badge-primary"
-                  style="background-color: {{ result.risk_level_color }}; opacity: 0.78"
-                > -->
                 {{ result.risk_level }}
-                <!-- </span> -->
               </td>
-              <!-- <td
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Z-Score (Standard Deviations from the Mean)"
-                aria-label="Z-Score"
-                aria-details="{{ result.z_score }}"
-              >
-                {{ result.z_score }}
-              </td> -->
               <td
                 data-toggle="tooltip"
                 data-placement="top"
@@ -169,7 +164,9 @@
       </div>
       <div class="col-12 container d-flex row justify-content-center mb-5 pb-4">
         <div class="col-md-6 d-flex justify-contents-center flex-column px-4">
-          <h2 class="text-center dd3"  style="font-size: 3.25rem">Risk Level Distribution</h2>
+          <h2 class="text-center dd3" style="font-size: 3.25rem">
+            Risk Level Distribution
+          </h2>
           <img
             src="scores/raw_scores.png"
             alt="Risk Level Distribution"

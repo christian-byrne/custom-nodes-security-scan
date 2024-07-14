@@ -1,6 +1,6 @@
 > [!TIP]
 >
-> ## [️🛡 ️View Node Security Scan Results](https://christian-byrne.github.io/https://christian-byrne.github.io/custom-nodes-security-scan)
+> ## [️🛡 ️View Node Security Scan Results](https://christian-byrne.github.io/custom-nodes-security-scan)
 >
 
 
@@ -1544,3 +1544,5 @@ pip install -r requirements.txt
 | Add blacklisted websites/domains/IPs | edit [scan/yara/yara-rules/aa-comfy-nodes-rules/dangerous-sites.yar](https://github.com/christian-byrne/custom-nodes-security-scan/blob/master/src/scan/yara/yara-rules/aa-comfy-nodes-rules/dangerous-sites.yar) |
 | Add custom tests for python code | Write `.py` tests and add to [scan/bandit/plugins](https://github.com/christian-byrne/custom-nodes-security-scan/tree/master/src/scan/bandit/plugins) |
 | Add custom yara rules | write `.yara` tests and add to [scan/yara/yara-rules/aa-comfy-nodes-rules](https://github.com/christian-byrne/custom-nodes-security-scan/tree/master/src/scan/yara/yara-rules/aa-comfy-nodes-rules) |
+
+Then PR any changes made 😊

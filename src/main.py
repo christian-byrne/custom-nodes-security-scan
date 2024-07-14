@@ -51,5 +51,5 @@ def bandit_scan():
 
 
 if __name__ == "__main__":
-    # yara_scan()
+    yara_scan()
     bandit_scan()

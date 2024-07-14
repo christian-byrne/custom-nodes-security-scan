@@ -584,26 +584,6 @@
             "findcrypt"
         ]
     },
-    "mindsdb": {
-        "num_issues": 1093,
-        "num_matched_patterns": 1099,
-        "num_match_instances": 5128,
-        "num_failed_tests": 12,
-        "failed_tests": [
-            "findcrypt",
-            "Detect_Sandbox_Unprotect",
-            "anti_sandboxing",
-            "ft_pdf",
-            "packer_compiler_signatures",
-            "compiler",
-            "Spyeye",
-            "ft_zip",
-            "packer",
-            "dangerous-sites",
-            "suspicious_sites",
-            "userdb_jclausing"
-        ]
-    },
     "comfyui-inpaint-nodes": {
         "num_issues": 7,
         "num_matched_patterns": 7,
