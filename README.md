@@ -1,6 +1,6 @@
 > [!TIP]
 >
-> ## [️🛡 ️View Node Security Scan Results](https://christian-byrne.github.io/node-sec-scan/)
+> ## [️🛡 ️View Node Security Scan Results](https://christian-byrne.github.io/https://christian-byrne.github.io/custom-nodes-security-scan)
 >
 
 
@@ -1523,47 +1523,24 @@
 &nbsp;
 
 
-&nbsp;
 
----
 
 &nbsp;
 
 ## Usage
 
-To run scan:
 
 ```bash
+pip install -r requirements.txt
 ./scan.sh $COMFY_MAIN_DIR/custom_nodes
 ```
 
+## Adding Tests and Blacklists
 
-To add blacklisted python calls, edit:
-
-```bash
-custom-nodes-security-scan/src/scan/bandit/blacklists/calls.py
-```
-
-To add blacklisted python imports, edit:
-
-```bash
-custom-nodes-security-scan/src/scan/bandit/blacklists/imports.py
-```
-
-To add more blacklisted websites/domains/IPs, edit:
-
-```bash
-custom-node-security-scan/src/scan/yara/yara-rules/aa-comfy-nodes-rules/dangerous-sites.yar
-```
-
-To add custom tests for python code, create tests similar to those in this dir
-
-```bash
-custom-nodes-security-scan/src/scan/bandit/plugins
-```
-
-To add more yara rules, create `.yara` file in:
-
-```bash
-custom-node-security-scan/src/scan/yara/yara-rules/aa-comfy-nodes-rules
-```
+|  |  |
+| --- | --- |
+|Add blacklisted python call | edit [scan/bandit/blacklists/calls.py](https://github.com/christian-byrne/custom-nodes-security-scan/blob/master/src/scan/bandit/blacklists/calls.py) |
+|Add blacklisted python import | edit [scan/bandit/blacklists/imports.py](https://github.com/christian-byrne/custom-nodes-security-scan/blob/master/src/scan/bandit/blacklists/imports.py) |
+| Add blacklisted websites/domains/IPs | edit [scan/yara/yara-rules/aa-comfy-nodes-rules/dangerous-sites.yar](https://github.com/christian-byrne/custom-nodes-security-scan/blob/master/src/scan/yara/yara-rules/aa-comfy-nodes-rules/dangerous-sites.yar) |
+| Add custom tests for python code | Write `.py` tests and add to [scan/bandit/plugins](https://github.com/christian-byrne/custom-nodes-security-scan/tree/master/src/scan/bandit/plugins) |
+| Add custom yara rules | write `.yara` tests and add to [scan/yara/yara-rules/aa-comfy-nodes-rules](https://github.com/christian-byrne/custom-nodes-security-scan/tree/master/src/scan/yara/yara-rules/aa-comfy-nodes-rules) |
