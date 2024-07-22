@@ -197,17 +197,15 @@
 
 > [!NOTE]
 >
-> This program uses Linux namespaces and servers, it will not work on other operating systems
+> Requires Linux
 >
 
 
-1. Clone the repo
 
 ```bash
 git clone https://github.com/christian-byrne/custom-nodes-security-scan.git
 ```
 
-2. Install requirements
 
 ```bash
 sudo apt install firejail yara rar
@@ -216,13 +214,11 @@ python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Edit values in [config.json](./config.json)
 
 ```bash
 vim config.json
 ```
 
-4. Run scan
 
 ```bash
 chmod +x ./scan.sh
@@ -241,4 +237,3 @@ chmod +x ./scan.sh
 
 &nbsp; 
 
-Then PR any changes please
