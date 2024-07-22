@@ -2,6 +2,8 @@ import sys
 import functools
 
 LOG_NAME = "settrace_import_scan.log"
+MAX_ARG_PREVIEW = 80
+LOG_ALL_IMPORTS = False
 
 # From bandit and IOC twitter
 BL_IMPORTS = [
@@ -189,11 +191,18 @@ def handle_exceptions(logger=None):
 
 
 @handle_exceptions()
-def scan_args(arg):
+def scan_args(arg, frame):
     global arg_violoations
     for bl_arg in BL_ARGS:
         if bl_arg in repr(arg):
-            arg_violoations.add(repr(arg))
+            preview = repr(arg)[
+                max(0, repr(arg).index(bl_arg) - 5) : min(
+                    len(repr(arg)), repr(arg).index(bl_arg) + MAX_ARG_PREVIEW
+                )
+            ]
+            arg_length = len(repr(arg))
+            context = f"Function '{frame.f_code.co_name}'\n\tCalled with arg containing '{bl_arg}'\n\tPreview: {preview}\n\t(full arg length: {arg_length})\n\tLocation: {frame.f_code.co_filename}:{frame.f_lineno}"
+            arg_violoations.add(context)
 
 
 @handle_exceptions()
@@ -269,8 +278,9 @@ def scan_import_fromlist(frame):
 
 # ---------------------------------------------------------
 
+
 def trace_calls(frame, event, arg):
-    scan_args(arg)
+    scan_args(arg, frame)
     if event == "call" or event == "return":
         scan_calls(frame)
         scan_builtin_import_calls(frame)
@@ -305,6 +315,7 @@ log_("\nCall violations:\n")
 for item in call_violations:
     log_(item.strip("'"))
 
-# log_("\nAll imports:")
-# for item in all_imports:
-#     log_(item.strip("'"))
+if LOG_ALL_IMPORTS:
+    log_("\nAll imports:")
+    for item in all_imports:
+        log_(item.strip("'"))
