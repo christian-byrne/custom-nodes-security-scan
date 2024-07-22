@@ -1,4 +1,0 @@
-libmagic
-cairo
-pango
-openssl

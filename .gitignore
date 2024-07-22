@@ -30,6 +30,7 @@ src/scan/bandit/quick-scan.sh
 venv/
 venv3/
 venv-cuckoo
+**/**/venv
 
 # ----
 
