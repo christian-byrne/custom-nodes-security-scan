@@ -65,9 +65,9 @@ false. A HIGH severity warning is generated in either of these scenarios.
 """
 import ast
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 @test.checks("Call")

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import linecache
 
-from bandit.core import constants
+from scan.bandit.core import constants
 
 
 class Cwe:

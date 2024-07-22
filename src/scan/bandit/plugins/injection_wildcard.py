@@ -99,9 +99,9 @@ methods are fully qualified and de-aliased prior to checking.
     CWE information added
 
 """
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 from bandit.plugins import injection_shell  # NOTE(tkelsey): shared config
 
 gen_config = injection_shell.gen_config

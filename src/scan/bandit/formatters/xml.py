@@ -37,7 +37,7 @@ import logging
 import sys
 from xml.etree import ElementTree as ET  # nosec: B405
 
-from bandit.core import docs_utils
+from scan.bandit.core import docs_utils
 
 LOG = logging.getLogger(__name__)
 

@@ -41,9 +41,9 @@ of the Patreon breach in 2015 [3]_.
     CWE information added
 
 """  # noqa: E501
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 @test.test_id("B201")

@@ -2,9 +2,9 @@
 # Copyright (c) 2018 SolarWinds, Inc.
 #
 # SPDX-License-Identifier: Apache-2.0
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 @test.checks("Call")

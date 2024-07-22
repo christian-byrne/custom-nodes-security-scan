@@ -10,11 +10,11 @@ import os
 import sys
 import textwrap
 
-import bandit
-from bandit.core import config as b_config
-from bandit.core import constants
-from bandit.core import manager as b_manager
-from bandit.core import utils
+import scan.bandit
+from scan.bandit.core import config as b_config
+from scan.bandit.core import constants
+from scan.bandit.core import manager as b_manager
+from scan.bandit.core import utils
 
 BASE_CONFIG = "bandit.yaml"
 LOG = logging.getLogger()
@@ -76,7 +76,7 @@ def _get_options_from_ini(ini_path, target):
 
 
 def _init_extensions():
-    from bandit.core import extension_loader as ext_loader
+    from scan.bandit.core import extension_loader as ext_loader
 
     return ext_loader.MANAGER
 

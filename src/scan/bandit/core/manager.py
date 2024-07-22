@@ -15,13 +15,13 @@ import traceback
 
 from rich import progress
 
-from bandit.core import constants as b_constants
-from bandit.core import extension_loader
-from bandit.core import issue
-from bandit.core import meta_ast as b_meta_ast
-from bandit.core import metrics
-from bandit.core import node_visitor as b_node_visitor
-from bandit.core import test_set as b_test_set
+from scan.bandit.core import constants as b_constants
+from scan.bandit.core import extension_loader
+from scan.bandit.core import issue
+from scan.bandit.core import meta_ast as b_meta_ast
+from scan.bandit.core import metrics
+from scan.bandit.core import node_visitor as b_node_visitor
+from scan.bandit.core import test_set as b_test_set
 
 LOG = logging.getLogger(__name__)
 NOSEC_COMMENT = re.compile(r"#\s*nosec:?\s*(?P<tests>[^#]+)?#?")
@@ -45,7 +45,7 @@ class BanditManager:
         """Get logger, config, AST handler, and result store ready
 
         :param config: config options object
-        :type config: bandit.core.BanditConfig
+        :type config: scan.bandit.core.BanditConfig
         :param agg_type: aggregation type
         :param debug: Whether to show debug messages or not
         :param verbose: Whether to show verbose output

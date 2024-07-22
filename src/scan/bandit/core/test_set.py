@@ -5,8 +5,8 @@
 import importlib
 import logging
 
-from bandit.core import blacklisting
-from bandit.core import extension_loader
+from scan.bandit.core import blacklisting
+from scan.bandit.core import extension_loader
 
 LOG = logging.getLogger(__name__)
 

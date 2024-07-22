@@ -39,9 +39,9 @@ medium severity error for those lower than the higher threshold.
     CWE information added
 
 """
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 def gen_config(name):

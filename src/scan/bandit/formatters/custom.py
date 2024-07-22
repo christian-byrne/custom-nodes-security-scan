@@ -31,7 +31,7 @@ import re
 import string
 import sys
 
-from bandit.core import test_properties
+from scan.bandit.core import test_properties
 
 LOG = logging.getLogger(__name__)
 

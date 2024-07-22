@@ -10,7 +10,7 @@ import sys
 
 import yaml
 
-from bandit.core import extension_loader
+from scan.bandit.core import extension_loader
 
 PROG_NAME = "bandit_conf_generator"
 LOG = logging.getLogger(__name__)

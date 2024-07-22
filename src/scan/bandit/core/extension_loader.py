@@ -4,6 +4,14 @@ import sys
 
 from stevedore import extension
 
+from scan.bandit.core import utils
+
+from utils.config import Config
+from utils.peformance_logging import report_time_taken
+from utils.log import Logger
+
+logger = Logger(__name__, Config()["log_level"])()
+
 from bandit.core import utils
 
 
@@ -13,14 +21,18 @@ class Manager:
 
     def __init__(
         self,
-        formatters_namespace="bandit.formatters",
-        plugins_namespace="bandit.plugins",
-        blacklists_namespace="bandit.blacklists",
+        formatters_namespace="scan.bandit.formatters",
+        plugins_namespace="scan.bandit.plugins",
+        blacklists_namespace="scan.bandit.blacklists",
     ):
+        logger.info("Manager.__init__")
         # Cache the extension managers, loaded extensions, and extension names
         self.load_formatters(formatters_namespace)
+        logger.info(f"Formatters loaded: {self.formatter_names}")
         self.load_plugins(plugins_namespace)
+        logger.info(f"Plugins loaded: {self.plugin_names}")
         self.load_blacklists(blacklists_namespace)
+        logger.info(f"Blacklists loaded: {self.blacklist_by_name.keys()}")
 
     def load_formatters(self, formatters_namespace):
         self.formatters_mgr = extension.ExtensionManager(
@@ -28,6 +40,7 @@ class Manager:
             invoke_on_load=False,
             verify_requirements=False,
         )
+        print(self.formatters_mgr.list_entry_points())
         self.formatters = list(self.formatters_mgr)
         self.formatter_names = self.formatters_mgr.names()
 

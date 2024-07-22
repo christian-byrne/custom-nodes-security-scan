@@ -55,9 +55,9 @@ file is set world write or executable. Warnings are given with HIGH confidence.
 """  # noqa: E501
 import stat
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 def _stat_is_dangerous(mode):

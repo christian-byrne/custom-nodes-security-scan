@@ -15,9 +15,9 @@ else:
     except ImportError:
         tomllib = None
 
-from bandit.core import constants
-from bandit.core import extension_loader
-from bandit.core import utils
+from scan.bandit.core import constants
+from scan.bandit.core import extension_loader
+from scan.bandit.core import utils
 
 LOG = logging.getLogger(__name__)
 

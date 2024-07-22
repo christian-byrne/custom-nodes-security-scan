@@ -60,7 +60,7 @@ class TestsManager:
         return yara.compile(filepaths=files)
 
     @report_time_taken
-    def run_all_on_dir(self, dir_: DirManager) -> Dict[Path, List[Match]]:
+    def run_all_on_dir(self, dir_: DirManager, report: bool = True) -> Dict[Path, List[Match]]:
         logger.info(f"Running tests on all files in {dir_.root_dir}")
         matches = {}
         for path in track(

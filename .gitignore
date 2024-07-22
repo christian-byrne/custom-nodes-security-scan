@@ -7,17 +7,42 @@ _site/
 references.md
 .env
 
+debug-reports
+
 node_modules/
 yara.log
 
 _todo.md
+todo.md
 _todo*.md
 
 **/**/results.log
 
 mass-clone.sh
 
-wiki/*.md
+wiki/ignored-yara-rules-reasoning.md
+wiki/scoring-algorithm.md
+wiki/*sample*.md
+
 replace.sh
 
 src/scan/bandit/quick-scan.sh
+venv/
+venv3/
+venv-cuckoo
+
+# ----
+
+quick-scans
+
+*.log
+research/
+research
+
+# ---- 
+
+mock-comfyui
+
+# ----
+
+dast/firejail/dev

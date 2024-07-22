@@ -68,7 +68,7 @@ import sys
 
 import yaml
 
-from bandit.core import docs_utils
+from scan.bandit.core import docs_utils
 
 LOG = logging.getLogger(__name__)
 

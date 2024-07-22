@@ -2,7 +2,7 @@
 # Copyright 2016 Hewlett-Packard Development Company, L.P.
 #
 # SPDX-License-Identifier: Apache-2.0
-import bandit
+import scan.bandit
 
 
 def get_url(bid):
@@ -12,7 +12,7 @@ def get_url(bid):
     # NOTE(tkelsey): for some reason this import can't be found when stevedore
     # loads up the formatter plugin that imports this file. It is available
     # later though.
-    from bandit.core import extension_loader
+    from scan.bandit.core import extension_loader
 
     info = extension_loader.MANAGER.plugins_by_id.get(bid)
     if info is not None:

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import logging
 
-from bandit.core import utils
+from scan.bandit.core import utils
 
 LOG = logging.getLogger(__name__)
 

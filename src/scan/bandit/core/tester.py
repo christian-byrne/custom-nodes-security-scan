@@ -6,9 +6,9 @@ import copy
 import logging
 import warnings
 
-from bandit.core import constants
-from bandit.core import context as b_context
-from bandit.core import utils
+from scan.bandit.core import constants
+from scan.bandit.core import context as b_context
+from scan.bandit.core import utils
 
 warnings.formatwarning = utils.warnings_formatter
 LOG = logging.getLogger(__name__)

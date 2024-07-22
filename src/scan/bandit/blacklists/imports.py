@@ -225,7 +225,7 @@ an encrypted protocol.
 
 """
 from bandit.blacklists import utils
-from bandit.core import issue
+from scan.bandit.core import issue
 
 
 def gen_blacklist():

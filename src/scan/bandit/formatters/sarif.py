@@ -134,8 +134,8 @@ from datetime import datetime
 import sarif_om as om
 from jschema_to_python.to_json import to_json
 
-import bandit
-from bandit.core import docs_utils
+import scan.bandit
+from scan.bandit.core import docs_utils
 
 LOG = logging.getLogger(__name__)
 SCHEMA_URI = "https://json.schemastore.org/sarif-2.1.0.json"

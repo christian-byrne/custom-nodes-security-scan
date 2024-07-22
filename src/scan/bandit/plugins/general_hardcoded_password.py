@@ -5,9 +5,9 @@
 import ast
 import re
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 RE_WORDS = "(pas+wo?r?d|pass(phrase)?|pwd|token|secrete?)"
 RE_CANDIDATES = re.compile(

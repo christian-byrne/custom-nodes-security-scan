@@ -40,6 +40,12 @@ EXCLUDE = (
 import json
 from pathlib import Path
 
+# from scan.bandit.core.issue import Issue
+# from scan.bandit.core import config as bandit_config
+# from scan.bandit.core import manager as bandit_manager
+# from scan.bandit.core import test_set as bandit_test_set
+# from scan.bandit.formatters.html import report
+
 from bandit.core.issue import Issue
 from bandit.core import config as bandit_config
 from bandit.core import manager as bandit_manager

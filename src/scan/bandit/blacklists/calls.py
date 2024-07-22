@@ -324,7 +324,7 @@ For further information:
 import sys
 
 from bandit.blacklists import utils
-from bandit.core import issue
+from scan.bandit.core import issue
 
 
 def gen_blacklist():
@@ -682,6 +682,18 @@ def gen_blacklist():
             " using an insecure context via the _create_unverified_context "
             "that  reverts to the previous behavior that does not validate "
             "certificates or perform hostname checks.",
+        )
+    )
+    
+    # Blacklist calls to __import__ and importlib.import_module
+    sets.append(
+        utils.build_conf_dict(
+            "import",
+            "B8324",
+            issue.Cwe.IMPROPER_INPUT_VALIDATION,
+            ["x.__import__"],
+            "Use of __import__ or importlib.import_module is not recommended. "
+            "Consider using importlib.util.module_from_spec instead.",
         )
     )
 

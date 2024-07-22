@@ -54,9 +54,9 @@ use assert statements in test cases.
 """
 import fnmatch
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 def gen_config(name):

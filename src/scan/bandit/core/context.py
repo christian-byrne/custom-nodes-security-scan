@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import ast
 
-from bandit.core import utils
+from scan.bandit.core import utils
 
 
 class Context:

@@ -42,9 +42,9 @@ attacks.
     CWE information added
 
 """
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 
 @test.checks("Call")

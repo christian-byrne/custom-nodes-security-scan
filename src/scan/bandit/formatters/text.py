@@ -36,10 +36,10 @@ import datetime
 import logging
 import sys
 
-from bandit.core import constants
-from bandit.core import docs_utils
-from bandit.core import test_properties
-from bandit.formatters import utils
+from scan.bandit.core import constants
+from scan.bandit.core import docs_utils
+from scan.bandit.core import test_properties
+from scan.bandit.formatters import utils
 
 LOG = logging.getLogger(__name__)
 

@@ -50,9 +50,9 @@ hash variants.
 """  # noqa: E501
 import sys
 
-import bandit
-from bandit.core import issue
-from bandit.core import test_properties as test
+import scan.bandit
+from scan.bandit.core import issue
+from scan.bandit.core import test_properties as test
 
 WEAK_HASHES = ("md4", "md5", "sha", "sha1")
 WEAK_CRYPT_HASHES = ("METHOD_CRYPT", "METHOD_MD5", "METHOD_BLOWFISH")

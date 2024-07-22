@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import time
 import json
@@ -37,6 +38,10 @@ class YaraReport:
         )
 
     def write_to_json(self) -> "YaraReport":
+        os.makedirs(self.raw_scores_filepath.parent, exist_ok=True)
+        if not self.raw_scores_filepath.exists():
+            with self.raw_scores_filepath.open("w") as f:
+                json.dump({}, f, indent=4)
         with self.raw_scores_filepath.open("r") as f:
             current = json.load(f)
         if self.package_name not in current:

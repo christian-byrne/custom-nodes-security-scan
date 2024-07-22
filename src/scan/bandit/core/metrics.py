@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import collections
 
-from bandit.core import constants
+from scan.bandit.core import constants
 
 
 class Metrics:

@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from scan.yara.yara_tests import YaraConfig, TestsManager
 from scan.yara.test_report import YaraReport
@@ -12,6 +13,10 @@ config = Config()
 logger = Logger(__name__, config["log_level"])()
 target_dir = Path(config["target_dir"])
 
+if len(sys.argv) > 1 and sys.argv[1] == "nowrite":
+    report = False
+else:
+    report = True
 
 def debug_tests_database():
     """Run to fix errors or add bad tests to the exclude list in config"""
@@ -32,7 +37,7 @@ def yara_scan():
         skip_package = package_dir.name in config["exclude_packages"]
         if package_dir.is_dir() and not skip_package:
             test_dir = DirManager(package_dir, exclude=config["exclude_in_packages"])
-            results = yara_tests.run_all_on_dir(test_dir)
+            results = yara_tests.run_all_on_dir(test_dir, report=report)
             (
                 YaraReport(results, package_dir.name)
                 .set_test_paths(yara_tests.config.dir.get_all_filenames())

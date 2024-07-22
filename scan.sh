@@ -23,8 +23,14 @@ fi
 
 # --------------------------------------------------
 
+if [[ ! -d venv ]]; then
+    python3 -m venv venv
+fi
+
+source venv/bin/activate
 cd src
-python3 ./main.py
+python ./main.py
+deactivate
 
 # cd scan-blacklists
 # npm run scan-dependency-check

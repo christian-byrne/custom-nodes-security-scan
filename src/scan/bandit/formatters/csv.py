@@ -33,7 +33,7 @@ import csv
 import logging
 import sys
 
-from bandit.core import docs_utils
+from scan.bandit.core import docs_utils
 
 LOG = logging.getLogger(__name__)
 
