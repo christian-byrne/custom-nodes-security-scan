@@ -30,24 +30,40 @@
 > | xml.pulldom   | B409 |
 > | lxml   | B410 |
 > | xmlrpclib   | B411 |
+> | requests   | B413 |
+> | cryptography   | B414 |
+> | json.scanner   | B416 |
+> | http.cookiejar   | B417 |
+> | sys.modules   | B418 |
+> | http   | B419 |
+> | socket   | B420 |
+> | urllib3   | B421 |
+> | email   | B422 |
+> | os.popen   | B423 |
+> | os.pidfd_open   | B424 |
+> | os.system   | B425 |
 
 """
 
 import sys
 
-log_filename = "settrace-log-filtered.log"
-with open(log_filename, "w") as f:
+VERBOSE = False
+LOG_NAME = "settrace_import_scan.log"
+
+with open(LOG_NAME, "w") as f:
     f.write("")
 
 
 def write_to_log(message):
-    with open(log_filename, "a") as f:
+    with open(LOG_NAME, "a") as f:
         f.write(message + "\n")
 
 
 tracelog = set()
 all_imports = set()
 import_violations = set()
+call_violations = set()
+arg_violations = set()
 
 blacklisted_imports = [
     "crypto",
@@ -86,7 +102,7 @@ blacklisted_imports = [
     "json.scanner",
     "http.cookiejar",
     "sys.modules",
-    # "http", 
+    # "http",
     # "socket",
     "urllib3",
     "email",
@@ -113,26 +129,30 @@ def trace_calls(frame, event, arg):
             func_locals = frame.f_locals
             if "args" in func_args:
                 if repr(func_args["args"]).lower() in blacklisted_imports:
-                    tracelog.add(repr(func_args["args"]))
+                    import_violations.add(repr(func_args["args"]))
+                    all_imports.add(repr(func_args["args"]))
                 if "f" in func_args:
                     fn = func_args["f"]
                     for f in blacklisted_functions:
                         if fn == f:
-                            tracelog.add(repr(func_args["args"]))
+                            call_violations.add(repr(func_args["args"]))
                             break
                     if fn == __import__:
                         for import_arg in func_args["args"]:
                             all_imports.add(repr(import_arg))
 
-                            if import_arg in blacklisted_imports or repr(import_arg).split(".")[0] in blacklisted_imports:
+                            if (
+                                import_arg in blacklisted_imports
+                                or repr(import_arg).split(".")[0] in blacklisted_imports
+                            ):
                                 import_violations.add(repr(import_arg))
 
                 if func_args["args"] in blacklisted_args:
-                    tracelog.add(repr(func_args["args"]))
+                    arg_violations.add(repr(func_args["args"]))
                 else:
                     for ref in blacklisted_args_refs:
                         if func_args["args"] == ref:
-                            tracelog.add(repr(func_args["args"]))
+                            arg_violations.add(repr(func_args["args"]))
                             break
         except:
             pass
@@ -151,8 +171,8 @@ def trace_calls(frame, event, arg):
                             added = True
                             break
                 if not added:
-                    for arg in blacklisted_args:
-                        if arg == arg:
+                    for arg_ in blacklisted_args:
+                        if arg == arg_:
                             tracelog.add(repr(arg))
                             added = True
                             break
@@ -175,8 +195,9 @@ except Exception as e:
     print(e)
 sys.settrace(None)
 
-for item in tracelog:
-    write_to_log(item)
+if VERBOSE:
+    for item in tracelog:
+        write_to_log(item)
 
 write_to_log("\nImport violations:")
 for item in import_violations:

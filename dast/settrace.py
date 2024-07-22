@@ -1,6 +1,6 @@
 import sys
 
-log_filename = "debug_scanning.log"
+log_filename = "memdump.log"
 with open(log_filename, "w") as f:
     f.write("")
 def write_to_log(message):
